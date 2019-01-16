@@ -1,9 +1,9 @@
 package `in`.bitotsav.network.fcm
 
 import `in`.bitotsav.MainActivity
-import `in`.bitotsav.MyJobService
-import `in`.bitotsav.utils.Channel
-import `in`.bitotsav.utils.displayNotification
+import `in`.bitotsav.network.NetworkJobService
+import `in`.bitotsav.notification.Channel
+import `in`.bitotsav.notification.displayNotification
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -19,12 +19,13 @@ private enum class UpdateType{
     EVENT,
     TEAM,
     RESULT,
+    FEED
 }
 
-class MyFirebaseMessagingService : FirebaseMessagingService() {
+class DefaultFirebaseMessagingService : FirebaseMessagingService() {
 
     companion object {
-        private const val TAG = "MyFirebaseMsgService"
+        private const val TAG = "FirebaseMsgService"
     }
 
     /**
@@ -83,7 +84,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val random = Random()
         val timeDelay = random.nextInt(5)
         val myJob = dispatcher.newJobBuilder()
-            .setService(MyJobService::class.java)
+            .setService(NetworkJobService::class.java)
             .setTag(tag)
             .setRecurring(false)
             .setLifetime(Lifetime.FOREVER)
@@ -111,6 +112,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 //        TODO("Call this method on login")
         // TODO: Implement this method to send token to your app server.
         // Decide whether to use sharedPref or continue with this approach
+        // https://codelabs.developers.google.com/codelabs/kotlin-coroutines/#0
         if (token.isNullOrEmpty()) {
             FirebaseInstanceId.getInstance().instanceId
                 .addOnCompleteListener(OnCompleteListener { task ->

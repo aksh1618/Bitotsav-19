@@ -1,13 +1,13 @@
-package `in`.bitotsav
+package `in`.bitotsav.network
 
 import android.util.Log
 import com.firebase.jobdispatcher.JobParameters
 import com.firebase.jobdispatcher.JobService
 
-class MyJobService : JobService() {
+class NetworkJobService : JobService() {
 
     companion object {
-        private const val TAG = "MyJobService"
+        private const val TAG = "NetworkJobService"
     }
 
     override fun onStartJob(job: JobParameters?): Boolean {

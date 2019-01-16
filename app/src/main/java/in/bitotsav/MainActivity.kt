@@ -1,6 +1,6 @@
 package `in`.bitotsav
 
-import `in`.bitotsav.utils.createNotificationChannels
+import `in`.bitotsav.notification.createNotificationChannels
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
