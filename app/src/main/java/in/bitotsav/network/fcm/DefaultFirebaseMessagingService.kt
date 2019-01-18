@@ -1,25 +1,39 @@
 package `in`.bitotsav.network.fcm
 
 import `in`.bitotsav.MainActivity
+import `in`.bitotsav.events.data.EventRepository
+import `in`.bitotsav.feed.data.Feed
+import `in`.bitotsav.feed.data.FeedRepository
+import `in`.bitotsav.feed.data.FeedType
 import `in`.bitotsav.network.NetworkJobService
 import `in`.bitotsav.notification.Channel
 import `in`.bitotsav.notification.displayNotification
+import `in`.bitotsav.shared.Singleton
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.firebase.jobdispatcher.*
+import com.firebase.jobdispatcher.Constraint
+import com.firebase.jobdispatcher.Lifetime
+import com.firebase.jobdispatcher.RetryStrategy
+import com.firebase.jobdispatcher.Trigger
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 //TODO("Complete this list")
 private enum class UpdateType{
     EVENT,
-    TEAM,
     RESULT,
-    FEED
+    ANNOUNCEMENT,
+    PM,
+    ALL_EVENTS,
+    ALL_TEAMS
 }
 
 class DefaultFirebaseMessagingService : FirebaseMessagingService() {
@@ -41,27 +55,79 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
         remoteMessage?.data?.isNotEmpty()?.let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
 
+            val updateType: UpdateType
+            try {
+                updateType = UpdateType.valueOf(remoteMessage.data["type"] ?: return)
+            } catch (e: IllegalArgumentException) {
+                Log.e(TAG, e.message)
+                return
+            }
+
+            if (UpdateType.ALL_EVENTS == updateType || UpdateType.ALL_TEAMS == updateType) {
+//                TODO("Schedule Job")
+                return
+            }
+
             val messageTitle = remoteMessage.data["title"] ?: return
             val messageBody = remoteMessage.data["message"] ?: return
             val timestamp = remoteMessage.data["timestamp"]?.toLong() ?: System.currentTimeMillis()
-            val channel = Channel.valueOf(remoteMessage.data["channel"] ?: return)
-            if (Channel.ANNOUNCEMENT == channel || Channel.PRIORITY == channel) {
-                val intent = Intent(this, MainActivity::class.java)
-                displayNotification(messageTitle, messageBody, timestamp, channel, intent, this)
-            } else /* Check if data needs to be processed by long running job */ {
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-//                TODO("Check for starred type here")
-                val tag = channel.id
-                var bundle = Bundle()
-                bundle.putString("eventId", "event_id")
-                scheduleJob(bundle, tag)
+            val feedId = remoteMessage.data["feedId"]?.toInt() ?: return
+            val feedType = FeedType.valueOf(updateType.name)
+            var channel = Channel.valueOf(updateType.name)
+
+            val database = Singleton.database.getInstance(applicationContext)
+
+            when(updateType) {
+                UpdateType.ANNOUNCEMENT, UpdateType.PM -> {
+                    val feed = Feed(
+                        feedId,
+                        messageTitle,
+                        messageBody,
+                        feedType.name,
+                        timestamp,
+                        false,
+                        null,
+                        null
+                    )
+                    CoroutineScope(Dispatchers.IO).async {
+                        FeedRepository(database.feedDao()).insert(feed)
+                    }
+//                    TODO("Pass appropriate intent")
+                    val intent = Intent(this, MainActivity::class.java)
+                    displayNotification(messageTitle, messageBody, timestamp, channel, intent, this)
+                }
+                else -> {
+                    val eventId = remoteMessage.data["eventId"]?.toInt() ?: return
+                    val deferredIsStarred = CoroutineScope(Dispatchers.IO).async {
+                        EventRepository(database.eventDao()).isStarred(eventId)
+                    }
+                    val deferredEventName = CoroutineScope(Dispatchers.IO).async {
+                        EventRepository(database.eventDao()).getEventName(eventId)
+                    }
+//                    TODO("Refresh data from server here")
+//                    TODO("Schedule Job")
+                    val isStarred = runBlocking { deferredIsStarred.await() }
+                    val eventName = runBlocking { deferredEventName.await() }
+                    val feed = Feed(
+                        feedId,
+                        messageTitle,
+                        messageBody,
+                        feedType.name,
+                        timestamp,
+                        isStarred,
+                        eventId,
+                        eventName
+                    )
+                    CoroutineScope(Dispatchers.IO).async {
+                        FeedRepository(database.feedDao()).insert(feed)
+                    }
+                    if (isStarred) channel = Channel.STARRED
+//                    TODO("Pass appropriate intent")
+                    val intent = Intent(this, MainActivity::class.java)
+                    displayNotification(messageTitle, messageBody, timestamp, channel, intent, applicationContext)
+                }
             }
         }
-
-//        // Check if message contains a notification payload.
-//        remoteMessage?.notification?.let {
-//            Log.d(TAG, "Message Notification Body: ${it.body}")
-//        }
     }
 
     /**
@@ -79,7 +145,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
      * Schedule a job using FirebaseJobDispatcher.
      */
     private fun scheduleJob(bundle: Bundle, tag: String) {
-        val dispatcher = FirebaseJobDispatcher(GooglePlayDriver(this))
+        val dispatcher = Singleton.dispatcher.getInstance(applicationContext)
         Log.d(TAG, "Scheduling new job")
         val random = Random()
         val timeDelay = random.nextInt(5)

@@ -15,7 +15,7 @@ import java.util.*
 enum class Channel(val id: String, val channelName: String){
     ANNOUNCEMENT("announcement", "Announcement"),
     EVENT("event", "Event"),
-    PRIORITY("priority", "Priority"),
+    PM("pm", "Private Message"),
     RESULT("result", "Result"),
     STARRED("starred", "Starred")
 }

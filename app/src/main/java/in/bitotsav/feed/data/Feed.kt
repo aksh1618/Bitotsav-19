@@ -5,6 +5,13 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+enum class FeedType{
+    EVENT,
+    RESULT,
+    ANNOUNCEMENT,
+    PM
+}
+
 @Entity
 data class Feed(
     @PrimaryKey @SerializedName("_id") val id: Int,

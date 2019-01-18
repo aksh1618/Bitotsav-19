@@ -9,6 +9,7 @@ class TeamRepository(private val teamDao: TeamDao): Repository<Team> {
         return teamDao.getAll()
     }
 
+    @WorkerThread
     fun getByName(name: String): Team {
         return teamDao.getByName(name)
     }
