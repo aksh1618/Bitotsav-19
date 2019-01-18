@@ -1,4 +1,4 @@
-package `in`.bitotsav.feed
+package `in`.bitotsav.feed.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

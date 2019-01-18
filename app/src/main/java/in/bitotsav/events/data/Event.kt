@@ -1,9 +1,14 @@
-package `in`.bitotsav.events
+package `in`.bitotsav.events.data
 
+import `in`.bitotsav.shared.Singleton
+import android.content.Context
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import java.util.*
 
 @Entity
@@ -33,16 +38,26 @@ data class Event(
     @SerializedName("eventPrize2") val prize2: Int,
     @SerializedName("eventPrize3") val prize3: Int,
 //    TODO: Set type as List<String>? Confirm default value stored in db
-    @SerializedName("eventPosition1") val position1: String,
-    @SerializedName("eventPosition2") val position2: String,
-    @SerializedName("eventPosition3") val position3: String
+    @SerializedName("eventPosition1") val position1: String = "NA",
+    @SerializedName("eventPosition2") val position2: String = "NA",
+    @SerializedName("eventPosition3") val position3: String = "NA"
 ) {
     // Using @Transient also makes room ignore the property
     @Expose(serialize = false, deserialize = false)
     val gregorianCalendar = getGregorianCalendarFromString(day, timeString)
 
+    @Expose(serialize = false, deserialize = false) var isStarred: Boolean = false
+    private set
+
     private fun getGregorianCalendarFromString(day: Int, timeString: String): GregorianCalendar {
         val (hours, minutes) = timeString.split(":").map { it.toInt() }
-        return GregorianCalendar(2019, 2, day + 13, hours, minutes)
+        return GregorianCalendar(2019, 2, day + 14, hours, minutes)
+    }
+
+    fun toggleStarred(context: Context) {
+        isStarred = isStarred.not()
+        CoroutineScope(Dispatchers.Default).async {
+            EventRepository(Singleton.database.getInstance(context).eventDao()).insert(this@Event)
+        }
     }
 }

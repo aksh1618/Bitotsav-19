@@ -1,4 +1,4 @@
-package `in`.bitotsav.teams
+package `in`.bitotsav.teams.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
