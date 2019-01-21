@@ -7,8 +7,8 @@ import com.google.gson.annotations.Expose
 data class NonChampionshipTeam(
     val eventId: Int,
     val teamLeaderId: String,
-    @Expose(serialize = false, deserialize = false) val name: String,
+    @Expose(serialize = false, deserialize = false) var name: String,
     val members: Map<String, String>,
-    @Expose(serialize = false, deserialize = false) val rank: Int = 0,
-    @Expose(serialize = false, deserialize = false) val isUserTeam: Boolean = false
+    @Expose(serialize = false, deserialize = false) var rank: Int = 0,
+    @Expose(serialize = false, deserialize = false) var isUserTeam: Boolean = false
 )

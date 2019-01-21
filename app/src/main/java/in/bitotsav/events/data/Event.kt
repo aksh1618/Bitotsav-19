@@ -44,10 +44,10 @@ data class Event(
 ) {
     // Using @Transient also makes room ignore the property
     @Expose(serialize = false, deserialize = false)
-    val gregorianCalendar = getGregorianCalendarFromString(day, timeString)
+    var gregorianCalendar = getGregorianCalendarFromString(day, timeString)
 
-    @Expose(serialize = false, deserialize = false) var isStarred: Boolean = false
-    private set
+    @Expose(serialize = false, deserialize = false)
+    var isStarred: Boolean = false
 
     private fun getGregorianCalendarFromString(day: Int, timeString: String): GregorianCalendar {
         val (hours, minutes) = timeString.split(":").map { it.toInt() }
@@ -56,7 +56,7 @@ data class Event(
 
     fun toggleStarred(context: Context) {
         isStarred = isStarred.not()
-        CoroutineScope(Dispatchers.Default).async {
+        CoroutineScope(Dispatchers.IO).async {
             EventRepository(Singleton.database.getInstance(context).eventDao()).insert(this@Event)
         }
     }
