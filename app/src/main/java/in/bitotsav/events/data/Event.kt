@@ -22,9 +22,9 @@ data class Event(
     @SerializedName("eventRules") val rules: String,
     @SerializedName("eventContact1Name") val contact1Name: String,
     @SerializedName("eventContact1Number") val contact1Number: Long,
-    @SerializedName("eventContact2Name") val contact2Name: String,
-    @SerializedName("eventContact2Number") val contact2Number: Long,
-    @SerializedName("eventRequirement") val requirement: String,
+//    TODO: This can be null or empty. Handle it in UI accordingly
+    @SerializedName("eventContact2Name") val contact2Name: String? = null,
+    @SerializedName("eventContact2Number") val contact2Number: Long? = null,
     @SerializedName("eventPoints1") val points1: Int,
     @SerializedName("eventPoints2") val points2: Int,
     @SerializedName("eventPoints3") val points3: Int,
@@ -37,21 +37,26 @@ data class Event(
     @SerializedName("eventPrize1") val prize1: Int,
     @SerializedName("eventPrize2") val prize2: Int,
     @SerializedName("eventPrize3") val prize3: Int,
-//    TODO: Set type as List<String>? Confirm default value stored in db
-    @SerializedName("eventPosition1") val position1: String = "NA",
-    @SerializedName("eventPosition2") val position2: String = "NA",
-    @SerializedName("eventPosition3") val position3: String = "NA"
+//    TODO: Note: Default value is empty map
+    @SerializedName("eventPosition1") val position1: Map<String, String>?,
+    @SerializedName("eventPosition2") val position2: Map<String, String>?,
+    @SerializedName("eventPosition3") val position3: Map<String, String>?
 ) {
     // Using @Transient also makes room ignore the property
     @Expose(serialize = false, deserialize = false)
-    var gregorianCalendar = getGregorianCalendarFromString(day, timeString)
+    var timestamp = getTimestampFromString(day, timeString)
 
     @Expose(serialize = false, deserialize = false)
     var isStarred: Boolean = false
 
-    private fun getGregorianCalendarFromString(day: Int, timeString: String): GregorianCalendar {
+    fun setProperties(isStarred: Boolean) {
+        this.timestamp = getTimestampFromString(day, timeString)
+        this.isStarred = isStarred
+    }
+
+    private fun getTimestampFromString(day: Int, timeString: String): Long {
         val (hours, minutes) = timeString.split(":").map { it.toInt() }
-        return GregorianCalendar(2019, 2, day + 14, hours, minutes)
+        return GregorianCalendar(2019, 2, day + 14, hours, minutes).timeInMillis
     }
 
     fun toggleStarred(context: Context) {

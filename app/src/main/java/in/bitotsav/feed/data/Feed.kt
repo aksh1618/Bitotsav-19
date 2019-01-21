@@ -14,12 +14,17 @@ enum class FeedType{
 
 @Entity
 data class Feed(
-    @PrimaryKey @SerializedName("_id") val id: Int,
+    @PrimaryKey @SerializedName("feedId") val id: Long,
     @SerializedName("title") val title: String,
     @SerializedName("content") val content: String,
     @SerializedName("type") val type: String,
-    @SerializedName("time") val time: Long,
+    @SerializedName("timestamp") val timestamp: Long,
     @Expose(serialize = false, deserialize = false) var isStarred: Boolean = false,
     val eventId: Int? = null,
     @Expose(serialize = false, deserialize = false) var eventName: String? = null
-)
+) {
+    fun setProperties(isStarred: Boolean, eventName: String) {
+        this.isStarred = isStarred
+        this.eventName = eventName
+    }
+}

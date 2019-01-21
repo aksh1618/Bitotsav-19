@@ -68,10 +68,10 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                 return
             }
 
-            val messageTitle = remoteMessage.data["title"] ?: return
-            val messageBody = remoteMessage.data["message"] ?: return
+            val title = remoteMessage.data["title"] ?: return
+            val content = remoteMessage.data["content"] ?: return
             val timestamp = remoteMessage.data["timestamp"]?.toLong() ?: System.currentTimeMillis()
-            val feedId = remoteMessage.data["feedId"]?.toInt() ?: return
+            val feedId = remoteMessage.data["feedId"]?.toLong() ?: return
             val feedType = FeedType.valueOf(updateType.name)
             var channel = Channel.valueOf(updateType.name)
 
@@ -81,8 +81,8 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                 UpdateType.ANNOUNCEMENT, UpdateType.PM -> {
                     val feed = Feed(
                         feedId,
-                        messageTitle,
-                        messageBody,
+                        title,
+                        content,
                         feedType.name,
                         timestamp,
                         false,
@@ -94,7 +94,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                     }
 //                    TODO("Pass appropriate intent")
                     val intent = Intent(this, MainActivity::class.java)
-                    displayNotification(messageTitle, messageBody, timestamp, channel, intent, this)
+                    displayNotification(title, content, timestamp, channel, intent, this)
                 }
                 else -> {
                     val eventId = remoteMessage.data["eventId"]?.toInt() ?: return
@@ -110,8 +110,8 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                     val eventName = runBlocking { deferredEventName.await() } ?: return
                     val feed = Feed(
                         feedId,
-                        messageTitle,
-                        messageBody,
+                        title,
+                        content,
                         feedType.name,
                         timestamp,
                         isStarred,
@@ -124,7 +124,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                     if (isStarred) channel = Channel.STARRED
 //                    TODO("Pass appropriate intent")
                     val intent = Intent(this, MainActivity::class.java)
-                    displayNotification(messageTitle, messageBody, timestamp, channel, intent, applicationContext)
+                    displayNotification(title, content, timestamp, channel, intent, applicationContext)
                 }
             }
         }

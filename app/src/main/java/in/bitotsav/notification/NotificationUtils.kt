@@ -24,8 +24,8 @@ enum class Channel(val id: String, val channelName: String){
  * Create and show a notification
  */
 fun displayNotification(
-    messageTitle: String,
-    messageBody: String,
+    title: String,
+    content: String,
     timestamp: Long,
     channel: Channel,
     intent: Intent,
@@ -43,15 +43,15 @@ fun displayNotification(
     )
 
     val bigTextStyle = NotificationCompat.BigTextStyle()
-    bigTextStyle.bigText(messageBody)
+    bigTextStyle.bigText(content)
 
 //    TODO("Set small icon, large icon and color")
     val channelId = channel.id
     val notificationBuilder = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(R.drawable.ic_launcher_foreground)
         .setStyle(bigTextStyle)
-        .setContentTitle(messageTitle)
-        .setContentText(messageBody)
+        .setContentTitle(title)
+        .setContentText(content)
         .setDefaults(Notification.DEFAULT_ALL)
         .setWhen(timestamp)
         .setShowWhen(true)
