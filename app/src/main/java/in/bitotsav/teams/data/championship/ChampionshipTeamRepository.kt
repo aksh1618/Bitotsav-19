@@ -10,7 +10,7 @@ class ChampionshipTeamRepository(private val championshipTeamDao: ChampionshipTe
     }
 
     @WorkerThread
-    fun getByName(name: String): ChampionshipTeam {
+    fun getByName(name: String): ChampionshipTeam? {
         return championshipTeamDao.getByName(name)
     }
 

@@ -106,8 +106,8 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                     }
 //                    TODO("Refresh data from server here")
 //                    TODO("Schedule Job")
-                    val isStarred = runBlocking { deferredIsStarred.await() }
-                    val eventName = runBlocking { deferredEventName.await() }
+                    val isStarred = runBlocking { deferredIsStarred.await() } ?: return
+                    val eventName = runBlocking { deferredEventName.await() } ?: return
                     val feed = Feed(
                         feedId,
                         messageTitle,

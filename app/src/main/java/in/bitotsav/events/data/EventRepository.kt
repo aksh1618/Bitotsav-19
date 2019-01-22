@@ -10,17 +10,17 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
     }
 
     @WorkerThread
-    suspend fun getById(id: Int): Event {
+    suspend fun getById(id: Int): Event? {
         return eventDao.getById(id)
     }
 
     @WorkerThread
-    suspend fun getEventName(id: Int): String {
+    suspend fun getEventName(id: Int): String? {
         return eventDao.getEventName(id)
     }
 
     @WorkerThread
-    suspend fun isStarred(id: Int): Boolean {
+    suspend fun isStarred(id: Int): Boolean? {
         return eventDao.isStarred(id)
     }
 

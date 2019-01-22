@@ -12,7 +12,7 @@ class NonChampionshipTeamRepository(
     }
 
     @WorkerThread
-    suspend fun getById(eventId: Int, teamLeaderId: String): NonChampionshipTeam {
+    suspend fun getById(eventId: Int, teamLeaderId: String): NonChampionshipTeam? {
         return nonChampionshipTeamDao.getById(eventId, teamLeaderId)
     }
 

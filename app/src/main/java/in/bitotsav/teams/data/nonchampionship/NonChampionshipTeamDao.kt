@@ -12,7 +12,7 @@ interface NonChampionshipTeamDao {
     fun getAll() : LiveData<List<NonChampionshipTeam>>
 
     @Query("SELECT * FROM nonchampionshipteam WHERE eventId = :eventId and teamLeaderId = :teamLeaderId")
-    fun getById(eventId: Int, teamLeaderId: String) : NonChampionshipTeam
+    fun getById(eventId: Int, teamLeaderId: String) : NonChampionshipTeam?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg nonChampionshipTeams: NonChampionshipTeam)

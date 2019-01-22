@@ -12,13 +12,13 @@ interface EventDao {
     fun getAll(): LiveData<List<Event>>
 
     @Query("SELECT * FROM event WHERE id = :id")
-    fun getById(id: Int): Event
+    fun getById(id: Int): Event?
 
     @Query("SELECT name FROM event WHERE id = :id")
-    fun getEventName(id: Int): String
+    fun getEventName(id: Int): String?
 
     @Query("SELECT isStarred FROM event WHERE id = :id")
-    fun isStarred(id: Int): Boolean
+    fun isStarred(id: Int): Boolean?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg events: Event)
