@@ -1,4 +1,4 @@
-package `in`.bitotsav.teams.data.nonchampionship
+package `in`.bitotsav.teams.nonchampionship.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

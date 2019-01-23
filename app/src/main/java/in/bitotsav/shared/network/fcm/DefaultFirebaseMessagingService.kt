@@ -1,14 +1,14 @@
-package `in`.bitotsav.network.fcm
+package `in`.bitotsav.shared.network.fcm
 
-import `in`.bitotsav.MainActivity
+import `in`.bitotsav.HomeActivity
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.feed.data.Feed
 import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.feed.data.FeedType
-import `in`.bitotsav.network.NetworkJobService
 import `in`.bitotsav.notification.Channel
 import `in`.bitotsav.notification.displayNotification
 import `in`.bitotsav.shared.Singleton
+import `in`.bitotsav.shared.network.NetworkJobService
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -93,7 +93,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                         FeedRepository(database.feedDao()).insert(feed)
                     }
 //                    TODO("Pass appropriate intent")
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, HomeActivity::class.java)
                     displayNotification(title, content, timestamp, channel, intent, this)
                 }
                 else -> {
@@ -123,7 +123,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                     }
                     if (isStarred) channel = Channel.STARRED
 //                    TODO("Pass appropriate intent")
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, HomeActivity::class.java)
                     displayNotification(title, content, timestamp, channel, intent, applicationContext)
                 }
             }

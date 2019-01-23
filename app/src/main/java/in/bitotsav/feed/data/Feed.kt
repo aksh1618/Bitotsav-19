@@ -23,7 +23,7 @@ data class Feed(
     val eventId: Int? = null,
     @Expose(serialize = false, deserialize = false) var eventName: String? = null
 ) {
-    fun setProperties(isStarred: Boolean, eventName: String) {
+    fun setProperties(isStarred: Boolean, eventName: String?) {
         this.isStarred = isStarred
         this.eventName = eventName
     }

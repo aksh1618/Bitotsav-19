@@ -1,4 +1,4 @@
-package `in`.bitotsav.teams.data.nonchampionship
+package `in`.bitotsav.teams.nonchampionship.data
 
 import `in`.bitotsav.shared.data.Repository
 import androidx.annotation.WorkerThread

@@ -1,4 +1,4 @@
-package `in`.bitotsav.network
+package `in`.bitotsav.shared.network
 
 import android.util.Log
 import com.firebase.jobdispatcher.JobParameters

@@ -11,7 +11,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
 
 object Singleton {
-    const val baseUrl = "https://bitotsav.in/"
+    const val baseUrl = "https://bitotsav.in/api/app/"
 
     val dispatcher = SingletonHolder<FirebaseJobDispatcher, Context> {
         FirebaseJobDispatcher(GooglePlayDriver(it))

@@ -2,13 +2,15 @@ package `in`.bitotsav.events.data
 
 import `in`.bitotsav.events.api.EventService
 import `in`.bitotsav.shared.data.Repository
+import `in`.bitotsav.shared.network.NetworkException
+import `in`.bitotsav.shared.utils.forEachParallel
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
+import kotlinx.coroutines.async
 
 private const val TAG = "EventRepository"
 
@@ -37,48 +39,47 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
         eventDao.insert(*items)
     }
 
-    fun fetchEventById(eventId: Int) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val request = EventService.api.getById(mapOf("eventId" to eventId))
-            try {
-                val response = request.await()
-                if (response.code() != 200) {
-                    if (response.code() == 404) {
-                        throw Exception("Event: $eventId not found")
-                    } else {
-                        throw Exception("Error fetching $eventId from the server")
-                    }
-                }
-                val event = response.body() ?: throw Exception("Request body is null")
-                event.setProperties(isStarred(eventId))
+//    POST - /getEventById - body: {eventId}
+//    502 - Server error
+//    404 - Event not found
+//    200 - Object containing event details
+    fun fetchEventById(eventId: Int): Deferred<Int> {
+        return CoroutineScope(Dispatchers.IO).async {
+            val body = mapOf("eventId" to eventId)
+            val request = EventService.api.getById(body)
+            val response = request.await()
+            if (response.code() == 200) {
+                val event = response.body() ?: throw NetworkException("Response body is empty")
+                Log.d(TAG, "Event: $eventId received from server")
+                event.setProperties(isStarred(eventId) ?: false)
                 insert(event)
                 Log.d(TAG, "Inserted $eventId into DB")
-            } catch (e: HttpException) {
-                Log.e(TAG, e.message)
-            } catch (e: Throwable) {
-                Log.e(TAG, e.message)
+            } else {
+                when (response.code()) {
+                    404 -> throw NetworkException("Event:$eventId not found")
+                    else -> throw NetworkException("Error fetching Event:$eventId from the server")
+                }
             }
         }
     }
 
-    fun fetchAllEvents() {
-        CoroutineScope(Dispatchers.IO).launch {
+//    GET - /getAllEvents
+//    502 - Server error
+//    200 - Array of events
+    fun fetchAllEvents(): Deferred<Any> {
+        return CoroutineScope(Dispatchers.IO).async {
             val request = EventService.api.getAll()
-            try {
-                val response = request.await()
-                if (response.code() != 200) {
-                    throw Exception("Fetch all events failed")
-                }
-                val events = response.body() ?: throw Exception("Request body is null")
-                events.forEach {
-                    it.setProperties(isStarred(it.id))
+            val response = request.await()
+            if (response.code() == 200) {
+                val events = response.body() ?: throw NetworkException("Response body is empty")
+                Log.d(TAG, "All Events received from the server")
+                events.forEachParallel {
+                    it.setProperties(isStarred(it.id) ?: false)
                 }
                 insert(*events.toTypedArray())
                 Log.d(TAG, "Inserted all events into DB")
-            } catch (e: HttpException) {
-                Log.e(TAG, e.message)
-            } catch (e: Throwable) {
-                Log.e(TAG, e.message)
+            } else {
+                throw NetworkException("Fetch all events failed. Code: ${response.code()}")
             }
         }
     }
