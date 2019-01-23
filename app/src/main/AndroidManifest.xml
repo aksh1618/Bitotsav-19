@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="in.bitotsav.shared.network.fcm.DefaultFirebaseMessagingService">
+        <service android:name="in.bitotsav.notification.fcm.DefaultFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

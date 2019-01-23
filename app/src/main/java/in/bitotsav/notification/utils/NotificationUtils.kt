@@ -1,4 +1,4 @@
-package `in`.bitotsav.notification
+package `in`.bitotsav.notification.utils
 
 import `in`.bitotsav.R
 import android.annotation.TargetApi

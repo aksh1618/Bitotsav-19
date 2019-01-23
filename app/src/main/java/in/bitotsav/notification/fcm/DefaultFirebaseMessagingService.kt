@@ -1,12 +1,12 @@
-package `in`.bitotsav.shared.network.fcm
+package `in`.bitotsav.notification.fcm
 
 import `in`.bitotsav.HomeActivity
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.feed.data.Feed
 import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.feed.data.FeedType
-import `in`.bitotsav.notification.Channel
-import `in`.bitotsav.notification.displayNotification
+import `in`.bitotsav.notification.utils.Channel
+import `in`.bitotsav.notification.utils.displayNotification
 import `in`.bitotsav.shared.Singleton
 import `in`.bitotsav.shared.network.NetworkJobService
 import android.content.Intent
@@ -94,7 +94,14 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                     }
 //                    TODO("Pass appropriate intent")
                     val intent = Intent(this, HomeActivity::class.java)
-                    displayNotification(title, content, timestamp, channel, intent, this)
+                    displayNotification(
+                        title,
+                        content,
+                        timestamp,
+                        channel,
+                        intent,
+                        this
+                    )
                 }
                 else -> {
                     val eventId = remoteMessage.data["eventId"]?.toInt() ?: return
@@ -124,7 +131,14 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                     if (isStarred) channel = Channel.STARRED
 //                    TODO("Pass appropriate intent")
                     val intent = Intent(this, HomeActivity::class.java)
-                    displayNotification(title, content, timestamp, channel, intent, applicationContext)
+                    displayNotification(
+                        title,
+                        content,
+                        timestamp,
+                        channel,
+                        intent,
+                        applicationContext
+                    )
                 }
             }
         }
