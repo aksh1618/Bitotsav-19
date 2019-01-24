@@ -27,7 +27,7 @@ import kotlinx.coroutines.runBlocking
 import java.util.*
 
 //TODO("Complete this list")
-private enum class UpdateType{
+private enum class UpdateType {
     EVENT,
     RESULT,
     ANNOUNCEMENT,
@@ -77,7 +77,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
 
             val database = Singleton.database.getInstance(applicationContext)
 
-            when(updateType) {
+            when (updateType) {
                 UpdateType.ANNOUNCEMENT, UpdateType.PM -> {
                     val feed = Feed(
                         feedId,

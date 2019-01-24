@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@id/destInfo"
+        android:title="@string/info_title"
+        android:icon="@drawable/ic_info_black_24dp" />
+
+    <item
+        android:id="@id/destSchedule"
+        android:title="@string/schedule_title"
+        android:icon="@drawable/ic_schedule_white_24dp" />
+
+    <item
+        android:id="@+id/destFeed"
+        android:title="@string/feed_title"
+        android:icon="@drawable/ic_feed_white_24dp" />
+
+</menu>
