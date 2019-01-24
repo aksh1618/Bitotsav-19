@@ -1,4 +1,4 @@
-package `in`.bitotsav.teams.championship.api
+package `in`.bitotsav.teams.api
 
 import `in`.bitotsav.shared.Singleton
 import `in`.bitotsav.teams.championship.data.ChampionshipTeam

@@ -2,7 +2,7 @@ package `in`.bitotsav.teams.championship.data
 
 import `in`.bitotsav.shared.data.Repository
 import `in`.bitotsav.shared.network.NetworkException
-import `in`.bitotsav.teams.championship.api.ChampionshipTeamService
+import `in`.bitotsav.teams.api.ChampionshipTeamService
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
