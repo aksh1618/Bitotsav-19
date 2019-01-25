@@ -6,25 +6,12 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.Header
 
-interface AuthenticationService {
-    @POST("login")
-    fun login(@Body body: Any): Deferred<Response<Map<String, String>>>
-
-    @POST("register")
-    fun register(@Body body: Any): Deferred<Response<Map<String, String>>>
-
-    @POST("verify")
-    fun verify(@Body body: Any): Deferred<Response<Map<String, String>>>
-
-    @POST("saveparticipant")
-    fun saveParticipant(@Body body: Any): Deferred<Response<Map<String, String>>>
-
-    @GET("getCollegeList")
-    fun getCollegeList(): Deferred<Response<Map<String, List<String>>>>
+interface ProfileService {
+    @GET("getParticipantDetails")
+    fun getParticipantDetails(@Header("token") authHeaderValue: String): Deferred<Response<Map<String, Any>>>
 
     companion object {
 //        TODO: Add custom client
@@ -33,7 +20,7 @@ interface AuthenticationService {
             .addConverterFactory(GsonConverterFactory.create(Singleton.gson))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
-            .create(AuthenticationService::class.java)
+            .create(ProfileService::class.java)
         }
     }
 }

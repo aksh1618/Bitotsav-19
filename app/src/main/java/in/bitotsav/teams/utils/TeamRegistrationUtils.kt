@@ -29,10 +29,11 @@ fun registerForEvent(
     members: List<Member>
 ): Deferred<Boolean> {
     return CoroutineScope(Dispatchers.Main).async {
+        TODO("Needs testing")
         val body = mapOf(
             "eventId" to eventId,
             "leaderId" to bitId,
-            "members" to members
+            "members" to "\"$members\""
         )
         val authHeaderValue = "Authorization $authToken"
         val request = TeamRegistrationService.api.registerForEvent(authHeaderValue, body)
@@ -94,7 +95,7 @@ fun registerForChampionship(
         val authHeaderValue = "Authorization $authToken"
         val body = mapOf(
             "teamName" to teamName,
-            "teamMembers" to members
+            "teamMembers" to "\"$members\""
         )
         val request = TeamRegistrationService.api.registerForChampionship(authHeaderValue, body)
         val response = request.await()

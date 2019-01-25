@@ -133,3 +133,18 @@ fun saveParticipant(
     }
 }
 
+//GET - /getCollegeList
+//200 - Object containing colleges
+fun fetchCollegeList(): Deferred<Any> {
+    return CoroutineScope(Dispatchers.IO).async {
+        val request = AuthenticationService.api.getCollegeList()
+        val response = request.await()
+        if (response.code() == 200) {
+            val colleges = response.body()?.get("colleges") ?: throw NetworkException("List of colleges is empty")
+            TODO("Insert into some entity")
+        } else {
+            throw Exception("Unable to get list of colleges from the server")
+        }
+    }
+}
+
