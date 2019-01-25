@@ -23,4 +23,10 @@
         android:label="fragment_feed"
         tools:layout="@layout/fragment_feed" />
 
+    <fragment
+        android:id="@+id/destProfile"
+        android:name="in.bitotsav.profile.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
 </navigation>

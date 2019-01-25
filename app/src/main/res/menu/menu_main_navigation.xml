@@ -4,7 +4,7 @@
     <item
         android:id="@id/destInfo"
         android:title="@string/info_title"
-        android:icon="@drawable/ic_info_black_24dp" />
+        android:icon="@drawable/ic_info_white_24dp" />
 
     <item
         android:id="@id/destSchedule"
@@ -15,5 +15,10 @@
         android:id="@+id/destFeed"
         android:title="@string/feed_title"
         android:icon="@drawable/ic_feed_white_24dp" />
+
+    <item
+        android:id="@id/destProfile"
+        android:title="@string/profile_title"
+        android:icon="@drawable/ic_profile_white_24dp" />
 
 </menu>
