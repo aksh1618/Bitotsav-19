@@ -52,7 +52,6 @@ class NonChampionshipTeamRepository(
             val response = request.await()
             if (response.code() == 200) {
                 Log.d(TAG, "Team retrieved from DB. eventId: $eventId, teamLeaderId: $teamLeaderId")
-//                TODO("Test this")
                 @Suppress("UNCHECKED_CAST")
                 val members = response.body()?.get("teamMembers") as Map<String, String>
 //                TODO("Retrieve all parameters")

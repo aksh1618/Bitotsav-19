@@ -29,14 +29,14 @@ fun registerForEvent(
     members: List<Member>
 ): Deferred<Boolean> {
     return CoroutineScope(Dispatchers.Main).async {
-        TODO("Needs testing")
         val body = mapOf(
             "eventId" to eventId,
             "leaderId" to bitId,
-            "members" to "\"$members\""
+            "members" to members.toString()
         )
         val authHeaderValue = "Authorization $authToken"
-        val request = TeamRegistrationService.api.registerForEvent(authHeaderValue, body)
+        val request
+                = TeamRegistrationService.api.registerForEvent(authHeaderValue, body)
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Registered for event $eventId")
@@ -59,12 +59,16 @@ fun registerForEvent(
 fun deregisterForEvent(
     authToken: String,
     eventId: Int,
-    bitId: String,
-    members: List<Member>
+    bitId: String
 ): Deferred<Boolean> {
     return CoroutineScope(Dispatchers.Main).async {
         val authHeaderValue = "Authorization $authToken"
-        val request = TeamRegistrationService.api.deregisterForEvent(authHeaderValue, eventId, bitId)
+        val request
+                = TeamRegistrationService.api.deregisterForEvent(
+            authHeaderValue,
+            eventId,
+            bitId.substringAfter("/")
+        )
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "De-registered for event $eventId")
@@ -86,6 +90,7 @@ fun deregisterForEvent(
 //405 - All members don't belong to same college
 //409 - Team name already taken or Some member is already registered for the event
 //200 - Success
+//TODO: - Incorrect errors
 fun registerForChampionship(
     authToken: String,
     teamName: String,
@@ -95,9 +100,10 @@ fun registerForChampionship(
         val authHeaderValue = "Authorization $authToken"
         val body = mapOf(
             "teamName" to teamName,
-            "teamMembers" to "\"$members\""
+            "teamMembers" to members.toString()
         )
-        val request = TeamRegistrationService.api.registerForChampionship(authHeaderValue, body)
+        val request
+                = TeamRegistrationService.api.registerForChampionship(authHeaderValue, body)
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Registered for Bitotsav championship")
