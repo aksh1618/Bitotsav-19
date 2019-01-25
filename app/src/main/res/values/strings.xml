@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Bitotsav \'19</string>
+
+    <string name="schedule_title">Schedule</string>
+    <string name="info_title">Info</string>
+    <string name="feed_title">Updates</string>
+    <string name="profile_title">Profile</string>
 </resources>
