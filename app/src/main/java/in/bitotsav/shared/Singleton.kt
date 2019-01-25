@@ -1,8 +1,6 @@
 package `in`.bitotsav.shared
 
-import `in`.bitotsav.database.AppDatabase
 import android.content.Context
-import androidx.room.Room
 import com.firebase.jobdispatcher.FirebaseJobDispatcher
 import com.firebase.jobdispatcher.GooglePlayDriver
 import com.google.gson.ExclusionStrategy
@@ -17,11 +15,12 @@ object Singleton {
         FirebaseJobDispatcher(GooglePlayDriver(it))
     }
 
-    val database = SingletonHolder<AppDatabase, Context> {
-        Room.databaseBuilder(it.applicationContext,
-            AppDatabase::class.java, "App.db")
-            .build()
-    }
+//    koine!
+//    val database = SingletonHolder<AppDatabase, Context> {
+//        Room.databaseBuilder(it.applicationContext,
+//            AppDatabase::class.java, "App.db")
+//            .build()
+//    }
 
     val gson by lazy { GsonBuilder().addDeserializationExclusionStrategy(object: ExclusionStrategy {
         override fun shouldSkipField(fieldAttributes: FieldAttributes):Boolean {

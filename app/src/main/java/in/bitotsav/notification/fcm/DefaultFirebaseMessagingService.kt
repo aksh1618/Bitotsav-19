@@ -24,6 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
+import org.koin.android.ext.android.get
 import java.util.*
 
 //TODO("Complete this list")
@@ -75,7 +76,9 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
             val feedType = FeedType.valueOf(updateType.name)
             var channel = Channel.valueOf(updateType.name)
 
-            val database = Singleton.database.getInstance(applicationContext)
+            // TODO: Test still working.
+//            koine!
+//            val database = Singleton.database.getInstance(applicationContext)
 
             when (updateType) {
                 UpdateType.ANNOUNCEMENT, UpdateType.PM -> {
@@ -90,7 +93,9 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                         null
                     )
                     CoroutineScope(Dispatchers.IO).async {
-                        FeedRepository(database.feedDao()).insert(feed)
+                        //                        koine!
+//                        FeedRepository(database.feedDao()).insert(feed)
+                        get<FeedRepository>().insert(feed)
                     }
 //                    TODO("Pass appropriate intent")
                     val intent = Intent(this, HomeActivity::class.java)
@@ -106,10 +111,14 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                 else -> {
                     val eventId = remoteMessage.data["eventId"]?.toInt() ?: return
                     val deferredIsStarred = CoroutineScope(Dispatchers.IO).async {
-                        EventRepository(database.eventDao()).isStarred(eventId)
+                        //                        koine!
+//                        EventRepository(database.eventDao()).isStarred(eventId)
+                        get<EventRepository>().isStarred(eventId)
                     }
                     val deferredEventName = CoroutineScope(Dispatchers.IO).async {
-                        EventRepository(database.eventDao()).getEventName(eventId)
+                        //                        koine!
+//                        EventRepository(database.eventDao()).getEventName(eventId)
+                        get<EventRepository>().getEventName(eventId)
                     }
 //                    TODO("Refresh data from server here")
 //                    TODO("Schedule Job")
@@ -126,7 +135,9 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                         eventName
                     )
                     CoroutineScope(Dispatchers.IO).async {
-                        FeedRepository(database.feedDao()).insert(feed)
+                        //                        koine!
+//                        FeedRepository(database.feedDao()).insert(feed)
+                        get<FeedRepository>().insert(feed)
                     }
                     if (isStarred) channel = Channel.STARRED
 //                    TODO("Pass appropriate intent")

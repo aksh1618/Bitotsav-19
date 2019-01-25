@@ -1,6 +1,5 @@
 package `in`.bitotsav.events.data
 
-import `in`.bitotsav.shared.Singleton
 import android.content.Context
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -9,6 +8,8 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import org.koin.core.KoinComponent
+import org.koin.core.get
 import java.util.*
 
 @Entity
@@ -47,7 +48,7 @@ data class Event(
     @SerializedName("eventPosition1") val position1: Map<String, String>?,
     @SerializedName("eventPosition2") val position2: Map<String, String>?,
     @SerializedName("eventPosition3") val position3: Map<String, String>?
-) {
+) : KoinComponent {
     // Using @Transient also makes room ignore the property
     @Expose(serialize = false, deserialize = false)
     var timestamp = getTimestampFromString(day, timeString)
@@ -66,9 +67,11 @@ data class Event(
     }
 
     fun toggleStarred(context: Context) {
-        isStarred = isStarred.not()
+        isStarred.apply { not() }
         CoroutineScope(Dispatchers.IO).async {
-            EventRepository(Singleton.database.getInstance(context).eventDao()).insert(this@Event)
+            //            koine!
+//            EventRepository(Singleton.database.getInstance(context).eventDao()).insert(this@Event)
+            get<EventRepository>().insert(this@Event)
         }
     }
 }

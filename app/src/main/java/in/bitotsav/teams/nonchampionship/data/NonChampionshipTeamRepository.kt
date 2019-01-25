@@ -1,7 +1,6 @@
 package `in`.bitotsav.teams.nonchampionship.data
 
 import `in`.bitotsav.events.data.EventRepository
-import `in`.bitotsav.shared.Singleton
 import `in`.bitotsav.shared.data.Repository
 import `in`.bitotsav.teams.api.NonChampionshipTeamService
 import android.content.Context
@@ -12,12 +11,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import org.koin.core.KoinComponent
+import org.koin.core.get
 
 private const val TAG = "NonBCTeamRepository"
 
 class NonChampionshipTeamRepository(
     private val nonChampionshipTeamDao: NonChampionshipTeamDao
-): Repository<NonChampionshipTeam> {
+) : Repository<NonChampionshipTeam>, KoinComponent {
     override fun getAll(): LiveData<List<NonChampionshipTeam>> {
         return nonChampionshipTeamDao.getAll()
     }
@@ -55,8 +56,10 @@ class NonChampionshipTeamRepository(
                 @Suppress("UNCHECKED_CAST")
                 val members = response.body()?.get("teamMembers") as Map<String, String>
 //                TODO("Retrieve all parameters")
-                val eventDao = Singleton.database.getInstance(context).eventDao()
-                val event = EventRepository(eventDao).getById(eventId)
+//                koine!
+//                val eventDao = Singleton.database.getInstance(context).eventDao()
+//                val event = EventRepository(eventDao).getById(eventId)
+                val event = get<EventRepository>().getById(eventId)
 //                eventPosition1: {
 //                    teamLeader: req.body.eventPosition1,
 //                    teamLeaderName: map[req.body.eventPosition1].name,
