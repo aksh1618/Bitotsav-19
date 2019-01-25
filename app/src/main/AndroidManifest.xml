@@ -12,7 +12,7 @@
             android:theme="@style/AppTheme"
             android:name=".Bitotsav19"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -20,14 +20,14 @@
             </intent-filter>
         </activity>
 
-        <service android:name="in.bitotsav.network.fcm.DefaultFirebaseMessagingService">
+        <service android:name="in.bitotsav.notification.fcm.DefaultFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
                 android:exported="false"
-                android:name=".network.NetworkJobService">
+                android:name="in.bitotsav.shared.network.NetworkJobService">
             <intent-filter>
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
             </intent-filter>

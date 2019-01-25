@@ -1,14 +1,14 @@
-package `in`.bitotsav.network.fcm
+package `in`.bitotsav.notification.fcm
 
-import `in`.bitotsav.MainActivity
+import `in`.bitotsav.HomeActivity
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.feed.data.Feed
 import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.feed.data.FeedType
-import `in`.bitotsav.network.NetworkJobService
-import `in`.bitotsav.notification.Channel
-import `in`.bitotsav.notification.displayNotification
+import `in`.bitotsav.notification.utils.Channel
+import `in`.bitotsav.notification.utils.displayNotification
 import `in`.bitotsav.shared.Singleton
+import `in`.bitotsav.shared.network.NetworkJobService
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -68,10 +68,10 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                 return
             }
 
-            val messageTitle = remoteMessage.data["title"] ?: return
-            val messageBody = remoteMessage.data["message"] ?: return
+            val title = remoteMessage.data["title"] ?: return
+            val content = remoteMessage.data["content"] ?: return
             val timestamp = remoteMessage.data["timestamp"]?.toLong() ?: System.currentTimeMillis()
-            val feedId = remoteMessage.data["feedId"]?.toInt() ?: return
+            val feedId = remoteMessage.data["feedId"]?.toLong() ?: return
             val feedType = FeedType.valueOf(updateType.name)
             var channel = Channel.valueOf(updateType.name)
 
@@ -81,8 +81,8 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                 UpdateType.ANNOUNCEMENT, UpdateType.PM -> {
                     val feed = Feed(
                         feedId,
-                        messageTitle,
-                        messageBody,
+                        title,
+                        content,
                         feedType.name,
                         timestamp,
                         false,
@@ -93,8 +93,15 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                         FeedRepository(database.feedDao()).insert(feed)
                     }
 //                    TODO("Pass appropriate intent")
-                    val intent = Intent(this, MainActivity::class.java)
-                    displayNotification(messageTitle, messageBody, timestamp, channel, intent, this)
+                    val intent = Intent(this, HomeActivity::class.java)
+                    displayNotification(
+                        title,
+                        content,
+                        timestamp,
+                        channel,
+                        intent,
+                        this
+                    )
                 }
                 else -> {
                     val eventId = remoteMessage.data["eventId"]?.toInt() ?: return
@@ -110,8 +117,8 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                     val eventName = runBlocking { deferredEventName.await() } ?: return
                     val feed = Feed(
                         feedId,
-                        messageTitle,
-                        messageBody,
+                        title,
+                        content,
                         feedType.name,
                         timestamp,
                         isStarred,
@@ -123,8 +130,15 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                     }
                     if (isStarred) channel = Channel.STARRED
 //                    TODO("Pass appropriate intent")
-                    val intent = Intent(this, MainActivity::class.java)
-                    displayNotification(messageTitle, messageBody, timestamp, channel, intent, applicationContext)
+                    val intent = Intent(this, HomeActivity::class.java)
+                    displayNotification(
+                        title,
+                        content,
+                        timestamp,
+                        channel,
+                        intent,
+                        applicationContext
+                    )
                 }
             }
         }
