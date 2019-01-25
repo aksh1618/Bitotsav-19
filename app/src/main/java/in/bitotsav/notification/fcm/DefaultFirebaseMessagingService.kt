@@ -8,14 +8,8 @@ import `in`.bitotsav.feed.data.FeedType
 import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
 import `in`.bitotsav.shared.Singleton
-import `in`.bitotsav.shared.network.NetworkJobService
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
-import com.firebase.jobdispatcher.Constraint
-import com.firebase.jobdispatcher.Lifetime
-import com.firebase.jobdispatcher.RetryStrategy
-import com.firebase.jobdispatcher.Trigger
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -169,27 +163,27 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
     /**
      * Schedule a job using FirebaseJobDispatcher.
      */
-    private fun scheduleJob(bundle: Bundle, tag: String) {
-        val dispatcher = Singleton.dispatcher.getInstance(applicationContext)
-        Log.d(TAG, "Scheduling new job")
-        val random = Random()
-        val timeDelay = random.nextInt(5)
-        val myJob = dispatcher.newJobBuilder()
-            .setService(NetworkJobService::class.java)
-            .setTag(tag)
-            .setRecurring(false)
-            .setLifetime(Lifetime.FOREVER)
-            .setTrigger(Trigger.executionWindow(timeDelay, 10))
-            .setReplaceCurrent(false)
-            .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
-            .setConstraints(
-                Constraint.ON_ANY_NETWORK
-            )
-            .setExtras(bundle)
-            .build()
-
-        dispatcher.mustSchedule(myJob)
-    }
+//    private fun scheduleJob(bundle: Bundle, tag: String) {
+//        val dispatcher = Singleton.dispatcher.getInstance(applicationContext)
+//        Log.d(TAG, "Scheduling new job")
+//        val random = Random()
+//        val timeDelay = random.nextInt(5)
+//        val myJob = dispatcher.newJobBuilder()
+//            .setService(NetworkJobService::class.java)
+//            .setTag(tag)
+//            .setRecurring(false)
+//            .setLifetime(Lifetime.FOREVER)
+//            .setTrigger(Trigger.executionWindow(timeDelay, 10))
+//            .setReplaceCurrent(false)
+//            .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+//            .setConstraints(
+//                Constraint.ON_ANY_NETWORK
+//            )
+//            .setExtras(bundle)
+//            .build()
+//
+//        dispatcher.mustSchedule(myJob)
+//    }
 
     /**
      * Persist token to third-party servers.

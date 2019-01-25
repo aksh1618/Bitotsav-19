@@ -10,20 +10,20 @@ import retrofit2.http.*
 
 interface TeamRegistrationService {
     @POST("eventRegistration")
-    fun registerForEvent(
+    fun registerForEventAsync(
         @Header("token") authHeaderValue: String,
         @Body body: Any
     ): Deferred<Response<Map<String, String>>>
 
     @GET("eventDeregistration/{eventId}/{bitId}")
-    fun deregisterForEvent(
+    fun deregisterForEventAsync(
         @Header("token") authHeaderValue: String,
         @Path("eventId") eventId: Int,
         @Path("bitId") bitId: String
     ): Deferred<Response<Map<String, String>>>
 
     @POST("championship")
-    fun registerForChampionship(
+    fun registerForChampionshipAsync(
         @Header("token") authHeaderValue: String,
         @Body body: Any
     ): Deferred<Response<Map<String, String>>>

@@ -12,19 +12,19 @@ import retrofit2.http.POST
 
 interface AuthenticationService {
     @POST("login")
-    fun login(@Body body: Any): Deferred<Response<Map<String, String>>>
+    fun loginAsync(@Body body: Any): Deferred<Response<Map<String, String>>>
 
     @POST("register")
-    fun register(@Body body: Any): Deferred<Response<Map<String, String>>>
+    fun registerAsync(@Body body: Any): Deferred<Response<Map<String, String>>>
 
     @POST("verify")
-    fun verify(@Body body: Any): Deferred<Response<Map<String, String>>>
+    fun verifyAsync(@Body body: Any): Deferred<Response<Map<String, String>>>
 
     @POST("saveparticipant")
-    fun saveParticipant(@Body body: Any): Deferred<Response<Map<String, String>>>
+    fun saveParticipantAsync(@Body body: Any): Deferred<Response<Map<String, String>>>
 
     @GET("getCollegeList")
-    fun getCollegeList(): Deferred<Response<Map<String, List<String>>>>
+    fun getCollegeListAsync(): Deferred<Response<Map<String, List<String>>>>
 
     companion object {
 //        TODO: Add custom client

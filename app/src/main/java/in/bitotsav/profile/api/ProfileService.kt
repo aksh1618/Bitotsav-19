@@ -11,7 +11,7 @@ import retrofit2.http.Header
 
 interface ProfileService {
     @GET("getParticipantDetails")
-    fun getParticipantDetails(@Header("token") authHeaderValue: String): Deferred<Response<Map<String, Any>>>
+    fun getParticipantDetailsAsync(@Header("token") authHeaderValue: String): Deferred<Response<Map<String, Any>>>
 
     companion object {
 //        TODO: Add custom client

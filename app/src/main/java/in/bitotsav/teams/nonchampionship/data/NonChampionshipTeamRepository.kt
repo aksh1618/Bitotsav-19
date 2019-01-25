@@ -43,13 +43,13 @@ class NonChampionshipTeamRepository(
 //    404 - Team not found
 //    403 - eventId or teamLeaderId not found
 //    200 - Success with teamMembers array
-    fun fetchNonChampionshipTeam(eventId: Int, teamLeaderId: String, context: Context): Deferred<Any> {
+    fun fetchNonChampionshipTeamAsync(eventId: Int, teamLeaderId: String, context: Context): Deferred<Any> {
         return CoroutineScope(Dispatchers.IO).async {
             val body = mapOf(
                 "eventId" to eventId,
                 "teamLeaderId" to teamLeaderId
             )
-            val request = NonChampionshipTeamService.api.getNonChampionshipTeam(body)
+            val request = NonChampionshipTeamService.api.getNonChampionshipTeamAsync(body)
             val response = request.await()
             if (response.code() == 200) {
                 Log.d(TAG, "Team retrieved from DB. eventId: $eventId, teamLeaderId: $teamLeaderId")

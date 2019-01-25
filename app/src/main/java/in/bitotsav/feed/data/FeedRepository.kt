@@ -32,10 +32,10 @@ class FeedRepository(private val feedDao: FeedDao) : Repository<Feed>, KoinCompo
 //    POST - /getFeedsAfter - body: {timestamp}
 //    502 - Server error
 //    200 - Array of announcements
-    fun fetchFeedsAfter(timestamp: Long, context: Context): Deferred<Any> {
+    fun fetchFeedsAfterAsync(timestamp: Long, context: Context): Deferred<Any> {
         return CoroutineScope(Dispatchers.IO).async {
             val body = mapOf("timestamp" to timestamp)
-            val request = FeedService.api.getFeedsAfter(body)
+            val request = FeedService.api.getFeedsAfterAsync(body)
             val response = request.await()
             if (response.code() == 200) {
                 Log.d(TAG, "Feeds received after $timestamp")

@@ -12,13 +12,13 @@ import retrofit2.http.POST
 
 interface FcmTokenService {
     @POST("addFCMToken")
-    fun addFcmToken(
+    fun addFcmTokenAsync(
         @Header("token") authHeaderValue: String,
         @Body body: Any
     ): Deferred<Response<Map<String, String>>>
 
     @POST("removeFCMToken")
-    fun removeFcmToken(
+    fun removeFcmTokenAsync(
         @Header("token") authHeaderValue: String,
         @Body body: Any
     ): Deferred<Response<Map<String, String>>>

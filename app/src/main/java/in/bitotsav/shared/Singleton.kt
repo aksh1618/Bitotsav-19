@@ -1,8 +1,7 @@
 package `in`.bitotsav.shared
 
 import android.content.Context
-import com.firebase.jobdispatcher.FirebaseJobDispatcher
-import com.firebase.jobdispatcher.GooglePlayDriver
+import androidx.room.Room
 import com.google.gson.ExclusionStrategy
 import com.google.gson.FieldAttributes
 import com.google.gson.GsonBuilder
@@ -10,10 +9,6 @@ import com.google.gson.annotations.Expose
 
 object Singleton {
     const val baseUrl = "https://bitotsav.in/api/app/"
-
-    val dispatcher = SingletonHolder<FirebaseJobDispatcher, Context> {
-        FirebaseJobDispatcher(GooglePlayDriver(it))
-    }
 
 //    koine!
 //    val database = SingletonHolder<AppDatabase, Context> {
