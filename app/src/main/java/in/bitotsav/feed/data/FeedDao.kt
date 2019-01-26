@@ -9,7 +9,10 @@ import androidx.room.Query
 @Dao
 interface FeedDao {
     @Query("SELECT * FROM feed")
-    fun getAll() : LiveData<List<Feed>>
+    fun getAll(): LiveData<List<Feed>>
+
+    @Query("SELECT MAX(timestamp) FROM feed")
+    fun getLatestTimestamp(): Long?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg feeds: Feed)

@@ -1,7 +1,5 @@
 package `in`.bitotsav.shared
 
-import android.content.Context
-import androidx.room.Room
 import com.google.gson.ExclusionStrategy
 import com.google.gson.FieldAttributes
 import com.google.gson.GsonBuilder
@@ -17,13 +15,17 @@ object Singleton {
 //            .build()
 //    }
 
-    val gson by lazy { GsonBuilder().addDeserializationExclusionStrategy(object: ExclusionStrategy {
-        override fun shouldSkipField(fieldAttributes: FieldAttributes):Boolean {
-            val expose = fieldAttributes.getAnnotation(Expose::class.java)
-            return expose != null && !expose.deserialize
-        }
-        override fun shouldSkipClass(aClass:Class<*>):Boolean {
-            return false
-        }
-    }).create() }
+    val gson by lazy {
+        GsonBuilder().addDeserializationExclusionStrategy(
+            object: ExclusionStrategy {
+                override fun shouldSkipField(fieldAttributes: FieldAttributes):Boolean {
+                    val expose = fieldAttributes.getAnnotation(Expose::class.java)
+                    return expose != null && !expose.deserialize
+                }
+                override fun shouldSkipClass(aClass:Class<*>):Boolean {
+                    return false
+                }
+            }
+        ).create()
+    }
 }

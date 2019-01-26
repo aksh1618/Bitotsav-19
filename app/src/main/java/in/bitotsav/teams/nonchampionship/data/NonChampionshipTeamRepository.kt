@@ -3,7 +3,6 @@ package `in`.bitotsav.teams.nonchampionship.data
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.shared.data.Repository
 import `in`.bitotsav.teams.api.NonChampionshipTeamService
-import android.content.Context
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
@@ -43,7 +42,7 @@ class NonChampionshipTeamRepository(
 //    404 - Team not found
 //    403 - eventId or teamLeaderId not found
 //    200 - Success with teamMembers array
-    fun fetchNonChampionshipTeamAsync(eventId: Int, teamLeaderId: String, context: Context): Deferred<Any> {
+    fun fetchNonChampionshipTeamAsync(eventId: Int, teamLeaderId: String): Deferred<Any> {
         return CoroutineScope(Dispatchers.IO).async {
             val body = mapOf(
                 "eventId" to eventId,

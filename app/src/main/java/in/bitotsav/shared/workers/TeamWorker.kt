@@ -1,6 +1,5 @@
 package `in`.bitotsav.shared.workers
 
-import `in`.bitotsav.shared.Singleton
 import `in`.bitotsav.shared.workers.TeamWorkType.*
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
@@ -9,6 +8,8 @@ import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import kotlinx.coroutines.runBlocking
+import org.koin.core.KoinComponent
+import org.koin.core.get
 
 private const val TAG = "TeamWorker"
 
@@ -17,24 +18,21 @@ enum class TeamWorkType {
     FETCH_ALL_TEAMS
 }
 
-class TeamWorker(context: Context, params: WorkerParameters): Worker(context, params) {
+class TeamWorker(context: Context, params: WorkerParameters): Worker(context, params), KoinComponent {
+
     override fun doWork(): Result {
-        val database = Singleton.database.getInstance(applicationContext)
         val type = valueOf(inputData.getString("type")!!)
 
         return runBlocking {
             try {
                 when (type) {
-                    FETCH_ALL_TEAMS -> {
-                        ChampionshipTeamRepository(database.championshipTeamDao())
-                            .fetchAllChampionshipTeamsAsync().await()
-                    }
+                    FETCH_ALL_TEAMS -> get<ChampionshipTeamRepository>().fetchAllChampionshipTeamsAsync().await()
                     FETCH_TEAM -> {
                         val eventId = inputData.getInt("eventId", 1)
                         val teamLeaderId = inputData.getString("teamLeaderId")
                             ?: throw Exception("Leader id is empty")
-                        NonChampionshipTeamRepository(database.nonChampionshipTeamDao())
-                            .fetchNonChampionshipTeamAsync(eventId, teamLeaderId, applicationContext).await()
+                        get<NonChampionshipTeamRepository>()
+                            .fetchNonChampionshipTeamAsync(eventId, teamLeaderId).await()
                     }
                 }
                 return@runBlocking Result.success()
