@@ -16,6 +16,7 @@ enum class RegistrationWorkType {
 
 class RegistrationWorker(context: Context, params: WorkerParameters): Worker(context, params) {
     override fun doWork(): Result {
+//        TODO("Move code into try block for all workers")
         val type = valueOf(inputData.getString("type")!!)
 
         return runBlocking {
