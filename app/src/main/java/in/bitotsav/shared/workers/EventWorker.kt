@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import kotlinx.coroutines.runBlocking
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -20,15 +21,19 @@ enum class EventWorkType {
 class EventWorker(context: Context, params: WorkerParameters): Worker(context, params), KoinComponent {
 
     override fun doWork(): Result {
-        val type = valueOf(inputData.getString("type")!!)
 
         return runBlocking {
             try {
+                val type = inputData.getString("type")?.let { valueOf(it) }
+                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Invalid work type"))
                 when (type) {
                     FETCH_ALL_EVENTS -> get<EventRepository>().fetchAllEventsAsync().await()
                     FETCH_EVENT -> {
-                        val eventId = inputData.getInt("eventId", 1)
+                        val eventId = inputData.getInt("eventId", -1)
+                        if (eventId == -1)
+                            return@runBlocking Result.failure(workDataOf("Error" to "Event id is empty"))
                         get<EventRepository>().fetchEventByIdAsync(eventId).await()
+                        return@runBlocking Result.success()
                     }
                 }
                 return@runBlocking Result.success()

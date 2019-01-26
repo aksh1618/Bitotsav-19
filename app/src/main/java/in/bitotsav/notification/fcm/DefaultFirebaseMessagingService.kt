@@ -7,9 +7,14 @@ import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.feed.data.FeedType
 import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
-import `in`.bitotsav.shared.Singleton
+import `in`.bitotsav.shared.network.getWork
+import `in`.bitotsav.shared.network.scheduleWork
+import `in`.bitotsav.shared.workers.*
 import android.content.Intent
 import android.util.Log
+import androidx.work.ExistingWorkPolicy
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -19,7 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.get
-import java.util.*
 
 //TODO("Complete this list")
 private enum class UpdateType {
@@ -43,7 +47,6 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
      * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
      */
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        // TODO(developer): Handle FCM messages here.
         Log.d(TAG, "From: ${remoteMessage?.from}")
 
         // Check if message contains a data payload.
@@ -58,8 +61,13 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                 return
             }
 
-            if (UpdateType.ALL_EVENTS == updateType || UpdateType.ALL_TEAMS == updateType) {
-//                TODO("Schedule Job")
+            if (UpdateType.ALL_EVENTS == updateType) {
+                scheduleWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
+                return
+            }
+
+            if (UpdateType.ALL_TEAMS == updateType) {
+                scheduleWork<TeamWorker>(workDataOf("type" to TeamWorkType.FETCH_ALL_TEAMS.name))
                 return
             }
 
@@ -69,10 +77,6 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
             val feedId = remoteMessage.data["feedId"]?.toLong() ?: return
             val feedType = FeedType.valueOf(updateType.name)
             var channel = Channel.valueOf(updateType.name)
-
-            // TODO: Test still working.
-//            koine!
-//            val database = Singleton.database.getInstance(applicationContext)
 
             when (updateType) {
                 UpdateType.ANNOUNCEMENT, UpdateType.PM -> {
@@ -87,8 +91,6 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                         null
                     )
                     CoroutineScope(Dispatchers.IO).async {
-                        //                        koine!
-//                        FeedRepository(database.feedDao()).insert(feed)
                         get<FeedRepository>().insert(feed)
                     }
 //                    TODO("Pass appropriate intent")
@@ -103,19 +105,34 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                     )
                 }
                 else -> {
+//                    UpdateType.EVENT or UpdateType.RESULT
                     val eventId = remoteMessage.data["eventId"]?.toInt() ?: return
                     val deferredIsStarred = CoroutineScope(Dispatchers.IO).async {
-                        //                        koine!
-//                        EventRepository(database.eventDao()).isStarred(eventId)
                         get<EventRepository>().isStarred(eventId)
                     }
                     val deferredEventName = CoroutineScope(Dispatchers.IO).async {
-                        //                        koine!
-//                        EventRepository(database.eventDao()).getEventName(eventId)
                         get<EventRepository>().getEventName(eventId)
                     }
 //                    TODO("Refresh data from server here")
-//                    TODO("Schedule Job")
+
+                    if (updateType == UpdateType.EVENT) {
+                        scheduleWork<EventWorker>(
+                            workDataOf("type" to EventWorkType.FETCH_EVENT.name, "eventId" to eventId)
+                        )
+                    } else {
+                        val eventWork = getWork<EventWorker>(
+                            workDataOf("type" to EventWorkType.FETCH_EVENT.name, "eventId" to eventId)
+                        )
+                        val resultWork = getWork<ResultWorker>(
+                            workDataOf("type" to ResultWorkType.RESULT.name, "eventId" to eventId)
+                        )
+                        WorkManager.getInstance().beginUniqueWork(
+                            eventId.toString(),
+                            ExistingWorkPolicy.REPLACE,
+                            eventWork
+                        ).then(resultWork).enqueue()
+                    }
+
                     val isStarred = runBlocking { deferredIsStarred.await() } ?: return
                     val eventName = runBlocking { deferredEventName.await() } ?: return
                     val feed = Feed(
@@ -129,8 +146,6 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
                         eventName
                     )
                     CoroutineScope(Dispatchers.IO).async {
-                        //                        koine!
-//                        FeedRepository(database.feedDao()).insert(feed)
                         get<FeedRepository>().insert(feed)
                     }
                     if (isStarred) channel = Channel.STARRED

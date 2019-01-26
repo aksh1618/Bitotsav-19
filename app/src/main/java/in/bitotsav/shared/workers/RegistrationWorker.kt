@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import kotlinx.coroutines.runBlocking
 
 private const val TAG = "RegistrationWorker"
@@ -16,11 +17,11 @@ enum class RegistrationWorkType {
 
 class RegistrationWorker(context: Context, params: WorkerParameters): Worker(context, params) {
     override fun doWork(): Result {
-//        TODO("Move code into try block for all workers")
-        val type = valueOf(inputData.getString("type")!!)
 
         return runBlocking {
             try {
+                val type = inputData.getString("type")?.let { valueOf(it) }
+                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Invalid work type"))
                 fetchCollegeListAsync().await()
                 return@runBlocking Result.success()
             } catch (e: Exception) {

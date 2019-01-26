@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import kotlinx.coroutines.runBlocking
 
 private const val TAG = "ProfileWorker"
@@ -17,11 +18,12 @@ enum class ProfileWorkType {
 class ProfileWorker(context: Context, params: WorkerParameters): Worker(context, params) {
 
     override fun doWork(): Result {
-        val type = valueOf(inputData.getString("type")!!)
-        val authToken = "" //TODO: Get from shared Prefs
 
         return runBlocking {
             try {
+                val type = inputData.getString("type")?.let { valueOf(it) }
+                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Invalid work type"))
+                val authToken = "" //TODO: Get from shared Prefs
                 fetchProfileDetailsAsync(authToken).await()
                 return@runBlocking Result.success()
             } catch (e: Exception) {

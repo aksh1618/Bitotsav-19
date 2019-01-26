@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import kotlinx.coroutines.runBlocking
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -19,9 +20,11 @@ enum class FeedWorkType {
 class FeedWorker(context: Context, params: WorkerParameters): Worker(context, params), KoinComponent {
 
     override fun doWork(): Result {
-        val type = valueOf(inputData.getString("type")!!)
+
         return runBlocking {
             try {
+                val type = inputData.getString("type")?.let { valueOf(it) }
+                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Invalid work type"))
                 val latestFeedTimestamp = get<FeedRepository>().getLatestTimestamp()
                 get<FeedRepository>().fetchFeedsAfterAsync(latestFeedTimestamp).await()
                 return@runBlocking Result.success()
