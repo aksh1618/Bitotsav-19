@@ -3,11 +3,11 @@ package `in`.bitotsav.shared.network
 import androidx.work.*
 import java.util.concurrent.TimeUnit
 
-fun<T: Worker> scheduleWork(input: Data, clazz: Class<T>): OneTimeWorkRequest {
+inline fun<reified T: Worker> scheduleWork(input: Data) {
     val constraints: Constraints = Constraints.Builder().apply {
         setRequiredNetworkType(NetworkType.CONNECTED)
     }.build()
-    return OneTimeWorkRequest.Builder(clazz)
+    val oneTimeWorkRequest = OneTimeWorkRequest.Builder(T::class.java)
         // Sets the input data for the ListenableWorker
         .setInputData(input)
         // If you want to delay the start of work by 60 seconds
@@ -17,4 +17,5 @@ fun<T: Worker> scheduleWork(input: Data, clazz: Class<T>): OneTimeWorkRequest {
         // Set additional constraints
         .setConstraints(constraints)
         .build()
+    WorkManager.getInstance().enqueue(oneTimeWorkRequest)
 }
