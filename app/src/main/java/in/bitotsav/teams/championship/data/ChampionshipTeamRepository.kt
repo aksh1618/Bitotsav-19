@@ -31,9 +31,9 @@ class ChampionshipTeamRepository(private val championshipTeamDao: ChampionshipTe
 //    GET - /getAllBCTeams
 //    502 - Server error
 //    200 - Array of teams
-    fun fetchAllChampionshipTeams() : Deferred<Any> {
+    fun fetchAllChampionshipTeamsAsync() : Deferred<Any> {
         return CoroutineScope(Dispatchers.IO).async {
-            val request = ChampionshipTeamService.api.getAllChampionshipTeams()
+            val request = ChampionshipTeamService.api.getAllChampionshipTeamsAsync()
             val response = request.await()
             if (response.code() == 200) {
                 val championshipTeams = response.body() ?: throw NetworkException("Response body is empty")

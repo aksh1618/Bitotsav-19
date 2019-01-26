@@ -11,7 +11,7 @@ import retrofit2.http.GET
 
 interface ChampionshipTeamService {
     @GET("getAllBCTeams")
-    fun getAllChampionshipTeams(): Deferred<Response<List<ChampionshipTeam>>>
+    fun getAllChampionshipTeamsAsync(): Deferred<Response<List<ChampionshipTeam>>>
 
     companion object {
 //        TODO: Add custom client

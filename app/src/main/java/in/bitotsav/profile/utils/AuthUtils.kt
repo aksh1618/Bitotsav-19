@@ -18,10 +18,10 @@ class AuthException(message: String): Exception(message)
 //502 - Server error
 //403 - Incorrect credentials
 //200 - Success with {token} to be sent
-fun login(email: String, password: String): Deferred<String> {
+fun loginAsync(email: String, password: String): Deferred<String> {
     return CoroutineScope(Dispatchers.Main).async {
         val body = mapOf("email" to email, "password" to password)
-        val request = AuthenticationService.api.login(body)
+        val request = AuthenticationService.api.loginAsync(body)
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "User:$email logged in")
@@ -42,7 +42,7 @@ fun login(email: String, password: String): Deferred<String> {
 //502 - Server error
 //409 - Email Id is already registered
 //200 - Success - OTP Sent
-fun register(
+fun registerAsync(
     email: String,
     phno: Long,
     name: String,
@@ -57,7 +57,7 @@ fun register(
             "password" to password,
             "g-recaptcha-response" to g_recaptcha_response
         )
-        val request =  AuthenticationService.api.register(body)
+        val request =  AuthenticationService.api.registerAsync(body)
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Registration Stage 1 complete")
@@ -77,14 +77,14 @@ fun register(
 //400 - Payload modified, i.e email is incorrect
 //502 - Server error
 //200 - Success
-fun verify(email: String, phoneOtp: String, emailOtp: String): Deferred<Boolean> {
+fun verifyAsync(email: String, phoneOtp: String, emailOtp: String): Deferred<Boolean> {
     return CoroutineScope(Dispatchers.Main).async {
         val body = mapOf(
             "email" to email,
             "phoneOtp" to phoneOtp,
             "emailOtp" to emailOtp
         )
-        val request = AuthenticationService.api.verify(body)
+        val request = AuthenticationService.api.verifyAsync(body)
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Registration Stage 2: OTP verification complete")
@@ -103,7 +103,7 @@ fun verify(email: String, phoneOtp: String, emailOtp: String): Deferred<Boolean>
 //POST - /saveparticipant - body: {email, gender, college, rollno, source, year}
 //502 - Server error
 //200 - Success with Bitotsav Id in {data}
-fun saveParticipant(
+fun saveParticipantAsync(
     email: String,
     gender: String,
     college: String,
@@ -120,7 +120,7 @@ fun saveParticipant(
             "source" to source,
             "year" to year
         )
-        val request = AuthenticationService.api.saveParticipant(body)
+        val request = AuthenticationService.api.saveParticipantAsync(body)
         val response = request.await()
         if (response.code() == 200) {
             val bitotsavId = response.body()?.get("data") ?: throw AuthException("Bitotsav ID not generated." +
@@ -135,9 +135,9 @@ fun saveParticipant(
 
 //GET - /getCollegeList
 //200 - Object containing colleges
-fun fetchCollegeList(): Deferred<Any> {
+fun fetchCollegeListAsync(): Deferred<Any> {
     return CoroutineScope(Dispatchers.IO).async {
-        val request = AuthenticationService.api.getCollegeList()
+        val request = AuthenticationService.api.getCollegeListAsync()
         val response = request.await()
         if (response.code() == 200) {
             val colleges = response.body()?.get("colleges") ?: throw NetworkException("List of colleges is empty")

@@ -22,7 +22,7 @@ data class Member(
 //405 - All members don't belong to same college
 //409 - Some member is already registered for the event
 //200 - Success
-fun registerForEvent(
+fun registerForEventAsync(
     authToken: String,
     eventId: Int,
     bitId: String,
@@ -36,7 +36,7 @@ fun registerForEvent(
         )
         val authHeaderValue = "Authorization $authToken"
         val request
-                = TeamRegistrationService.api.registerForEvent(authHeaderValue, body)
+                = TeamRegistrationService.api.registerForEventAsync(authHeaderValue, body)
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Registered for event $eventId")
@@ -56,7 +56,7 @@ fun registerForEvent(
 //502 - Server error
 //403 - Not registered or not the team leader
 //200 - Success
-fun deregisterForEvent(
+fun deregisterForEventAsync(
     authToken: String,
     eventId: Int,
     bitId: String
@@ -64,7 +64,7 @@ fun deregisterForEvent(
     return CoroutineScope(Dispatchers.Main).async {
         val authHeaderValue = "Authorization $authToken"
         val request
-                = TeamRegistrationService.api.deregisterForEvent(
+                = TeamRegistrationService.api.deregisterForEventAsync(
             authHeaderValue,
             eventId,
             bitId.substringAfter("/")
@@ -91,7 +91,7 @@ fun deregisterForEvent(
 //409 - Team name already taken or Some member is already registered for the event
 //200 - Success
 //TODO: - Incorrect errors
-fun registerForChampionship(
+fun registerForChampionshipAsync(
     authToken: String,
     teamName: String,
     members: List<Member>
@@ -103,7 +103,7 @@ fun registerForChampionship(
             "teamMembers" to members.toString()
         )
         val request
-                = TeamRegistrationService.api.registerForChampionship(authHeaderValue, body)
+                = TeamRegistrationService.api.registerForChampionshipAsync(authHeaderValue, body)
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Registered for Bitotsav championship")

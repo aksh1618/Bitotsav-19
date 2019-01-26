@@ -43,10 +43,10 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
 //    502 - Server error
 //    404 - Event not found
 //    200 - Object containing event details
-    fun fetchEventById(eventId: Int): Deferred<Int> {
+    fun fetchEventByIdAsync(eventId: Int): Deferred<Int> {
         return CoroutineScope(Dispatchers.IO).async {
             val body = mapOf("eventId" to eventId)
-            val request = EventService.api.getById(body)
+            val request = EventService.api.getByIdAsync(body)
             val response = request.await()
             if (response.code() == 200) {
                 val event = response.body() ?: throw NetworkException("Response body is empty")
@@ -66,9 +66,9 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
 //    GET - /getAllEvents
 //    502 - Server error
 //    200 - Array of events
-    fun fetchAllEvents(): Deferred<Any> {
+    fun fetchAllEventsAsync(): Deferred<Any> {
         return CoroutineScope(Dispatchers.IO).async {
-            val request = EventService.api.getAll()
+            val request = EventService.api.getAllAsync()
             val response = request.await()
             if (response.code() == 200) {
                 val events = response.body() ?: throw NetworkException("Response body is empty")

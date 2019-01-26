@@ -13,10 +13,10 @@ import retrofit2.http.POST
 
 interface FeedService {
     @GET("getAllFeeds")
-    fun getAllFeeds(): Deferred<Response<List<Feed>>>
+    fun getAllFeedsAsync(): Deferred<Response<List<Feed>>>
 
     @POST("getFeedsAfter")
-    fun getFeedsAfter(@Body body: Any): Deferred<Response<List<Feed>>>
+    fun getFeedsAfterAsync(@Body body: Any): Deferred<Response<List<Feed>>>
 
     companion object {
 //        TODO: Add custom client

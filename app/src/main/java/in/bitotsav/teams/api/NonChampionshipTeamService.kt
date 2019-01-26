@@ -11,7 +11,7 @@ import retrofit2.http.POST
 
 interface NonChampionshipTeamService {
     @POST("getTeamDetails")
-    fun getNonChampionshipTeam(@Body body: Any): Deferred<Response<Map<String, Any>>>
+    fun getNonChampionshipTeamAsync(@Body body: Any): Deferred<Response<Map<String, Any>>>
 
     companion object {
         //        TODO: Add custom client

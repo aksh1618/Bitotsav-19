@@ -15,11 +15,11 @@ private const val TAG = "FcmUtils"
 //403 - Token (to be added) not sent or auth failure
 //502 - Server error
 //200 - Success
-fun sendFcmToken(authToken: String, fcmToken: String): Deferred<Any> {
+fun sendFcmTokenAsync(authToken: String, fcmToken: String): Deferred<Any> {
     return CoroutineScope(Dispatchers.IO).async {
         val body = mapOf("token" to fcmToken)
         val authHeaderValue = "Authorization $authToken"
-        val request = FcmTokenService.api.addFcmToken(authHeaderValue, body)
+        val request = FcmTokenService.api.addFcmTokenAsync(authHeaderValue, body)
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Fcm token send to server")
@@ -40,11 +40,11 @@ fun sendFcmToken(authToken: String, fcmToken: String): Deferred<Any> {
 //502 - Server error
 //404 - Token (to be removed) not found
 //200 - Success
-fun deleteFcmToken(authToken: String, fcmToken: String): Deferred<Any> {
+fun deleteFcmTokenAsync(authToken: String, fcmToken: String): Deferred<Any> {
     return CoroutineScope(Dispatchers.IO).async {
         val body = mapOf("token" to fcmToken)
         val authHeaderValue = "Authorization $authToken"
-        val request = FcmTokenService.api.removeFcmToken(authHeaderValue, body)
+        val request = FcmTokenService.api.removeFcmTokenAsync(authHeaderValue, body)
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Fcm token deleted from server")

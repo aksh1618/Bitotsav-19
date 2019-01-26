@@ -13,10 +13,10 @@ import retrofit2.http.POST
 
 interface EventService {
     @GET("getAllEvents")
-    fun getAll(): Deferred<Response<List<Event>>>
+    fun getAllAsync(): Deferred<Response<List<Event>>>
 
     @POST("getEventById")
-    fun getById(@Body body: Any): Deferred<Response<Event>>
+    fun getByIdAsync(@Body body: Any): Deferred<Response<Event>>
 
     companion object {
 //        TODO: Add custom client
