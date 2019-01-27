@@ -1,6 +1,8 @@
 package `in`.bitotsav.shared.data
 
 import androidx.room.TypeConverter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class MapConverter {
     companion object {
@@ -21,6 +23,17 @@ class MapConverter {
                     left to right
                 }
             }
+        }
+
+        @JvmStatic
+        fun fromGenericMap(value: Map<String, Any>): String {
+            return Gson().toJson(value)
+        }
+
+        @JvmStatic
+        fun toGenericMap(value: String): Map<String, Any> {
+            val type = object : TypeToken<Map<String, Any>>() {}.type
+            return Gson().fromJson<Map<String, Any>>(value, type)
         }
     }
 }

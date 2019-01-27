@@ -1,6 +1,7 @@
 package `in`.bitotsav.teams.nonchampionship.data
 
 import `in`.bitotsav.events.data.EventRepository
+import `in`.bitotsav.profile.User
 import `in`.bitotsav.shared.data.Repository
 import `in`.bitotsav.teams.api.NonChampionshipTeamService
 import android.util.Log
@@ -43,6 +44,7 @@ class NonChampionshipTeamRepository(
 //    403 - eventId or teamLeaderId not found
 //    200 - Success with teamMembers array
     fun fetchNonChampionshipTeamAsync(eventId: Int, teamLeaderId: String): Deferred<Any> {
+//    TODO: Needs thorough testing
         return CoroutineScope(Dispatchers.IO).async {
             val body = mapOf(
                 "eventId" to eventId,
@@ -55,9 +57,6 @@ class NonChampionshipTeamRepository(
                 @Suppress("UNCHECKED_CAST")
                 val members = response.body()?.get("teamMembers") as Map<String, String>
 //                TODO("Retrieve all parameters")
-//                koine!
-//                val eventDao = Singleton.database.getInstance(context).eventDao()
-//                val event = EventRepository(eventDao).getById(eventId)
                 val event = get<EventRepository>().getById(eventId)
 //                eventPosition1: {
 //                    teamLeader: req.body.eventPosition1,
@@ -65,32 +64,49 @@ class NonChampionshipTeamRepository(
 //                    championshipTeam: (team1 != null) ? team1 : "-1",
 //                    points: (team1 != null) ? event.eventPoints1 : 0
 //                }
-//                TODO("Get this data")
-                val userTeamLeader = ""
-                val userTeamName = ""
-                val isUserTeam = (userTeamLeader == teamLeaderId)
+                var userTeam = User.userTeams?.get(eventId.toString())
+                val isUserTeam: Boolean
+
+                if (userTeam == null) {
+                    isUserTeam = false
+                } else {
+                    userTeam = userTeam as Map<String, String>
+                    val userTeamLeader = userTeam["id"]
+                        ?: throw Exception("Team leader for event: $eventId not found")
+                    isUserTeam = (teamLeaderId == userTeamLeader)
+                }
+
+                if (isUserTeam) {
+                    var userTeams = User.userTeams?.toMutableMap()
+                    val team = (userTeams?.get(eventId.toString()) as Map<String, String>).toMutableMap()
+                    team["id"] = teamLeaderId
+                    team["name"] = members.values.first()
+                    userTeams[eventId.toString()] = team
+                    User.userTeams = userTeams.toMap()
+                }
+
                 var rank = 0
-                var teamName = "${members.values.first()}'s team"
+                var teamName: String? = null
                 try {
-                    if (event?.position1?.get("teamLeader") == userTeamLeader) {
+                    if (teamLeaderId == event?.position1?.get("teamLeader")) {
                         rank = 1
-                        if (event.position1.getValue("points").toInt() != 0) {
-                            teamName = userTeamName
-                        }
-                    } else if (event?.position2?.get("teamLeader") == userTeamLeader) {
+                        if (event.position1.getValue("championshipTeam") != "-1")
+                            teamName = event.position1["championsipTeam"]
+                    } else if (teamLeaderId == event?.position2?.get("teamLeader")) {
                         rank = 2
-                        if (event.position2.getValue("points").toInt() != 0) {
-                            teamName = userTeamName
-                        }
-                    } else if (event?.position3?.get("teamLeader") == userTeamLeader) {
-                        rank = 2
-                        if (event.position3.getValue("points").toInt() != 0) {
-                            teamName = userTeamName
-                        }
+                        if (event.position2.getValue("championshipTeam") != "-1")
+                            teamName = event.position2["championsipTeam"]
+                    } else if (teamLeaderId == event?.position3?.get("teamLeader")) {
+                        rank = 3
+                        if (event.position3.getValue("championshipTeam") != "-1")
+                            teamName = event.position3["championsipTeam"]
                     }
                 } catch (e: NoSuchElementException) {
-                    Log.d(TAG, e.message)
+                    Log.e(TAG, e.message)
                 }
+
+                if (teamName.isNullOrEmpty() || teamName == "-1") teamName = "${members.values.first()}'s team"
+
                 val team = NonChampionshipTeam(
                     eventId,
                     teamLeaderId,

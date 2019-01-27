@@ -12,7 +12,6 @@ interface ChampionshipTeamService {
     fun getAllChampionshipTeamsAsync(): Deferred<Response<List<ChampionshipTeam>>>
 
     companion object {
-        //        TODO: Add custom client
         val api by lazy {
             get().koin.get<Retrofit>()
                 .create(ChampionshipTeamService::class.java)

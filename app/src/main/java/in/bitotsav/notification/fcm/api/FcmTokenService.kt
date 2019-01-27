@@ -22,7 +22,6 @@ interface FcmTokenService {
     ): Deferred<Response<Map<String, String>>>
 
     companion object {
-        //        TODO: Add custom client
         val api by lazy {
             get().koin.get<Retrofit>()
                 .create(FcmTokenService::class.java)

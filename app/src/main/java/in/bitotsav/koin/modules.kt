@@ -5,6 +5,7 @@ import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
+import android.content.Context.MODE_PRIVATE
 import androidx.room.Room
 import com.google.gson.ExclusionStrategy
 import com.google.gson.FieldAttributes
@@ -36,18 +37,20 @@ val repositoriesModule = module {
 val retrofitModule = module {
 
     single("custom_gson") {
-        GsonBuilder().addDeserializationExclusionStrategy(object : ExclusionStrategy {
-            override fun shouldSkipField(fieldAttributes: FieldAttributes): Boolean {
-                val expose = fieldAttributes.getAnnotation(Expose::class.java)
-                return expose != null && !expose.deserialize
-            }
+        GsonBuilder().addDeserializationExclusionStrategy(
+            object : ExclusionStrategy {
+                override fun shouldSkipField(fieldAttributes: FieldAttributes): Boolean {
+                    val expose = fieldAttributes.getAnnotation(Expose::class.java)
+                    return expose != null && !expose.deserialize
+                }
 
-            override fun shouldSkipClass(aClass: Class<*>): Boolean {
-                return false
+                override fun shouldSkipClass(aClass: Class<*>): Boolean {
+                    return false
+                }
             }
-        }).create()//!! <- Is this needed?
+        ).create()
     }
-//    factory { GsonConverterFactory.create(get<Gson>("custom_gson")) }
+//    TODO: Check if custom client is required
     single {
         Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -57,6 +60,11 @@ val retrofitModule = module {
     }
 }
 
+val sharedPrefsModule = module {
+    factory {
+        androidContext().getSharedPreferences("profile", MODE_PRIVATE)
+    }
+}
 
 val viewModelsModule = module {
     //    viewModel { ScheduleViewModel(get()) }

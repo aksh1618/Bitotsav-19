@@ -7,6 +7,7 @@ import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.feed.data.FeedType
 import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
+import `in`.bitotsav.profile.User
 import `in`.bitotsav.shared.network.getWork
 import `in`.bitotsav.shared.network.scheduleWork
 import `in`.bitotsav.shared.workers.*
@@ -15,8 +16,6 @@ import android.util.Log
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.get
+import org.koin.core.KoinComponent
 
 //TODO("Complete this list")
 private enum class UpdateType {
@@ -35,7 +35,7 @@ private enum class UpdateType {
     ALL_TEAMS
 }
 
-class DefaultFirebaseMessagingService : FirebaseMessagingService() {
+class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponent {
 
     companion object {
         private const val TAG = "FirebaseMsgService"
@@ -171,8 +171,13 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
      */
     override fun onNewToken(token: String?) {
         Log.d(TAG, "Refreshed token: $token")
-//        TODO("Check logged in status and send token if true")
-        if (/*Check if user is logged in*/false) sendTokenToServer(token)
+        token?.let {
+            User.fcmToken = token
+            if (User.isLoggedIn)
+                sendTokenToServer(token)
+            return
+        }
+        Log.wtf(TAG, "Empty token generated!")
     }
 
     /**
@@ -208,28 +213,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService() {
      *
      * @param token The new token.
      */
-    fun sendTokenToServer(token: String?) {
-//        TODO("Call this method on login")
-        // TODO: Implement this method to send token to your app server.
-        // Decide whether to use sharedPref or continue with this approach
-        // https://codelabs.developers.google.com/codelabs/kotlin-coroutines/#0
-        if (token.isNullOrEmpty()) {
-            FirebaseInstanceId.getInstance().instanceId
-                .addOnCompleteListener(OnCompleteListener { task ->
-                    if (!task.isSuccessful) {
-                        Log.w(TAG, "getInstanceId failed", task.exception)
-                        return@OnCompleteListener
-                    }
-
-                    val token = task.result?.token
-
-                    val msg = "InstanceID Token: $token"
-                    Log.d(TAG, msg)
-                    TODO("Send token here")
-
-                })
-        } else {
-            TODO("Send token here")
-        }
+    private fun sendTokenToServer(token: String) {
+        scheduleWork<FcmTokenWorker>(workDataOf("type" to FcmTokenWorkType.SEND_TOKEN))
     }
 }

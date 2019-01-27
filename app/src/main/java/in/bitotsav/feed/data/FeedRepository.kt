@@ -43,13 +43,8 @@ class FeedRepository(private val feedDao: FeedDao) : Repository<Feed>, KoinCompo
             if (response.code() == 200) {
                 Log.d(TAG, "Feeds received after $timestamp")
                 val feeds = response.body() ?: throw NetworkException("Response body is empty")
-//                koine!
-//                val database = Singleton.database.getInstance(context).eventDao()
                 feeds.forEachParallel {
                     if (it.eventId != null) {
-//                        koine!
-//                        val isStarred = EventRepository(database).isStarred(it.eventId) ?: false
-//                        val eventName = EventRepository(database).getEventName(it.eventId)
                         val isStarred = get<EventRepository>().isStarred(it.eventId) ?: false
                         val eventName = get<EventRepository>().getEventName(it.eventId)
                             ?: throw DatabaseException("Event name not found for ${it.eventId}")

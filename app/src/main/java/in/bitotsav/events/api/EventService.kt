@@ -17,7 +17,6 @@ interface EventService {
     fun getByIdAsync(@Body body: Any): Deferred<Response<Event>>
 
     companion object {
-        //        TODO: Add custom client
         val api by lazy {
             get().koin.get<Retrofit>()
                 .create(EventService::class.java)

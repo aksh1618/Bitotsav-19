@@ -68,8 +68,6 @@ data class Event(
     fun toggleStarred() {
         isStarred.apply { not() }
         CoroutineScope(Dispatchers.IO).async {
-            //            koine!
-//            EventRepository(Singleton.database.getInstance(context).eventDao()).insert(this@Event)
             get<EventRepository>().insert(this@Event)
         }
     }

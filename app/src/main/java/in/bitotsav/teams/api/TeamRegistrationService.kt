@@ -27,7 +27,6 @@ interface TeamRegistrationService {
     ): Deferred<Response<Map<String, String>>>
 
     companion object {
-        //        TODO: Add custom client
         val api by lazy {
             get().koin.get<Retrofit>()
                 .create(TeamRegistrationService::class.java)

@@ -1,5 +1,6 @@
 package `in`.bitotsav.profile.utils
 
+import `in`.bitotsav.profile.User
 import `in`.bitotsav.profile.api.ProfileService
 import android.util.Log
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +21,14 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Participant details received from server")
-            TODO("Store participant details here")
+//            TODO("Store participant details here")
+            User.name = response.body()?.get("name")?.toString()
+            User.email = response.body()?.get("email")?.toString()
+            User.bitotsavId = response.body()?.get("id")?.toString()
+            var teamName = response.body()?.get("teamName")?.toString()
+            if ("-1" == teamName) teamName = null
+            User.championshipTeamName = teamName
+//            TODO: Store user teams
         } else {
             when (response.code()) {
                 403 -> throw AuthException("Authentication error")

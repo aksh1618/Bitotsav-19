@@ -2,6 +2,7 @@ package `in`.bitotsav.shared.workers
 
 import `in`.bitotsav.notification.utils.deleteFcmTokenAsync
 import `in`.bitotsav.notification.utils.sendFcmTokenAsync
+import `in`.bitotsav.profile.User
 import `in`.bitotsav.shared.workers.FcmTokenWorkType.valueOf
 import android.content.Context
 import android.util.Log
@@ -25,8 +26,9 @@ class FcmTokenWorker(context: Context, params: WorkerParameters): Worker(context
             try {
                 val type = inputData.getString("type")?.let { valueOf(it) }
                     ?: return@runBlocking Result.failure(workDataOf("Error" to "Invalid work type"))
-                val authToken = "" //TODO: Get from shared Prefs
-                val fcmToken = inputData.getString("fcmToken")
+                val authToken = User.authToken
+                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Auth token is empty"))
+                val fcmToken = User.fcmToken
                     ?: return@runBlocking Result.failure(workDataOf("Error" to "FCM token not found"))
                 when (type) {
                     FcmTokenWorkType.SEND_TOKEN -> sendFcmTokenAsync(authToken, fcmToken).await()

@@ -12,7 +12,6 @@ interface ProfileService {
     fun getParticipantDetailsAsync(@Header("token") authHeaderValue: String): Deferred<Response<Map<String, Any>>>
 
     companion object {
-        //        TODO: Add custom client
         val api by lazy {
             get().koin.get<Retrofit>()
                 .create(ProfileService::class.java)
