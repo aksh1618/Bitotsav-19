@@ -15,29 +15,23 @@ import kotlinx.coroutines.async
 private const val TAG = "EventRepository"
 
 class EventRepository(private val eventDao: EventDao) : Repository<Event> {
-    override fun getAll(): LiveData<List<Event>> {
-        return eventDao.getAll()
-    }
+    override fun getAll() = eventDao.getAll()
+
+    fun getByDay(day: Int) = eventDao.getByDay(day)
+
+    fun getByCategories(vararg categories: String) = eventDao.getByCategories(*categories)
 
     @WorkerThread
-    suspend fun getById(id: Int): Event? {
-        return eventDao.getById(id)
-    }
+    suspend fun getById(id: Int) = eventDao.getById(id)
 
     @WorkerThread
-    suspend fun getEventName(id: Int): String? {
-        return eventDao.getEventName(id)
-    }
+    suspend fun getEventName(id: Int) = eventDao.getEventName(id)
 
     @WorkerThread
-    suspend fun isStarred(id: Int): Boolean? {
-        return eventDao.isStarred(id)
-    }
+    suspend fun isStarred(id: Int) = eventDao.isStarred(id)
 
     @WorkerThread
-    override suspend fun insert(vararg items: Event) {
-        eventDao.insert(*items)
-    }
+    override suspend fun insert(vararg items: Event) = eventDao.insert(*items)
 
 //    POST - /getEventById - body: {eventId}
 //    502 - Server error

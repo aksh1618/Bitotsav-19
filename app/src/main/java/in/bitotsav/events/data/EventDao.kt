@@ -11,6 +11,12 @@ interface EventDao {
     @Query("SELECT * FROM event")
     fun getAll(): LiveData<List<Event>>
 
+    @Query("SELECT * FROM event WHERE day = :day")
+    fun getByDay(day: Int): LiveData<List<Event>>
+
+    @Query("SELECT * FROM event WHERE category IN(:categories)")
+    fun getByCategories(vararg categories: String): LiveData<List<Event>>
+
     @Query("SELECT * FROM event WHERE id = :id")
     fun getById(id: Int): Event?
 
