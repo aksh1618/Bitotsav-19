@@ -11,6 +11,9 @@ interface EventDao {
     @Query("SELECT * FROM event")
     fun getAll(): LiveData<List<Event>>
 
+    @Query("SELECT DISTINCT category FROM event ")
+    fun getAllCategories(): List<String>
+
     @Query("SELECT * FROM event WHERE day = :day")
     fun getByDay(day: Int): LiveData<List<Event>>
 

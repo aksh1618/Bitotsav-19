@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".events.ui.ScheduleFragment">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.events.ui.ScheduleViewModel" />
+    </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,11 +31,16 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:backgroundTint="@color/colorRed"
+            android:onClick="@{() -> viewModel.showFiltersSheet()}"
+            android:onLongClick="@{() -> viewModel.clearFilters()}"
             android:src="@drawable/ic_filter_white_24dp"
             app:layout_anchor="@+id/scheduleRecyclerView"
             app:layout_anchorGravity="end|bottom" />
 
-
+        <include
+            android:id="@+id/bottomSheet"
+            layout="@layout/bottom_sheet_event_filter"
+            app:viewModel="@{viewModel}" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

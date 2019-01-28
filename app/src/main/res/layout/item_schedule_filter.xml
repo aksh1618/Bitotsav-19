@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="scheduleFilter"
+            type="in.bitotsav.events.ui.ScheduleFilter" />
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.events.ui.ScheduleViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@{scheduleFilter.isSelected ? @drawable/round_corners: @drawable/round_corners_border}"
+        android:backgroundTint="@{scheduleFilter.color}"
+        android:onClick="@{() -> viewModel.toggleCategoryFilter(scheduleFilter.label)}"
+        android:orientation="horizontal"
+        tools:backgroundTint="@color/colorRed"
+        android:paddingEnd="12dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rotation="@{scheduleFilter.isSelected ? 45: 0}"
+            android:src="@drawable/ic_add_circle_white_16dp"
+            android:tint="@{scheduleFilter.isSelected ? @color/colorWhite: scheduleFilter.color}"
+            android:padding="8dp"/>
+
+        <!-- TODO: Fix API warning (binding adapter)-->
+        <TextView
+            style="@style/TextAppearance.Bitotsav.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="@{scheduleFilter.label}"
+            android:textColor="@{scheduleFilter.isSelected ? @color/colorWhite: @color/textColor}"
+            tools:text="Category Name"
+            tools:textColor="@color/colorWhite" />
+
+    </LinearLayout>
+</layout>

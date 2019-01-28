@@ -3,6 +3,7 @@ package `in`.bitotsav.events.ui
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.ItemEventBinding
 import `in`.bitotsav.events.data.Event
+import `in`.bitotsav.shared.utils.executeAfter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,10 +39,9 @@ class ScheduleAdapter : ListAdapter<Event, ScheduleAdapter.ViewHolder>(EventDiff
 
     inner class ViewHolder(private val binding: ItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(event: Event, listener: View.OnClickListener) {
-            binding.apply {
+            binding.executeAfter {
                 this.event = event
                 this.listener = listener
-                executePendingBindings()
             }
         }
     }

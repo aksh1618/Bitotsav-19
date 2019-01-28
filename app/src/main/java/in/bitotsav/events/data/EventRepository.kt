@@ -22,6 +22,9 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
     fun getByCategories(vararg categories: String) = eventDao.getByCategories(*categories)
 
     @WorkerThread
+    suspend fun getAllCategories() = eventDao.getAllCategories()
+
+    @WorkerThread
     suspend fun getById(id: Int) = eventDao.getById(id)
 
     @WorkerThread

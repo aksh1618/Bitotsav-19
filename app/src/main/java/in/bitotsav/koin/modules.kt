@@ -29,10 +29,10 @@ val repositoriesModule = module {
         Room.databaseBuilder(androidContext(), AppDatabase::class.java, "App.db")
             .build()
     }
-    factory { EventRepository(get<AppDatabase>().eventDao()) }
-    factory { FeedRepository(get<AppDatabase>().feedDao()) }
-    factory { ChampionshipTeamRepository(get<AppDatabase>().championshipTeamDao()) }
-    factory { NonChampionshipTeamRepository(get<AppDatabase>().nonChampionshipTeamDao()) }
+    single { EventRepository(get<AppDatabase>().eventDao()) }
+    single { FeedRepository(get<AppDatabase>().feedDao()) }
+    single { ChampionshipTeamRepository(get<AppDatabase>().championshipTeamDao()) }
+    single { NonChampionshipTeamRepository(get<AppDatabase>().nonChampionshipTeamDao()) }
 }
 
 // TODO: Use this!
@@ -69,5 +69,5 @@ val sharedPrefsModule = module {
 }
 
 val viewModelsModule = module {
-        viewModel { ScheduleViewModel(get()) }
+    viewModel { ScheduleViewModel(get()) }
 }

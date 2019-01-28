@@ -5,4 +5,8 @@
     <string name="info_title">Info</string>
     <string name="feed_title">Updates</string>
     <string name="profile_title">Profile</string>
+
+    <!-- Schedule Fragment -->
+    <string name="filters_sheet_label">Filters</string>
+    <string name="filters_clear_all_label">Clear All</string>
 </resources>
