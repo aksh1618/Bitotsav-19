@@ -2,6 +2,7 @@ package `in`.bitotsav.koin
 
 import `in`.bitotsav.database.AppDatabase
 import `in`.bitotsav.events.data.EventRepository
+import `in`.bitotsav.events.ui.ScheduleViewModel
 import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
@@ -14,6 +15,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,10 +29,10 @@ val repositoriesModule = module {
         Room.databaseBuilder(androidContext(), AppDatabase::class.java, "App.db")
             .build()
     }
-    factory { EventRepository(get<AppDatabase>().eventDao()) }
-    factory { FeedRepository(get<AppDatabase>().feedDao()) }
-    factory { ChampionshipTeamRepository(get<AppDatabase>().championshipTeamDao()) }
-    factory { NonChampionshipTeamRepository(get<AppDatabase>().nonChampionshipTeamDao()) }
+    single { EventRepository(get<AppDatabase>().eventDao()) }
+    single { FeedRepository(get<AppDatabase>().feedDao()) }
+    single { ChampionshipTeamRepository(get<AppDatabase>().championshipTeamDao()) }
+    single { NonChampionshipTeamRepository(get<AppDatabase>().nonChampionshipTeamDao()) }
 }
 
 // TODO: Use this!
@@ -67,5 +69,5 @@ val sharedPrefsModule = module {
 }
 
 val viewModelsModule = module {
-    //    viewModel { ScheduleViewModel(get()) }
+    viewModel { ScheduleViewModel(get()) }
 }

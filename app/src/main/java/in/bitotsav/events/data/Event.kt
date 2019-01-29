@@ -47,7 +47,7 @@ data class Event(
     @SerializedName("eventPosition1") val position1: Map<String, String>?,
     @SerializedName("eventPosition2") val position2: Map<String, String>?,
     @SerializedName("eventPosition3") val position3: Map<String, String>?
-): KoinComponent {
+) : KoinComponent {
     // Using @Transient also makes room ignore the property
     @Expose(serialize = false, deserialize = false)
     var timestamp = getTimestampFromString(day, timeString)

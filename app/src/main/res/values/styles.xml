@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:statusBarColor">@color/background</item>
+        <!-- Handled in code -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -23,6 +24,16 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TextAppearance.Bitotsav.Heading1" parent="@style/TextAppearance.MaterialComponents.Headline4"/>
+
+    <style name="TextAppearance.Bitotsav.Heading2" parent="@style/TextAppearance.MaterialComponents.Headline5"/>
+
+    <style name="TextAppearance.Bitotsav.Heading3" parent="@style/TextAppearance.MaterialComponents.Headline6"/>
+
+    <style name="TextAppearance.Bitotsav.Body1" parent="@style/TextAppearance.MaterialComponents.Body1"/>
+
+    <style name="TextAppearance.Bitotsav.Body2" parent="@style/TextAppearance.MaterialComponents.Body2"/>
+
     <style name="Widget.Bitotsav" parent="@android:style/Widget" />
 
     <style name="Widget.Bitotsav.MainNav" parent="@style/Widget.MaterialComponents.BottomNavigationView.Colored">
@@ -32,6 +43,15 @@
         <item name="itemTextAppearanceActive">@style/TextAppearance.Bitotsav.BottomNavigationView.Active</item>
         <item name="itemTextAppearanceInactive">@style/TextAppearance.Bitotsav.BottomNavigationView</item>
         <item name="android:theme">@style/ThemeOverlay.MaterialComponents.Dark</item>
+    </style>
+
+    <style name="AppTheme.PopupTheme" parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <style name="Widget.Bitotsav.AppBar" parent="@style/Widget.Design.AppBarLayout">
+        <item name="popupTheme">@style/AppTheme.PopupTheme</item>
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:elevation">8dp</item>
+        <item name="android:orientation">vertical</item>
     </style>
 
 </resources>

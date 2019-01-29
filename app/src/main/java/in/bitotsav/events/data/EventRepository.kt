@@ -6,7 +6,6 @@ import `in`.bitotsav.shared.network.NetworkException
 import `in`.bitotsav.shared.utils.forEachParallel
 import android.util.Log
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -15,31 +14,36 @@ import kotlinx.coroutines.async
 private const val TAG = "EventRepository"
 
 class EventRepository(private val eventDao: EventDao) : Repository<Event> {
-    override fun getAll(): LiveData<List<Event>> {
-        return eventDao.getAll()
+    override fun getAll() = eventDao.getAll()
+
+    fun getByDay(day: Int, starredOnly: Boolean = false) = when (starredOnly) {
+        true -> eventDao.getStarredByDay(day)
+        false -> eventDao.getByDay(day)
+    }
+
+    fun getByCategories(vararg categories: String) = eventDao.getByCategories(*categories)
+
+    fun getByCategoriesForDay(day: Int, starredOnly: Boolean = false, vararg categories: String) = when (starredOnly) {
+        true -> eventDao.getStarredByCategoriesForDay(day, *categories)
+        false -> eventDao.getByCategoriesForDay(day, *categories)
     }
 
     @WorkerThread
-    suspend fun getById(id: Int): Event? {
-        return eventDao.getById(id)
-    }
+    suspend fun getAllCategories() = eventDao.getAllCategories()
 
     @WorkerThread
-    suspend fun getEventName(id: Int): String? {
-        return eventDao.getEventName(id)
-    }
+    suspend fun getById(id: Int) = eventDao.getById(id)
 
     @WorkerThread
-    suspend fun isStarred(id: Int): Boolean? {
-        return eventDao.isStarred(id)
-    }
+    suspend fun getEventName(id: Int) = eventDao.getEventName(id)
 
     @WorkerThread
-    override suspend fun insert(vararg items: Event) {
-        eventDao.insert(*items)
-    }
+    suspend fun isStarred(id: Int) = eventDao.isStarred(id)
 
-//    POST - /getEventById - body: {eventId}
+    @WorkerThread
+    override suspend fun insert(vararg items: Event) = eventDao.insert(*items)
+
+    //    POST - /getEventById - body: {eventId}
 //    502 - Server error
 //    404 - Event not found
 //    200 - Object containing event details
@@ -63,7 +67,7 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
         }
     }
 
-//    GET - /getAllEvents
+    //    GET - /getAllEvents
 //    502 - Server error
 //    200 - Array of events
     fun fetchAllEventsAsync(): Deferred<Any> {
