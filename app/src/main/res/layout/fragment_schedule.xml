@@ -9,21 +9,26 @@
         <variable
             name="viewModel"
             type="in.bitotsav.events.ui.ScheduleViewModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/scheduleRecyclerView"
+        <include
+            android:id="@+id/appBar"
+            layout="@layout/include_app_bar"
+            app:color="@{@color/background}"
+            app:tabbed="@{true}"
+            app:title="@{@string/schedule_title}" />
+
+        <!-- TODO: [WARN] Might break because of behavior string. -->
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/dayPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_event" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/filterFab"
@@ -34,12 +39,12 @@
             android:onClick="@{() -> viewModel.showFiltersSheet()}"
             android:onLongClick="@{() -> viewModel.clearFilters()}"
             android:src="@drawable/ic_filter_white_24dp"
-            app:layout_anchor="@+id/scheduleRecyclerView"
+            app:layout_anchor="@+id/dayPager"
             app:layout_anchorGravity="end|bottom" />
 
         <include
             android:id="@+id/bottomSheet"
-            layout="@layout/bottom_sheet_event_filter"
+            layout="@layout/include_filter_sheet"
             app:viewModel="@{viewModel}" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

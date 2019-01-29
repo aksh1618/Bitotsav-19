@@ -6,7 +6,6 @@ import `in`.bitotsav.shared.network.NetworkException
 import `in`.bitotsav.shared.utils.forEachParallel
 import android.util.Log
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -17,9 +16,17 @@ private const val TAG = "EventRepository"
 class EventRepository(private val eventDao: EventDao) : Repository<Event> {
     override fun getAll() = eventDao.getAll()
 
-    fun getByDay(day: Int) = eventDao.getByDay(day)
+    fun getByDay(day: Int, starredOnly: Boolean = false) = when (starredOnly) {
+        true -> eventDao.getStarredByDay(day)
+        false -> eventDao.getByDay(day)
+    }
 
     fun getByCategories(vararg categories: String) = eventDao.getByCategories(*categories)
+
+    fun getByCategoriesForDay(day: Int, starredOnly: Boolean = false, vararg categories: String) = when (starredOnly) {
+        true -> eventDao.getStarredByCategoriesForDay(day, *categories)
+        false -> eventDao.getByCategoriesForDay(day, *categories)
+    }
 
     @WorkerThread
     suspend fun getAllCategories() = eventDao.getAllCategories()
@@ -36,7 +43,7 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
     @WorkerThread
     override suspend fun insert(vararg items: Event) = eventDao.insert(*items)
 
-//    POST - /getEventById - body: {eventId}
+    //    POST - /getEventById - body: {eventId}
 //    502 - Server error
 //    404 - Event not found
 //    200 - Object containing event details
@@ -60,7 +67,7 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
         }
     }
 
-//    GET - /getAllEvents
+    //    GET - /getAllEvents
 //    502 - Server error
 //    200 - Array of events
     fun fetchAllEventsAsync(): Deferred<Any> {

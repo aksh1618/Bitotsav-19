@@ -14,6 +14,7 @@ class ScheduleViewModel(private val eventRepository: EventRepository) : ViewMode
 
     companion object {
         val ALL_CATEGORIES = emptyList<String>()
+        const val DAYS = 3
     }
 
     private val parentJob = Job()
@@ -21,41 +22,56 @@ class ScheduleViewModel(private val eventRepository: EventRepository) : ViewMode
         get() = parentJob + Dispatchers.Main
     private val scope = CoroutineScope(coroutineContext)
 
+    private val _showStarredOnly = MutableLiveData<Boolean>()
     private val _toastMessage = MutableLiveData<String>()
     private val _isSheetVisible = MutableLiveData<Boolean>()
-    private lateinit var allCategories: List<String>
     private val categoriesToShow = MutableLiveData<List<String>>()
-    private val visibleEventsList = MediatorLiveData<List<Event>>()
+    private val dayWiseVisibleEventsListArray = Array<MediatorLiveData<List<Event>>>(DAYS) { MediatorLiveData() }
     private val scheduleFiltersList = MutableLiveData<List<ScheduleFilter>>()
 
+    val starredOnly: LiveData<Boolean>
+        get() = _showStarredOnly
     val toastMessage: LiveData<String>
         get() = _toastMessage
     val isSheetVisible: LiveData<Boolean>
         get() = _isSheetVisible
-    val events: LiveData<List<Event>>
-        get() = visibleEventsList
+    // WARN: This might fail due to absence of custom getter.
+    val dayWiseEventsArray = Array<LiveData<List<Event>>>(DAYS) { dayWiseVisibleEventsListArray[it] }
     val filters: LiveData<List<ScheduleFilter>>
         get() = scheduleFiltersList
     lateinit var filterColors: List<Int>
+    lateinit var allCategories: List<String>
 
     init {
+        _showStarredOnly.value = false
         _toastMessage.value = ""
         categoriesToShow.value = ALL_CATEGORIES
         _isSheetVisible.value = false
-        val liveEventsList = Transformations.switchMap(categoriesToShow) {
-            when (it) {
-                ALL_CATEGORIES -> eventRepository.getAll()
-                // TODO: May need to be sorted by time
-                else -> eventRepository.getByCategories(*it.toTypedArray())
-            }
-        }
+
         scope.launch(Dispatchers.IO) {
             // TODO: Get from resources?
             allCategories = eventRepository.getAllCategories()
         }.invokeOnCompletion {
             scope.launch(Dispatchers.Main) { refreshScheduleFilterList() }
         }
-        visibleEventsList.addSource(liveEventsList, visibleEventsList::setValue)
+
+        (1..DAYS).forEach { day ->
+            val liveEventsList = Transformations.switchMap(
+                DoubleTriggerLiveData(categoriesToShow, _showStarredOnly)
+            ) { (categories, starredOnly) ->
+                if (starredOnly == null || categories == null)
+                    throw IllegalStateException("Categories and/or starred are null, somehow")
+                when (categories) {
+                    ALL_CATEGORIES -> eventRepository.getByDay(day, starredOnly)
+                    // TODO: May need to be sorted by time
+                    else -> eventRepository.getByCategoriesForDay(day, starredOnly, *categories.toTypedArray())
+                }
+            }
+            dayWiseVisibleEventsListArray[day - 1].addSource(
+                liveEventsList,
+                dayWiseVisibleEventsListArray[day - 1]::setValue
+            )
+        }
     }
 
     private fun refreshScheduleFilterList() {
@@ -64,9 +80,9 @@ class ScheduleViewModel(private val eventRepository: EventRepository) : ViewMode
         }
     }
 
-//    fun filterByCategories(vararg categories: String) {
-//        this.categoriesToShow.value = categories.asList()
-//    }
+    fun toggleStarredFilter() {
+        _showStarredOnly.value = _showStarredOnly.value?.not()
+    }
 
     fun toggleCategoryFilter(category: String) {
         categoriesToShow.value?.let {
@@ -94,12 +110,9 @@ class ScheduleViewModel(private val eventRepository: EventRepository) : ViewMode
         categoriesToShow.value = ALL_CATEGORIES
         refreshScheduleFilterList()
         areFiltersActive.set(false)
-        toast("Filters cleared")
+        _showStarredOnly.value = false
+//        toast("Filters cleared")
         return true
-    }
-
-    fun toggleSheetVisibility() {
-        _isSheetVisible.value = _isSheetVisible.value?.not()
     }
 
     fun toast(message: String) {
@@ -120,5 +133,12 @@ class ScheduleViewModel(private val eventRepository: EventRepository) : ViewMode
     override fun onCleared() {
         super.onCleared()
         parentJob.cancel()
+    }
+}
+
+class DoubleTriggerLiveData<S, T>(s: LiveData<S>, t: LiveData<T>) : MediatorLiveData<Pair<S?, T?>>() {
+    init {
+        addSource(s) { value = it to t.value }
+        addSource(t) { value = s.value to it }
     }
 }

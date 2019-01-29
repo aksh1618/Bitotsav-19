@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.events.ui.ScheduleViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/filterSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        android:background="@color/background"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="32dp"
+            android:isScrollContainer="true">
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/TextAppearance.Bitotsav.Heading3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_down_black_24dp"
+                android:onClick="@{() -> viewModel.hideFiltersSheet()}"
+                android:text="@string/filters_sheet_label"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/filterGridRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:spanCount="2"
+                android:nestedScrollingEnabled="false"
+                tools:layout_editor_absoluteX="0dp"
+                tools:listitem="@layout/item_schedule_filter" />
+
+            <include
+                android:id="@+id/starredFilter"
+                layout="@layout/include_filter_pill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="32dp"
+                app:color="@{@color/colorRed}"
+                app:label="@{@string/filters_starred_label}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/filterGridRecyclerView"
+                app:listener="@{() -> viewModel.toggleStarredFilter()}"
+                app:selected="@{viewModel.starredOnly}" />
+
+            <include
+                android:id="@+id/clearFilters"
+                layout="@layout/include_filter_pill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="32dp"
+                android:visibility="@{viewModel.areFiltersActive ? View.VISIBLE : View.GONE}"
+                app:color="@{@color/colorRed}"
+                app:label="@{@string/filters_clear_all_label}"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/filterGridRecyclerView"
+                app:listener="@{() -> viewModel.clearFilters()}"
+                app:selected="@{true}" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

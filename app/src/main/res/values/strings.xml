@@ -9,4 +9,6 @@
     <!-- Schedule Fragment -->
     <string name="filters_sheet_label">Filters</string>
     <string name="filters_clear_all_label">Clear All</string>
+    <string name="filters_starred_label">Starred</string>
+
 </resources>

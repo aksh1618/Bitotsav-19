@@ -2,6 +2,7 @@ package `in`.bitotsav
 
 import `in`.bitotsav.koin.repositoriesModule
 import `in`.bitotsav.koin.retrofitModule
+import `in`.bitotsav.koin.sharedPrefsModule
 import `in`.bitotsav.koin.viewModelsModule
 import `in`.bitotsav.notification.utils.createNotificationChannels
 import android.app.Application
@@ -40,7 +41,7 @@ class Bitotsav19 : Application() {
             androidLogger()
             // Use properties from assets/koin.properties
             androidFileProperties()
-            modules(repositoriesModule, retrofitModule, viewModelsModule)
+            modules(repositoriesModule, retrofitModule, viewModelsModule, sharedPrefsModule)
         }
     }
 }
