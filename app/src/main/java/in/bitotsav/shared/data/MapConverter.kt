@@ -26,14 +26,14 @@ class MapConverter {
         }
 
         @JvmStatic
-        fun fromGenericMap(value: Map<String, Any>): String {
+        fun fromMapOfMap(value: Map<String, Map<String, String>>): String {
             return Gson().toJson(value)
         }
 
         @JvmStatic
-        fun toGenericMap(value: String): Map<String, Any> {
-            val type = object : TypeToken<Map<String, Any>>() {}.type
-            return Gson().fromJson<Map<String, Any>>(value, type)
+        fun toMapOfMap(value: String): Map<String, Map<String, String>> {
+            val type = object : TypeToken<Map<String, Map<String, String>>>() {}.type
+            return Gson().fromJson<Map<String, Map<String, String>>>(value, type)
         }
     }
 }

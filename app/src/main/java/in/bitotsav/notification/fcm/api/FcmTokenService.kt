@@ -22,7 +22,7 @@ interface FcmTokenService {
     ): Deferred<Response<Map<String, String>>>
 
     companion object {
-        val api by lazy {
+        val api: FcmTokenService by lazy {
             get().koin.get<Retrofit>()
                 .create(FcmTokenService::class.java)
         }

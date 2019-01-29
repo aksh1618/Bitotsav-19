@@ -25,7 +25,6 @@ import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.get
 import org.koin.core.KoinComponent
 
-//TODO("Complete this list")
 private enum class UpdateType {
     EVENT,
     RESULT,
@@ -174,7 +173,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
         token?.let {
             User.fcmToken = token
             if (User.isLoggedIn)
-                sendTokenToServer(token)
+                sendTokenToServer()
             return
         }
         Log.wtf(TAG, "Empty token generated!")
@@ -213,7 +212,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
      *
      * @param token The new token.
      */
-    private fun sendTokenToServer(token: String) {
-        scheduleWork<FcmTokenWorker>(workDataOf("type" to FcmTokenWorkType.SEND_TOKEN))
+    private fun sendTokenToServer() {
+        scheduleWork<FcmTokenWorker>(workDataOf("type" to FcmTokenWorkType.SEND_TOKEN.name))
     }
 }

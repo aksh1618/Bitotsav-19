@@ -17,7 +17,7 @@ interface FeedService {
     fun getFeedsAfterAsync(@Body body: Any): Deferred<Response<List<Feed>>>
 
     companion object {
-        val api by lazy {
+        val api: FeedService by lazy {
             get().koin.get<Retrofit>()
                 .create(FeedService::class.java)
         }

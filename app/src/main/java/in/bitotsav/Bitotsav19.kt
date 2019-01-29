@@ -5,9 +5,13 @@ import `in`.bitotsav.koin.retrofitModule
 import `in`.bitotsav.koin.sharedPrefsModule
 import `in`.bitotsav.koin.viewModelsModule
 import `in`.bitotsav.notification.utils.createNotificationChannels
+import `in`.bitotsav.shared.network.scheduleWork
+import `in`.bitotsav.shared.workers.EventWorkType
+import `in`.bitotsav.shared.workers.EventWorker
 import android.app.Application
 import android.os.Build
 import android.util.Log
+import androidx.work.workDataOf
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
@@ -34,6 +38,8 @@ class Bitotsav19 : Application() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannels(this)
         }
+
+        scheduleWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
 
         startKoin {
             androidContext(this@Bitotsav19)

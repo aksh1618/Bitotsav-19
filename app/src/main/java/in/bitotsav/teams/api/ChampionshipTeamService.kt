@@ -12,7 +12,7 @@ interface ChampionshipTeamService {
     fun getAllChampionshipTeamsAsync(): Deferred<Response<List<ChampionshipTeam>>>
 
     companion object {
-        val api by lazy {
+        val api: ChampionshipTeamService by lazy {
             get().koin.get<Retrofit>()
                 .create(ChampionshipTeamService::class.java)
         }

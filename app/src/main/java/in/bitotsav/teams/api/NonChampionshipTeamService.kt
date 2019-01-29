@@ -12,7 +12,7 @@ interface NonChampionshipTeamService {
     fun getNonChampionshipTeamAsync(@Body body: Any): Deferred<Response<Map<String, Any>>>
 
     companion object {
-        val api by lazy {
+        val api: NonChampionshipTeamService by lazy {
             get().koin.get<Retrofit>()
                 .create(NonChampionshipTeamService::class.java)
         }

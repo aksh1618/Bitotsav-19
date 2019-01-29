@@ -48,6 +48,7 @@ fun displayNotification(
 //    TODO("Set small icon, large icon and color")
     val channelId = channel.id
     val notificationBuilder = NotificationCompat.Builder(context, channelId)
+//        TODO: https://stackoverflow.com/questions/25317659/how-to-fix-android-app-remoteserviceexception-bad-notification-posted-from-pac
         .setSmallIcon(R.drawable.ic_launcher_foreground)
         .setStyle(bigTextStyle)
         .setContentTitle(title)
@@ -69,7 +70,7 @@ fun createNotificationChannels(context: Context){
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     Channel.values().forEach {
-    val channel = NotificationChannel(it.id, it.channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
+        val channel = NotificationChannel(it.id, it.channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
         setSound(defaultSoundUri, null)
         enableLights(true)
         enableVibration(true)

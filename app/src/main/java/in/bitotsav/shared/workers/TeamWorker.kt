@@ -16,7 +16,8 @@ private const val TAG = "TeamWorker"
 
 enum class TeamWorkType {
     FETCH_TEAM,
-    FETCH_ALL_TEAMS
+    FETCH_ALL_TEAMS,
+    CLEAN_OLD_TEAMS
 }
 
 class TeamWorker(context: Context, params: WorkerParameters): Worker(context, params), KoinComponent {
@@ -35,9 +36,11 @@ class TeamWorker(context: Context, params: WorkerParameters): Worker(context, pa
                             return@runBlocking Result.failure(workDataOf("Error" to "Event id is empty"))
                         val teamLeaderId = inputData.getString("teamLeaderId")
                             ?: return@runBlocking Result.failure(workDataOf("Error" to "Leader id is empty"))
+                        val isUserTeam = inputData.getBoolean("isUserTeam", false)
                         get<NonChampionshipTeamRepository>()
-                            .fetchNonChampionshipTeamAsync(eventId, teamLeaderId).await()
+                            .fetchNonChampionshipTeamAsync(eventId, teamLeaderId, isUserTeam).await()
                     }
+                    CLEAN_OLD_TEAMS -> get<NonChampionshipTeamRepository>().cleanupUserTeams()
                 }
                 return@runBlocking Result.success()
             } catch (e: Exception) {

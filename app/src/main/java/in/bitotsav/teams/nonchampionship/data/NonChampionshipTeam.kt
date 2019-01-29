@@ -10,5 +10,7 @@ data class NonChampionshipTeam(
     @Expose(serialize = false, deserialize = false) var name: String,
     val members: Map<String, String>,
     @Expose(serialize = false, deserialize = false) var rank: Int = 0,
-    @Expose(serialize = false, deserialize = false) var isUserTeam: Boolean = false
+    @Expose(serialize = false, deserialize = false) var isUserTeam: Boolean = false,
+    // For updating user teams
+    @Expose(serialize = false, deserialize = false) var isTemp: Boolean = false
 )

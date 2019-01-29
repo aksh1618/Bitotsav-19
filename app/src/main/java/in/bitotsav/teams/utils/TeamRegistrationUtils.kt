@@ -8,7 +8,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
-private const val TAG = "EventRegistrationUtils"
+private const val TAG = "TeamRegistrationUtils"
 
 data class Member(
     val memberId: String,

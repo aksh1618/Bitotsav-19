@@ -1,7 +1,7 @@
 package `in`.bitotsav.profile
 
-import `in`.bitotsav.shared.data.MapConverter.Companion.fromGenericMap
-import `in`.bitotsav.shared.data.MapConverter.Companion.toGenericMap
+import `in`.bitotsav.shared.data.MapConverter.Companion.fromMapOfMap
+import `in`.bitotsav.shared.data.MapConverter.Companion.toMapOfMap
 import android.content.SharedPreferences
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -62,16 +62,16 @@ object User : KoinComponent {
             }
         }
 
-    // userTeams: {'eventId':{'id':id, 'name':name}}
+    // userTeams: {'eventId':{'leaderId':id, 'leaderName':name}}
     // **Note: eventId is string
 //    TODO: Initialize on login
-    var userTeams: Map<String, Any>? = null
+    var userTeams: Map<String, Map<String, String>>? = null
         get() = get("userTeams")?.let {
-            toGenericMap(it)
+            toMapOfMap(it)
         }
         set(value) {
             value?.let {
-                set("userTeams", fromGenericMap(it))
+                set("userTeams", fromMapOfMap(it))
                 field = value
             }
         }

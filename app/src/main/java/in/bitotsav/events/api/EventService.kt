@@ -17,7 +17,7 @@ interface EventService {
     fun getByIdAsync(@Body body: Any): Deferred<Response<Event>>
 
     companion object {
-        val api by lazy {
+        val api: EventService by lazy {
             get().koin.get<Retrofit>()
                 .create(EventService::class.java)
         }
