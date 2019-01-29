@@ -2,12 +2,10 @@ package `in`.bitotsav.events.ui
 
 import `in`.bitotsav.events.data.Event
 import `in`.bitotsav.events.data.EventRepository
+import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class ScheduleViewModel(private val eventRepository: EventRepository) : ViewModel() {
@@ -51,6 +49,12 @@ class ScheduleViewModel(private val eventRepository: EventRepository) : ViewMode
         scope.launch(Dispatchers.IO) {
             // TODO: Get from resources?
             allCategories = eventRepository.getAllCategories()
+            // The events might not have been fetched in case of first run.
+            while (allCategories.isEmpty()) {
+                Log.i("allCategories fetch", "Retrying fetching categories after a half second delay...")
+                delay(500)
+                allCategories = eventRepository.getAllCategories()
+            }
         }.invokeOnCompletion {
             scope.launch(Dispatchers.Main) { refreshScheduleFilterList() }
         }
@@ -75,8 +79,8 @@ class ScheduleViewModel(private val eventRepository: EventRepository) : ViewMode
     }
 
     private fun refreshScheduleFilterList() {
-        scheduleFiltersList.value = allCategories.map {
-            ScheduleFilter(it, filterColors[0], categoriesToShow.value?.contains(it) ?: false)
+        scheduleFiltersList.value = allCategories.map { category ->
+            ScheduleFilter(category, filterColors[0], categoriesToShow.value?.contains(category) ?: false)
         }
     }
 

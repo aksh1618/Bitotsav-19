@@ -82,7 +82,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="32dp"
-                android:visibility="@{viewModel.areFiltersActive ? View.VISIBLE : View.GONE}"
+                android:visibility="@{viewModel.areFiltersActive || viewModel.starredOnly ? View.VISIBLE : View.GONE}"
                 app:color="@{@color/colorRed}"
                 app:label="@{@string/filters_clear_all_label}"
                 app:layout_constraintStart_toStartOf="@+id/guideline"

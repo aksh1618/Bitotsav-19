@@ -39,6 +39,7 @@ class Bitotsav19 : Application() {
             createNotificationChannels(this)
         }
 
+        // TODO: Remove this.
         scheduleWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
 
         startKoin {
