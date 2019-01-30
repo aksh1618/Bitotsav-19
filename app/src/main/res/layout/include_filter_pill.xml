@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -19,40 +20,36 @@
         <variable
             name="listener"
             type="android.view.View.OnClickListener" />
+
     </data>
 
-    <!-- TODO: [BUG] The drawable is not tinted in API 21 -->
-
-    <LinearLayout
+    <com.google.android.material.chip.Chip
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@{selected ? @drawable/round_corners: @drawable/round_corners_border}"
-        android:backgroundTint="@{color}"
-        android:orientation="horizontal"
-        android:paddingEnd="12dp"
+        android:checkable="true"
+        android:checked="@{selected}"
         android:onClickListener="@{listener}"
-        tools:backgroundTint="@color/colorRed">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:rotation="@{selected ? 45: 0}"
-            android:src="@drawable/ic_add_circle_white_16dp"
-            android:tint="@{selected ? @color/colorWhite: color}" />
+        android:text="@{label}"
 
-        <TextView
-            style="@style/TextAppearance.Bitotsav.Body2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:text="@{label}"
-            android:textColor="@{selected ? @color/colorWhite: @color/textColor}"
-            tools:text="Category Name"
-            tools:textColor="@color/colorWhite" />
+        android:textColor="@{selected ? @color/colorWhite: @color/textColor}"
+        app:checkedIcon="@drawable/ic_close_circle_white_16dp"
+        app:checkedIconEnabled="true"
+        app:checkedIconVisible="@color/colorWhite"
 
-    </LinearLayout>
+        app:chipBackgroundColor="@{selected ? color : @color/colorWhite}"
+        app:chipIcon="@drawable/ic_add_circle_white_16dp"
+
+        app:chipIconSize="16dp"
+        app:chipIconTint="@{color}"
+        app:chipStartPadding="8dp"
+        app:chipStrokeColor="@{color}"
+        app:chipStrokeWidth="1dp"
+
+        app:rippleColor="@{color}"
+
+        tools:chipBackgroundColor="@color/colorRed"
+        tools:text="Filter"
+        tools:textColor="@color/colorWhite" />
 
 </layout>
