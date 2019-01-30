@@ -35,7 +35,7 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
     suspend fun getById(id: Int) = eventDao.getById(id)
 
     @WorkerThread
-    suspend fun getEventName(id: Int) = eventDao.getEventName(id)
+    suspend fun getNameById(id: Int) = eventDao.getNameById(id)
 
     @WorkerThread
     suspend fun isStarred(id: Int) = eventDao.isStarred(id)

@@ -1,6 +1,6 @@
 package `in`.bitotsav.shared.workers
 
-import `in`.bitotsav.profile.User
+import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.utils.fetchProfileDetailsAsync
 import `in`.bitotsav.shared.workers.ProfileWorkType.valueOf
 import android.content.Context
@@ -24,9 +24,10 @@ class ProfileWorker(context: Context, params: WorkerParameters): Worker(context,
             try {
                 val type = inputData.getString("type")?.let { valueOf(it) }
                     ?: return@runBlocking Result.failure(workDataOf("Error" to "Invalid work type"))
-                val authToken = User.authToken
+                val authToken = CurrentUser.authToken
                     ?: return@runBlocking Result.failure(workDataOf("Error" to "Auth token is empty"))
                 fetchProfileDetailsAsync(authToken).await()
+                Log.d("ProfileWorker", "Fetching completed")
                 return@runBlocking Result.success()
             } catch (e: Exception) {
                 Log.d(TAG, e.message)

@@ -7,7 +7,7 @@ import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.feed.data.FeedType
 import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
-import `in`.bitotsav.profile.User
+import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.network.getWork
 import `in`.bitotsav.shared.network.scheduleWork
 import `in`.bitotsav.shared.workers.*
@@ -110,7 +110,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
                         get<EventRepository>().isStarred(eventId)
                     }
                     val deferredEventName = CoroutineScope(Dispatchers.IO).async {
-                        get<EventRepository>().getEventName(eventId)
+                        get<EventRepository>().getNameById(eventId)
                     }
 //                    TODO("Refresh data from server here")
 
@@ -171,8 +171,8 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
     override fun onNewToken(token: String?) {
         Log.d(TAG, "Refreshed token: $token")
         token?.let {
-            User.fcmToken = token
-            if (User.isLoggedIn)
+            CurrentUser.fcmToken = token
+            if (CurrentUser.isLoggedIn)
                 sendTokenToServer()
             return
         }

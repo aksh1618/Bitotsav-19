@@ -27,6 +27,45 @@
         android:id="@+id/destProfile"
         android:name="in.bitotsav.profile.ui.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_destProfile_to_destLogin"
+            app:destination="@+id/destLogin"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/destSchedule" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destLogin"
+        android:name="in.bitotsav.profile.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_destLogin_to_destRegistration"
+            app:destination="@id/destRegistrationBegin"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/destLogin" />
+
+        <action
+            android:id="@+id/action_destLogin_to_destProfile"
+            app:destination="@id/destProfile"
+            app:popUpTo="@+id/destSchedule" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destRegistrationBegin"
+        android:name="in.bitotsav.profile.ui.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" />
 
 </navigation>

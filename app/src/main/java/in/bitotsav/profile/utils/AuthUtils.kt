@@ -1,5 +1,6 @@
 package `in`.bitotsav.profile.utils
 
+import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.api.AuthenticationService
 import `in`.bitotsav.shared.network.NetworkException
 import android.util.Log
@@ -18,17 +19,18 @@ class AuthException(message: String): Exception(message)
 //502 - Server error
 //403 - Incorrect credentials
 //200 - Success with {token} to be sent
-fun loginAsync(email: String, password: String): Deferred<String> {
+fun loginAsync(email: String, password: String): Deferred<Unit> {
     return CoroutineScope(Dispatchers.Main).async {
         val body = mapOf("email" to email, "password" to password)
         val request = AuthenticationService.api.loginAsync(body)
         val response = request.await()
         if (response.code() == 200) {
-            Log.d(TAG, "User:$email logged in")
-            return@async response.body()?.get("token")
+            Log.d(TAG, "CurrentUser:$email logged in")
+            CurrentUser.authToken = response.body()?.get("token")
                 ?: throw AuthException("Empty token received from the server." +
                         " Contact the tech team if this issue persists")
         } else {
+            Log.d(TAG, "${response.code()}")
             when (response.code()) {
                 403 -> throw AuthException("Incorrect email and/or password")
                 else -> throw NetworkException("Server is currently facing some issues. Try again later")

@@ -2,7 +2,7 @@ package `in`.bitotsav.teams.nonchampionship.data
 
 import `in`.bitotsav.database.AppDatabase
 import `in`.bitotsav.events.data.EventRepository
-import `in`.bitotsav.profile.User
+import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.data.Repository
 import `in`.bitotsav.teams.api.NonChampionshipTeamService
 import android.util.Log
@@ -22,6 +22,7 @@ class NonChampionshipTeamRepository(
 ) : Repository<NonChampionshipTeam>, KoinComponent {
 
     override fun getAll(): LiveData<List<NonChampionshipTeam>> = nonChampionshipTeamDao.getAll()
+    // TODO: @ ashank getAllChronological()
 
     @WorkerThread
     suspend fun getById(eventId: Int, teamLeaderId: String): NonChampionshipTeam? =
@@ -48,8 +49,8 @@ class NonChampionshipTeamRepository(
 //    404 - Team not found
 //    403 - eventId or teamLeaderId not found
 //    200 - Success with teamMembers array
-fun fetchNonChampionshipTeamAsync(eventId: Int, teamLeaderId: String, isUserTeam: Boolean): Deferred<Any> {
-//    TODO: Needs thorough testing
+    fun fetchNonChampionshipTeamAsync(eventId: Int, teamLeaderId: String, isUserTeam: Boolean): Deferred<Any> {
+        // TODO: Needs thorough testing
         return CoroutineScope(Dispatchers.IO).async {
             val body = mapOf(
                 "eventId" to eventId,
@@ -71,13 +72,13 @@ fun fetchNonChampionshipTeamAsync(eventId: Int, teamLeaderId: String, isUserTeam
 //                }
 
                 if (isUserTeam) {
-                    val userTeams = User.userTeams?.toMutableMap()
+                    val userTeams = CurrentUser.userTeams?.toMutableMap()
                     val team = userTeams?.get(eventId.toString())?.toMutableMap()
                     team?.let {
                         team["leaderId"] = teamLeaderId
                         team["leaderName"] = members.values.first()
                         userTeams[eventId.toString()] = team.toMap()
-                        User.userTeams = userTeams.toMap()
+                        CurrentUser.userTeams = userTeams.toMap()
                     }
                 }
 

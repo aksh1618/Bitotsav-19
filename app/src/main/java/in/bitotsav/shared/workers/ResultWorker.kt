@@ -4,7 +4,7 @@ import `in`.bitotsav.HomeActivity
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
-import `in`.bitotsav.profile.User
+import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
 import android.content.Context
 import android.content.Intent
@@ -48,7 +48,7 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
                 position1Task?.await()
                 position2Task?.await()
                 position3Task?.await()
-                val leaderId = User.userTeams?.get(eventId.toString())
+                val leaderId = CurrentUser.userTeams?.get(eventId.toString())
                 val position: String?
 //                TODO("Pass appropriate intent")
                 val intent = Intent(applicationContext, HomeActivity::class.java)
@@ -60,7 +60,7 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
                         else -> null
                     }
                     position?.let {
-                        val eventName = get<EventRepository>().getEventName(eventId)
+                        val eventName = get<EventRepository>().getNameById(eventId)
                         val content = "Your team secured $position position in $eventName"
                         displayNotification(
                             "Congratulations!",

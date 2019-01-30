@@ -4,6 +4,8 @@ import `in`.bitotsav.database.AppDatabase
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.events.ui.ScheduleViewModel
 import `in`.bitotsav.feed.data.FeedRepository
+import `in`.bitotsav.profile.ui.LoginViewModel
+import `in`.bitotsav.profile.ui.ProfileViewModel
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
 import android.content.Context.MODE_PRIVATE
@@ -70,4 +72,6 @@ val sharedPrefsModule = module {
 
 val viewModelsModule = module {
     viewModel { ScheduleViewModel(get()) }
+    viewModel { LoginViewModel() }
+    viewModel { ProfileViewModel() }
 }

@@ -54,4 +54,6 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="Widget.Bitotsav.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"/>
+
 </resources>

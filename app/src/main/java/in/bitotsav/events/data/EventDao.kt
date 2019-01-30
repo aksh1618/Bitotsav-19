@@ -33,7 +33,7 @@ interface EventDao {
     fun getById(id: Int): Event?
 
     @Query("SELECT name FROM event WHERE id = :id")
-    fun getEventName(id: Int): String?
+    fun getNameById(id: Int): String?
 
     @Query("SELECT isStarred FROM event WHERE id = :id")
     fun isStarred(id: Int): Boolean?

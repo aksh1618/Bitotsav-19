@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.profile.ui.LoginViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <!-- TODO: Do something about hint color on focus -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Bitotsav.TextInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_email_label"
+            app:boxStrokeColor="@color/colorRed"
+            app:errorEnabled="true"
+            app:errorText="@{viewModel.loginEmailErrorText}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autofillHints=".AUTOFILL_HINT_EMAIL_ADDRESS"
+                android:backgroundTint="@color/colorRed"
+                android:ems="10"
+                android:focusedByDefault="true"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.loginEmail}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Bitotsav.TextInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/login_password_label"
+            app:boxCollapsedPaddingTop="0dp"
+            app:boxStrokeColor="@color/colorRed"
+            app:errorEnabled="true"
+            app:errorText="@{viewModel.loginPasswordErrorText}">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Password"
+                style="@style/TextAppearance.MaterialComponents.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autofillHints=".AUTOFILL_HINT_PASSWORD"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:text="@={viewModel.loginPassword}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/login"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@{viewModel.mainColor}"
+            android:ems="10"
+            android:enabled="@{``.equals(viewModel.loginEmailErrorText)}"
+            android:filterTouchesWhenObscured="true"
+            android:onClick="@{() -> viewModel.login()}"
+            android:text="@string/login_button_label"
+            android:textColor="@color/colorWhite"
+            android:visibility="@{viewModel.loading ? View.GONE: View.VISIBLE}"
+            tools:backgroundTint="@color/colorRed" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:padding="8dp"
+            android:layout_gravity="center"
+            android:progressTint="@{viewModel.mainColor}"
+            android:visibility="@{viewModel.loading ? View.VISIBLE: View.GONE}"
+            tools:progressTint="@color/colorRed"/>
+
+        <Button
+            android:id="@+id/register"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@{viewModel.mainColor}"
+            android:ems="10"
+            android:filterTouchesWhenObscured="true"
+            android:text="@string/register_button_label"
+            android:textColor="@color/colorWhite"
+            tools:backgroundTint="@color/colorRed" />
+
+        <TextView
+            android:id="@+id/loginErrorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@{viewModel.loginErrorText}"
+            android:textColor="@color/colorRed"
+            android:textStyle="italic"
+            android:visibility="@{``.equals(viewModel.loginErrorText) ? View.GONE : View.VISIBLE}"
+            tools:text="Error Message" />
+
+    </LinearLayout>
+</layout>

@@ -87,6 +87,7 @@ dependencies {
     testImplementation "org.koin:koin-test:$koin_version"
 
     implementation "android.arch.work:work-runtime-ktx:$workmanager_version"
+    implementation 'com.google.android.material:material:1.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

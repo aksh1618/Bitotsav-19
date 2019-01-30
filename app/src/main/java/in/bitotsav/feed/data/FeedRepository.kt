@@ -46,7 +46,7 @@ class FeedRepository(private val feedDao: FeedDao) : Repository<Feed>, KoinCompo
                 feeds.forEachParallel {
                     if (it.eventId != null) {
                         val isStarred = get<EventRepository>().isStarred(it.eventId) ?: false
-                        val eventName = get<EventRepository>().getEventName(it.eventId)
+                        val eventName = get<EventRepository>().getNameById(it.eventId)
                             ?: throw DatabaseException("Event name not found for ${it.eventId}")
                         it.setProperties(isStarred, eventName)
                     } else {
