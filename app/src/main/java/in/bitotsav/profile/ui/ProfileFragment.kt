@@ -24,7 +24,7 @@ class ProfileFragment : Fragment() {
     ): View? {
 
         context?.let {
-            profileViewModel.mainColor = it.getColorCompat(R.color.colorRed)
+            profileViewModel.mColor = it.getColorCompat(R.color.colorRed)
         }
         profileViewModel.toastMessage.observe(viewLifecycleOwner, Observer { message ->
             this@ProfileFragment.context?.let { message.toast(it) }

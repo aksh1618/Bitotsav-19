@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
         if (CurrentUser.isLoggedIn)
             findNavController().navigate(R.id.action_destLogin_to_destProfile)
 
-        context?.let { loginViewModel.mainColor = it.getColorCompat(R.color.colorRed) }
+        context?.let { loginViewModel.mColor = it.getColorCompat(R.color.colorRed) }
         setObservers()
 
         return FragmentLoginBinding.inflate(inflater, container, false)

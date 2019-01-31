@@ -24,6 +24,7 @@
             style="@style/Widget.Bitotsav.TextInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autofillHints=".AUTOFILL_HINT_EMAIL_ADDRESS"
             android:hint="@string/login_email_label"
             app:boxStrokeColor="@color/colorRed"
             app:errorEnabled="true"
@@ -31,15 +32,12 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
-                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:autofillHints=".AUTOFILL_HINT_EMAIL_ADDRESS"
-                android:backgroundTint="@color/colorRed"
                 android:ems="10"
-                android:focusedByDefault="true"
                 android:inputType="textEmailAddress"
-                android:text="@={viewModel.loginEmail}" />
+                android:text="@={viewModel.loginEmail}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,21 +46,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:autofillHints=".AUTOFILL_HINT_PASSWORD"
             android:hint="@string/login_password_label"
-            app:boxCollapsedPaddingTop="0dp"
             app:boxStrokeColor="@color/colorRed"
             app:errorEnabled="true"
             app:errorText="@{viewModel.loginPasswordErrorText}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Password"
-                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:autofillHints=".AUTOFILL_HINT_PASSWORD"
                 android:ems="10"
                 android:inputType="textPassword"
-                android:text="@={viewModel.loginPassword}" />
+                android:text="@={viewModel.loginPassword}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,7 +70,7 @@
             android:layout_height="52dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@{viewModel.mainColor}"
+            android:backgroundTint="@{viewModel.mColor}"
             android:ems="10"
             android:enabled="@{``.equals(viewModel.loginEmailErrorText)}"
             android:filterTouchesWhenObscured="true"
@@ -87,12 +84,12 @@
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="52dp"
             android:layout_height="52dp"
+            android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:padding="8dp"
-            android:layout_gravity="center"
-            android:progressTint="@{viewModel.mainColor}"
+            android:progressTint="@{viewModel.mColor}"
             android:visibility="@{viewModel.loading ? View.VISIBLE: View.GONE}"
-            tools:progressTint="@color/colorRed"/>
+            tools:progressTint="@color/colorRed" />
 
         <Button
             android:id="@+id/register"
@@ -101,7 +98,7 @@
             android:layout_height="52dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@{viewModel.mainColor}"
+            android:backgroundTint="@{viewModel.mColor}"
             android:ems="10"
             android:filterTouchesWhenObscured="true"
             android:text="@string/register_button_label"

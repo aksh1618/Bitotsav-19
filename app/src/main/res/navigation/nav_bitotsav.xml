@@ -32,10 +32,6 @@
         <action
             android:id="@+id/action_destProfile_to_destLogin"
             app:destination="@+id/destLogin"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_right"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@+id/destSchedule" />
 
     </fragment>
@@ -49,10 +45,6 @@
         <action
             android:id="@+id/action_destLogin_to_destRegistration"
             app:destination="@id/destRegistrationBegin"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_right"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@+id/destLogin" />
 
         <action

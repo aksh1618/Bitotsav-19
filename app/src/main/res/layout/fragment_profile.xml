@@ -10,9 +10,10 @@
 
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         tools:context=".profile.ui.ProfileFragment">
 
         <TextView
@@ -20,5 +21,20 @@
             android:layout_height="match_parent"
             android:text="@{viewModel.user.name}" />
 
-    </FrameLayout>
+        <Button
+            android:id="@+id/register"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@{viewModel.mColor}"
+            android:onClick="@{() -> viewModel.logout()}"
+            android:ems="10"
+            android:filterTouchesWhenObscured="true"
+            android:text="@string/logout_button_label"
+            android:textColor="@color/colorWhite"
+            tools:backgroundTint="@color/colorRed" />
+
+    </LinearLayout>
 </layout>

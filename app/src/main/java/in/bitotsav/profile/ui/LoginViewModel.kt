@@ -1,39 +1,32 @@
 package `in`.bitotsav.profile.ui
 
-import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.utils.AuthException
 import `in`.bitotsav.profile.utils.loginAsync
-import `in`.bitotsav.profile.utils.syncUserProfile
-import android.os.Handler
-import android.os.Looper
+import `in`.bitotsav.profile.utils.syncUserAndRun
+import `in`.bitotsav.shared.ui.BaseViewModel
+import `in`.bitotsav.shared.utils.onTrue
+import `in`.bitotsav.shared.utils.or
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel : BaseViewModel() {
 
-    var mainColor: Int = 0
-
-    val loading = MutableLiveData<Boolean>()
-    val toastMessage = MutableLiveData<String>()
     val loginEmail = MutableLiveData<String>()
     val loginPassword = MutableLiveData<String>()
-    val loginErrorText = MutableLiveData<String>()
     val loginEmailErrorText = MutableLiveData<String>()
     val loginPasswordErrorText = MutableLiveData<String>()
+    val loginErrorText = MutableLiveData<String>()
     val loggedIn = MutableLiveData<Boolean>()
-    var token = ""
+    val loading = MutableLiveData<Boolean>()
 
     init {
         loginEmail.value = ""
         loginPassword.value = ""
-        loginErrorText.value = ""
         loginEmailErrorText.value = ""
         loginPasswordErrorText.value = ""
+        loginErrorText.value = ""
         loggedIn.value = false
-        toastMessage.value = ""
     }
 
     fun login() {
@@ -42,75 +35,46 @@ class LoginViewModel : ViewModel() {
 
         // Invalid email
         if (!loginEmailErrorText.value.isNullOrEmpty()) return
-        if (checkEmailOrPasswordEmpty()) return
-
-        Log.d("Login pressed", "Attempting login...")
+        // Empty email or password
+        if (checkEmailOrPasswordEmpty()) {
+            Log.i("LoginViewModel.login", "Empty email or password")
+            return
+        }
+        Log.i("LoginViewModel.login", "Attempting login...")
 
         scope.launch {
+            loading.value = true
             try {
-                loading.value = true
                 loginAsync(loginEmail.value!!, loginPassword.value!!).await()
-                Log.d("Login pressed", "Got token: ${CurrentUser.authToken}")
-                setLoggedIn()
+                fetchUserAndLogin()
             } catch (exception: AuthException) {
-                loading.value = false
-                Log.e("Login Pressed", "${exception.stackTrace}")
                 loginErrorText.value = exception.message
+                Log.e("LoginViewModel.login", null, exception)
             } catch (exception: NullPointerException) {
-                loading.value = false
-                Log.e("Login pressed", "Email or password is null, somehow")
+                loginErrorText.value = "Som error occurred, try again"
+                Log.e("LoginViewModel.login", null, exception)
             } catch (exception: Exception) {
-                loading.value = false
-                Log.e("Login Pressed", "${exception.stackTrace}")
-                toast(exception.message ?: "Unknown Error!!")
+                loginErrorText.value = exception.message
+                    ?.let { "Unable to reach bitotsav :(" }
+                    ?: "Unknown Error!!"
+                Log.e("LoginViewModel.login", null, exception)
+            } finally {
+//                loading.value = false
             }
         }
     }
 
-    private fun checkEmailOrPasswordEmpty(): Boolean {
-        var empty = false
-        if (loginEmail.value.isNullOrEmpty()) {
+    private fun checkEmailOrPasswordEmpty() = Boolean.or(
+        loginEmail.value.isNullOrEmpty().onTrue {
             loginEmailErrorText.value = "Email required."
-            empty = true
-        }
-        if (loginPassword.value.isNullOrEmpty()) {
+        },
+        loginPassword.value.isNullOrEmpty().onTrue {
             loginPasswordErrorText.value = "Password required."
-            empty = true
         }
-        return empty
+    )
+
+    private fun fetchUserAndLogin() = syncUserAndRun {
+        loading.value = false
+        loggedIn.value = true
     }
-
-    fun setLoggedIn() {
-        scope.launch {
-            val profileFuture = syncUserProfile()
-            // TODO: Is there a better way?
-//            while (profileFuture.isDone.not()) {
-//                Log.d("Logging in", "Waiting for user info sync")
-//                delay(500)
-//            }
-            profileFuture.addListener(
-                { loading.postValue(false); loggedIn.postValue(true) },
-                { it?.run() }
-//                { Handler(Looper.getMainLooper()).post { it?.run() } }
-            )
-//            loading.value = false
-//            loggedIn.value = true
-        }
-        // TODO: Store (and retrieve) CurrentUser in some way.
-    }
-
-    private fun toast(message: String) {
-        toastMessage.value = message
-    }
-
-    private val parentJob = Job()
-    private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.Main
-    private val scope = CoroutineScope(coroutineContext)
-
-    override fun onCleared() {
-        super.onCleared()
-        parentJob.cancel()
-    }
-
 }

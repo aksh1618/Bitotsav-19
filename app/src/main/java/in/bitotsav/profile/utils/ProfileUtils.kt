@@ -7,6 +7,8 @@ import `in`.bitotsav.shared.workers.ProfileWorkType
 import `in`.bitotsav.shared.workers.ProfileWorker
 import `in`.bitotsav.shared.workers.TeamWorkType
 import `in`.bitotsav.shared.workers.TeamWorker
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.work.OneTimeWorkRequest
 import androidx.work.Operation
@@ -43,7 +45,8 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
             val userTeams = mutableMapOf<String, Map<String, String>>()
             teams.forEach {
                 val eventId = (it["eventId"] as Double).toInt()
-                userTeams[eventId.toString()] = mapOf("leaderId" to it["teamLeader"].toString())
+                userTeams[eventId.toString()] =
+                    mapOf("leaderId" to it["teamLeader"].toString())
             }
             CurrentUser.userTeams = userTeams.toMap()
         } else {
@@ -76,5 +79,17 @@ fun syncUserProfile(): ListenableFuture<Operation.State.SUCCESS> {
         workDataOf("type" to TeamWorkType.CLEAN_OLD_TEAMS.name)
     )
     // TODO: [FIXME] @ ashank
-    return WorkManager.getInstance().beginWith(profileWork)/*.then(listOfWorks).then(cleanupWork)*/.enqueue().result
+    return WorkManager.getInstance()
+        .beginWith(profileWork)/*.then(listOfWorks).then(cleanupWork)*/.enqueue().result
+}
+
+fun syncUserAndRun(block: () -> Unit) {
+    // FIXME: Improvement Possible?.
+    syncUserProfile().addListener(
+        { block.invoke() },
+        {
+            // Give harbi's slow ass method some time to complete
+            Handler(Looper.getMainLooper()).postDelayed(it, 1000)
+        }
+    )
 }
