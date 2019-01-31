@@ -25,11 +25,13 @@ class MapConverter {
             }
         }
 
+        @TypeConverter
         @JvmStatic
         fun fromMapOfMap(value: Map<String, Map<String, String>>): String {
             return Gson().toJson(value)
         }
 
+        @TypeConverter
         @JvmStatic
         fun toMapOfMap(value: String): Map<String, Map<String, String>> {
             val type = object : TypeToken<Map<String, Map<String, String>>>() {}.type

@@ -9,10 +9,19 @@ import androidx.room.Query
 @Dao
 interface NonChampionshipTeamDao {
     @Query("SELECT * FROM nonchampionshipteam")
-    fun getAll() : LiveData<List<NonChampionshipTeam>>
+    fun getAll(): LiveData<List<NonChampionshipTeam>>
+
+    @Query(
+        """
+        SELECT DISTINCT nonchampionshipteam.* FROM nonchampionshipteam
+        INNER JOIN event ON nonchampionshipteam.eventId = event.id WHERE nonchampionshipteam.isUserTeam == 1
+        GROUP BY nonchampionshipteam.eventId
+        ORDER BY event.id DESC, event.timestamp DESC"""
+    )
+    fun getAllUserTeams(): LiveData<List<NonChampionshipTeam>>
 
     @Query("SELECT * FROM nonchampionshipteam WHERE eventId = :eventId and teamLeaderId = :teamLeaderId")
-    fun getById(eventId: Int, teamLeaderId: String) : NonChampionshipTeam?
+    fun getById(eventId: Int, teamLeaderId: String): NonChampionshipTeam?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg nonChampionshipTeams: NonChampionshipTeam)

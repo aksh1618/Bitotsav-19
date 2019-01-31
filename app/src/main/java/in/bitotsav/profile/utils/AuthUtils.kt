@@ -11,7 +11,7 @@ import kotlinx.coroutines.async
 
 private const val TAG = "AuthUtils"
 
-class AuthException(message: String): Exception(message)
+class AuthException(message: String) : Exception(message)
 
 //TODO: Client side verification of inputs
 
@@ -25,10 +25,12 @@ fun loginAsync(email: String, password: String): Deferred<Unit> {
         val request = AuthenticationService.api.loginAsync(body)
         val response = request.await()
         if (response.code() == 200) {
-            Log.d(TAG, "CurrentUser:$email logged in")
+            Log.d(TAG, "User:$email logged in")
             CurrentUser.authToken = response.body()?.get("token")
-                ?: throw AuthException("Empty token received from the server." +
-                        " Contact the tech team if this issue persists")
+                ?: throw AuthException(
+                    "Empty token received from the server." +
+                            " Contact the tech team if this issue persists"
+                )
         } else {
             Log.d(TAG, "${response.code()}")
             when (response.code()) {
@@ -59,7 +61,7 @@ fun registerAsync(
             "password" to password,
             "g-recaptcha-response" to g_recaptcha_response
         )
-        val request =  AuthenticationService.api.registerAsync(body)
+        val request = AuthenticationService.api.registerAsync(body)
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Registration Stage 1 complete")
@@ -94,8 +96,10 @@ fun verifyAsync(email: String, phoneOtp: String, emailOtp: String): Deferred<Boo
         } else {
             when (response.code()) {
                 403 -> throw AuthException("Incorrect OTP")
-                400 -> throw AuthException("You are running a modded app." +
-                        " Install the original one from Google Play Store")
+                400 -> throw AuthException(
+                    "You are running a modded app." +
+                            " Install the original one from Google Play Store"
+                )
                 else -> throw NetworkException("Server is currently facing some issues. Try again later")
             }
         }
@@ -125,8 +129,10 @@ fun saveParticipantAsync(
         val request = AuthenticationService.api.saveParticipantAsync(body)
         val response = request.await()
         if (response.code() == 200) {
-            val bitotsavId = response.body()?.get("data") ?: throw AuthException("Bitotsav ID not generated." +
-                    " Contact the tech team if this issue persists")
+            val bitotsavId = response.body()?.get("data") ?: throw AuthException(
+                "Bitotsav ID not generated." +
+                        " Contact the tech team if this issue persists"
+            )
             Log.d(TAG, "Registration complete. BitotsavId: $bitotsavId")
             return@async bitotsavId
         } else {
@@ -137,13 +143,13 @@ fun saveParticipantAsync(
 
 //GET - /getCollegeList
 //200 - Object containing colleges
-fun fetchCollegeListAsync(): Deferred<Any> {
+fun fetchCollegeListAsync(): Deferred<List<String>> {
     return CoroutineScope(Dispatchers.IO).async {
         val request = AuthenticationService.api.getCollegeListAsync()
         val response = request.await()
         if (response.code() == 200) {
-            val colleges = response.body()?.get("colleges") ?: throw NetworkException("List of colleges is empty")
-            TODO("Insert into some entity")
+            return@async response.body()?.get("colleges")
+                ?: throw NetworkException("List of colleges is empty")
         } else {
             throw Exception("Unable to get list of colleges from the server")
         }

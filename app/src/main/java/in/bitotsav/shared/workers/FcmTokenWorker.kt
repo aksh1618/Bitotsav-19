@@ -2,7 +2,6 @@ package `in`.bitotsav.shared.workers
 
 import `in`.bitotsav.notification.utils.deleteFcmTokenAsync
 import `in`.bitotsav.notification.utils.sendFcmTokenAsync
-import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.workers.FcmTokenWorkType.valueOf
 import android.content.Context
 import android.util.Log
@@ -21,24 +20,21 @@ enum class FcmTokenWorkType {
 class FcmTokenWorker(context: Context, params: WorkerParameters): Worker(context, params) {
 
     override fun doWork(): Result {
-
-        return runBlocking {
-            try {
-                val type = inputData.getString("type")?.let { valueOf(it) }
-                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Invalid work type"))
-                val authToken = CurrentUser.authToken
-                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Auth token is empty"))
-                val fcmToken = CurrentUser.fcmToken
-                    ?: return@runBlocking Result.failure(workDataOf("Error" to "FCM token not found"))
-                when (type) {
-                    FcmTokenWorkType.SEND_TOKEN -> sendFcmTokenAsync(authToken, fcmToken).await()
-                    FcmTokenWorkType.DELETE_TOKEN -> deleteFcmTokenAsync(authToken, fcmToken).await()
-                }
-                return@runBlocking Result.success()
-            } catch (e: Exception) {
-                Log.d(TAG, e.message)
-                return@runBlocking Result.retry()
+        try {
+            val type = inputData.getString("type")?.let { valueOf(it) }
+                ?: return Result.failure(workDataOf("Error" to "Invalid work type"))
+            val authToken = inputData.getString("authToken")
+                ?: return Result.failure(workDataOf("Error" to "Auth token is empty"))
+            val fcmToken = inputData.getString("fcmToken")
+                ?: return Result.failure(workDataOf("Error" to "FCM token not found"))
+            when (type) {
+                FcmTokenWorkType.SEND_TOKEN -> runBlocking { sendFcmTokenAsync(authToken, fcmToken).await() }
+                FcmTokenWorkType.DELETE_TOKEN -> runBlocking { deleteFcmTokenAsync(authToken, fcmToken).await() }
             }
+            return Result.success()
+        } catch (e: Exception) {
+            Log.d(TAG, e.message)
+            return Result.retry()
         }
     }
 }

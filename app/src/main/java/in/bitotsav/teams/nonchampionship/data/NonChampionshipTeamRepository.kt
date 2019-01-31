@@ -22,7 +22,9 @@ class NonChampionshipTeamRepository(
 ) : Repository<NonChampionshipTeam>, KoinComponent {
 
     override fun getAll(): LiveData<List<NonChampionshipTeam>> = nonChampionshipTeamDao.getAll()
-    // TODO: @ ashank getAllChronological()
+
+    // TODO: @ aksh Test this
+    fun getAllUserTeams(): LiveData<List<NonChampionshipTeam>> = nonChampionshipTeamDao.getAllUserTeams()
 
     @WorkerThread
     suspend fun getById(eventId: Int, teamLeaderId: String): NonChampionshipTeam? =
@@ -44,7 +46,7 @@ class NonChampionshipTeamRepository(
         }
     }
 
-//    POST - /getTeamDetails - {eventId, teamLeaderId}
+    //    POST - /getTeamDetails - {eventId, teamLeaderId}
 //    502 - Server error
 //    404 - Team not found
 //    403 - eventId or teamLeaderId not found

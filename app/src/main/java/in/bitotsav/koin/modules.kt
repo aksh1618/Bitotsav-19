@@ -4,6 +4,7 @@ import `in`.bitotsav.database.AppDatabase
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.events.ui.ScheduleViewModel
 import `in`.bitotsav.feed.data.FeedRepository
+import `in`.bitotsav.profile.data.UserRepository
 import `in`.bitotsav.profile.ui.LoginViewModel
 import `in`.bitotsav.profile.ui.ProfileViewModel
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
@@ -35,9 +36,9 @@ val repositoriesModule = module {
     single { FeedRepository(get<AppDatabase>().feedDao()) }
     single { ChampionshipTeamRepository(get<AppDatabase>().championshipTeamDao()) }
     single { NonChampionshipTeamRepository(get<AppDatabase>().nonChampionshipTeamDao()) }
+    single { UserRepository(get<AppDatabase>().userDao()) }
 }
 
-// TODO: Use this!
 val retrofitModule = module {
 
     single("custom_gson") {

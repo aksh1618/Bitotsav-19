@@ -21,26 +21,23 @@ enum class EventWorkType {
 class EventWorker(context: Context, params: WorkerParameters): Worker(context, params), KoinComponent {
 
     override fun doWork(): Result {
-
-        return runBlocking {
-            try {
-                val type = inputData.getString("type")?.let { valueOf(it) }
-                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Invalid work type"))
-                when (type) {
-                    FETCH_ALL_EVENTS -> get<EventRepository>().fetchAllEventsAsync().await()
-                    FETCH_EVENT -> {
-                        val eventId = inputData.getInt("eventId", -1)
-                        if (eventId == -1)
-                            return@runBlocking Result.failure(workDataOf("Error" to "Event id is empty"))
-                        get<EventRepository>().fetchEventByIdAsync(eventId).await()
-                        return@runBlocking Result.success()
-                    }
+        try {
+            val type = inputData.getString("type")?.let { valueOf(it) }
+                ?: return Result.failure(workDataOf("Error" to "Invalid work type"))
+            when (type) {
+                FETCH_ALL_EVENTS -> runBlocking { get<EventRepository>().fetchAllEventsAsync().await() }
+                FETCH_EVENT -> {
+                    val eventId = inputData.getInt("eventId", -1)
+                    if (eventId == -1)
+                        return Result.failure(workDataOf("Error" to "Event id is empty"))
+                    runBlocking { get<EventRepository>().fetchEventByIdAsync(eventId).await() }
+                    return Result.success()
                 }
-                return@runBlocking Result.success()
-            } catch (e: Exception) {
-                Log.d(TAG, e.message)
-                return@runBlocking Result.retry()
             }
+            return Result.success()
+        } catch (e: Exception) {
+            Log.d(TAG, e.message)
+            return Result.retry()
         }
     }
 }

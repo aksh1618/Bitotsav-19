@@ -7,6 +7,7 @@ import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.feed.data.FeedType
 import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
+import `in`.bitotsav.notification.utils.sendFcmTokenToServer
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.network.getWork
 import `in`.bitotsav.shared.network.scheduleWork
@@ -112,7 +113,6 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
                     val deferredEventName = CoroutineScope(Dispatchers.IO).async {
                         get<EventRepository>().getNameById(eventId)
                     }
-//                    TODO("Refresh data from server here")
 
                     if (updateType == UpdateType.EVENT) {
                         scheduleWork<EventWorker>(
@@ -173,46 +173,9 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
         token?.let {
             CurrentUser.fcmToken = token
             if (CurrentUser.isLoggedIn)
-                sendTokenToServer()
+                sendFcmTokenToServer()
             return
         }
         Log.wtf(TAG, "Empty token generated!")
-    }
-
-    /**
-     * Schedule a job using FirebaseJobDispatcher.
-     */
-//    private fun scheduleJob(bundle: Bundle, tag: String) {
-//        val dispatcher = Singleton.dispatcher.getInstance(applicationContext)
-//        Log.d(TAG, "Scheduling new job")
-//        val random = Random()
-//        val timeDelay = random.nextInt(5)
-//        val myJob = dispatcher.newJobBuilder()
-//            .setService(NetworkJobService::class.java)
-//            .setTag(tag)
-//            .setRecurring(false)
-//            .setLifetime(Lifetime.FOREVER)
-//            .setTrigger(Trigger.executionWindow(timeDelay, 10))
-//            .setReplaceCurrent(false)
-//            .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
-//            .setConstraints(
-//                Constraint.ON_ANY_NETWORK
-//            )
-//            .setExtras(bundle)
-//            .build()
-//
-//        dispatcher.mustSchedule(myJob)
-//    }
-
-    /**
-     * Persist token to third-party servers.
-     *
-     * Modify this method to associate the user's FCM InstanceID token with any server-side account
-     * maintained by your application.
-     *
-     * @param token The new token.
-     */
-    private fun sendTokenToServer() {
-        scheduleWork<FcmTokenWorker>(workDataOf("type" to FcmTokenWorkType.SEND_TOKEN.name))
     }
 }

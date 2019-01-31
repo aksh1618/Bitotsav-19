@@ -2,15 +2,14 @@ package `in`.bitotsav.profile.utils
 
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.api.ProfileService
+import `in`.bitotsav.profile.data.User
+import `in`.bitotsav.profile.data.UserRepository
 import `in`.bitotsav.shared.network.getWork
 import `in`.bitotsav.shared.workers.ProfileWorkType
 import `in`.bitotsav.shared.workers.ProfileWorker
-import `in`.bitotsav.shared.workers.TeamWorkType
-import `in`.bitotsav.shared.workers.TeamWorker
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.work.OneTimeWorkRequest
 import androidx.work.Operation
 import androidx.work.WorkManager
 import androidx.work.workDataOf
@@ -19,6 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import org.koin.core.context.GlobalContext.get
 
 private const val TAG = "ProfileUtils"
 
@@ -33,14 +33,39 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Participant details received from server")
-//            TODO("Store participant details here")
-            CurrentUser.name = response.body()?.get("name")?.toString()
-            CurrentUser.email = response.body()?.get("email")?.toString()
-            CurrentUser.bitotsavId = response.body()?.get("id")?.toString()
+//            ("Store participant details here")
+//            "teamMembers": [
+//            {
+//                "name": $name,
+//                "email": "$email,
+//                "id": $id
+//            }]
+//            TODO: Store email and members here
+            val name = response.body()?.get("name")?.toString()
+            val email = response.body()?.get("email")?.toString()
+            val bitotsavId = response.body()?.get("id")?.toString()
             var teamName = response.body()?.get("teamName")?.toString()
+            if (name == null || email == null || bitotsavId == null || teamName == null) {
+                throw Exception("API not functioning correctly. Null fields")
+            }
             if ("-1" == teamName) teamName = null
+            CurrentUser.name = name
+            CurrentUser.email = email
+            CurrentUser.bitotsavId = bitotsavId
             CurrentUser.championshipTeamName = teamName
-//            TODO: Store user teams
+
+            val teamMembers = mutableMapOf<String, Map<String, String>>()
+            teamName?.let {
+                val members = response.body()?.get("teamMembers") as List<Map<String, String>>
+                members.forEach {
+                    val bitId = it["id"].toString()
+                    val memberName = it["name"].toString()
+                    val memberEmail = it["email"].toString()
+                    teamMembers[bitId] = mapOf("name" to memberName, "email" to memberEmail)
+                }
+                CurrentUser.teamMembers = teamMembers.toMap()
+            }
+
             val teams = response.body()?.get("events") as List<Map<String, Any>>
             val userTeams = mutableMapOf<String, Map<String, String>>()
             teams.forEach {
@@ -49,6 +74,14 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
                     mapOf("leaderId" to it["teamLeader"].toString())
             }
             CurrentUser.userTeams = userTeams.toMap()
+            val user = User(
+                bitotsavId,
+                name,
+                email,
+                teamName
+            )
+            get().koin.get<UserRepository>().insert(user)
+            Log.d(TAG, "User inserted into DB")
         } else {
             when (response.code()) {
                 403 -> throw AuthException("Authentication error")
@@ -60,27 +93,12 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
 }
 
 fun syncUserProfile(): ListenableFuture<Operation.State.SUCCESS> {
-    val listOfWorks = mutableListOf<OneTimeWorkRequest>()
-    CurrentUser.userTeams?.forEach {
-        listOfWorks.add(
-            getWork<TeamWorker>(
-                workDataOf(
-                    "type" to TeamWorkType.FETCH_TEAM.name,
-                    "teamLeaderId" to it.value["teamLeaderId"],
-                    "isUserTeam" to true
-                )
-            )
-        )
-    }
+
     val profileWork = getWork<ProfileWorker>(
         workDataOf("type" to ProfileWorkType.FETCH_PROFILE.name)
     )
-    val cleanupWork = getWork<TeamWorker>(
-        workDataOf("type" to TeamWorkType.CLEAN_OLD_TEAMS.name)
-    )
-    // TODO: [FIXME] @ ashank
-    return WorkManager.getInstance()
-        .beginWith(profileWork)/*.then(listOfWorks).then(cleanupWork)*/.enqueue().result
+
+    return WorkManager.getInstance().enqueue(profileWork).result
 }
 
 fun syncUserAndRun(block: () -> Unit) {

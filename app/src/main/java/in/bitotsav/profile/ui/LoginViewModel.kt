@@ -1,5 +1,6 @@
 package `in`.bitotsav.profile.ui
 
+import `in`.bitotsav.notification.utils.sendFcmTokenToServer
 import `in`.bitotsav.profile.utils.AuthException
 import `in`.bitotsav.profile.utils.loginAsync
 import `in`.bitotsav.profile.utils.syncUserAndRun
@@ -59,6 +60,7 @@ class LoginViewModel : BaseViewModel() {
                     ?: "Unknown Error!!"
                 Log.e("LoginViewModel.login", null, exception)
             } finally {
+//                TODO: @aksh Handle this
 //                loading.value = false
             }
         }
@@ -74,6 +76,7 @@ class LoginViewModel : BaseViewModel() {
     )
 
     private fun fetchUserAndLogin() = syncUserAndRun {
+        sendFcmTokenToServer()
         loading.value = false
         loggedIn.value = true
     }

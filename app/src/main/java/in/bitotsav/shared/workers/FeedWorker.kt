@@ -20,18 +20,17 @@ enum class FeedWorkType {
 class FeedWorker(context: Context, params: WorkerParameters): Worker(context, params), KoinComponent {
 
     override fun doWork(): Result {
-
-        return runBlocking {
-            try {
-                val type = inputData.getString("type")?.let { valueOf(it) }
-                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Invalid work type"))
+        try {
+            val type = inputData.getString("type")?.let { valueOf(it) }
+                ?: return Result.failure(workDataOf("Error" to "Invalid work type"))
+            runBlocking {
                 val latestFeedTimestamp = get<FeedRepository>().getLatestTimestamp()
                 get<FeedRepository>().fetchFeedsAfterAsync(latestFeedTimestamp).await()
-                return@runBlocking Result.success()
-            } catch (e: Exception) {
-                Log.d(TAG, e.message)
-                return@runBlocking Result.retry()
             }
+            return Result.success()
+        } catch (e: Exception) {
+            Log.d(TAG, e.message)
+            return Result.retry()
         }
     }
 }

@@ -20,33 +20,37 @@ enum class TeamWorkType {
     CLEAN_OLD_TEAMS
 }
 
-class TeamWorker(context: Context, params: WorkerParameters): Worker(context, params), KoinComponent {
+class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, params), KoinComponent {
 
     override fun doWork(): Result {
-
-        return runBlocking {
-            try {
-                val type = inputData.getString("type")?.let { valueOf(it) }
-                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Invalid work type"))
-                when (type) {
-                    FETCH_ALL_TEAMS -> get<ChampionshipTeamRepository>().fetchAllChampionshipTeamsAsync().await()
-                    FETCH_TEAM -> {
-                        val eventId = inputData.getInt("eventId", -1)
-                        if (eventId == -1)
-                            return@runBlocking Result.failure(workDataOf("Error" to "Event id is empty"))
-                        val teamLeaderId = inputData.getString("teamLeaderId")
-                            ?: return@runBlocking Result.failure(workDataOf("Error" to "Leader id is empty"))
-                        val isUserTeam = inputData.getBoolean("isUserTeam", false)
+        try {
+            val type = inputData.getString("type")?.let { valueOf(it) }
+                ?: return Result.failure(workDataOf("Error" to "Invalid work type"))
+            when (type) {
+                FETCH_ALL_TEAMS -> runBlocking {
+                    get<ChampionshipTeamRepository>().fetchAllChampionshipTeamsAsync().await()
+                }
+                FETCH_TEAM -> {
+                    val eventId = inputData.getInt("eventId", -1)
+                    if (eventId == -1)
+                        return Result.failure(workDataOf("Error" to "Event id is empty"))
+                    val teamLeaderId = inputData.getString("teamLeaderId")
+                        ?: return Result.failure(workDataOf("Error" to "Leader id is empty"))
+                    val isUserTeam = inputData.getBoolean("isUserTeam", false)
+                    runBlocking {
                         get<NonChampionshipTeamRepository>()
                             .fetchNonChampionshipTeamAsync(eventId, teamLeaderId, isUserTeam).await()
                     }
-                    CLEAN_OLD_TEAMS -> get<NonChampionshipTeamRepository>().cleanupUserTeams()
                 }
-                return@runBlocking Result.success()
-            } catch (e: Exception) {
-                Log.d(TAG, e.message)
-                return@runBlocking Result.retry()
+                CLEAN_OLD_TEAMS -> runBlocking {
+                    get<NonChampionshipTeamRepository>().cleanupUserTeams()
+                    Log.d(TAG, "Teams cleanup complete")
+                }
             }
+            return Result.success()
+        } catch (e: Exception) {
+            Log.d(TAG, e.message)
+            return Result.retry()
         }
     }
 }

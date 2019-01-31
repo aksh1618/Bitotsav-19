@@ -2,12 +2,11 @@ package `in`.bitotsav.shared.workers
 
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.utils.fetchProfileDetailsAsync
+import `in`.bitotsav.shared.network.getWork
 import `in`.bitotsav.shared.workers.ProfileWorkType.valueOf
 import android.content.Context
 import android.util.Log
-import androidx.work.Worker
-import androidx.work.WorkerParameters
-import androidx.work.workDataOf
+import androidx.work.*
 import kotlinx.coroutines.runBlocking
 
 private const val TAG = "ProfileWorker"
@@ -19,20 +18,35 @@ enum class ProfileWorkType {
 class ProfileWorker(context: Context, params: WorkerParameters): Worker(context, params) {
 
     override fun doWork(): Result {
+        try {
+            val type = inputData.getString("type")?.let { valueOf(it) }
+                ?: return Result.failure(workDataOf("Error" to "Invalid work type"))
+            val authToken = CurrentUser.authToken
+                ?: return Result.failure(workDataOf("Error" to "Auth token is empty"))
+            runBlocking { fetchProfileDetailsAsync(authToken).await() }
+            Log.d(TAG, "Fetching completed")
 
-        return runBlocking {
-            try {
-                val type = inputData.getString("type")?.let { valueOf(it) }
-                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Invalid work type"))
-                val authToken = CurrentUser.authToken
-                    ?: return@runBlocking Result.failure(workDataOf("Error" to "Auth token is empty"))
-                fetchProfileDetailsAsync(authToken).await()
-                Log.d("ProfileWorker", "Fetching completed")
-                return@runBlocking Result.success()
-            } catch (e: Exception) {
-                Log.d(TAG, e.message)
-                return@runBlocking Result.retry()
+            val fetchUserTeamWorks = mutableListOf<OneTimeWorkRequest>()
+            CurrentUser.userTeams?.forEach {
+                fetchUserTeamWorks.add(
+                    getWork<TeamWorker>(
+                        workDataOf(
+                            "type" to TeamWorkType.FETCH_TEAM.name,
+                            "eventId" to it.key.toInt(),
+                            "teamLeaderId" to it.value["leaderId"],
+                            "isUserTeam" to true
+                        )
+                    )
+                )
             }
+            val cleanupWork = getWork<TeamWorker>(
+                workDataOf("type" to TeamWorkType.CLEAN_OLD_TEAMS.name)
+            )
+            WorkManager.getInstance().beginWith(fetchUserTeamWorks)/*.then(cleanupWork)*/.enqueue()
+            return Result.success()
+        } catch (e: Exception) {
+            Log.d(TAG, e.message)
+            return Result.retry()
         }
     }
 }

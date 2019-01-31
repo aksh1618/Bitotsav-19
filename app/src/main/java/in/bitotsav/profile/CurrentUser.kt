@@ -61,11 +61,19 @@ object CurrentUser : KoinComponent {
 
     // userTeams: {'eventId':{'leaderId':id, 'leaderName':name}}
     // **Note: eventId is string
-//    TODO: Initialize on login
     var userTeams: Map<String, Map<String, String>>? = getFromPrefs("userTeams")?.let { toMapOfMap(it) }
         set(value) {
             value?.let {
                 putInPrefs("userTeams", fromMapOfMap(it))
+                field = value
+            }
+        }
+
+    //    [{id:{email, name}}]
+    var teamMembers: Map<String, Map<String, String>>? = getFromPrefs("teamMembers")?.let { toMapOfMap(it) }
+        set(value) {
+            value?.let {
+                putInPrefs("teamMembers", fromMapOfMap(it))
                 field = value
             }
         }
