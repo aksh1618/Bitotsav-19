@@ -1,4 +1,4 @@
-package `in`.bitotsav.shared.network
+package `in`.bitotsav.shared.utils
 
 import androidx.work.*
 import java.util.concurrent.TimeUnit

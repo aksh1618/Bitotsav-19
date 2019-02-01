@@ -2,9 +2,9 @@ package `in`.bitotsav.notification.utils
 
 import `in`.bitotsav.notification.fcm.api.FcmTokenService
 import `in`.bitotsav.profile.CurrentUser
-import `in`.bitotsav.profile.utils.AuthException
-import `in`.bitotsav.shared.network.NetworkException
-import `in`.bitotsav.shared.network.scheduleWork
+import `in`.bitotsav.shared.exceptions.NetworkException
+import `in`.bitotsav.shared.exceptions.NonRetryableException
+import `in`.bitotsav.shared.utils.scheduleWork
 import `in`.bitotsav.shared.workers.FcmTokenWorkType
 import `in`.bitotsav.shared.workers.FcmTokenWorker
 import android.util.Log
@@ -32,8 +32,8 @@ fun sendFcmTokenAsync(authToken: String, fcmToken: String): Deferred<Any> {
         } else {
             when (response.code()) {
 //                TODO("Delete local token for 403")
-                403 -> throw AuthException("Fcm token missing or user authentication failed")
-                409 -> throw Exception("Token already exists")
+                403 -> throw NonRetryableException("Fcm token missing or user authentication failed")
+                409 -> throw NonRetryableException("Token already exists")
                 else -> throw NetworkException("Unable to send token to server")
             }
         }
@@ -57,8 +57,8 @@ fun deleteFcmTokenAsync(authToken: String, fcmToken: String): Deferred<Any> {
         } else {
             when (response.code()) {
 //                TODO("Delete local token for 403")
-                403 -> throw AuthException("Fcm token missing or user authentication failed")
-                404 -> throw Exception("Token not found")
+                403 -> throw NonRetryableException("Fcm token missing or user authentication failed")
+                404 -> throw NonRetryableException("Token not found")
                 else -> throw NetworkException("Unable to send token to server")
             }
         }

@@ -1,5 +1,6 @@
 package `in`.bitotsav.shared.workers
 
+import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.workers.TeamWorkType.*
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
@@ -48,6 +49,9 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
                 }
             }
             return Result.success()
+        } catch (e: NonRetryableException) {
+            Log.d(TAG, e.message)
+            return Result.failure()
         } catch (e: Exception) {
             Log.d(TAG, e.message)
             return Result.retry()

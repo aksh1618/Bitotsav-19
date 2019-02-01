@@ -2,9 +2,9 @@ package `in`.bitotsav.feed.data
 
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.feed.api.FeedService
-import `in`.bitotsav.shared.data.DatabaseException
 import `in`.bitotsav.shared.data.Repository
-import `in`.bitotsav.shared.network.NetworkException
+import `in`.bitotsav.shared.exceptions.DatabaseException
+import `in`.bitotsav.shared.exceptions.NetworkException
 import `in`.bitotsav.shared.utils.forEachParallel
 import android.util.Log
 import androidx.annotation.WorkerThread

@@ -3,7 +3,8 @@ package `in`.bitotsav.events.data
 import `in`.bitotsav.R
 import `in`.bitotsav.events.api.EventService
 import `in`.bitotsav.shared.data.Repository
-import `in`.bitotsav.shared.network.NetworkException
+import `in`.bitotsav.shared.exceptions.NetworkException
+import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.forEachParallel
 import android.content.Context
 import android.util.Log
@@ -78,7 +79,7 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
                 Log.d(TAG, "Inserted $eventId into DB")
             } else {
                 when (response.code()) {
-                    404 -> throw NetworkException("Event:$eventId not found")
+                    404 -> throw NonRetryableException("Event:$eventId not found")
                     else -> throw NetworkException("Error fetching Event:$eventId from the server")
                 }
             }

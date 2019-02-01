@@ -4,6 +4,8 @@ import `in`.bitotsav.database.AppDatabase
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.data.Repository
+import `in`.bitotsav.shared.exceptions.NetworkException
+import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.teams.api.NonChampionshipTeamService
 import android.util.Log
 import androidx.annotation.WorkerThread
@@ -118,9 +120,11 @@ class NonChampionshipTeamRepository(
                 Log.d(TAG, "Team inserted into DB")
             } else {
                 when (response.code()) {
-                    404 -> throw Exception("Team not found")
-                    403 -> throw Exception("Event id or team leader id not found")
-                    else -> throw Exception("Failed to retrieve {$eventId, $teamLeaderId}. Code: ${response.code()}")
+                    404 -> throw NonRetryableException("Team not found")
+                    403 -> throw NonRetryableException("Event id or team leader id not found")
+                    else -> throw NetworkException(
+                        "Failed to retrieve {$eventId, $teamLeaderId}. Code: ${response.code()}"
+                    )
                 }
             }
         }

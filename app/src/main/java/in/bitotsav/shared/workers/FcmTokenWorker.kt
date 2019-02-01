@@ -2,6 +2,7 @@ package `in`.bitotsav.shared.workers
 
 import `in`.bitotsav.notification.utils.deleteFcmTokenAsync
 import `in`.bitotsav.notification.utils.sendFcmTokenAsync
+import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.workers.FcmTokenWorkType.valueOf
 import android.content.Context
 import android.util.Log
@@ -32,6 +33,9 @@ class FcmTokenWorker(context: Context, params: WorkerParameters): Worker(context
                 FcmTokenWorkType.DELETE_TOKEN -> runBlocking { deleteFcmTokenAsync(authToken, fcmToken).await() }
             }
             return Result.success()
+        } catch (e: NonRetryableException) {
+            Log.d(TAG, e.message)
+            return Result.failure()
         } catch (e: Exception) {
             Log.d(TAG, e.message)
             return Result.retry()

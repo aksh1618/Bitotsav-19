@@ -6,6 +6,7 @@ import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
 import `in`.bitotsav.profile.CurrentUser
+import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.forEachParallel
 import `in`.bitotsav.shared.workers.ResultWorkType.valueOf
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
@@ -51,6 +52,9 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
                 }
             }
             return Result.success()
+        } catch (e: NonRetryableException) {
+            Log.d(TAG, e.message)
+            return Result.failure()
         } catch (e: Exception) {
             Log.d(TAG, e.message)
             return Result.retry()
@@ -92,6 +96,7 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
             }
             position?.let {
                 val eventName = runBlocking { get<EventRepository>().getNameById(event.id) }
+                    ?: throw NonRetryableException("Event name not found for: ${event.id}")
                 val title = "Congratulations!"
                 val content = "Your team secured $position position in $eventName."
                 displayNotification(

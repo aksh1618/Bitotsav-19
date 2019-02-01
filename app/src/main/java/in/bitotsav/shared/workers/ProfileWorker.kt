@@ -1,8 +1,10 @@
 package `in`.bitotsav.shared.workers
 
 import `in`.bitotsav.profile.CurrentUser
+import `in`.bitotsav.profile.utils.AuthException
 import `in`.bitotsav.profile.utils.fetchProfileDetailsAsync
-import `in`.bitotsav.shared.network.getWork
+import `in`.bitotsav.shared.exceptions.NonRetryableException
+import `in`.bitotsav.shared.utils.getWork
 import `in`.bitotsav.shared.workers.ProfileWorkType.valueOf
 import android.content.Context
 import android.util.Log
@@ -44,6 +46,13 @@ class ProfileWorker(context: Context, params: WorkerParameters): Worker(context,
             )
             WorkManager.getInstance().beginWith(fetchUserTeamWorks)/*.then(cleanupWork)*/.enqueue()
             return Result.success()
+        } catch (e: NonRetryableException) {
+            Log.d(TAG, e.message)
+            return Result.failure()
+        } catch (e: AuthException) {
+            Log.d(TAG, e.message)
+            // TODO: Delete token
+            return Result.failure()
         } catch (e: Exception) {
             Log.d(TAG, e.message)
             return Result.retry()

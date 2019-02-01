@@ -2,7 +2,7 @@ package `in`.bitotsav.profile.utils
 
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.api.AuthenticationService
-import `in`.bitotsav.shared.network.NetworkException
+import `in`.bitotsav.shared.exceptions.NetworkException
 import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred

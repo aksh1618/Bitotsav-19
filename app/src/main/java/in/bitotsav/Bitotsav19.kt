@@ -6,7 +6,7 @@ import `in`.bitotsav.koin.retrofitModule
 import `in`.bitotsav.koin.sharedPrefsModule
 import `in`.bitotsav.koin.viewModelsModule
 import `in`.bitotsav.notification.utils.createNotificationChannels
-import `in`.bitotsav.shared.network.getWork
+import `in`.bitotsav.shared.utils.getWork
 import `in`.bitotsav.shared.workers.EventWorkType
 import `in`.bitotsav.shared.workers.EventWorker
 import `in`.bitotsav.shared.workers.ResultWorkType
@@ -55,8 +55,10 @@ class Bitotsav19 : Application() {
 
         get<EventRepository>().getEventsFromLocalJson()
         // TODO: Remove this.
-        val eventWork = getWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
-        val winningTeamsWork = getWork<ResultWorker>(workDataOf("type" to ResultWorkType.WINNING_TEAMS.name))
+        val eventWork =
+            getWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
+        val winningTeamsWork =
+            getWork<ResultWorker>(workDataOf("type" to ResultWorkType.WINNING_TEAMS.name))
         WorkManager.getInstance().beginWith(eventWork).then(winningTeamsWork).enqueue()
     }
 }

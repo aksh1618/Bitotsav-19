@@ -1,6 +1,7 @@
 package `in`.bitotsav.shared.workers
 
 import `in`.bitotsav.events.data.EventRepository
+import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.workers.EventWorkType.*
 import android.content.Context
 import android.util.Log
@@ -35,6 +36,9 @@ class EventWorker(context: Context, params: WorkerParameters): Worker(context, p
                 }
             }
             return Result.success()
+        } catch (e: NonRetryableException) {
+            Log.d(TAG, e.message)
+            return Result.failure()
         } catch (e: Exception) {
             Log.d(TAG, e.message)
             return Result.retry()

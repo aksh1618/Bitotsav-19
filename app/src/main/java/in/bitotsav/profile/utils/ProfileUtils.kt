@@ -4,7 +4,9 @@ import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.api.ProfileService
 import `in`.bitotsav.profile.data.User
 import `in`.bitotsav.profile.data.UserRepository
-import `in`.bitotsav.shared.network.getWork
+import `in`.bitotsav.shared.exceptions.NetworkException
+import `in`.bitotsav.shared.exceptions.NonRetryableException
+import `in`.bitotsav.shared.utils.getWork
 import `in`.bitotsav.shared.workers.ProfileWorkType
 import `in`.bitotsav.shared.workers.ProfileWorker
 import android.os.Handler
@@ -46,7 +48,7 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
             val bitotsavId = response.body()?.get("id")?.toString()
             var teamName = response.body()?.get("teamName")?.toString()
             if (name == null || email == null || bitotsavId == null || teamName == null) {
-                throw Exception("API not functioning correctly. Null fields")
+                throw NonRetryableException("API not functioning correctly. Null fields")
             }
             if ("-1" == teamName) teamName = null
             CurrentUser.name = name
@@ -85,8 +87,8 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
         } else {
             when (response.code()) {
                 403 -> throw AuthException("Authentication error")
-                404 -> throw Exception("Participant not found")
-                else -> throw Exception("Unable to fetch the participant")
+                404 -> throw NonRetryableException("Participant not found")
+                else -> throw NetworkException("Unable to fetch the participant")
             }
         }
     }

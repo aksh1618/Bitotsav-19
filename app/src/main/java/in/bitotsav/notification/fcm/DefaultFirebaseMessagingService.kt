@@ -9,8 +9,8 @@ import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
 import `in`.bitotsav.notification.utils.sendFcmTokenToServer
 import `in`.bitotsav.profile.CurrentUser
-import `in`.bitotsav.shared.network.getWork
-import `in`.bitotsav.shared.network.scheduleWork
+import `in`.bitotsav.shared.utils.getWork
+import `in`.bitotsav.shared.utils.scheduleWork
 import `in`.bitotsav.shared.workers.*
 import android.content.Intent
 import android.util.Log

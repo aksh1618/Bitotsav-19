@@ -1,7 +1,7 @@
 package `in`.bitotsav.teams.championship.data
 
 import `in`.bitotsav.shared.data.Repository
-import `in`.bitotsav.shared.network.NetworkException
+import `in`.bitotsav.shared.exceptions.NetworkException
 import `in`.bitotsav.teams.api.ChampionshipTeamService
 import android.util.Log
 import androidx.annotation.WorkerThread
