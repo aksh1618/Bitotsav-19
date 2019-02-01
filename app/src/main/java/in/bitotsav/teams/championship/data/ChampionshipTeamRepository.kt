@@ -34,11 +34,31 @@ class ChampionshipTeamRepository(private val championshipTeamDao: ChampionshipTe
             val response = request.await()
             if (response.code() == 200) {
                 val championshipTeams = response.body() ?: throw NetworkException("Response body is empty")
-                insert(*championshipTeams.toTypedArray())
+                val teamsByRank = getChampionshipTeamsByRank(championshipTeams)
+                insert(*teamsByRank.toTypedArray())
                 Log.d(TAG, "Inserted all championship teams into DB")
             } else {
                 throw NetworkException("Fetch all championship teams failed. Code: ${response.code()}")
             }
         }
+    }
+
+    private fun getChampionshipTeamsByRank(teams: List<ChampionshipTeam>): List<ChampionshipTeam> {
+        val sortedTeams = teams.sortedByDescending { it.totalScore }
+        var rank = 1
+        var jump = 0
+        var previousScore = sortedTeams.first().totalScore
+        sortedTeams.forEach {
+            if (it.totalScore == previousScore) {
+                it.rank = rank
+                ++jump
+            } else {
+                it.rank = rank + jump
+                rank = it.rank
+                jump = 1
+            }
+            previousScore = it.totalScore
+        }
+        return sortedTeams
     }
 }

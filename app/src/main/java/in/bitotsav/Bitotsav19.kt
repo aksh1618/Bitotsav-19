@@ -1,5 +1,6 @@
 package `in`.bitotsav
 
+import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.koin.repositoriesModule
 import `in`.bitotsav.koin.retrofitModule
 import `in`.bitotsav.koin.sharedPrefsModule
@@ -13,6 +14,7 @@ import android.os.Build
 import android.util.Log
 import androidx.work.workDataOf
 import com.google.firebase.messaging.FirebaseMessaging
+import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
@@ -39,9 +41,6 @@ class Bitotsav19 : Application() {
             createNotificationChannels(this)
         }
 
-        // TODO: Remove this.
-        scheduleWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
-
         startKoin {
             androidContext(this@Bitotsav19)
             // Enable logging, log.INFO by default
@@ -50,5 +49,9 @@ class Bitotsav19 : Application() {
             androidFileProperties()
             modules(repositoriesModule, retrofitModule, viewModelsModule, sharedPrefsModule)
         }
+
+        get<EventRepository>().getEventsFromLocalJson()
+        // TODO: Remove this.
+        scheduleWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
     }
 }

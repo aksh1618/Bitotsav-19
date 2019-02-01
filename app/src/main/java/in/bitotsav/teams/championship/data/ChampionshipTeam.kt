@@ -9,5 +9,6 @@ data class ChampionshipTeam(
     @PrimaryKey @SerializedName("teamName") val name: String,
     @SerializedName("teamMembers") val members: Map<String, String>,
     @SerializedName("teamPoints") val totalScore: Int
-// TODO: Get and insert rank here
-)
+) {
+    var rank = 1
+}

@@ -1,15 +1,19 @@
 package `in`.bitotsav.events.data
 
+import `in`.bitotsav.R
 import `in`.bitotsav.events.api.EventService
 import `in`.bitotsav.shared.data.Repository
 import `in`.bitotsav.shared.network.NetworkException
 import `in`.bitotsav.shared.utils.forEachParallel
+import android.content.Context
 import android.util.Log
 import androidx.annotation.WorkerThread
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import org.koin.core.context.GlobalContext.get
 
 private const val TAG = "EventRepository"
 
@@ -42,6 +46,17 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
 
     @WorkerThread
     override suspend fun insert(vararg items: Event) = eventDao.insert(*items)
+
+    fun getEventsFromLocalJson() {
+        val eventsJsonString: String =
+            get().koin.get<Context>().resources.openRawResource(R.raw.events_init).bufferedReader()
+                .use { it.readText() }
+        val events = Gson().fromJson(eventsJsonString, Array<Event>::class.java)
+        CoroutineScope(Dispatchers.IO).async {
+            insert(*events)
+            Log.d(TAG, "Inserted events into DB from local json file.")
+        }
+    }
 
     //    POST - /getEventById - body: {eventId}
 //    502 - Server error

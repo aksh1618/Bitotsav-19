@@ -17,8 +17,6 @@ data class User(
     val championshipTeam: String? = null
 ) : KoinComponent {
     var score: Int = runBlocking { championshipTeam?.let { get<ChampionshipTeamRepository>().getScoreByName(it) } ?: 0 }
-    // TODO: Get rank
-    var rank: Int = 0
     // [{"eventId":{name:"eventName",rank:"rank"**}}]  Note: All values are strings
     var teams: Map<String, Map<String, String>> = getUserTeams()
     //    [{id:{email, name}}]
