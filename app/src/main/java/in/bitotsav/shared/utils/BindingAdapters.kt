@@ -1,6 +1,5 @@
 package `in`.bitotsav.shared.utils
 
-import `in`.bitotsav.profile.ui.RegistrationViewModel
 import android.annotation.SuppressLint
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout
@@ -29,15 +28,5 @@ fun setImportantForAutofill(view: TextInputLayout, isImportant: Boolean) {
             .onFalse {
                 view.importantForAutofill = TextInputLayout.IMPORTANT_FOR_AUTOFILL_YES
             }
-    }
-}
-
-@BindingAdapter("errorTextLive")
-fun setErrorTextLive(
-    view: TextInputLayout,
-    liveDataWithErrorText: RegistrationViewModel.MutableLiveDataWithErrorText<String>
-) {
-    if (liveDataWithErrorText.errorText.value.isNullOrEmpty().not()) {
-        view.error = liveDataWithErrorText.errorText.getValue
     }
 }

@@ -12,6 +12,10 @@
             name="viewModel"
             type="in.bitotsav.profile.ui.RegistrationViewModel" />
 
+        <variable
+            name="fields"
+            type="in.bitotsav.profile.data.RegistrationFields" />
+
     </data>
 
     <LinearLayout
@@ -19,11 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="step 2"/>
 
         <!-- TODO: Do something about hint color on focus -->
 

@@ -14,6 +14,10 @@
             name="viewModel"
             type="in.bitotsav.profile.ui.RegistrationViewModel" />
 
+        <variable
+            name="fields"
+            type="in.bitotsav.profile.data.RegistrationFields" />
+
     </data>
 
     <LinearLayout
@@ -29,7 +33,7 @@
             app:color="@{viewModel.mColor}"
             app:hint="@{@string/registration_label_name}"
             app:inputType="@{InputType.TYPE_TEXT_VARIATION_PERSON_NAME}"
-            app:target="@{viewModel.name}" />
+            app:target="@{fields.name}" />
 
         <include
             android:id="@+id/phone"
@@ -38,7 +42,7 @@
             app:color="@{viewModel.mColor}"
             app:hint="@{@string/registration_label_phone}"
             app:inputType="@{InputType.TYPE_CLASS_PHONE}"
-            app:target="@{viewModel.phone}" />
+            app:target="@{fields.phone}" />
 
         <include
             android:id="@+id/email"
@@ -47,7 +51,7 @@
             app:color="@{viewModel.mColor}"
             app:hint="@{@string/registration_label_email}"
             app:inputType="@{InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS}"
-            app:target="@{viewModel.email}" />
+            app:target="@{fields.email}" />
 
         <!-- TODO: Ensure correct input type -->
         <include
@@ -57,7 +61,7 @@
             app:color="@{viewModel.mColor}"
             app:hint="@{@string/registration_label_password}"
             app:inputType="@{InputType.TYPE_TEXT_VARIATION_PASSWORD}"
-            app:target="@{viewModel.password}" />
+            app:target="@{fields.password}" />
 
         <!-- TODO: Ensure correct input type -->
         <include
@@ -67,7 +71,7 @@
             app:color="@{viewModel.mColor}"
             app:hint="@{@string/registration_label_password_again}"
             app:inputType="@{InputType.TYPE_TEXT_VARIATION_PASSWORD}"
-            app:target="@{viewModel.passwordAgain}" />
+            app:target="@{fields.passwordAgain}" />
 
         <include
             android:id="@+id/next"

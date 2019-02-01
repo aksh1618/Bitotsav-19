@@ -6,9 +6,6 @@
 
     <data>
 
-        <import type="in.bitotsav.profile.ui.RegistrationViewModel.MutableLiveDataWithErrorText"
-            alias="MutableLiveDataWithErrorText"/>
-
         <variable
             name="color"
             type="int" />
@@ -31,7 +28,7 @@
 
         <variable
             name="target"
-            type="in.bitotsav.profile.ui.RegistrationViewModel.MutableLiveDataWithErrorText&lt;String&gt;" />
+            type="in.bitotsav.profile.utils.MutableLiveDataTextWithValidation" />
 
     </data>
 
@@ -40,12 +37,13 @@
         style="@style/Widget.Bitotsav.TextInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:autofillHints="@{autofillHints}"
         android:hint="@{hint}"
         android:importantForAutofill="@{``.equals(autofillHints)}"
         app:boxStrokeColor="@{color}"
         app:errorEnabled="true"
-        app:errorTextLive="@{target}">
+        app:errorText="@{target.errorText}">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText"
@@ -55,7 +53,7 @@
             android:backgroundTint="@{color}"
             android:ems="10"
             android:inputType="@{inputType}"
-            android:text="@={target}" />
+            android:text="@={target.text}" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </layout>

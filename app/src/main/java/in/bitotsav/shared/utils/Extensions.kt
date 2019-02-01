@@ -35,3 +35,8 @@ fun Boolean.onFalse(block: () -> Unit): Boolean {
 }
 
 fun Boolean.Companion.or(vararg booleans: Boolean) = booleans.any { it }
+
+fun String.isLong() = this.toLongOrNull() != null
+
+fun String.isProperEmail() =
+    android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()

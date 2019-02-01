@@ -1,5 +1,16 @@
 package `in`.bitotsav.profile.ui
 
+import `in`.bitotsav.profile.data.RegistrationFields.college
+import `in`.bitotsav.profile.data.RegistrationFields.email
+import `in`.bitotsav.profile.data.RegistrationFields.emailOtp
+import `in`.bitotsav.profile.data.RegistrationFields.gender
+import `in`.bitotsav.profile.data.RegistrationFields.name
+import `in`.bitotsav.profile.data.RegistrationFields.password
+import `in`.bitotsav.profile.data.RegistrationFields.passwordAgain
+import `in`.bitotsav.profile.data.RegistrationFields.phone
+import `in`.bitotsav.profile.data.RegistrationFields.phoneOtp
+import `in`.bitotsav.profile.data.RegistrationFields.rollNo
+import `in`.bitotsav.profile.data.RegistrationFields.source
 import `in`.bitotsav.profile.utils.AuthException
 import `in`.bitotsav.profile.utils.registerAsync
 import `in`.bitotsav.shared.network.NetworkException
@@ -11,6 +22,11 @@ import kotlinx.coroutines.launch
 
 class RegistrationViewModel : BaseViewModel("RegistrationViewModel") {
 
+    val currentStep = MutableLiveData<Int>().apply { value = 1 }
+    val registrationError = MutableLiveData<String>().apply { value = "" }
+    val waiting = MutableLiveData<Boolean>().apply { value = false }
+    val recaptchaResponse = MutableLiveData<String>().apply { value = "" }
+
     // Common
     private fun checkFieldsEmpty() =
         when (currentStep.value) {
@@ -20,7 +36,7 @@ class RegistrationViewModel : BaseViewModel("RegistrationViewModel") {
         }
             // Not using sequence as all errors need to be set.
             .map {
-                it.value.isEmpty().onTrue {
+                it.text.value.isEmpty().onTrue {
                     it.errorText.value = "Required"
                 }
             }.any { it }
@@ -30,11 +46,11 @@ class RegistrationViewModel : BaseViewModel("RegistrationViewModel") {
         scope.launch {
             try {
                 registerAsync(
-                    name.value,
-                    phone.value,
-                    email.value,
-                    password.value,
-                    recaptchaResponse.value
+                    name.text.value,
+                    phone.text.value,
+                    email.text.value,
+                    password.text.value,
+                    recaptchaResponse.value!!
                 ).await()
                 currentStep.value = 2
             } catch (e: NetworkException) {
@@ -66,43 +82,4 @@ class RegistrationViewModel : BaseViewModel("RegistrationViewModel") {
         toast("Nope")
     }
 
-    // Common
-    val currentStep = MutableLiveData<Int>().apply { value = 1 }
-    val registrationError = MutableLiveData<String>().apply { value = "" }
-    val waiting = MutableLiveData<Boolean>().apply { value = false }
-
-    // Step One
-    // Vars
-//    val name = MutableLiveData<Pair<String,String>>()
-    val name = MutableLiveDataWithErrorText<String>("")
-    val phone = MutableLiveDataWithErrorText<String>("")
-    val email = MutableLiveDataWithErrorText<String>("")
-    // Min 6 chars
-    val password = MutableLiveDataWithErrorText<String>("")
-    // Min 6 chars
-    val passwordAgain = MutableLiveDataWithErrorText<String>("")
-    val recaptchaResponse = MutableLiveDataWithErrorText<String>("")
-
-    // Step Two
-    // 6 digitspublic void setTarget(@Nullable in.bitotsav.profile.ui.Registr
-    val phoneOtp = MutableLiveDataWithErrorText<String>("")
-    // 6 digits
-    val emailOtp = MutableLiveDataWithErrorText<String>("")
-
-    // Step Three
-    // Male/Female/Other/Prefer not to say
-    val gender = MutableLiveDataWithErrorText<String>("")
-    val college = MutableLiveDataWithErrorText<String>("")
-    val rollNo = MutableLiveDataWithErrorText<String>("")
-    // Friends/Newspaper/Online/Others
-    val source = MutableLiveDataWithErrorText<String>("")
-
-    class MutableLiveDataWithErrorText<T>(
-        private val defaultValue: T
-    ) : MutableLiveData<T>() {
-        val errorText = MutableLiveData<String>().apply { value = "" }
-        override fun getValue(): T {
-            return super.getValue() ?: defaultValue
-        }
-    }
 }

@@ -3,6 +3,7 @@ package `in`.bitotsav.profile.ui
 import `in`.bitotsav.databinding.FragmentRegistrationStepOneBinding
 import `in`.bitotsav.databinding.FragmentRegistrationStepThreeBinding
 import `in`.bitotsav.databinding.FragmentRegistrationStepTwoBinding
+import `in`.bitotsav.profile.data.RegistrationFields
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
@@ -16,17 +17,14 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.safetynet.SafetyNet
-import com.google.android.gms.safetynet.SafetyNetApi
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
 import org.koin.androidx.viewmodel.ext.sharedViewModel
-import java.util.concurrent.Executor
 
 class RegistrationFragment : Fragment() {
 
     companion object {
         const val TAG = "RegistrationFragment"
     }
+
     private val registrationViewModel by sharedViewModel<RegistrationViewModel>()
 //    private val args by navArgs<RegistrationFragmentArgs>()
 //    private val curStep = args.registrationStepNumber
@@ -37,24 +35,36 @@ class RegistrationFragment : Fragment() {
         return when (registrationViewModel.currentStep.value) {
             2 -> FragmentRegistrationStepTwoBinding
                 .inflate(inflater, container, false)
-                .apply { viewModel = registrationViewModel; setStepTwoObservers() }
+                .apply {
+                    lifecycleOwner = viewLifecycleOwner
+                    fields = RegistrationFields
+                    viewModel = registrationViewModel
+                    setStepTwoObservers()
+                }
             3 -> FragmentRegistrationStepThreeBinding
                 .inflate(inflater, container, false)
-                .apply { viewModel = registrationViewModel; setStepThreeObservers() }
+                .apply {
+                    lifecycleOwner = viewLifecycleOwner
+                    fields = RegistrationFields
+                    viewModel = registrationViewModel
+                    setStepThreeObservers()
+                }
             else -> FragmentRegistrationStepOneBinding
                 .inflate(inflater, container, false)
-                .apply { viewModel = registrationViewModel; setStepOneObservers() }
+                .apply {
+                    lifecycleOwner = viewLifecycleOwner
+                    fields = RegistrationFields
+                    viewModel = registrationViewModel
+                    setStepOneObservers()
+                }
         }
-            .apply {
-                lifecycleOwner = viewLifecycleOwner
-            }
             .root
     }
 
     private fun setStepOneObservers() {
         with(registrationViewModel) {
 
-            waiting.setObserver{ isWaiting ->
+            waiting.setObserver { isWaiting ->
                 if (isWaiting) {
                     Log.d(TAG, "Waiting for captcha...")
                     fetchCaptchaResponseToken()
@@ -62,7 +72,7 @@ class RegistrationFragment : Fragment() {
             }
 
             recaptchaResponse.setObserver { token ->
-                if (token.isNotEmpty()) {
+                if (token.isNullOrEmpty().not()) {
                     completeStepOne()
                 }
             }
@@ -74,9 +84,6 @@ class RegistrationFragment : Fragment() {
                     )
                 }
             }
-
-            phone.setObserver { Log.d(TAG, "observed phone: $it") }
-            phone.errorText.setObserver { Log.d(TAG, "observed phone error: $it") }
         }
     }
 

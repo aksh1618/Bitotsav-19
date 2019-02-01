@@ -3,8 +3,8 @@ package `in`.bitotsav.profile.ui
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentLoginBinding
 import `in`.bitotsav.profile.CurrentUser
-import `in`.bitotsav.profile.utils.isProperEmail
 import `in`.bitotsav.shared.utils.getColorCompat
+import `in`.bitotsav.shared.utils.isProperEmail
 import `in`.bitotsav.shared.utils.runOnMinApi
 import `in`.bitotsav.shared.utils.toast
 import android.annotation.SuppressLint
