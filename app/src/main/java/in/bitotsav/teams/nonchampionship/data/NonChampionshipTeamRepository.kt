@@ -23,8 +23,7 @@ class NonChampionshipTeamRepository(
 
     override fun getAll(): LiveData<List<NonChampionshipTeam>> = nonChampionshipTeamDao.getAll()
 
-    // TODO: @ aksh Test this
-    fun getAllUserTeams(): LiveData<List<NonChampionshipTeam>> = nonChampionshipTeamDao.getAllUserTeams()
+    fun getAllUserTeams(): List<NonChampionshipTeam>? = nonChampionshipTeamDao.getAllUserTeams()
 
     @WorkerThread
     suspend fun getById(eventId: Int, teamLeaderId: String): NonChampionshipTeam? =

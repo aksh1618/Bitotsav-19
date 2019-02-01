@@ -6,12 +6,15 @@ import `in`.bitotsav.koin.retrofitModule
 import `in`.bitotsav.koin.sharedPrefsModule
 import `in`.bitotsav.koin.viewModelsModule
 import `in`.bitotsav.notification.utils.createNotificationChannels
-import `in`.bitotsav.shared.network.scheduleWork
+import `in`.bitotsav.shared.network.getWork
 import `in`.bitotsav.shared.workers.EventWorkType
 import `in`.bitotsav.shared.workers.EventWorker
+import `in`.bitotsav.shared.workers.ResultWorkType
+import `in`.bitotsav.shared.workers.ResultWorker
 import android.app.Application
 import android.os.Build
 import android.util.Log
+import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.android.ext.android.get
@@ -52,6 +55,8 @@ class Bitotsav19 : Application() {
 
         get<EventRepository>().getEventsFromLocalJson()
         // TODO: Remove this.
-        scheduleWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
+        val eventWork = getWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
+        val winningTeamsWork = getWork<ResultWorker>(workDataOf("type" to ResultWorkType.WINNING_TEAMS.name))
+        WorkManager.getInstance().beginWith(eventWork).then(winningTeamsWork).enqueue()
     }
 }

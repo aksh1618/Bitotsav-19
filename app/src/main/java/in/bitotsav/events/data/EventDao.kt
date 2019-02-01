@@ -11,6 +11,9 @@ interface EventDao {
     @Query("SELECT * FROM event")
     fun getAll(): LiveData<List<Event>>
 
+    @Query("SELECT * FROM event")
+    fun getAllEvents(): List<Event>
+
     @Query("SELECT DISTINCT category FROM event ")
     fun getAllCategories(): List<String>
 

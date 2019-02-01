@@ -24,7 +24,7 @@ data class User(
 
     private fun getUserTeams(): Map<String, Map<String, String>> {
         val userTeams = mutableMapOf<String, Map<String, String>>()
-        val teams = runBlocking { get<NonChampionshipTeamRepository>().getAllUserTeams().value }
+        val teams = runBlocking { get<NonChampionshipTeamRepository>().getAllUserTeams() }
         teams?.forEach {
             userTeams[it.eventId.toString()] = mapOf(
                 "name" to it.name,

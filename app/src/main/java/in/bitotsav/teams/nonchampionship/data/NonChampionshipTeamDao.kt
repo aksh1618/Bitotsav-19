@@ -15,10 +15,9 @@ interface NonChampionshipTeamDao {
         """
         SELECT DISTINCT nonchampionshipteam.* FROM nonchampionshipteam
         INNER JOIN event ON nonchampionshipteam.eventId = event.id WHERE nonchampionshipteam.isUserTeam == 1
-        GROUP BY nonchampionshipteam.eventId
-        ORDER BY event.id DESC, event.timestamp DESC"""
+        ORDER BY event.timestamp DESC"""
     )
-    fun getAllUserTeams(): LiveData<List<NonChampionshipTeam>>
+    fun getAllUserTeams(): List<NonChampionshipTeam>?
 
     @Query("SELECT * FROM nonchampionshipteam WHERE eventId = :eventId and teamLeaderId = :teamLeaderId")
     fun getById(eventId: Int, teamLeaderId: String): NonChampionshipTeam?
