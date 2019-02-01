@@ -1,20 +1,43 @@
 <resources>
     <string name="app_name">Bitotsav \'19</string>
 
+    <!-- Home -->
     <string name="schedule_title">Schedule</string>
     <string name="info_title">Info</string>
     <string name="feed_title">Updates</string>
     <string name="profile_title">Profile</string>
 
-    <!-- Schedule Fragment -->
-    <string name="filters_sheet_label">Filters</string>
-    <string name="filters_clear_all_label">Clear All</string>
-    <string name="filters_starred_label">Starred</string>
-    <string name="login_email_label">Email</string>
-    <string name="login_password_label">Password</string>
-    <string name="login_button_label">Login</string>
-    <string name="register_button_label">Register</string>
+    <!-- Schedule -->
+    <string name="filters_label_sheet_title">Filters</string>
+    <string name="filters_label_clear_all">Clear All</string>
+    <string name="filters_label_starred">Starred</string>
 
-    <string name="logout_button_label">Logout</string>
+    <!-- Login -->
+    <string name="login_label_email">Email</string>
+    <string name="login_label_password">Password</string>
+    <string name="login_label_login">Login</string>
+    <string name="login_label_register">Register</string>
+
+    <!-- Profile -->
+    <string name="profile_label_logout">Logout</string>
+
+    <!-- Registration -->
+    <string name="registration_label_next">Continue</string>
+    <!-- Step 1 -->
+    <string name="registration_label_name">Name</string>
+    <string name="registration_label_email">Email</string>
+    <string name="registration_label_phone">Phone No</string>
+    <string name="registration_label_password">Password</string>
+    <string name="registration_label_password_again">Repeat Password</string>
+
+    <!-- Step 2 -->
+    <string name="registration_label_phone_otp">Phone</string>
+    <string name="registration_label_email_otp">Email</string>
+
+    <!-- Step 3 -->
+    <string name="registration_label_gender">Gender</string>
+    <string name="registration_label_college">College</string>
+    <string name="registration_label_rollNo">Roll No</string>
+    <string name="registration_label_source">Source</string>
 
 </resources>

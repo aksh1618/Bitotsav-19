@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="color"
+            type="int" />
+
+        <variable
+            name="loading"
+            type="boolean" />
+
+        <variable
+            name="label"
+            type="String" />
+
+        <variable
+            name="errorText"
+            type="androidx.lifecycle.LiveData&lt;String&gt;" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@{color}"
+            android:ems="10"
+            android:filterTouchesWhenObscured="true"
+            android:onClick="@{listener}"
+            android:text="@{label}"
+            android:textColor="@color/colorWhite"
+            android:visibility="@{loading ? View.GONE: View.VISIBLE}"
+            tools:text="Click Me!"
+            tools:backgroundTint="@color/colorRed" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:padding="8dp"
+            android:progressTint="@{color}"
+            android:visibility="@{loading ? View.VISIBLE: View.GONE}"
+            tools:progressTint="@color/colorRed" />
+
+        <TextView
+            android:id="@+id/error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="@{errorText}"
+            android:textColor="@color/errorTextColor"
+            android:textStyle="italic"
+            android:visibility="@{``.equals(errorText) ? View.GONE : View.VISIBLE}"
+            tools:text="Error Message" />
+
+    </LinearLayout>
+
+</layout>

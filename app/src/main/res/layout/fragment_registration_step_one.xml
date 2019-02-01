@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".profile.ui.RegistrationFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.InputType" />
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.profile.ui.RegistrationViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/name"
+            layout="@layout/include_edit_text"
+            app:autofillHints="@{View.AUTOFILL_HINT_NAME}"
+            app:color="@{viewModel.mColor}"
+            app:hint="@{@string/registration_label_name}"
+            app:inputType="@{InputType.TYPE_TEXT_VARIATION_PERSON_NAME}"
+            app:target="@{viewModel.name}" />
+
+        <include
+            android:id="@+id/phone"
+            layout="@layout/include_edit_text"
+            app:autofillHints="@{View.AUTOFILL_HINT_PHONE}"
+            app:color="@{viewModel.mColor}"
+            app:hint="@{@string/registration_label_phone}"
+            app:inputType="@{InputType.TYPE_CLASS_PHONE}"
+            app:target="@{viewModel.phone}" />
+
+        <include
+            android:id="@+id/email"
+            layout="@layout/include_edit_text"
+            app:autofillHints="@{View.AUTOFILL_HINT_EMAIL_ADDRESS}"
+            app:color="@{viewModel.mColor}"
+            app:hint="@{@string/registration_label_email}"
+            app:inputType="@{InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS}"
+            app:target="@{viewModel.email}" />
+
+        <!-- TODO: Ensure correct input type -->
+        <include
+            android:id="@+id/password"
+            layout="@layout/include_edit_text"
+            app:autofillHints="@{``}"
+            app:color="@{viewModel.mColor}"
+            app:hint="@{@string/registration_label_password}"
+            app:inputType="@{InputType.TYPE_TEXT_VARIATION_PASSWORD}"
+            app:target="@{viewModel.password}" />
+
+        <!-- TODO: Ensure correct input type -->
+        <include
+            android:id="@+id/passwordAgain"
+            layout="@layout/include_edit_text"
+            app:autofillHints="@{``}"
+            app:color="@{viewModel.mColor}"
+            app:hint="@{@string/registration_label_password_again}"
+            app:inputType="@{InputType.TYPE_TEXT_VARIATION_PASSWORD}"
+            app:target="@{viewModel.passwordAgain}" />
+
+        <include
+            android:id="@+id/next"
+            layout="@layout/include_loading_button_with_error"
+            app:color="@{viewModel.mColor}"
+            app:label="@{@string/registration_label_next}"
+            app:listener="@{() -> viewModel.next()}"
+            app:loading="@{viewModel.waiting}"
+            app:errorText="@{viewModel.registrationError}" />
+
+    </LinearLayout>
+
+</layout>

@@ -35,7 +35,9 @@ fun loginAsync(email: String, password: String): Deferred<Unit> {
             Log.d(TAG, "${response.code()}")
             when (response.code()) {
                 403 -> throw AuthException("Incorrect email and/or password")
-                else -> throw NetworkException("Server is currently facing some issues. Try again later")
+                else -> throw NetworkException(
+                    "Server is currently facing some issues. Try again later"
+                )
             }
         }
     }
@@ -47,31 +49,31 @@ fun loginAsync(email: String, password: String): Deferred<Unit> {
 //409 - Email Id is already registered
 //200 - Success - OTP Sent
 fun registerAsync(
-    email: String,
-    phno: Long,
     name: String,
+    phone: String,
+    email: String,
     password: String,
-    g_recaptcha_response: String
-): Deferred<Boolean> {
-    return CoroutineScope(Dispatchers.Main).async {
-        val body = mapOf(
-            "email" to email,
-            "phno" to phno,
-            "name" to name,
-            "password" to password,
-            "g-recaptcha-response" to g_recaptcha_response
-        )
-        val request = AuthenticationService.api.registerAsync(body)
-        val response = request.await()
-        if (response.code() == 200) {
-            Log.d(TAG, "Registration Stage 1 complete")
-            return@async true
-        } else {
-            when (response.code()) {
-                403 -> throw AuthException("Captcha verification failed")
-                409 -> throw AuthException("Email id is already registered")
-                else -> throw NetworkException("Server is currently facing some issues. Try again later")
-            }
+    recaptchaResponse: String
+) = CoroutineScope(Dispatchers.Main).async {
+    val body = mapOf(
+        "email" to email,
+        "phno" to phone,
+        "name" to name,
+        "password" to password,
+        "g-recaptcha-response" to recaptchaResponse
+    )
+    val request = AuthenticationService.api.registerAsync(body)
+    val response = request.await()
+    if (response.code() == 200) {
+        Log.d(TAG, "Registration Stage 1 complete")
+        return@async
+    } else {
+        when (response.code()) {
+            403 -> throw AuthException("Captcha verification failed")
+            409 -> throw AuthException("Email id is already registered")
+            else -> throw NetworkException(
+                "Server is currently facing some issues. Try again later"
+            )
         }
     }
 }
@@ -97,10 +99,11 @@ fun verifyAsync(email: String, phoneOtp: String, emailOtp: String): Deferred<Boo
             when (response.code()) {
                 403 -> throw AuthException("Incorrect OTP")
                 400 -> throw AuthException(
-                    "You are running a modded app." +
-                            " Install the original one from Google Play Store"
+                    "LOL 'Hacker', install the original app from Google Play Store"
                 )
-                else -> throw NetworkException("Server is currently facing some issues. Try again later")
+                else -> throw NetworkException(
+                    "Server is currently facing some issues. Try again later"
+                )
             }
         }
     }
@@ -136,7 +139,9 @@ fun saveParticipantAsync(
             Log.d(TAG, "Registration complete. BitotsavId: $bitotsavId")
             return@async bitotsavId
         } else {
-            throw NetworkException("Server is currently facing some issues. Try again later")
+            throw NetworkException(
+                "Server is currently facing some issues. Try again later"
+            )
         }
     }
 }
@@ -155,4 +160,3 @@ fun fetchCollegeListAsync(): Deferred<List<String>> {
         }
     }
 }
-

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- TODO: Do something about hint color on focus -->
+
+    <data>
+
+        <import type="in.bitotsav.profile.ui.RegistrationViewModel.MutableLiveDataWithErrorText"
+            alias="MutableLiveDataWithErrorText"/>
+
+        <variable
+            name="color"
+            type="int" />
+
+        <!--<variable-->
+        <!--name="errorText"-->
+        <!--type="String" />-->
+
+        <variable
+            name="hint"
+            type="String" />
+
+        <variable
+            name="autofillHints"
+            type="String" />
+
+        <variable
+            name="inputType"
+            type="int" />
+
+        <variable
+            name="target"
+            type="in.bitotsav.profile.ui.RegistrationViewModel.MutableLiveDataWithErrorText&lt;String&gt;" />
+
+    </data>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout"
+        style="@style/Widget.Bitotsav.TextInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="@{autofillHints}"
+        android:hint="@{hint}"
+        android:importantForAutofill="@{``.equals(autofillHints)}"
+        app:boxStrokeColor="@{color}"
+        app:errorEnabled="true"
+        app:errorTextLive="@{target}">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@{color}"
+            android:ems="10"
+            android:inputType="@{inputType}"
+            android:text="@={target}" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+</layout>

@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-open class BaseViewModel : ViewModel() {
+open class BaseViewModel(protected val TAG:String = "BaseViewModel") : ViewModel() {
 
     var mColor: Int = 0
     private val _toastMessage = MutableLiveData<String>()

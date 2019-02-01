@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autofillHints=".AUTOFILL_HINT_EMAIL_ADDRESS"
-            android:hint="@string/login_email_label"
+            android:hint="@string/login_label_email"
             app:boxStrokeColor="@color/colorRed"
             app:errorEnabled="true"
             app:errorText="@{viewModel.loginEmailErrorText}">
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:autofillHints=".AUTOFILL_HINT_PASSWORD"
-            android:hint="@string/login_password_label"
+            android:hint="@string/login_label_password"
             app:boxStrokeColor="@color/colorRed"
             app:errorEnabled="true"
             app:errorText="@{viewModel.loginPasswordErrorText}">
@@ -75,7 +75,7 @@
             android:enabled="@{``.equals(viewModel.loginEmailErrorText)}"
             android:filterTouchesWhenObscured="true"
             android:onClick="@{() -> viewModel.login()}"
-            android:text="@string/login_button_label"
+            android:text="@string/login_label_login"
             android:textColor="@color/colorWhite"
             android:visibility="@{viewModel.loading ? View.GONE: View.VISIBLE}"
             tools:backgroundTint="@color/colorRed" />
@@ -101,7 +101,7 @@
             android:backgroundTint="@{viewModel.mColor}"
             android:ems="10"
             android:filterTouchesWhenObscured="true"
-            android:text="@string/register_button_label"
+            android:text="@string/login_label_register"
             android:textColor="@color/colorWhite"
             tools:backgroundTint="@color/colorRed" />
 

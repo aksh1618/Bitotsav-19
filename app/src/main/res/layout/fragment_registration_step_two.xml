@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".profile.ui.RegistrationFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.profile.ui.RegistrationViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <!-- TODO: Do something about hint color on focus -->
+
+        <!--<include-->
+        <!--android:id="@+id/name"-->
+        <!--layout="@layout/include_edit_text" />-->
+
+        <!--<include-->
+        <!--android:id="@+id/phone"-->
+        <!--layout="@layout/include_edit_text" />-->
+
+        <!--<include-->
+        <!--android:id="@+id/email"-->
+        <!--layout="@layout/include_edit_text" />-->
+
+        <!--<include-->
+        <!--android:id="@+id/password"-->
+        <!--layout="@layout/include_edit_text" />-->
+
+        <!--<include-->
+            <!--android:id="@+id/submit"-->
+            <!--style="@style/Widget.Bitotsav.Button"-->
+            <!--layout="@layout/include_loading_button_with_error"-->
+            <!--app:color="@{viewModel.mColor}"-->
+            <!--app:enabled="@{``.equals(viewModel.registerEmailErrorText)}"-->
+            <!--app:label="@{@string/register_button_label}"-->
+            <!--app:listener="@{() -> viewModel.register()}"-->
+            <!--app:loading="@{viewModel.loading}" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/registerErrorTextView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="@{viewModel.registerErrorText}"-->
+            <!--android:textColor="@color/colorRed"-->
+            <!--android:textStyle="italic"-->
+            <!--android:visibility="@{``.equals(viewModel.registerErrorText) ? View.GONE : View.VISIBLE}"-->
+            <!--tools:text="Error Message" />-->
+
+    </LinearLayout>
+
+</layout>

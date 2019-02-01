@@ -4,8 +4,8 @@ import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentLoginBinding
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.utils.isProperEmail
-import `in`.bitotsav.shared.utils.forMinApi
 import `in`.bitotsav.shared.utils.getColorCompat
+import `in`.bitotsav.shared.utils.runOnMinApi
 import `in`.bitotsav.shared.utils.toast
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -41,7 +41,7 @@ class LoginFragment : Fragment() {
                 viewModel = loginViewModel
                 register.setOnClickListener(
                     Navigation.createNavigateOnClickListener(
-                        R.id.action_destLogin_to_destRegistration
+                        R.id.action_destLogin_to_destRegistrationStepOne
                     )
                 )
             }
@@ -74,15 +74,15 @@ class LoginFragment : Fragment() {
                     }
             })
 
-            loginPassword.observe(
-                viewLifecycleOwner,
-                Observer { loginPasswordErrorText.value = "" })
+            loginPassword.observe(viewLifecycleOwner, Observer {
+                loginPasswordErrorText.value = ""
+            })
         }
     }
 
     @SuppressLint("NewApi")
     private fun commitAutofillFields() {
-        forMinApi(26) {
+        runOnMinApi(26) {
             context?.getSystemService(AutofillManager::class.java)?.commit()
         }
     }
