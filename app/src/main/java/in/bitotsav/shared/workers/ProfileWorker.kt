@@ -17,7 +17,7 @@ enum class ProfileWorkType {
     FETCH_PROFILE,
 }
 
-class ProfileWorker(context: Context, params: WorkerParameters): Worker(context, params) {
+class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
 
     override fun doWork(): Result {
         try {
@@ -27,24 +27,7 @@ class ProfileWorker(context: Context, params: WorkerParameters): Worker(context,
                 ?: return Result.failure(workDataOf("Error" to "Auth token is empty"))
             runBlocking { fetchProfileDetailsAsync(authToken).await() }
             Log.d(TAG, "Fetching completed")
-
-            val fetchUserTeamWorks = mutableListOf<OneTimeWorkRequest>()
-            CurrentUser.userTeams?.forEach {
-                fetchUserTeamWorks.add(
-                    getWork<TeamWorker>(
-                        workDataOf(
-                            "type" to TeamWorkType.FETCH_TEAM.name,
-                            "eventId" to it.key.toInt(),
-                            "teamLeaderId" to it.value["leaderId"],
-                            "isUserTeam" to true
-                        )
-                    )
-                )
-            }
-            val cleanupWork = getWork<TeamWorker>(
-                workDataOf("type" to TeamWorkType.CLEAN_OLD_TEAMS.name)
-            )
-            WorkManager.getInstance().beginWith(fetchUserTeamWorks)/*.then(cleanupWork)*/.enqueue()
+            fetchUserTeams()
             return Result.success()
         } catch (e: NonRetryableException) {
             Log.d(TAG, e.message)
@@ -57,5 +40,34 @@ class ProfileWorker(context: Context, params: WorkerParameters): Worker(context,
             Log.d(TAG, e.message)
             return Result.retry()
         }
+    }
+
+    private fun fetchUserTeams() {
+        val fetchUserTeamWorks = mutableListOf<OneTimeWorkRequest>()
+        CurrentUser.userTeams?.forEach {
+            fetchUserTeamWorks.add(
+                getWork<TeamWorker>(
+                    workDataOf(
+                        "type" to TeamWorkType.FETCH_TEAM.name,
+                        "eventId" to it.key.toInt(),
+                        "teamLeaderId" to it.value["leaderId"],
+                        "isUserTeam" to true
+                    )
+                )
+            )
+        }
+        val fetchChampionshipTeamWork = getWork<TeamWorker>(
+            workDataOf(
+                "type" to TeamWorkType.FETCH_BC_TEAM.name,
+                "teamName" to CurrentUser.championshipTeamName
+            )
+        )
+        val cleanupWork = getWork<TeamWorker>(
+            workDataOf("type" to TeamWorkType.CLEAN_OLD_TEAMS.name)
+        )
+        WorkManager.getInstance().beginWith(fetchUserTeamWorks)
+            .then(fetchChampionshipTeamWork)
+            .then(cleanupWork)
+            .enqueue()
     }
 }

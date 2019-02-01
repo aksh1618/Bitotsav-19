@@ -1,5 +1,8 @@
 package `in`.bitotsav.shared.workers
 
+import `in`.bitotsav.profile.CurrentUser
+import `in`.bitotsav.profile.data.User
+import `in`.bitotsav.profile.data.UserRepository
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.workers.TeamWorkType.*
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
@@ -17,6 +20,7 @@ private const val TAG = "TeamWorker"
 
 enum class TeamWorkType {
     FETCH_TEAM,
+    FETCH_BC_TEAM,
     FETCH_ALL_TEAMS,
     CLEAN_OLD_TEAMS
 }
@@ -46,6 +50,21 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
                 CLEAN_OLD_TEAMS -> runBlocking {
                     get<NonChampionshipTeamRepository>().cleanupUserTeams()
                     Log.d(TAG, "Teams cleanup complete")
+                }
+                FETCH_BC_TEAM -> {
+                    val teamName = inputData.getString("teamName")
+                        ?: return Result.failure(workDataOf("Error" to "Team name empty"))
+                    runBlocking {
+                        get<ChampionshipTeamRepository>().fetchChampionshipTeamAsync(teamName).await()
+                        val user = User(
+                            CurrentUser.bitotsavId!!,
+                            CurrentUser.name!!,
+                            CurrentUser.email!!,
+                            teamName
+                        )
+                        get<UserRepository>().insert(user)
+                        Log.d(TAG, "User inserted into DB")
+                    }
                 }
             }
             return Result.success()

@@ -2,8 +2,6 @@ package `in`.bitotsav.profile.utils
 
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.api.ProfileService
-import `in`.bitotsav.profile.data.User
-import `in`.bitotsav.profile.data.UserRepository
 import `in`.bitotsav.shared.exceptions.NetworkException
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.getWork
@@ -20,7 +18,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import org.koin.core.context.GlobalContext.get
+import kotlin.collections.List
+import kotlin.collections.Map
+import kotlin.collections.forEach
+import kotlin.collections.mapOf
+import kotlin.collections.mutableMapOf
+import kotlin.collections.set
+import kotlin.collections.toMap
 
 private const val TAG = "ProfileUtils"
 
@@ -76,14 +80,7 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
                     mapOf("leaderId" to it["teamLeader"].toString())
             }
             CurrentUser.userTeams = userTeams.toMap()
-            val user = User(
-                bitotsavId,
-                name,
-                email,
-                teamName
-            )
-            get().koin.get<UserRepository>().insert(user)
-            Log.d(TAG, "User inserted into DB")
+            Log.d(TAG, "Participant details stored in CurrentUser")
         } else {
             when (response.code()) {
                 403 -> throw AuthException("Authentication error")

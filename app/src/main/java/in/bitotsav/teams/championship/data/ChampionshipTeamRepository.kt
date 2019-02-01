@@ -2,6 +2,7 @@ package `in`.bitotsav.teams.championship.data
 
 import `in`.bitotsav.shared.data.Repository
 import `in`.bitotsav.shared.exceptions.NetworkException
+import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.teams.api.ChampionshipTeamService
 import android.util.Log
 import androidx.annotation.WorkerThread
@@ -39,6 +40,25 @@ class ChampionshipTeamRepository(private val championshipTeamDao: ChampionshipTe
                 Log.d(TAG, "Inserted all championship teams into DB")
             } else {
                 throw NetworkException("Fetch all championship teams failed. Code: ${response.code()}")
+            }
+        }
+    }
+
+    fun fetchChampionshipTeamAsync(teamName: String): Deferred<Any> {
+        return CoroutineScope(Dispatchers.IO).async {
+            val body = mapOf("teamName" to teamName)
+            val request = ChampionshipTeamService.api.getChampionshipTeamByNameAsync(body)
+            val response = request.await()
+            if (response.code() == 200) {
+                val championshipTeam = response.body() ?: throw NetworkException("Response body is empty")
+                insert(championshipTeam)
+                Log.d(TAG, "Inserted team: $teamName into DB")
+            } else {
+                when (response.code()) {
+                    403 -> throw NonRetryableException("Team name not sent in body")
+                    404 -> throw NonRetryableException("Team name not found")
+                    else -> throw NetworkException("Unable to fetch team: $teamName")
+                }
             }
         }
     }
