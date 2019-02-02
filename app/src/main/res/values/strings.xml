@@ -15,6 +15,7 @@
     <!-- Login -->
     <string name="login_label_email">Email</string>
     <string name="login_label_password">Password</string>
+    <!-- TODO [Refactor]: Could this be 'Begin' ? -->
     <string name="login_label_login">Login</string>
     <string name="login_label_register">Register</string>
 
@@ -22,22 +23,26 @@
     <string name="profile_label_logout">Logout</string>
 
     <!-- Registration -->
-    <string name="registration_label_next">Continue</string>
+
     <!-- Step 1 -->
     <string name="registration_label_name">Name</string>
-    <string name="registration_label_email">Email</string>
-    <string name="registration_label_phone">Phone No</string>
+    <string name="registration_label_phone">Phone No (For First OTP) </string>
+    <string name="registration_label_email">Email (For Second OTP)</string>
     <string name="registration_label_password">Password</string>
     <string name="registration_label_password_again">Repeat Password</string>
+    <string name="registration_label_next_step_one">Get OTPs</string>
 
     <!-- Step 2 -->
     <string name="registration_label_phone_otp">Phone</string>
     <string name="registration_label_email_otp">Email</string>
+    <string name="registration_label_next_step_two">Verify OTPs</string>
 
     <!-- Step 3 -->
     <string name="registration_label_gender">Gender</string>
     <string name="registration_label_college">College</string>
     <string name="registration_label_rollNo">Roll No</string>
     <string name="registration_label_source">Source</string>
+    <!-- TODO [Refactor]: Should this be 'Get Bitotsav ID' ? -->
+    <string name="registration_label_next_step_three">Let\'s Rock !!</string>
 
 </resources>

@@ -35,6 +35,7 @@
             app:inputType="@{InputType.TYPE_TEXT_VARIATION_PERSON_NAME}"
             app:target="@{fields.name}" />
 
+        <!-- TODO: Indicate this will be used for OTP -->
         <include
             android:id="@+id/phone"
             layout="@layout/include_edit_text"
@@ -44,6 +45,7 @@
             app:inputType="@{InputType.TYPE_CLASS_PHONE}"
             app:target="@{fields.phone}" />
 
+        <!-- TODO: Indicate this will be used for OTP -->
         <include
             android:id="@+id/email"
             layout="@layout/include_edit_text"
@@ -53,31 +55,32 @@
             app:inputType="@{InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS}"
             app:target="@{fields.email}" />
 
-        <!-- TODO: Ensure correct input type -->
+        <!-- TODO: Indicate this will mailed and then removed -->
         <include
             android:id="@+id/password"
             layout="@layout/include_edit_text"
             app:autofillHints="@{``}"
             app:color="@{viewModel.mColor}"
+            app:isPass="@{true}"
             app:hint="@{@string/registration_label_password}"
-            app:inputType="@{InputType.TYPE_TEXT_VARIATION_PASSWORD}"
+            app:inputType="@{InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD}"
             app:target="@{fields.password}" />
 
-        <!-- TODO: Ensure correct input type -->
-        <include
-            android:id="@+id/passwordAgain"
-            layout="@layout/include_edit_text"
-            app:autofillHints="@{``}"
-            app:color="@{viewModel.mColor}"
-            app:hint="@{@string/registration_label_password_again}"
-            app:inputType="@{InputType.TYPE_TEXT_VARIATION_PASSWORD}"
-            app:target="@{fields.passwordAgain}" />
+        <!--&lt;!&ndash; TODO: Replace with passwordToggleEnabled on @id/password &ndash;&gt;-->
+        <!--<include-->
+            <!--android:id="@+id/passwordAgain"-->
+            <!--layout="@layout/include_edit_text"-->
+            <!--app:autofillHints="@{``}"-->
+            <!--app:color="@{viewModel.mColor}"-->
+            <!--app:hint="@{@string/registration_label_password_again}"-->
+            <!--app:inputType="@{InputType.TYPE_TEXT_VARIATION_PASSWORD}"-->
+            <!--app:target="@{fields.passwordAgain}" />-->
 
         <include
             android:id="@+id/next"
             layout="@layout/include_loading_button_with_error"
             app:color="@{viewModel.mColor}"
-            app:label="@{@string/registration_label_next}"
+            app:label="@{@string/registration_label_next_step_one}"
             app:listener="@{() -> viewModel.next()}"
             app:loading="@{viewModel.waiting}"
             app:errorText="@{viewModel.registrationError}" />

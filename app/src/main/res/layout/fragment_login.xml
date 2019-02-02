@@ -13,6 +13,8 @@
 
     </data>
 
+    <!-- TODO [Refactor]: Use includes for layouts (and thus add ids, use color) -->
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,6 +50,7 @@
             android:layout_marginTop="8dp"
             android:autofillHints=".AUTOFILL_HINT_PASSWORD"
             android:hint="@string/login_label_password"
+            app:passwordToggleEnabled="true"
             app:boxStrokeColor="@color/colorRed"
             app:errorEnabled="true"
             app:errorText="@{viewModel.loginPasswordErrorText}">

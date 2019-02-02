@@ -8,6 +8,8 @@
 
         <import type="android.view.View" />
 
+        <import type="android.text.InputType" />
+
         <variable
             name="viewModel"
             type="in.bitotsav.profile.ui.RegistrationViewModel" />
@@ -24,50 +26,32 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="step 2"/>
+        <include
+            android:id="@+id/phoneOtp"
+            layout="@layout/include_edit_text"
+            app:autofillHints="@{``}"
+            app:color="@{viewModel.mColor}"
+            app:hint="@{@string/registration_label_phone_otp}"
+            app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
+            app:target="@{fields.phoneOtp}" />
 
-        <!-- TODO: Do something about hint color on focus -->
+        <include
+            android:id="@+id/emailOtp"
+            layout="@layout/include_edit_text"
+            app:autofillHints="@{``}"
+            app:color="@{viewModel.mColor}"
+            app:hint="@{@string/registration_label_email_otp}"
+            app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
+            app:target="@{fields.emailOtp}" />
 
-        <!--<include-->
-        <!--android:id="@+id/name"-->
-        <!--layout="@layout/include_edit_text" />-->
-
-        <!--<include-->
-        <!--android:id="@+id/phone"-->
-        <!--layout="@layout/include_edit_text" />-->
-
-        <!--<include-->
-        <!--android:id="@+id/email"-->
-        <!--layout="@layout/include_edit_text" />-->
-
-        <!--<include-->
-        <!--android:id="@+id/password"-->
-        <!--layout="@layout/include_edit_text" />-->
-
-        <!--<include-->
-            <!--android:id="@+id/submit"-->
-            <!--style="@style/Widget.Bitotsav.Button"-->
-            <!--layout="@layout/include_loading_button_with_error"-->
-            <!--app:color="@{viewModel.mColor}"-->
-            <!--app:enabled="@{``.equals(viewModel.registerEmailErrorText)}"-->
-            <!--app:label="@{@string/register_button_label}"-->
-            <!--app:listener="@{() -> viewModel.register()}"-->
-            <!--app:loading="@{viewModel.loading}" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/registerErrorTextView"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="@{viewModel.registerErrorText}"-->
-            <!--android:textColor="@color/colorRed"-->
-            <!--android:textStyle="italic"-->
-            <!--android:visibility="@{``.equals(viewModel.registerErrorText) ? View.GONE : View.VISIBLE}"-->
-            <!--tools:text="Error Message" />-->
+        <include
+            android:id="@+id/next"
+            layout="@layout/include_loading_button_with_error"
+            app:color="@{viewModel.mColor}"
+            app:label="@{@string/registration_label_next_step_two}"
+            app:listener="@{() -> viewModel.next()}"
+            app:loading="@{viewModel.waiting}"
+            app:errorText="@{viewModel.registrationError}" />
 
     </LinearLayout>
 

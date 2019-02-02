@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- TODO: Do something about hint color on focus -->
 
@@ -10,9 +11,9 @@
             name="color"
             type="int" />
 
-        <!--<variable-->
-        <!--name="errorText"-->
-        <!--type="String" />-->
+        <variable
+            name="isPass"
+            type="boolean" />
 
         <variable
             name="hint"
@@ -32,19 +33,28 @@
 
     </data>
 
+    <!-- FIXME: Do something about colors of hint on focus, password toggle, cursor etc.
+     -->
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout"
         style="@style/Widget.Bitotsav.TextInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="8dp"
         android:autofillHints="@{autofillHints}"
         android:hint="@{hint}"
         android:importantForAutofill="@{``.equals(autofillHints)}"
         app:boxStrokeColor="@{color}"
+        app:passwordToggleEnabled="@{isPass, default=false}"
+        app:passwordToggleTint="@{color}"
         app:errorEnabled="true"
-        app:errorText="@{target.errorText}">
+        app:errorText="@{target.errorText}"
+        tools:hint="Hint">
 
+        <!-- TODO [WARN]: Setting default value for passwordHidingEnabled leads to
+        compilation error due to resource linking failure. -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText"
             style="@style/TextAppearance.MaterialComponents.Body1"
