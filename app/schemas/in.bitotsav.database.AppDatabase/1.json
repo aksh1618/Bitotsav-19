@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ed9e57472a6cf1a497f28739efd34865",
+    "identityHash": "8c3eaf1b01adab6eecd0f584397b20ac",
     "entities": [
       {
         "tableName": "Event",
@@ -244,8 +244,14 @@
       },
       {
         "tableName": "ChampionshipTeam",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `members` TEXT NOT NULL, `totalScore` INTEGER NOT NULL, PRIMARY KEY(`name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rank` INTEGER NOT NULL, `name` TEXT NOT NULL, `members` TEXT NOT NULL, `totalScore` INTEGER NOT NULL, PRIMARY KEY(`name`))",
         "fields": [
+          {
+            "fieldPath": "rank",
+            "columnName": "rank",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
           {
             "fieldPath": "name",
             "columnName": "name",
@@ -391,7 +397,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ed9e57472a6cf1a497f28739efd34865\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"8c3eaf1b01adab6eecd0f584397b20ac\")"
     ]
   }
 }

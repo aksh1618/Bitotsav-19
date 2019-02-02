@@ -15,7 +15,7 @@ import `in`.bitotsav.profile.data.RegistrationFields.source
 import `in`.bitotsav.profile.data.RegistrationFields.year
 import `in`.bitotsav.profile.data.RegistrationFields.yearOptions
 import `in`.bitotsav.profile.utils.*
-import `in`.bitotsav.shared.network.NetworkException
+import `in`.bitotsav.shared.exceptions.NetworkException
 import `in`.bitotsav.shared.ui.BaseViewModel
 import `in`.bitotsav.shared.utils.onFalse
 import `in`.bitotsav.shared.utils.onTrue
