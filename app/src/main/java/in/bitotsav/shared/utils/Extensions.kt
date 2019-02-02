@@ -1,6 +1,10 @@
 package `in`.bitotsav.shared.utils
 
+import `in`.bitotsav.R
 import android.content.Context
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
@@ -35,3 +39,12 @@ fun Boolean.onFalse(block: () -> Unit): Boolean {
 }
 
 fun Boolean.Companion.or(vararg booleans: Boolean) = booleans.any { it }
+
+fun String.isLong() = this.toLongOrNull() != null
+
+fun String.isProperEmail() =
+    android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
+fun AutoCompleteTextView.setEntries(entries: List<String>) {
+    setAdapter(ArrayAdapter(context, R.layout.item_spinner, entries))
+}

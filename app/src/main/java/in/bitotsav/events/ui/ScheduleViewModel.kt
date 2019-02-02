@@ -4,7 +4,6 @@ import `in`.bitotsav.events.data.Event
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.shared.ui.BaseViewModel
 import android.util.Log
-import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -39,7 +38,7 @@ class ScheduleViewModel(
     val filters: LiveData<List<ScheduleFilter>>
         get() = scheduleFiltersList
     lateinit var filterColors: List<Int>
-    lateinit var allCategories: List<String>
+    private lateinit var allCategories: List<String>
     // TODO: Use switch map with double trigger for this
     val areFiltersActive = MutableLiveData<Boolean>()
 

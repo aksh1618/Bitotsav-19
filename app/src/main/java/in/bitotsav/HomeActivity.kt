@@ -1,6 +1,8 @@
 package `in`.bitotsav
 
 import `in`.bitotsav.events.ui.ScheduleViewModel
+import `in`.bitotsav.profile.ui.RegistrationViewModel
+import `in`.bitotsav.shared.utils.getColorCompat
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
@@ -13,6 +15,7 @@ import org.koin.androidx.viewmodel.ext.viewModel
 class HomeActivity : AppCompatActivity() {
 
     private val scheduleViewModel by viewModel<ScheduleViewModel>()
+    private val registrationViewModel by viewModel<RegistrationViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +33,12 @@ class HomeActivity : AppCompatActivity() {
 
     private fun finalizeViewModels() {
         scheduleViewModel.filterColors = filterColors
+        registrationViewModel.mColor = filterColors[0]
     }
 
     // TODO: Get colors from resources
     private val filterColors: List<Int>
-        get() = listOf(ContextCompat.getColor(this, R.color.colorRed))
+        get() = listOf(getColorCompat(R.color.colorRed))
 
     private fun handlePlatformLimitations() {
         when {

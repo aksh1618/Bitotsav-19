@@ -9,7 +9,9 @@
     <color name="colorDisabledWhite">#C8D2FE</color>
     <color name="colorRedDark">#900508</color>
     <color name="colorRed">#F0191E</color>
+    <color name="colorOrange">#FF5722</color>
 
     <color name="background">@color/colorWhite</color>
     <color name="textColor">@android:color/primary_text_light</color>
+    <color name="errorTextColor">@color/colorOrange</color>
 </resources>

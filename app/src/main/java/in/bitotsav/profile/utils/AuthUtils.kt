@@ -35,7 +35,9 @@ fun loginAsync(email: String, password: String): Deferred<Unit> {
             Log.d(TAG, "${response.code()}")
             when (response.code()) {
                 403 -> throw AuthException("Incorrect email and/or password")
-                else -> throw NetworkException("Server is currently facing some issues. Try again later")
+                else -> throw NetworkException(
+                    "Server is currently facing some issues. Try again later"
+                )
             }
         }
     }
@@ -47,32 +49,28 @@ fun loginAsync(email: String, password: String): Deferred<Unit> {
 //409 - Email Id is already registered
 //200 - Success - OTP Sent
 fun registerAsync(
-    email: String,
-    phno: Long,
     name: String,
+    phone: String,
+    email: String,
     password: String,
-    g_recaptcha_response: String
-): Deferred<Boolean> {
-    return CoroutineScope(Dispatchers.Main).async {
-        val body = mapOf(
-            "email" to email,
-            "phno" to phno,
-            "name" to name,
-            "password" to password,
-            "g-recaptcha-response" to g_recaptcha_response
+    recaptchaResponse: String
+) = CoroutineScope(Dispatchers.Main).async {
+    val body = mapOf(
+        "email" to email,
+        "phno" to phone,
+        "name" to name,
+        "password" to password,
+        "g-recaptcha-response" to recaptchaResponse
+    )
+    val request = AuthenticationService.api.registerAsync(body)
+    val response = request.await()
+    when (response.code()) {
+        200 -> Log.d(TAG, "Registration Stage 1 complete")
+        403 -> throw AuthException("Captcha verification failed")
+        409 -> throw AuthException("Email id is already registered")
+        else -> throw NetworkException(
+            "Server is currently facing some issues. Try again later"
         )
-        val request = AuthenticationService.api.registerAsync(body)
-        val response = request.await()
-        if (response.code() == 200) {
-            Log.d(TAG, "Registration Stage 1 complete")
-            return@async true
-        } else {
-            when (response.code()) {
-                403 -> throw AuthException("Captcha verification failed")
-                409 -> throw AuthException("Email id is already registered")
-                else -> throw NetworkException("Server is currently facing some issues. Try again later")
-            }
-        }
     }
 }
 
@@ -81,28 +79,28 @@ fun registerAsync(
 //400 - Payload modified, i.e email is incorrect
 //502 - Server error
 //200 - Success
-fun verifyAsync(email: String, phoneOtp: String, emailOtp: String): Deferred<Boolean> {
-    return CoroutineScope(Dispatchers.Main).async {
-        val body = mapOf(
-            "email" to email,
-            "phoneOtp" to phoneOtp,
-            "emailOtp" to emailOtp
+fun verifyAsync(
+    email: String,
+    phoneOtp: String,
+    emailOtp: String
+) = CoroutineScope(Dispatchers.Main).async {
+    val body = mapOf(
+        "email" to email,
+        "phoneOtp" to phoneOtp,
+        "emailOtp" to emailOtp
+    )
+    val request = AuthenticationService.api.verifyAsync(body)
+    val response = request.await()
+    when (response.code()) {
+        200 -> Log.d(TAG, "Registration Stage 2: OTP verification complete")
+
+        403 -> throw AuthException("Incorrect OTP(s)")
+        400 -> throw AuthException(
+            "LOL 'Hacker', install the original app from Google Play Store"
         )
-        val request = AuthenticationService.api.verifyAsync(body)
-        val response = request.await()
-        if (response.code() == 200) {
-            Log.d(TAG, "Registration Stage 2: OTP verification complete")
-            return@async true
-        } else {
-            when (response.code()) {
-                403 -> throw AuthException("Incorrect OTP")
-                400 -> throw AuthException(
-                    "You are running a modded app." +
-                            " Install the original one from Google Play Store"
-                )
-                else -> throw NetworkException("Server is currently facing some issues. Try again later")
-            }
-        }
+        else -> throw NetworkException(
+            "Server is currently facing some issues. Try again later"
+        )
     }
 }
 
@@ -116,43 +114,40 @@ fun saveParticipantAsync(
     rollNo: String,
     source: String,
     year: Int
-): Deferred<String> {
-    return CoroutineScope(Dispatchers.Main).async {
-        val body = mapOf(
-            "email" to email,
-            "gender" to gender,
-            "college" to college,
-            "rollno" to rollNo,
-            "source" to source,
-            "year" to year
+) = CoroutineScope(Dispatchers.Main).async {
+    val body = mapOf(
+        "email" to email,
+        "gender" to gender,
+        "college" to college,
+        "rollno" to rollNo,
+        "source" to source,
+        "year" to year
+    )
+    val request = AuthenticationService.api.saveParticipantAsync(body)
+    val response = request.await()
+    if (response.code() == 200) {
+        val bitotsavId = response.body()?.get("data") ?: throw AuthException(
+            "Bitotsav ID not generated." +
+                    " Contact the tech team if this issue persists"
         )
-        val request = AuthenticationService.api.saveParticipantAsync(body)
-        val response = request.await()
-        if (response.code() == 200) {
-            val bitotsavId = response.body()?.get("data") ?: throw AuthException(
-                "Bitotsav ID not generated." +
-                        " Contact the tech team if this issue persists"
-            )
-            Log.d(TAG, "Registration complete. BitotsavId: $bitotsavId")
-            return@async bitotsavId
-        } else {
-            throw NetworkException("Server is currently facing some issues. Try again later")
-        }
+        Log.d(TAG, "Registration complete. BitotsavId: $bitotsavId")
+        return@async bitotsavId
+    } else {
+        throw NetworkException(
+            "Server is currently facing some issues. Try again later"
+        )
     }
 }
 
 //GET - /getCollegeList
 //200 - Object containing colleges
-fun fetchCollegeListAsync(): Deferred<List<String>> {
-    return CoroutineScope(Dispatchers.IO).async {
-        val request = AuthenticationService.api.getCollegeListAsync()
-        val response = request.await()
-        if (response.code() == 200) {
-            return@async response.body()?.get("colleges")
-                ?: throw NetworkException("List of colleges is empty")
-        } else {
-            throw Exception("Unable to get list of colleges from the server")
-        }
+fun fetchCollegeListAsync() = CoroutineScope(Dispatchers.IO).async {
+    val request = AuthenticationService.api.getCollegeListAsync()
+    val response = request.await()
+    if (response.code() == 200) {
+        return@async response.body()?.get("colleges")
+            ?: throw NetworkException("List of colleges is empty")
+    } else {
+        throw Exception("Unable to get list of colleges from the server")
     }
 }
-

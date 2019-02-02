@@ -32,7 +32,7 @@
             android:onClick="@{() -> viewModel.logout()}"
             android:ems="10"
             android:filterTouchesWhenObscured="true"
-            android:text="@string/logout_button_label"
+            android:text="@string/profile_label_logout"
             android:textColor="@color/colorWhite"
             tools:backgroundTint="@color/colorRed" />
 

@@ -60,8 +60,7 @@ class LoginViewModel : BaseViewModel() {
                     ?: "Unknown Error!!"
                 Log.e("LoginViewModel.login", null, exception)
             } finally {
-//                TODO: @aksh Handle this
-//                loading.value = false
+                loading.value = false
             }
         }
     }
