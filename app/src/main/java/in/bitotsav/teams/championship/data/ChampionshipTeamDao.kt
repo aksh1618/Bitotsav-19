@@ -12,11 +12,11 @@ interface ChampionshipTeamDao {
     fun getAll() : LiveData<List<ChampionshipTeam>>
 
     @Query("SELECT * FROM championshipteam WHERE name = :name")
-    fun getByName(name: String) : ChampionshipTeam?
+    suspend fun getByName(name: String): ChampionshipTeam?
 
     @Query("SELECT totalScore FROM championshipteam WHERE name = :name")
-    fun getScoreByName(name: String): Int?
+    suspend fun getScoreByName(name: String): Int?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg championshipTeams: ChampionshipTeam)
+    suspend fun insert(vararg championshipTeams: ChampionshipTeam)
 }

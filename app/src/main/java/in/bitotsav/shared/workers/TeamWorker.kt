@@ -11,7 +11,6 @@ import android.content.Context
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import androidx.work.workDataOf
 import kotlinx.coroutines.runBlocking
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -30,7 +29,7 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
     override fun doWork(): Result {
         try {
             val type = inputData.getString("type")?.let { valueOf(it) }
-                ?: return Result.failure(workDataOf("Error" to "Invalid work type"))
+                ?: throw NonRetryableException("Invalid work type")
             when (type) {
                 FETCH_ALL_TEAMS -> runBlocking {
                     get<ChampionshipTeamRepository>().fetchAllChampionshipTeamsAsync().await()
@@ -38,9 +37,9 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
                 FETCH_TEAM -> {
                     val eventId = inputData.getInt("eventId", -1)
                     if (eventId == -1)
-                        return Result.failure(workDataOf("Error" to "Event id is empty"))
+                        throw NonRetryableException("Event id is empty")
                     val teamLeaderId = inputData.getString("teamLeaderId")
-                        ?: return Result.failure(workDataOf("Error" to "Leader id is empty"))
+                        ?: throw NonRetryableException("Leader id is empty")
                     val isUserTeam = inputData.getBoolean("isUserTeam", false)
                     runBlocking {
                         get<NonChampionshipTeamRepository>()

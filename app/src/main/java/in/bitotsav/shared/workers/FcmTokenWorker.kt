@@ -8,7 +8,6 @@ import android.content.Context
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import androidx.work.workDataOf
 import kotlinx.coroutines.runBlocking
 
 private const val TAG = "FcmTokenWorker"
@@ -23,11 +22,11 @@ class FcmTokenWorker(context: Context, params: WorkerParameters): Worker(context
     override fun doWork(): Result {
         try {
             val type = inputData.getString("type")?.let { valueOf(it) }
-                ?: return Result.failure(workDataOf("Error" to "Invalid work type"))
+                ?: throw NonRetryableException("Invalid work type")
             val authToken = inputData.getString("authToken")
-                ?: return Result.failure(workDataOf("Error" to "Auth token is empty"))
+                ?: throw NonRetryableException("Auth token is empty")
             val fcmToken = inputData.getString("fcmToken")
-                ?: return Result.failure(workDataOf("Error" to "FCM token not found"))
+                ?: throw NonRetryableException("FCM token not found")
             when (type) {
                 FcmTokenWorkType.SEND_TOKEN -> runBlocking { sendFcmTokenAsync(authToken, fcmToken).await() }
                 FcmTokenWorkType.DELETE_TOKEN -> runBlocking { deleteFcmTokenAsync(authToken, fcmToken).await() }

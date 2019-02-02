@@ -15,7 +15,6 @@ import android.content.Intent
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import androidx.work.workDataOf
 import kotlinx.coroutines.runBlocking
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -32,14 +31,14 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
     override fun doWork(): Result {
         try {
             val type = inputData.getString("type")?.let { valueOf(it) }
-                ?: return Result.failure(workDataOf("Error" to "Invalid work type"))
+                ?: throw NonRetryableException("Invalid work type")
             when (type) {
                 ResultWorkType.RESULT -> {
                     val eventId = inputData.getInt("eventId", -1)
                     if (eventId == -1)
-                        return Result.failure(workDataOf("Error" to "Event id is empty"))
+                        throw NonRetryableException("Event id is empty")
                     val event = runBlocking { get<EventRepository>().getById(eventId) }
-                        ?: return Result.failure(workDataOf("Error" to "Event $eventId not found in DB"))
+                        ?: throw NonRetryableException("Event $eventId not found in DB")
                     fetchWinningTeamsByEvent(event)
                     checkAndHandleIfUsersTeam(event)
                 }

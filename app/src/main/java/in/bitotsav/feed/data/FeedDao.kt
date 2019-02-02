@@ -12,8 +12,8 @@ interface FeedDao {
     fun getAll(): LiveData<List<Feed>>
 
     @Query("SELECT MAX(timestamp) FROM feed")
-    fun getLatestTimestamp(): Long?
+    suspend fun getLatestTimestamp(): Long?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg feeds: Feed)
+    suspend fun insert(vararg feeds: Feed)
 }

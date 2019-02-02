@@ -17,17 +17,17 @@ interface NonChampionshipTeamDao {
         INNER JOIN event ON nonchampionshipteam.eventId = event.id WHERE nonchampionshipteam.isUserTeam == 1
         ORDER BY event.timestamp DESC"""
     )
-    fun getAllUserTeams(): List<NonChampionshipTeam>?
+    suspend fun getAllUserTeams(): List<NonChampionshipTeam>?
 
     @Query("SELECT * FROM nonchampionshipteam WHERE eventId = :eventId and teamLeaderId = :teamLeaderId")
-    fun getById(eventId: Int, teamLeaderId: String): NonChampionshipTeam?
+    suspend fun getById(eventId: Int, teamLeaderId: String): NonChampionshipTeam?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg nonChampionshipTeams: NonChampionshipTeam)
+    suspend fun insert(vararg nonChampionshipTeams: NonChampionshipTeam)
 
     @Query("DELETE FROM nonchampionshipteam WHERE isUserTeam == 1 AND isTemp == 0")
-    fun deleteUserOldTeams()
+    suspend fun deleteUserOldTeams()
 
     @Query("UPDATE nonchampionshipteam SET isTemp = 0 WHERE isTemp == 1")
-    fun changeTempStatus()
+    suspend fun changeTempStatus()
 }

@@ -12,10 +12,10 @@ interface EventDao {
     fun getAll(): LiveData<List<Event>>
 
     @Query("SELECT * FROM event")
-    fun getAllEvents(): List<Event>
+    suspend fun getAllEvents(): List<Event>
 
     @Query("SELECT DISTINCT category FROM event ")
-    fun getAllCategories(): List<String>
+    suspend fun getAllCategories(): List<String>
 
     @Query("SELECT * FROM event WHERE day = :day")
     fun getByDay(day: Int): LiveData<List<Event>>
@@ -33,14 +33,14 @@ interface EventDao {
     fun getStarredByCategoriesForDay(day: Int, vararg categories: String): LiveData<List<Event>>
 
     @Query("SELECT * FROM event WHERE id = :id")
-    fun getById(id: Int): Event?
+    suspend fun getById(id: Int): Event?
 
     @Query("SELECT name FROM event WHERE id = :id")
-    fun getNameById(id: Int): String?
+    suspend fun getNameById(id: Int): String?
 
     @Query("SELECT isStarred FROM event WHERE id = :id")
-    fun isStarred(id: Int): Boolean?
+    suspend fun isStarred(id: Int): Boolean?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg events: Event)
+    suspend fun insert(vararg events: Event)
 }

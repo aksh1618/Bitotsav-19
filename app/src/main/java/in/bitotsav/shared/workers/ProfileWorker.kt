@@ -22,9 +22,9 @@ class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context
     override fun doWork(): Result {
         try {
             val type = inputData.getString("type")?.let { valueOf(it) }
-                ?: return Result.failure(workDataOf("Error" to "Invalid work type"))
+                ?: throw NonRetryableException("Invalid work type")
             val authToken = CurrentUser.authToken
-                ?: return Result.failure(workDataOf("Error" to "Auth token is empty"))
+                ?: throw NonRetryableException("Auth token is empty")
             runBlocking { fetchProfileDetailsAsync(authToken).await() }
             Log.d(TAG, "Fetching completed")
             fetchUserTeams()

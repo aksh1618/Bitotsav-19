@@ -25,7 +25,7 @@ class NonChampionshipTeamRepository(
 
     override fun getAll(): LiveData<List<NonChampionshipTeam>> = nonChampionshipTeamDao.getAll()
 
-    fun getAllUserTeams(): List<NonChampionshipTeam>? = nonChampionshipTeamDao.getAllUserTeams()
+    suspend fun getAllUserTeams(): List<NonChampionshipTeam>? = nonChampionshipTeamDao.getAllUserTeams()
 
     @WorkerThread
     suspend fun getById(eventId: Int, teamLeaderId: String): NonChampionshipTeam? =

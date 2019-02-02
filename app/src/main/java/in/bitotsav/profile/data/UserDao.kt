@@ -12,8 +12,8 @@ interface UserDao {
     fun get(): LiveData<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: User)
+    suspend fun insert(user: User)
 
     @Query("DELETE FROM user")
-    fun delete()
+    suspend fun delete()
 }
