@@ -6,9 +6,18 @@ import `in`.bitotsav.shared.data.Repository
 import `in`.bitotsav.shared.exceptions.DatabaseException
 import `in`.bitotsav.shared.exceptions.NetworkException
 import `in`.bitotsav.shared.utils.forEachParallel
+import `in`.bitotsav.shared.utils.getWork
+import `in`.bitotsav.shared.utils.scheduleWork
+import `in`.bitotsav.shared.workers.EventWorkType
+import `in`.bitotsav.shared.workers.EventWorker
+import `in`.bitotsav.shared.workers.ResultWorkType
+import `in`.bitotsav.shared.workers.ResultWorker
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import androidx.work.ExistingWorkPolicy
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -32,7 +41,7 @@ class FeedRepository(private val feedDao: FeedDao) : Repository<Feed>, KoinCompo
         feedDao.insert(*items)
     }
 
-//    POST - /getFeedsAfter - body: {timestamp}
+    //    POST - /getFeedsAfter - body: {timestamp}
 //    502 - Server error
 //    200 - Array of announcements
     fun fetchFeedsAfterAsync(timestamp: Long): Deferred<Any> {
@@ -45,6 +54,26 @@ class FeedRepository(private val feedDao: FeedDao) : Repository<Feed>, KoinCompo
                 val feeds = response.body() ?: throw NetworkException("Response body is empty")
                 feeds.forEachParallel {
                     if (it.eventId != null) {
+                        if (FeedType.RESULT == FeedType.valueOf(it.type)) {
+                            val eventWork = getWork<EventWorker>(
+                                workDataOf("type" to EventWorkType.FETCH_EVENT.name, "eventId" to it.eventId)
+                            )
+                            val resultWork = getWork<ResultWorker>(
+                                workDataOf("type" to ResultWorkType.RESULT.name, "eventId" to it.eventId)
+                            )
+                            WorkManager.getInstance().beginUniqueWork(
+                                it.eventId.toString(),
+                                ExistingWorkPolicy.REPLACE,
+                                eventWork
+                            ).then(resultWork).enqueue()
+                        } else {
+                            scheduleWork<EventWorker>(
+                                workDataOf(
+                                    "type" to EventWorkType.FETCH_EVENT.name,
+                                    "eventId" to it.eventId
+                                )
+                            )
+                        }
                         val isStarred = get<EventRepository>().isStarred(it.eventId) ?: false
                         val eventName = get<EventRepository>().getNameById(it.eventId)
                             ?: throw DatabaseException("Event name not found for ${it.eventId}")

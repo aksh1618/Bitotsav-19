@@ -28,9 +28,9 @@ class ProfileViewModel : BaseViewModel() {
 
     fun logout() {
         deleteFcmTokenFromServer()
-        CurrentUser.authToken = ""
-        CurrentUser.fcmToken = ""
+        CurrentUser.clearAllFields()
         user.value = CurrentUser
+//        TODO: @aksh Switch to login view
         // Delete previous FCM token to avoid conflicts
         CoroutineScope(Dispatchers.IO).launch {
             FirebaseInstanceId.getInstance().deleteInstanceId()

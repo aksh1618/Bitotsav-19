@@ -104,11 +104,12 @@ fun verifyAsync(
     }
 }
 
-//POST - /saveparticipant - body: {email, gender, college, rollno, source, year}
+//POST - /saveparticipant - body: {email, gender, college, rollno, source, year, password}
 //502 - Server error
 //200 - Success with Bitotsav Id in {data}
 fun saveParticipantAsync(
     email: String,
+    password: String,
     gender: String,
     college: String,
     rollNo: String,
@@ -117,6 +118,7 @@ fun saveParticipantAsync(
 ) = CoroutineScope(Dispatchers.Main).async {
     val body = mapOf(
         "email" to email,
+        "password" to password,
         "gender" to gender,
         "college" to college,
         "rollno" to rollNo,

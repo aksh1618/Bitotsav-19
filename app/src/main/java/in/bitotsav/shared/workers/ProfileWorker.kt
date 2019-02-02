@@ -56,6 +56,7 @@ class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context
                 )
             )
         }
+
         val fetchChampionshipTeamWork = getWork<TeamWorker>(
             workDataOf(
                 "type" to TeamWorkType.FETCH_BC_TEAM.name,
@@ -65,9 +66,13 @@ class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context
         val cleanupWork = getWork<TeamWorker>(
             workDataOf("type" to TeamWorkType.CLEAN_OLD_TEAMS.name)
         )
-        WorkManager.getInstance().beginWith(fetchUserTeamWorks)
-            .then(fetchChampionshipTeamWork)
-            .then(cleanupWork)
-            .enqueue()
+        if (fetchUserTeamWorks.isEmpty()) {
+            WorkManager.getInstance().enqueue(fetchChampionshipTeamWork)
+        } else {
+            WorkManager.getInstance().beginWith(fetchUserTeamWorks)
+                .then(fetchChampionshipTeamWork)
+                .then(cleanupWork)
+                .enqueue()
+        }
     }
 }

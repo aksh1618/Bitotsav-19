@@ -111,6 +111,8 @@ class RegistrationViewModel : BaseViewModel("RegistrationViewModel") {
 
                 saveParticipantAsync(
                     email.text.value,
+//                    TODO: @aksh Check if this can somehow break the operation. Note: Password value is required.
+                    password.text.value,
                     gender.text.value,
                     college.text.value,
                     rollNo.text.value,

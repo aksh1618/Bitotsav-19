@@ -78,6 +78,17 @@ object CurrentUser : KoinComponent {
             }
         }
 
+    fun clearAllFields() {
+        authToken = ""
+        fcmToken = ""
+        bitotsavId = ""
+        name = ""
+        email = ""
+        teamMembers = mapOf()
+        userTeams = mapOf()
+        championshipTeamName = ""
+    }
+
     private fun getFromPrefs(key: String): String? {
         return get<SharedPreferences>().getString(key, null)
     }
