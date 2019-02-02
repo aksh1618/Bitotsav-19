@@ -9,7 +9,7 @@ import `in`.bitotsav.shared.utils.isProperEmail
 object RegistrationFields {
 
     // Validations
-    private val requiredValidation: String.() -> Boolean = { isNotEmpty() }
+    private val requiredValidation: String.() -> Boolean = { isNotBlank() }
     private val isProperEmailValidation: String.() -> Boolean = { isProperEmail() }
     private val lengthEqualToTenValidation: String.() -> Boolean = { length == 10 }
     private val lengthGreaterThanFiveValidation: String.() -> Boolean = { length > 5 }
@@ -75,7 +75,7 @@ object RegistrationFields {
         "Prefer not to say"
     )
     // List of colleges (to be fetched)
-    lateinit var collegeOptions: List<String>
+    val collegeOptions = NonNullMutableLiveData(emptyList<String>())
     // Year options
     val yearOptions = listOf(
         "First",

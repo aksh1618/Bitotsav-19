@@ -4,6 +4,7 @@ import `in`.bitotsav.databinding.FragmentRegistrationStepOneBinding
 import `in`.bitotsav.databinding.FragmentRegistrationStepThreeBinding
 import `in`.bitotsav.databinding.FragmentRegistrationStepTwoBinding
 import `in`.bitotsav.profile.data.RegistrationFields
+import `in`.bitotsav.shared.utils.onTrue
 import `in`.bitotsav.shared.utils.runOnMinApi
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -48,8 +49,8 @@ class RegistrationFragment : Fragment() {
         savedInstanceState?.getString(KEY_EMAIL)?.let {
             RegistrationFields.email.text.value = it
         }
-        savedInstanceState?.getCharArray(KEY_PASSWORD)?.let {
-            RegistrationFields.password.text.value = it.toString()
+        savedInstanceState?.getString(KEY_PASSWORD)?.let {
+            RegistrationFields.password.text.value = it
         }
 
         // Inflate current step layout
@@ -132,6 +133,8 @@ class RegistrationFragment : Fragment() {
     private fun setStepThreeObservers() {
         with(registrationViewModel) {
 
+            registrationViewModel.fetchCollegeList()
+
             waiting.setObserver { isWaiting ->
                 if (isWaiting) {
                     Log.d(TAG, "Waiting for bitotsav id")
@@ -148,6 +151,7 @@ class RegistrationFragment : Fragment() {
 
             currentStep.setObserver { nextStep ->
                 if (nextStep == 1) {
+                    // TODO: isLoggedIn can be checked to determine where to navigate to.
                     findNavController().navigate(
                         RegistrationFragmentDirections.nextStep()
                     )
@@ -189,8 +193,12 @@ class RegistrationFragment : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt(KEY_CURSTEP, registrationViewModel.currentStep.value)
-        outState.putString(KEY_EMAIL, RegistrationFields.email.text.value)
-        outState.putCharArray(KEY_PASSWORD, RegistrationFields.password.text.value.toCharArray())
+        RegistrationFields.email.text.value.let {
+            it.isNotEmpty().onTrue { outState.putString(KEY_EMAIL, it) }
+        }
+        RegistrationFields.password.text.value.let {
+            it.isNotEmpty().onTrue { outState.putString(KEY_PASSWORD, it) }
+        }
         super.onSaveInstanceState(outState)
     }
 

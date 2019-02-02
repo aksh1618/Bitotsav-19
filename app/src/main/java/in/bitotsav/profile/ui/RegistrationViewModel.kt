@@ -20,19 +20,27 @@ import `in`.bitotsav.shared.ui.BaseViewModel
 import `in`.bitotsav.shared.utils.onFalse
 import `in`.bitotsav.shared.utils.onTrue
 import android.util.Log
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RegistrationViewModel : BaseViewModel("RegistrationViewModel") {
+class RegistrationViewModel : BaseViewModel("RegVM") {
 
     val currentStep = NonNullMutableLiveData(1)
     val registrationError = NonNullMutableLiveData("")
     val waiting = NonNullMutableLiveData(false)
-    val allDone= NonNullMutableLiveData(false)
-    val loggedIn= NonNullMutableLiveData(false)
+    val allDone = NonNullMutableLiveData(false)
+    val loggedIn = NonNullMutableLiveData(false)
 
-    init {
-        // Fetch list of colleges for step 3
-        scope.launch { collegeOptions = fetchCollegeListAsync().await() }
+    fun fetchCollegeList() {
+        scope.launch(Dispatchers.IO)
+        {
+            try {
+                collegeOptions.postValue(fetchCollegeListAsync().await())
+                Log.v(TAG, "College options fetched")
+            } catch (e: Exception) {
+                Log.w(TAG, e.message, e)
+            }
+        }
     }
 
     // Common
@@ -50,7 +58,6 @@ class RegistrationViewModel : BaseViewModel("RegistrationViewModel") {
                 Log.v(TAG, "All validations succeeded for step ${currentStep.value}")
             }
 
-    // Step 1
     fun completeStepOne(recaptchaResponseToken: String) {
         scope.launch {
             try {
@@ -142,10 +149,10 @@ class RegistrationViewModel : BaseViewModel("RegistrationViewModel") {
 
                 loginAsync(email.text.value, password.text.value).await()
                 syncUserAndRun { sendFcmTokenToServer() }
+                loggedIn.value = true
 
-            } catch (exception: Exception) {
-                Log.e("RegistrationVM.login", "Unable to auto-login after " +
-                        "registration", exception)
+            } catch (e: Exception) {
+                Log.e("$TAG::login", "Unable to auto-login after registration", e)
             } finally {
 
                 waiting.value = false
@@ -157,7 +164,7 @@ class RegistrationViewModel : BaseViewModel("RegistrationViewModel") {
 
     fun next() {
         Log.v(TAG, "Attempting step ${currentStep.value}")
-        if (anyErrors) { return }
+        if (anyErrors) return
         registrationError.value = ""
         waiting.value = true
     }
