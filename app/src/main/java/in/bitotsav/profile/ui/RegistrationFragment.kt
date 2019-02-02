@@ -13,8 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.autofill.AutofillManager
-import android.widget.AdapterView
-import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -32,6 +30,7 @@ class RegistrationFragment : Fragment() {
         const val TAG = "RegistrationFragment"
         const val KEY_CURSTEP = "curStep"
         const val KEY_EMAIL = "email"
+        const val KEY_PASSWORD = "pass"
     }
 
     private val registrationViewModel by sharedViewModel<RegistrationViewModel>()
@@ -44,10 +43,13 @@ class RegistrationFragment : Fragment() {
 
         // Restore state
         val currentStep =
-        savedInstanceState?.getString(KEY_CURSTEP)?.let { it }
-            ?: registrationViewModel.currentStep.value
+            savedInstanceState?.getInt(KEY_CURSTEP)?.let { it }
+                ?: registrationViewModel.currentStep.value
         savedInstanceState?.getString(KEY_EMAIL)?.let {
             RegistrationFields.email.text.value = it
+        }
+        savedInstanceState?.getCharArray(KEY_PASSWORD)?.let {
+            RegistrationFields.password.text.value = it.toString()
         }
 
         // Inflate current step layout
@@ -128,7 +130,31 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun setStepThreeObservers() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        with(registrationViewModel) {
+
+            waiting.setObserver { isWaiting ->
+                if (isWaiting) {
+                    Log.d(TAG, "Waiting for bitotsav id")
+                    completeStepThree()
+                }
+            }
+
+            allDone.setObserver { allDone ->
+                if (allDone) {
+                    Log.d(TAG, "Logging In")
+                    login()
+                }
+            }
+
+            currentStep.setObserver { nextStep ->
+                if (nextStep == 1) {
+                    findNavController().navigate(
+                        RegistrationFragmentDirections.nextStep()
+                    )
+                }
+            }
+
+        }
     }
 
     private fun fetchCaptchaResponseToken() {
@@ -164,6 +190,7 @@ class RegistrationFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt(KEY_CURSTEP, registrationViewModel.currentStep.value)
         outState.putString(KEY_EMAIL, RegistrationFields.email.text.value)
+        outState.putCharArray(KEY_PASSWORD, RegistrationFields.password.text.value.toCharArray())
         super.onSaveInstanceState(outState)
     }
 

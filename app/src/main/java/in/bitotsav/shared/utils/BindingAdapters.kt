@@ -5,10 +5,7 @@ import android.content.res.ColorStateList
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.AutoCompleteTextView
-import android.widget.Spinner
 import androidx.databinding.BindingAdapter
-import androidx.databinding.adapters.AutoCompleteTextViewBindingAdapter
-import androidx.databinding.adapters.SpinnerBindingAdapter
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -41,7 +38,9 @@ fun setImportantForAutofill(view: TextInputLayout, isImportant: Boolean) {
 
 @BindingAdapter("passwordHidingEnabled")
 fun setPasswordHidingEnabled(view: TextInputEditText, isPass: Boolean) {
-    isPass.onTrue { view.transformationMethod = PasswordTransformationMethod.getInstance() }
+    isPass.onTrue {
+        view.transformationMethod = PasswordTransformationMethod.getInstance()
+    }
 }
 
 @BindingAdapter("passwordToggleEnabled")
@@ -53,4 +52,19 @@ fun setPasswordToggleEnabled(view: TextInputLayout, isPass: Boolean) {
 @BindingAdapter("passwordToggleTint")
 fun setPasswordToggleTint(view: TextInputLayout, color: ColorStateList) {
     view.setPasswordVisibilityToggleTintList(color)
+}
+
+@BindingAdapter("actvAdapter", "useAsSpinner", requireAll = false)
+fun setActvAdapter(
+    view: AutoCompleteTextView, entries: List<String>, asSpinnerOnly: Boolean = true
+) {
+    view.setEntries(entries)
+    asSpinnerOnly.onTrue {
+        view.keyListener = null
+        view.setOnTouchListener { v, _ ->
+            (v as AutoCompleteTextView).showDropDown()
+            false
+        }
+    }
+
 }

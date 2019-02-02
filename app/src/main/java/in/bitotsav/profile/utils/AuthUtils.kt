@@ -94,7 +94,7 @@ fun verifyAsync(
     when (response.code()) {
         200 -> Log.d(TAG, "Registration Stage 2: OTP verification complete")
 
-        403 -> throw AuthException("Incorrect OTP")
+        403 -> throw AuthException("Incorrect OTP(s)")
         400 -> throw AuthException(
             "LOL 'Hacker', install the original app from Google Play Store"
         )

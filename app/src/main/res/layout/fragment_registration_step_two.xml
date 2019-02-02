@@ -31,7 +31,7 @@
             layout="@layout/include_edit_text"
             app:autofillHints="@{``}"
             app:color="@{viewModel.mColor}"
-            app:hint="@{@string/registration_label_phone_otp}"
+            app:hint="@{@string/registration_label_phoneOtp}"
             app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
             app:target="@{fields.phoneOtp}" />
 
@@ -40,7 +40,7 @@
             layout="@layout/include_edit_text"
             app:autofillHints="@{``}"
             app:color="@{viewModel.mColor}"
-            app:hint="@{@string/registration_label_email_otp}"
+            app:hint="@{@string/registration_label_emailOtp}"
             app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
             app:target="@{fields.emailOtp}" />
 

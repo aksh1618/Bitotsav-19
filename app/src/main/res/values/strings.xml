@@ -29,17 +29,17 @@
     <string name="registration_label_phone">Phone No (For First OTP) </string>
     <string name="registration_label_email">Email (For Second OTP)</string>
     <string name="registration_label_password">Password</string>
-    <string name="registration_label_password_again">Repeat Password</string>
     <string name="registration_label_next_step_one">Get OTPs</string>
 
     <!-- Step 2 -->
-    <string name="registration_label_phone_otp">Phone</string>
-    <string name="registration_label_email_otp">Email</string>
+    <string name="registration_label_phoneOtp">Phone OTP</string>
+    <string name="registration_label_emailOtp">Email OTP</string>
     <string name="registration_label_next_step_two">Verify OTPs</string>
 
     <!-- Step 3 -->
     <string name="registration_label_gender">Gender</string>
     <string name="registration_label_college">College</string>
+    <string name="registration_label_year">Year</string>
     <string name="registration_label_rollNo">Roll No</string>
     <string name="registration_label_source">Source</string>
     <!-- TODO [Refactor]: Should this be 'Get Bitotsav ID' ? -->
