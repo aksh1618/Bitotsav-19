@@ -20,7 +20,8 @@ object RegistrationFields {
     private val oneOfSourceOptionsValidation: String.() -> Boolean =
         { RegistrationFields.sourceOptions.contains(this) }
 
-    // Required Validation for every field
+    // Required Validation for every field. Only helpful when user clears a field
+    // after entering something.
     private val requiredValidationErrorPair = requiredValidation to "Required"
 
     // Step One

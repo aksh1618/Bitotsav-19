@@ -53,11 +53,25 @@ class RegistrationViewModel(private val authService: AuthenticationService) :
             3 -> listOf(gender, college, rollNo, source)
             else -> listOf(name, phone, email, password)
         }
+            .apply {
+                // Check each field and set error text if blank
+                // Can't use validations for this because they are checked only when
+                // text changes, which doesn't happen if user tries proceeding without
+                // entering anything. A way to check instead for no modifications
+                // (dirty bit ?) might be better, and allow validations to work.
+                forEach {
+                    it.text.value.isBlank().onTrue {
+                        it.errorText.value = "Required."
+                    }
+                }
+            }
             .any {
+                // Check for any non-empty error texts
                 it.errorText.value.isNotEmpty().onTrue {
                     Log.v(TAG, "Step ${currentStep.value}: ${it.text}: ${it.errorText}")
                 }
             }.onFalse {
+                // No non-empty error texts found
                 Log.v(TAG, "All validations succeeded for step ${currentStep.value}")
             }
 
