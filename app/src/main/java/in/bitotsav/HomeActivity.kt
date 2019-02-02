@@ -5,10 +5,9 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.android.synthetic.main.activity_home.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.viewModel
 
 class HomeActivity : AppCompatActivity() {
@@ -25,7 +24,8 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupBottomNavMenu() {
         val navController = Navigation.findNavController(this, R.id.mainFragment)
-        mainNavigation.setupWithNavController(navController)
+        findViewById<BottomNavigationView>(R.id.mainNavigation)
+            .setupWithNavController(navController)
     }
 
     private fun finalizeViewModels() {
