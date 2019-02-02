@@ -53,7 +53,7 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
                 }
                 FETCH_BC_TEAM -> {
                     val teamName = inputData.getString("teamName")
-                        ?: return Result.failure(workDataOf("Error" to "Team name empty"))
+                        ?: throw NonRetryableException("Championship team not found for this user.")
                     runBlocking {
                         get<ChampionshipTeamRepository>().fetchChampionshipTeamAsync(teamName).await()
                         val user = User(

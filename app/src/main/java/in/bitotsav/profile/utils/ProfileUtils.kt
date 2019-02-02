@@ -18,13 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlin.collections.List
-import kotlin.collections.Map
-import kotlin.collections.forEach
-import kotlin.collections.mapOf
-import kotlin.collections.mutableMapOf
 import kotlin.collections.set
-import kotlin.collections.toMap
 
 private const val TAG = "ProfileUtils"
 
@@ -81,6 +75,7 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
             }
             CurrentUser.userTeams = userTeams.toMap()
             Log.d(TAG, "Participant details stored in CurrentUser")
+            Log.d(TAG, CurrentUser.toString())
         } else {
             when (response.code()) {
                 403 -> throw AuthException("Authentication error")
