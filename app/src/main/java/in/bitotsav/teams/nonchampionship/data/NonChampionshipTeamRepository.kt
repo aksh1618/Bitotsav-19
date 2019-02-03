@@ -123,7 +123,7 @@ class NonChampionshipTeamRepository(
                     404 -> throw NonRetryableException("Team not found")
                     403 -> throw NonRetryableException("Event id or team leader id not found")
                     else -> throw NetworkException(
-                        "Failed to retrieve {$eventId, $teamLeaderId}. Code: ${response.code()}"
+                        "Failed to retrieve {$eventId, $teamLeaderId}. Response code: ${response.code()}"
                     )
                 }
             }

@@ -42,7 +42,6 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
 //                "email": "$email,
 //                "id": $id
 //            }]
-//            TODO: Store email and members here
             val name = response.body()?.get("name")?.toString()
             val email = response.body()?.get("email")?.toString()
             val bitotsavId = response.body()?.get("id")?.toString()
@@ -82,7 +81,7 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
             when (response.code()) {
                 403 -> throw AuthException("Authentication error")
                 404 -> throw NonRetryableException("Participant not found")
-                else -> throw NetworkException("Unable to fetch the participant")
+                else -> throw NetworkException("Unable to fetch the participant. Response code: ${response.code()}")
             }
         }
     }

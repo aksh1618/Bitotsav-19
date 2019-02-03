@@ -80,7 +80,10 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
             } else {
                 when (response.code()) {
                     404 -> throw NonRetryableException("Event:$eventId not found")
-                    else -> throw NetworkException("Error fetching Event:$eventId from the server")
+                    else -> throw NetworkException(
+                        "Error fetching Event:$eventId from the server." +
+                                " Response code: ${response.code()}"
+                    )
                 }
             }
         }

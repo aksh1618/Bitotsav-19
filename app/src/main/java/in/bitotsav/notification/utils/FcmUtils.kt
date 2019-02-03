@@ -36,7 +36,7 @@ fun sendFcmTokenAsync(authToken: String, fcmToken: String): Deferred<Any> {
 //                TODO("Delete local token for 403")
                 403 -> throw NonRetryableException("Fcm token missing or user authentication failed")
                 409 -> throw NonRetryableException("Token already exists")
-                else -> throw NetworkException("Unable to send token to server")
+                else -> throw NetworkException("Unable to send token to server. Response code: ${response.code()}")
             }
         }
     }
@@ -61,7 +61,7 @@ fun deleteFcmTokenAsync(authToken: String, fcmToken: String): Deferred<Any> {
 //                TODO("Delete local token for 403")
                 403 -> throw NonRetryableException("Fcm token missing or user authentication failed")
                 404 -> throw NonRetryableException("Token not found")
-                else -> throw NetworkException("Unable to send token to server")
+                else -> throw NetworkException("Unable to send token to server. Response code: ${response.code()}")
             }
         }
     }

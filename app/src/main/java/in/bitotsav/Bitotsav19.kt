@@ -12,6 +12,7 @@ import `in`.bitotsav.shared.workers.EventWorker
 import `in`.bitotsav.shared.workers.ResultWorkType
 import `in`.bitotsav.shared.workers.ResultWorker
 import android.app.Application
+import android.content.SharedPreferences
 import android.os.Build
 import android.util.Log
 import androidx.work.WorkManager
@@ -25,6 +26,7 @@ import org.koin.core.context.startKoin
 
 class Bitotsav19 : Application() {
     companion object {
+        private const val IS_FIRST_RUN = "isFirstRun"
         private const val TAG = "Bitotsav19"
     }
 
@@ -40,10 +42,6 @@ class Bitotsav19 : Application() {
                 Log.d(TAG, msg)
             }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            createNotificationChannels(this)
-        }
-
         startKoin {
             androidContext(this@Bitotsav19)
             // Enable logging, log.INFO by default
@@ -53,12 +51,25 @@ class Bitotsav19 : Application() {
             modules(repositoriesModule, retrofitModule, viewModelsModule, sharedPrefsModule)
         }
 
-        get<EventRepository>().getEventsFromLocalJson()
+        if (get<SharedPreferences>().getBoolean(IS_FIRST_RUN, true)) {
+            init()
+            get<SharedPreferences>().edit().putBoolean(IS_FIRST_RUN, false).apply()
+        }
+
         // TODO: Remove this.
         val eventWork =
             getWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
         val winningTeamsWork =
             getWork<ResultWorker>(workDataOf("type" to ResultWorkType.WINNING_TEAMS.name))
         WorkManager.getInstance().beginWith(eventWork).then(winningTeamsWork).enqueue()
+    }
+
+    // Place code which needs to run on first run only here
+    private fun init() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannels(this)
+        }
+
+        get<EventRepository>().getEventsFromLocalJson()
     }
 }

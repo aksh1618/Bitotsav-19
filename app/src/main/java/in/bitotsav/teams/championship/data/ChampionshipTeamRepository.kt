@@ -39,7 +39,7 @@ class ChampionshipTeamRepository(private val championshipTeamDao: ChampionshipTe
                 insert(*teamsByRank.toTypedArray())
                 Log.d(TAG, "Inserted all championship teams into DB")
             } else {
-                throw NetworkException("Fetch all championship teams failed. Code: ${response.code()}")
+                throw NetworkException("Fetch all championship teams failed. Response code: ${response.code()}")
             }
         }
     }
@@ -57,7 +57,7 @@ class ChampionshipTeamRepository(private val championshipTeamDao: ChampionshipTe
                 when (response.code()) {
                     403 -> throw NonRetryableException("Team name not sent in body")
                     404 -> throw NonRetryableException("Team name not found")
-                    else -> throw NetworkException("Unable to fetch team: $teamName")
+                    else -> throw NetworkException("Unable to fetch team: $teamName. Response code: ${response.code()}")
                 }
             }
         }
