@@ -73,3 +73,11 @@ class Bitotsav19 : Application() {
         get<EventRepository>().getEventsFromLocalJson()
     }
 }
+
+// Global TODOs
+// TODO: Move tools:context in all layout files from <layout> to root inside <layout>
+// TODO: [Refactor] The magnum opus: Wire color change into the lifecycle, so every
+//  major interactions causes a color change!
+// TODO: [WARN]: Figure out if lifecycleOwner passed to data binding should be
+//  viewLifecycleOwner or
+// TODO: [Refactor] Inject all services as AuthenticationService is right now

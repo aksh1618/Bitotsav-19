@@ -1,10 +1,12 @@
 package `in`.bitotsav.profile.data
 
 import `in`.bitotsav.profile.utils.MutableLiveDataTextWithValidation
-import `in`.bitotsav.profile.utils.NonNullMediatorLiveData
 import `in`.bitotsav.profile.utils.NonNullMutableLiveData
 import `in`.bitotsav.shared.utils.isLong
 import `in`.bitotsav.shared.utils.isProperEmail
+import `in`.bitotsav.shared.utils.onFalse
+import `in`.bitotsav.shared.utils.onTrue
+import android.util.Log
 
 object RegistrationFields {
 
@@ -17,6 +19,8 @@ object RegistrationFields {
     private val lengthEqualToSixValidation: String.() -> Boolean = { length == 6 }
     private val oneOfGenderOptionsValidation: String.() -> Boolean =
         { RegistrationFields.genderOptions.contains(this) }
+    private val oneOfYearOptionsValidation: String.() -> Boolean =
+        { RegistrationFields.yearOptions.contains(this) }
     private val oneOfSourceOptionsValidation: String.() -> Boolean =
         { RegistrationFields.sourceOptions.contains(this) }
 
@@ -61,7 +65,10 @@ object RegistrationFields {
         oneOfGenderOptionsValidation to "Please select from given options."
     )
     val college = MutableLiveDataTextWithValidation(requiredValidationErrorPair)
-    val year = MutableLiveDataTextWithValidation(requiredValidationErrorPair)
+    val year = MutableLiveDataTextWithValidation(
+        requiredValidationErrorPair,
+        oneOfYearOptionsValidation to "Please select from given options."
+    )
     val rollNo = MutableLiveDataTextWithValidation(requiredValidationErrorPair)
     val source = MutableLiveDataTextWithValidation(
         requiredValidationErrorPair,
@@ -92,4 +99,20 @@ object RegistrationFields {
         "Newspaper",
         "Others"
     )
+
+    val stepOneFields = listOf(name, phone, email, password)
+    val stepTwoFields = listOf(phoneOtp, emailOtp)
+    val stepThreeFields = listOf(gender, college, year, rollNo, source)
+    val allFields = listOf(
+        *stepOneFields.toTypedArray(),
+        *stepTwoFields.toTypedArray(),
+        *stepThreeFields.toTypedArray()
+    )
+
+    fun resetAll() {
+        allFields.forEach {
+            it.text.value = ""
+            it.errorText.value = ""
+        }
+    }
 }

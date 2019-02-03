@@ -43,9 +43,9 @@
         tools:layout="@layout/fragment_login">
 
         <action
-            android:id="@+id/action_destLogin_to_destRegistrationStepOne"
-            app:destination="@id/destRegistrationStepOne"
-            app:popUpTo="@+id/destLogin" />
+            android:id="@+id/action_destLogin_to_destRegistration"
+            app:destination="@id/destRegistration"
+            app:popUpTo="@+id/destProfile" />
 
         <action
             android:id="@+id/action_destLogin_to_destProfile"
@@ -55,49 +55,9 @@
     </fragment>
 
     <fragment
-        android:id="@+id/destRegistrationStepOne"
+        android:id="@+id/destRegistration"
         android:name="in.bitotsav.profile.ui.RegistrationFragment"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration_step_one" >
-        <argument
-            android:name="registrationStepNumber"
-            app:argType="integer"
-            android:defaultValue="1" />
-        <action
-            android:id="@+id/next_step"
-            app:destination="@id/destRegistrationStepTwo"
-            app:popUpTo="@+id/destLogin" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/destRegistrationStepTwo"
-        android:name="in.bitotsav.profile.ui.RegistrationFragment"
-        android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration_step_two" >
-        <argument
-            android:name="registrationStepNumber"
-            app:argType="integer"
-            android:defaultValue="2" />
-        <action
-            android:id="@+id/next_step"
-            app:destination="@id/destRegistrationStepThree"
-            app:popUpTo="@+id/destLogin" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/destRegistrationStepThree"
-        android:name="in.bitotsav.profile.ui.RegistrationFragment"
-        android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration_step_three" >
-        <argument
-            android:name="registrationStepNumber"
-            app:argType="integer"
-            android:defaultValue="3" />
-        <!-- TODO: Ensure that this doesn't cause double destProfile in pop stack -->
-        <action
-            android:id="@+id/next_step"
-            app:destination="@id/destProfile"
-            app:popUpTo="@+id/destProfile" />
-    </fragment>
+        tools:layout="@layout/fragment_registration"/>
 
 </navigation>

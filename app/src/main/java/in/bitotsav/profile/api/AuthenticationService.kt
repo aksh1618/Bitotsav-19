@@ -23,11 +23,4 @@ interface AuthenticationService {
 
     @GET("getCollegeList")
     fun getCollegeListAsync(): Deferred<Response<Map<String, List<String>>>>
-
-    companion object {
-        val api: AuthenticationService by lazy {
-            get().koin.get<Retrofit>()
-                .create(AuthenticationService::class.java)
-        }
-    }
 }

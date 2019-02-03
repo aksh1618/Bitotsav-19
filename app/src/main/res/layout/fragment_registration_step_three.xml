@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".profile.ui.RegistrationFragment">
+    tools:context=".profile.ui.RegistrationStepFragment">
 
     <data>
 
@@ -20,142 +20,147 @@
 
     </data>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:fillViewport="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/genderLayout"
-            style="@style/Widget.Bitotsav.TextInput"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:hint="@string/registration_label_gender"
-            app:boxStrokeColor="@{viewModel.mColor}"
-            app:errorEnabled="true"
-            app:errorText="@{fields.gender.errorText}"
-            app:passwordToggleTint="@{viewModel.mColor}">
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <AutoCompleteTextView
-                android:id="@+id/genderEditText"
-                style="@style/TextAppearance.Bitotsav.Body1"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/genderLayout"
+                style="@style/Widget.Bitotsav.TextInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:completionThreshold="0"
-                android:ems="10"
-                android:inputType="text"
-                android:paddingLeft="12dp"
-                android:text="@={fields.gender.text}"
-                app:actvAdapter="@{fields.genderOptions}"
-                app:useAsSpinner="@{true}" />
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:hint="@string/registration_label_gender"
+                app:boxStrokeColor="@{viewModel.mColor}"
+                app:errorEnabled="true"
+                app:errorText="@{fields.gender.errorText}"
+                app:passwordToggleTint="@{viewModel.mColor}">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/genderEditText"
+                    style="@style/TextAppearance.Bitotsav.Body1"
+                    android:layout_width="@dimen/form_field_width"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="0"
+                    android:inputType="text"
+                    android:paddingLeft="12dp"
+                    android:text="@={fields.gender.text}"
+                    app:actvAdapter="@{fields.genderOptions}"
+                    app:useAsSpinner="@{true}" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/collegeLayout"
-            style="@style/Widget.Bitotsav.TextInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:hint="@string/registration_label_college"
-            app:boxStrokeColor="@{viewModel.mColor}"
-            app:errorEnabled="true"
-            app:errorText="@{fields.gender.errorText}"
-            app:passwordToggleTint="@{viewModel.mColor}">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <AutoCompleteTextView
-                android:id="@+id/collegeEditText"
-                style="@style/TextAppearance.Bitotsav.Body1"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/collegeLayout"
+                style="@style/Widget.Bitotsav.TextInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:completionThreshold="0"
-                android:ems="10"
-                android:inputType="text"
-                android:paddingLeft="12dp"
-                android:text="@={fields.college.text}"
-                app:actvAdapter="@{fields.collegeOptions}"
-                app:useAsSpinner="@{false}" />
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:hint="@string/registration_label_college"
+                app:boxStrokeColor="@{viewModel.mColor}"
+                app:errorEnabled="true"
+                app:errorText="@{fields.college.errorText}"
+                app:passwordToggleTint="@{viewModel.mColor}">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/collegeEditText"
+                    style="@style/TextAppearance.Bitotsav.Body1"
+                    android:layout_width="@dimen/form_field_width"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="0"
+                    android:dropDownAnchor="@id/collegeLayout"
+                    android:inputType="text"
+                    android:paddingLeft="12dp"
+                    android:text="@={fields.college.text}"
+                    app:actvAdapter="@{fields.collegeOptions}"
+                    app:useAsSpinner="@{false}" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/year"
-            style="@style/Widget.Bitotsav.TextInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:hint="@string/registration_label_year"
-            app:boxStrokeColor="@{viewModel.mColor}"
-            app:errorEnabled="true"
-            app:errorText="@{fields.gender.errorText}"
-            app:passwordToggleTint="@{viewModel.mColor}">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <AutoCompleteTextView
-                android:id="@+id/yearEditText"
-                style="@style/TextAppearance.Bitotsav.Body1"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/year"
+                style="@style/Widget.Bitotsav.TextInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:completionThreshold="0"
-                android:ems="10"
-                android:inputType="text"
-                android:paddingLeft="12dp"
-                android:text="@={fields.year.text}"
-                app:actvAdapter="@{fields.yearOptions}"
-                app:useAsSpinner="@{true}" />
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:hint="@string/registration_label_year"
+                app:boxStrokeColor="@{viewModel.mColor}"
+                app:errorEnabled="true"
+                app:errorText="@{fields.year.errorText}"
+                app:passwordToggleTint="@{viewModel.mColor}">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/yearEditText"
+                    style="@style/TextAppearance.Bitotsav.Body1"
+                    android:layout_width="@dimen/form_field_width"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="0"
+                    android:inputType="text"
+                    android:paddingStart="12dp"
+                    android:text="@={fields.year.text}"
+                    app:actvAdapter="@{fields.yearOptions}"
+                    app:useAsSpinner="@{true}" />
 
-        <include
-            android:id="@+id/rollNo"
-            layout="@layout/include_edit_text"
-            app:autofillHints="@{``}"
-            app:color="@{viewModel.mColor}"
-            app:hint="@{@string/registration_label_rollNo}"
-            app:inputType="@{InputType.TYPE_CLASS_TEXT}"
-            app:target="@{fields.rollNo}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/sourceLayout"
-            style="@style/Widget.Bitotsav.TextInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:hint="@string/registration_label_source"
-            app:boxStrokeColor="@{viewModel.mColor}"
-            app:errorEnabled="true"
-            app:errorText="@{fields.gender.errorText}"
-            app:passwordToggleTint="@{viewModel.mColor}">
+            <include
+                android:id="@+id/rollNo"
+                layout="@layout/include_edit_text"
+                app:autofillHints="@{``}"
+                app:color="@{viewModel.mColor}"
+                app:hint="@{@string/registration_label_rollNo}"
+                app:inputType="@{InputType.TYPE_CLASS_TEXT}"
+                app:target="@{fields.rollNo}" />
 
-            <AutoCompleteTextView
-                android:id="@+id/sourceEditText"
-                style="@style/TextAppearance.Bitotsav.Body1"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sourceLayout"
+                style="@style/Widget.Bitotsav.TextInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:completionThreshold="0"
-                android:ems="10"
-                android:inputType="text"
-                android:paddingLeft="12dp"
-                android:text="@={fields.source.text}"
-                app:actvAdapter="@{fields.sourceOptions}"
-                app:useAsSpinner="@{true}" />
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:hint="@string/registration_label_source"
+                app:boxStrokeColor="@{viewModel.mColor}"
+                app:errorEnabled="true"
+                app:errorText="@{fields.source.errorText}"
+                app:passwordToggleTint="@{viewModel.mColor}">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/sourceEditText"
+                    style="@style/TextAppearance.Bitotsav.Body1"
+                    android:layout_width="@dimen/form_field_width"
+                    android:layout_height="wrap_content"
+                    android:completionThreshold="0"
+                    android:inputType="text"
+                    android:paddingLeft="12dp"
+                    android:text="@={fields.source.text}"
+                    app:actvAdapter="@{fields.sourceOptions}"
+                    app:useAsSpinner="@{true}" />
 
-        <include
-            android:id="@+id/next"
-            layout="@layout/include_loading_button_with_error"
-            app:color="@{viewModel.mColor}"
-            app:errorText="@{viewModel.registrationError}"
-            app:label="@{@string/registration_label_next_step_three}"
-            app:listener="@{() -> viewModel.next()}"
-            app:loading="@{viewModel.waiting}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            <include
+                android:id="@+id/next"
+                layout="@layout/include_loading_button_with_error"
+                app:color="@{viewModel.mColor}"
+                app:errorText="@{viewModel.registrationError}"
+                app:label="@{@string/registration_label_next_step_three}"
+                app:listener="@{() -> viewModel.next()}"
+                app:loading="@{viewModel.waiting}" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </layout>

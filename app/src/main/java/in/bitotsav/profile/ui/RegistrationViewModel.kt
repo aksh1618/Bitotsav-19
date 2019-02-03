@@ -13,6 +13,9 @@ import `in`.bitotsav.profile.data.RegistrationFields.phone
 import `in`.bitotsav.profile.data.RegistrationFields.phoneOtp
 import `in`.bitotsav.profile.data.RegistrationFields.rollNo
 import `in`.bitotsav.profile.data.RegistrationFields.source
+import `in`.bitotsav.profile.data.RegistrationFields.stepOneFields
+import `in`.bitotsav.profile.data.RegistrationFields.stepThreeFields
+import `in`.bitotsav.profile.data.RegistrationFields.stepTwoFields
 import `in`.bitotsav.profile.data.RegistrationFields.year
 import `in`.bitotsav.profile.data.RegistrationFields.yearOptions
 import `in`.bitotsav.profile.utils.*
@@ -49,9 +52,9 @@ class RegistrationViewModel(private val authService: AuthenticationService) :
     // Common
     private val anyErrors
         get() = when (currentStep.value) {
-            2 -> listOf(phoneOtp, emailOtp)
-            3 -> listOf(gender, college, rollNo, source)
-            else -> listOf(name, phone, email, password)
+            2 -> stepTwoFields
+            3 -> stepThreeFields
+            else -> stepOneFields
         }
             .apply {
                 // Check each field and set error text if blank
@@ -68,7 +71,10 @@ class RegistrationViewModel(private val authService: AuthenticationService) :
             .any {
                 // Check for any non-empty error texts
                 it.errorText.value.isNotEmpty().onTrue {
-                    Log.v(TAG, "Step ${currentStep.value}: ${it.text}: ${it.errorText}")
+                    Log.v(
+                        TAG,
+                        "Step ${currentStep.value}: ${it.text.value}: ${it.errorText.value}"
+                    )
                 }
             }.onFalse {
                 // No non-empty error texts found
@@ -166,8 +172,8 @@ class RegistrationViewModel(private val authService: AuthenticationService) :
     fun login() {
         scope.launch {
             try {
-                // Give time to DB to store User
-                delay(1000)
+
+                delay(1000) // Server requires some time before login
                 loginAsync(authService, email.text.value, password.text.value).await()
                 syncUserAndRun { sendFcmTokenToServer() }
                 loggedIn.value = true
@@ -177,7 +183,7 @@ class RegistrationViewModel(private val authService: AuthenticationService) :
             } finally {
 
                 waiting.value = false
-                currentStep.value = 1
+                currentStep.value = 4
 
             }
         }
@@ -185,7 +191,10 @@ class RegistrationViewModel(private val authService: AuthenticationService) :
 
     fun next() {
         Log.v(TAG, "Attempting step ${currentStep.value}")
-        if (anyErrors) return
+        if (anyErrors) {
+            registrationError.value = "Error(s) in some field(s)"
+            return
+        }
         registrationError.value = ""
         waiting.value = true
     }
