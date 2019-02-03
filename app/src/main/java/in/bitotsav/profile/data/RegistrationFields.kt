@@ -8,7 +8,7 @@ import `in`.bitotsav.shared.utils.onFalse
 import `in`.bitotsav.shared.utils.onTrue
 import android.util.Log
 
-object RegistrationFields {
+class RegistrationFields {
 
     // Validations
     private val requiredValidation: String.() -> Boolean = { isNotBlank() }
@@ -18,11 +18,11 @@ object RegistrationFields {
     private val numbersOnlyValidation: String.() -> Boolean = { isLong() }
     private val lengthEqualToSixValidation: String.() -> Boolean = { length == 6 }
     private val oneOfGenderOptionsValidation: String.() -> Boolean =
-        { RegistrationFields.genderOptions.contains(this) }
+        { genderOptions.contains(this) }
     private val oneOfYearOptionsValidation: String.() -> Boolean =
-        { RegistrationFields.yearOptions.contains(this) }
+        { yearOptions.contains(this) }
     private val oneOfSourceOptionsValidation: String.() -> Boolean =
-        { RegistrationFields.sourceOptions.contains(this) }
+        { sourceOptions.contains(this) }
 
     // Required Validation for every field. Only helpful when user clears a field
     // after entering something.

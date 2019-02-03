@@ -1,10 +1,8 @@
 package `in`.bitotsav.profile.ui
 
-import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentRegistrationStepOneBinding
 import `in`.bitotsav.databinding.FragmentRegistrationStepThreeBinding
 import `in`.bitotsav.databinding.FragmentRegistrationStepTwoBinding
-import `in`.bitotsav.profile.data.RegistrationFields
 import `in`.bitotsav.shared.utils.runOnMinApi
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -32,16 +30,17 @@ class RegistrationStepFragment : Fragment() {
     }
 
     private val registrationViewModel by sharedViewModel<RegistrationViewModel>()
+    private val currentStep by lazy {
+        arguments?.let {
+            RegistrationStepFragmentArgs.fromBundle(it).registrationStepNumber.apply {
+                Log.v(TAG, "SafeArgs: Registration step $this")
+            }
+        } ?: 1.apply { Log.e(TAG, "SafeArgs betrayed us") }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-
-        val currentStep = arguments?.let {
-            RegistrationStepFragmentArgs.fromBundle(it).registrationStepNumber.apply {
-                Log.e(TAG, "SafeArgs: Registration step $this")
-            }
-        } ?: 1.apply { Log.e(TAG, "SafeArgs betrayed us") }
 
         // Inflate current step layout
         val binding = when (currentStep) {
@@ -49,7 +48,7 @@ class RegistrationStepFragment : Fragment() {
                 .inflate(inflater, container, false)
                 .apply {
                     lifecycleOwner = viewLifecycleOwner
-                    fields = RegistrationFields
+                    fields = registrationViewModel.fields
                     viewModel = registrationViewModel
                     setStepTwoObservers()
                 }
@@ -57,7 +56,7 @@ class RegistrationStepFragment : Fragment() {
                 .inflate(inflater, container, false)
                 .apply {
                     lifecycleOwner = viewLifecycleOwner
-                    fields = RegistrationFields
+                    fields = registrationViewModel.fields
                     viewModel = registrationViewModel
                     setStepThreeObservers()
                 }
@@ -65,7 +64,7 @@ class RegistrationStepFragment : Fragment() {
                 .inflate(inflater, container, false)
                 .apply {
                     lifecycleOwner = viewLifecycleOwner
-                    fields = RegistrationFields
+                    fields = registrationViewModel.fields
                     viewModel = registrationViewModel
                     setStepOneObservers()
                 }
@@ -78,7 +77,7 @@ class RegistrationStepFragment : Fragment() {
 
             waiting.setObserver { isWaiting ->
                 if (isWaiting) {
-                    Log.d(TAG, "Waiting for captcha...")
+                    Log.v(TAG, "Waiting for captcha...")
                     // TODO: [Refactor] Should this be called directly from xml?
                     //  Or should xml only have access to the ViewModel (Or is that
                     //  ridiculous as it already has access to this Fragment anyway,
@@ -88,7 +87,7 @@ class RegistrationStepFragment : Fragment() {
             }
 
             // TODO: [Refactor] This could be common, single observer
-            currentStep.setObserver { nextStep ->
+            nextStep.setObserver { nextStep ->
                 if (nextStep == 2) {
                     commitAutofillFields()
                     findNavController().navigate(
@@ -105,14 +104,14 @@ class RegistrationStepFragment : Fragment() {
 
             waiting.setObserver { isWaiting ->
                 if (isWaiting) {
-                    Log.d(TAG, "Waiting for otp verification")
+                    Log.v(TAG, "Waiting for otp verification")
                     completeStepTwo()
                 }
             }
 
-            currentStep.setObserver { nextStep ->
+            nextStep.setObserver { nextStep ->
                 if (nextStep == 3) {
-                    Log.d(TAG, "Finished step 2")
+                    Log.v(TAG, "Finished step 2")
                     findNavController().navigate(
                         RegistrationStepFragmentDirections.nextStep()
                     )
@@ -128,28 +127,17 @@ class RegistrationStepFragment : Fragment() {
 
             waiting.setObserver { isWaiting ->
                 if (isWaiting) {
-                    Log.d(TAG, "Waiting for bitotsav id")
+                    Log.v(TAG, "Waiting for bitotsav id")
                     completeStepThree()
                 }
             }
 
             allDone.setObserver { allDone ->
                 if (allDone) {
-                    Log.d(TAG, "Logging In")
+                    Log.v(TAG, "Logging In")
                     login()
                 }
             }
-
-            currentStep.setObserver { nextStep ->
-                if (nextStep == 4) {
-                    // TODO: isLoggedIn can be checked to determine where to navigate to.
-                    Log.d(TAG, "Finished step 3")
-                    findNavController().navigate(
-                        RegistrationStepFragmentDirections.nextStep()
-                    )
-                }
-            }
-
         }
     }
 

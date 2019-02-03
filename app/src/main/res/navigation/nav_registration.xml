@@ -19,6 +19,8 @@
         <action
             android:id="@+id/next_step"
             app:destination="@+id/destRegistrationStepTwo"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popUpTo="@+id/nav_registration"></action>
 
     </fragment>
@@ -37,6 +39,8 @@
         <action
             android:id="@+id/next_step"
             app:destination="@id/destRegistrationStepThree"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
             app:popUpTo="@+id/nav_registration"></action>
 
     </fragment>
@@ -51,13 +55,6 @@
             android:name="registrationStepNumber"
             android:defaultValue="3"
             app:argType="integer" />
-
-        <!-- TODO: Ensure that this doesn't cause double destProfile in pop stack -->
-
-        <action
-            android:id="@+id/next_step"
-            app:destination="@+id/nav_registration"
-            app:popUpTo="@+id/nav_registration" />
 
     </fragment>
 

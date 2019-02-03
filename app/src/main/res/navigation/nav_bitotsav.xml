@@ -45,11 +45,17 @@
         <action
             android:id="@+id/action_destLogin_to_destRegistration"
             app:destination="@id/destRegistration"
-            app:popUpTo="@+id/destProfile" />
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/destLogin" />
 
         <action
             android:id="@+id/action_destLogin_to_destProfile"
             app:destination="@id/destProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
             app:popUpTo="@+id/destSchedule" />
 
     </fragment>
@@ -58,6 +64,13 @@
         android:id="@+id/destRegistration"
         android:name="in.bitotsav.profile.ui.RegistrationFragment"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration"/>
+        tools:layout="@layout/fragment_registration">
+        <action
+            android:id="@+id/action_destRegistration_to_destProfile"
+            app:destination="@id/destProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@+id/destSchedule" />
+    </fragment>
 
 </navigation>
