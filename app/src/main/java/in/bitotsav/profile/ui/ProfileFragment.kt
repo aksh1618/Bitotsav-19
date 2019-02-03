@@ -43,7 +43,21 @@ class ProfileFragment : Fragment() {
                 lifecycleOwner = this@ProfileFragment
                 // TODO: May not be needed.
                 viewModel = profileViewModel
+                setObservers()
             }
             .root
+    }
+
+    private fun setObservers() {
+        profileViewModel.loggedOut.observe(viewLifecycleOwner, Observer { loggedOut ->
+            if (loggedOut) {
+                findNavController().navigate(R.id.action_destProfile_to_destLogin)
+            }
+        })
+    }
+
+    override fun onDestroyView() {
+        profileViewModel.loading.value = false
+        super.onDestroyView()
     }
 }
