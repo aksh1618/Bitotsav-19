@@ -5,9 +5,7 @@ import `in`.bitotsav.feed.api.FeedService
 import `in`.bitotsav.shared.data.Repository
 import `in`.bitotsav.shared.exceptions.DatabaseException
 import `in`.bitotsav.shared.exceptions.NetworkException
-import `in`.bitotsav.shared.utils.forEachParallel
-import `in`.bitotsav.shared.utils.getWork
-import `in`.bitotsav.shared.utils.scheduleWork
+import `in`.bitotsav.shared.utils.*
 import `in`.bitotsav.shared.workers.EventWorkType
 import `in`.bitotsav.shared.workers.EventWorker
 import `in`.bitotsav.shared.workers.ResultWorkType
@@ -62,16 +60,17 @@ class FeedRepository(private val feedDao: FeedDao) : Repository<Feed>, KoinCompo
                                 workDataOf("type" to ResultWorkType.RESULT.name, "eventId" to it.eventId)
                             )
                             WorkManager.getInstance().beginUniqueWork(
-                                it.eventId.toString(),
+                                getWorkNameForResultWorker(ResultWorkType.RESULT, it.eventId),
                                 ExistingWorkPolicy.REPLACE,
                                 eventWork
                             ).then(resultWork).enqueue()
                         } else {
-                            scheduleWork<EventWorker>(
+                            scheduleUniqueWork<EventWorker>(
                                 workDataOf(
                                     "type" to EventWorkType.FETCH_EVENT.name,
                                     "eventId" to it.eventId
-                                )
+                                ),
+                                getWorkNameForEventWorker(EventWorkType.FETCH_EVENT, it.eventId)
                             )
                         }
                         val isStarred = get<EventRepository>().isStarred(it.eventId) ?: false

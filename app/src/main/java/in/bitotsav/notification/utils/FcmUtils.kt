@@ -4,6 +4,8 @@ import `in`.bitotsav.notification.fcm.api.FcmTokenService
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.exceptions.NetworkException
 import `in`.bitotsav.shared.exceptions.NonRetryableException
+import `in`.bitotsav.shared.utils.getWorkNameForFcmTokenWorker
+import `in`.bitotsav.shared.utils.scheduleUniqueWork
 import `in`.bitotsav.shared.utils.scheduleWork
 import `in`.bitotsav.shared.workers.FcmTokenWorkType
 import `in`.bitotsav.shared.workers.FcmTokenWorker
@@ -72,12 +74,13 @@ fun sendFcmTokenToServer() {
         Log.wtf(TAG, "Token is missing!")
         return
     }
-    scheduleWork<FcmTokenWorker>(
+    scheduleUniqueWork<FcmTokenWorker>(
         workDataOf(
             "type" to FcmTokenWorkType.SEND_TOKEN.name,
             "authToken" to authToken,
             "fcmToken" to fcmToken
-        )
+        ),
+        getWorkNameForFcmTokenWorker(FcmTokenWorkType.SEND_TOKEN)
     )
 }
 

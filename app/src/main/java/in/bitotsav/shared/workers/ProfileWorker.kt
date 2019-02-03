@@ -67,9 +67,17 @@ class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context
             workDataOf("type" to TeamWorkType.CLEAN_OLD_TEAMS.name)
         )
         if (fetchUserTeamWorks.isEmpty()) {
-            WorkManager.getInstance().enqueue(fetchChampionshipTeamWork)
+            WorkManager.getInstance().enqueueUniqueWork(
+                "FETCH_ALL_USER_TEAMS",
+                ExistingWorkPolicy.REPLACE,
+                fetchChampionshipTeamWork
+            )
         } else {
-            WorkManager.getInstance().beginWith(fetchUserTeamWorks)
+            WorkManager.getInstance().beginUniqueWork(
+                "FETCH_ALL_USER_TEAMS",
+                ExistingWorkPolicy.REPLACE,
+                fetchUserTeamWorks
+            )
                 .then(fetchChampionshipTeamWork)
                 .then(cleanupWork)
                 .enqueue()

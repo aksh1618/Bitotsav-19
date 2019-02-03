@@ -5,11 +5,13 @@ import `in`.bitotsav.profile.api.ProfileService
 import `in`.bitotsav.shared.exceptions.NetworkException
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.getWork
+import `in`.bitotsav.shared.utils.getWorkNameForProfileWorker
 import `in`.bitotsav.shared.workers.ProfileWorkType
 import `in`.bitotsav.shared.workers.ProfileWorker
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.work.ExistingWorkPolicy
 import androidx.work.Operation
 import androidx.work.WorkManager
 import androidx.work.workDataOf
@@ -92,7 +94,11 @@ fun syncUserProfile(): ListenableFuture<Operation.State.SUCCESS> {
         workDataOf("type" to ProfileWorkType.FETCH_PROFILE.name)
     )
 
-    return WorkManager.getInstance().enqueue(profileWork).result
+    return WorkManager.getInstance().enqueueUniqueWork(
+        getWorkNameForProfileWorker(ProfileWorkType.FETCH_PROFILE),
+        ExistingWorkPolicy.REPLACE,
+        profileWork
+    ).result
 }
 
 fun syncUserAndRun(block: () -> Unit) {

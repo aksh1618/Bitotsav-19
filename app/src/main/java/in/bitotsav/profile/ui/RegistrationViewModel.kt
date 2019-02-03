@@ -22,6 +22,7 @@ import `in`.bitotsav.shared.utils.onFalse
 import `in`.bitotsav.shared.utils.onTrue
 import android.util.Log
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class RegistrationViewModel(private val authService: AuthenticationService) :
@@ -151,7 +152,8 @@ class RegistrationViewModel(private val authService: AuthenticationService) :
     fun login() {
         scope.launch {
             try {
-
+                // Give time to DB to store User
+                delay(1000)
                 loginAsync(authService, email.text.value, password.text.value).await()
                 syncUserAndRun { sendFcmTokenToServer() }
                 loggedIn.value = true

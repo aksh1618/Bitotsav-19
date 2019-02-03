@@ -9,8 +9,7 @@ import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
 import `in`.bitotsav.notification.utils.sendFcmTokenToServer
 import `in`.bitotsav.profile.CurrentUser
-import `in`.bitotsav.shared.utils.getWork
-import `in`.bitotsav.shared.utils.scheduleWork
+import `in`.bitotsav.shared.utils.*
 import `in`.bitotsav.shared.workers.*
 import android.content.Intent
 import android.util.Log
@@ -62,12 +61,20 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
             }
 
             if (UpdateType.ALL_EVENTS == updateType) {
-                scheduleWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
+                scheduleUniqueWork<EventWorker>(
+                    workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name),
+                    getWorkNameForEventWorker(EventWorkType.FETCH_ALL_EVENTS)
+                )
+//                scheduleWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
                 return
             }
 
             if (UpdateType.ALL_TEAMS == updateType) {
-                scheduleWork<TeamWorker>(workDataOf("type" to TeamWorkType.FETCH_ALL_TEAMS.name))
+                scheduleUniqueWork<TeamWorker>(
+                    workDataOf("type" to TeamWorkType.FETCH_ALL_TEAMS.name),
+                    getWorkNameForTeamWorker(TeamWorkType.FETCH_ALL_TEAMS)
+                )
+//                scheduleWork<TeamWorker>(workDataOf("type" to TeamWorkType.FETCH_ALL_TEAMS.name))
                 return
             }
 
@@ -115,9 +122,13 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
                     }
 
                     if (updateType == UpdateType.EVENT) {
-                        scheduleWork<EventWorker>(
-                            workDataOf("type" to EventWorkType.FETCH_EVENT.name, "eventId" to eventId)
+                        scheduleUniqueWork<EventWorker>(
+                            workDataOf("type" to EventWorkType.FETCH_EVENT.name, "eventId" to eventId),
+                            getWorkNameForEventWorker(EventWorkType.FETCH_EVENT, eventId)
                         )
+//                        scheduleWork<EventWorker>(
+//                            workDataOf("type" to EventWorkType.FETCH_EVENT.name, "eventId" to eventId)
+//                        )
                     } else {
                         val eventWork = getWork<EventWorker>(
                             workDataOf("type" to EventWorkType.FETCH_EVENT.name, "eventId" to eventId)
@@ -126,7 +137,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
                             workDataOf("type" to ResultWorkType.RESULT.name, "eventId" to eventId)
                         )
                         WorkManager.getInstance().beginUniqueWork(
-                            eventId.toString(),
+                            getWorkNameForResultWorker(ResultWorkType.RESULT, eventId),
                             ExistingWorkPolicy.REPLACE,
                             eventWork
                         ).then(resultWork).enqueue()
