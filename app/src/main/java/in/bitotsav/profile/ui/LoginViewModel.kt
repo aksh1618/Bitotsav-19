@@ -1,7 +1,9 @@
 package `in`.bitotsav.profile.ui
 
 import `in`.bitotsav.notification.utils.sendFcmTokenToServer
+import `in`.bitotsav.profile.api.AuthenticationService
 import `in`.bitotsav.profile.utils.AuthException
+import `in`.bitotsav.profile.utils.NonNullMutableLiveData
 import `in`.bitotsav.profile.utils.loginAsync
 import `in`.bitotsav.profile.utils.syncUserAndRun
 import `in`.bitotsav.shared.ui.BaseViewModel
@@ -11,31 +13,23 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
 
-class LoginViewModel : BaseViewModel() {
+class LoginViewModel(private val authService: AuthenticationService) : BaseViewModel() {
 
-    val loginEmail = MutableLiveData<String>()
-    val loginPassword = MutableLiveData<String>()
-    val loginEmailErrorText = MutableLiveData<String>()
-    val loginPasswordErrorText = MutableLiveData<String>()
-    val loginErrorText = MutableLiveData<String>()
-    val loggedIn = MutableLiveData<Boolean>()
-    val loading = MutableLiveData<Boolean>()
-
-    init {
-        loginEmail.value = ""
-        loginPassword.value = ""
-        loginEmailErrorText.value = ""
-        loginPasswordErrorText.value = ""
-        loginErrorText.value = ""
-        loggedIn.value = false
-    }
+    val loginEmail = NonNullMutableLiveData("")
+    val loginPassword = NonNullMutableLiveData("")
+    val loginEmailErrorText = NonNullMutableLiveData("")
+    val loginPasswordErrorText = NonNullMutableLiveData("")
+    val loginErrorText = NonNullMutableLiveData("")
+    val loggedIn = NonNullMutableLiveData(false)
+    // Being observed by data binding
+    val loading = NonNullMutableLiveData(false)
 
     fun login() {
-        Log.d("Login pressed", "${loginEmailErrorText.value}")
+        Log.d("Login pressed", loginEmailErrorText.value)
         loginErrorText.value = ""
 
         // Invalid email
-        if (!loginEmailErrorText.value.isNullOrEmpty()) return
+        if (!loginEmailErrorText.value.isEmpty()) return
         // Empty email or password
         if (checkEmailOrPasswordEmpty()) {
             Log.i("LoginViewModel.login", "Empty email or password")
@@ -46,10 +40,10 @@ class LoginViewModel : BaseViewModel() {
         scope.launch {
             loading.value = true
             try {
-                loginAsync(loginEmail.value!!, loginPassword.value!!).await()
+                loginAsync(authService, loginEmail.value, loginPassword.value).await()
                 fetchUserAndLogin()
             } catch (exception: AuthException) {
-                loginErrorText.value = exception.message
+                loginErrorText.value = exception.message ?: "Authentication Error"
                 Log.e("LoginViewModel.login", null, exception)
             } catch (exception: NullPointerException) {
                 loginErrorText.value = "Som error occurred, try again"
@@ -66,10 +60,10 @@ class LoginViewModel : BaseViewModel() {
     }
 
     private fun checkEmailOrPasswordEmpty() = Boolean.or(
-        loginEmail.value.isNullOrEmpty().onTrue {
+        loginEmail.value.isEmpty().onTrue {
             loginEmailErrorText.value = "Email required."
         },
-        loginPassword.value.isNullOrEmpty().onTrue {
+        loginPassword.value.isEmpty().onTrue {
             loginPasswordErrorText.value = "Password required."
         }
     )

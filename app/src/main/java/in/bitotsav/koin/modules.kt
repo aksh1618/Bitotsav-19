@@ -4,6 +4,7 @@ import `in`.bitotsav.database.AppDatabase
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.events.ui.ScheduleViewModel
 import `in`.bitotsav.feed.data.FeedRepository
+import `in`.bitotsav.profile.api.AuthenticationService
 import `in`.bitotsav.profile.data.UserRepository
 import `in`.bitotsav.profile.ui.LoginViewModel
 import `in`.bitotsav.profile.ui.ProfileViewModel
@@ -23,6 +24,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 private const val baseUrl = "https://bitotsav.in/api/app/"
 
@@ -64,6 +66,8 @@ val retrofitModule = module {
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
     }
+
+    single { get<Retrofit>().create(AuthenticationService::class.java) }
 }
 
 val sharedPrefsModule = module {
@@ -74,7 +78,7 @@ val sharedPrefsModule = module {
 
 val viewModelsModule = module {
     viewModel { ScheduleViewModel(get()) }
-    viewModel { LoginViewModel() }
+    viewModel { LoginViewModel(get()) }
     viewModel { ProfileViewModel() }
-    viewModel { RegistrationViewModel() }
+    viewModel { RegistrationViewModel(get()) }
 }

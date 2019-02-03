@@ -1,6 +1,7 @@
 package `in`.bitotsav.profile.ui
 
 import `in`.bitotsav.notification.utils.sendFcmTokenToServer
+import `in`.bitotsav.profile.api.AuthenticationService
 import `in`.bitotsav.profile.data.RegistrationFields.college
 import `in`.bitotsav.profile.data.RegistrationFields.collegeOptions
 import `in`.bitotsav.profile.data.RegistrationFields.email
@@ -23,7 +24,8 @@ import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RegistrationViewModel : BaseViewModel("RegVM") {
+class RegistrationViewModel(private val authService: AuthenticationService) :
+    BaseViewModel("RegVM") {
 
     val currentStep = NonNullMutableLiveData(1)
     val registrationError = NonNullMutableLiveData("")
@@ -35,7 +37,7 @@ class RegistrationViewModel : BaseViewModel("RegVM") {
         scope.launch(Dispatchers.IO)
         {
             try {
-                collegeOptions.postValue(fetchCollegeListAsync().await())
+                collegeOptions.postValue(fetchCollegeListAsync(authService).await())
                 Log.v(TAG, "College options fetched")
             } catch (e: Exception) {
                 Log.w(TAG, e.message, e)
@@ -63,6 +65,7 @@ class RegistrationViewModel : BaseViewModel("RegVM") {
             try {
 
                 registerAsync(
+                    authService,
                     name.text.value,
                     phone.text.value,
                     email.text.value,
@@ -91,6 +94,7 @@ class RegistrationViewModel : BaseViewModel("RegVM") {
             try {
 
                 verifyAsync(
+                    authService,
                     email.text.value,
                     phoneOtp.text.value,
                     emailOtp.text.value
@@ -117,6 +121,7 @@ class RegistrationViewModel : BaseViewModel("RegVM") {
             try {
 
                 saveParticipantAsync(
+                    authService,
                     email.text.value,
 //                    TODO: @aksh Check if this can somehow break the operation. Note: Password value is required.
                     password.text.value,
@@ -147,7 +152,7 @@ class RegistrationViewModel : BaseViewModel("RegVM") {
         scope.launch {
             try {
 
-                loginAsync(email.text.value, password.text.value).await()
+                loginAsync(authService, email.text.value, password.text.value).await()
                 syncUserAndRun { sendFcmTokenToServer() }
                 loggedIn.value = true
 

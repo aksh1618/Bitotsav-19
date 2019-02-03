@@ -19,10 +19,11 @@ class AuthException(message: String) : Exception(message)
 //502 - Server error
 //403 - Incorrect credentials
 //200 - Success with {token} to be sent
-fun loginAsync(email: String, password: String): Deferred<Unit> {
+fun loginAsync(authService: AuthenticationService, email: String, password: String):
+        Deferred<Unit> {
     return CoroutineScope(Dispatchers.Main).async {
         val body = mapOf("email" to email, "password" to password)
-        val request = AuthenticationService.api.loginAsync(body)
+        val request = authService.loginAsync(body)
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "User:$email logged in")
@@ -49,6 +50,7 @@ fun loginAsync(email: String, password: String): Deferred<Unit> {
 //409 - Email Id is already registered
 //200 - Success - OTP Sent
 fun registerAsync(
+    authService: AuthenticationService,
     name: String,
     phone: String,
     email: String,
@@ -62,7 +64,7 @@ fun registerAsync(
         "password" to password,
         "g-recaptcha-response" to recaptchaResponse
     )
-    val request = AuthenticationService.api.registerAsync(body)
+    val request = authService.registerAsync(body)
     val response = request.await()
     when (response.code()) {
         200 -> Log.d(TAG, "Registration Stage 1 complete")
@@ -80,6 +82,7 @@ fun registerAsync(
 //502 - Server error
 //200 - Success
 fun verifyAsync(
+    authService: AuthenticationService,
     email: String,
     phoneOtp: String,
     emailOtp: String
@@ -89,7 +92,7 @@ fun verifyAsync(
         "phoneOtp" to phoneOtp,
         "emailOtp" to emailOtp
     )
-    val request = AuthenticationService.api.verifyAsync(body)
+    val request = authService.verifyAsync(body)
     val response = request.await()
     when (response.code()) {
         200 -> Log.d(TAG, "Registration Stage 2: OTP verification complete")
@@ -108,6 +111,7 @@ fun verifyAsync(
 //502 - Server error
 //200 - Success with Bitotsav Id in {data}
 fun saveParticipantAsync(
+    authService: AuthenticationService,
     email: String,
     password: String,
     gender: String,
@@ -125,7 +129,7 @@ fun saveParticipantAsync(
         "source" to source,
         "year" to year
     )
-    val request = AuthenticationService.api.saveParticipantAsync(body)
+    val request = authService.saveParticipantAsync(body)
     val response = request.await()
     if (response.code() == 200) {
         val bitotsavId = response.body()?.get("data") ?: throw AuthException(
@@ -143,8 +147,10 @@ fun saveParticipantAsync(
 
 //GET - /getCollegeList
 //200 - Object containing colleges
-fun fetchCollegeListAsync() = CoroutineScope(Dispatchers.IO).async {
-    val request = AuthenticationService.api.getCollegeListAsync()
+fun fetchCollegeListAsync(
+    authService: AuthenticationService
+) = CoroutineScope(Dispatchers.IO).async {
+    val request = authService.getCollegeListAsync()
     val response = request.await()
     if (response.code() == 200) {
         return@async response.body()?.get("colleges")
