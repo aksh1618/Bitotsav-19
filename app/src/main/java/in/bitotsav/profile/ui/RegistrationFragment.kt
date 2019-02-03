@@ -1,217 +1,95 @@
 package `in`.bitotsav.profile.ui
 
-import `in`.bitotsav.databinding.FragmentRegistrationStepOneBinding
-import `in`.bitotsav.databinding.FragmentRegistrationStepThreeBinding
-import `in`.bitotsav.databinding.FragmentRegistrationStepTwoBinding
+
+import `in`.bitotsav.R
+import `in`.bitotsav.databinding.FragmentRegistrationBinding
 import `in`.bitotsav.profile.data.RegistrationFields
 import `in`.bitotsav.shared.utils.onTrue
-import `in`.bitotsav.shared.utils.runOnMinApi
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.autofill.AutofillManager
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.CommonStatusCodes
-import com.google.android.gms.safetynet.SafetyNet
 import org.koin.androidx.viewmodel.ext.sharedViewModel
 
-// TODO: [Refactor] Try removing as many observers as possible, observing should be
-//  done by data binding view only, preferably.
 class RegistrationFragment : Fragment() {
 
+    private val registrationViewModel by sharedViewModel<RegistrationViewModel>()
+
     companion object {
-        const val TAG = "RegistrationFragment"
-        const val KEY_CURSTEP = "curStep"
+        const val TAG = "RegF"
         const val KEY_EMAIL = "email"
         const val KEY_PASSWORD = "pass"
+        const val KEY_STEP = "step"
     }
-
-    private val registrationViewModel by sharedViewModel<RegistrationViewModel>()
-//    private val args by navArgs<RegistrationFragmentArgs>()
-//    private val curStep = args.registrationStepNumber
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        // Restore state
-        val currentStep =
-            savedInstanceState?.getInt(KEY_CURSTEP)?.let { it }
-                ?: registrationViewModel.currentStep.value
         savedInstanceState?.getString(KEY_EMAIL)?.let {
-            RegistrationFields.email.text.value = it
+            registrationViewModel.fields.email.text.value = it
         }
         savedInstanceState?.getString(KEY_PASSWORD)?.let {
-            RegistrationFields.password.text.value = it
+            registrationViewModel.fields.password.text.value = it
+        }
+        savedInstanceState?.getInt(KEY_STEP)?.let {
+            registrationViewModel.nextStep.value = it
+        } ?: run {
+            registrationViewModel.fields = RegistrationFields()
+            Log.d(TAG, "Reset all fields")
         }
 
-        // Inflate current step layout
-        val binding = when (currentStep) {
-            2 -> FragmentRegistrationStepTwoBinding
-                .inflate(inflater, container, false)
-                .apply {
-                    lifecycleOwner = viewLifecycleOwner
-                    fields = RegistrationFields
-                    viewModel = registrationViewModel
-                    setStepTwoObservers()
-                }
-            3 -> FragmentRegistrationStepThreeBinding
-                .inflate(inflater, container, false)
-                .apply {
-                    lifecycleOwner = viewLifecycleOwner
-                    fields = RegistrationFields
-                    viewModel = registrationViewModel
-                    setStepThreeObservers()
-                }
-            else -> FragmentRegistrationStepOneBinding
-                .inflate(inflater, container, false)
-                .apply {
-                    lifecycleOwner = viewLifecycleOwner
-                    fields = RegistrationFields
-                    viewModel = registrationViewModel
-                    setStepOneObservers()
-                }
-        }
-        return binding.root
-    }
-
-    private fun setStepOneObservers() {
-        with(registrationViewModel) {
-
-            waiting.setObserver { isWaiting ->
-                if (isWaiting) {
-                    Log.d(TAG, "Waiting for captcha...")
-                    // TODO: [Refactor] Should this be called directly from xml?
-                    //  Or should xml only have access to the ViewModel (Or is that
-                    //  ridiculous as it already has access to this Fragment anyway,
-                    //  because it IS the fragment, thus the inflation code) ?
-                    fetchCaptchaResponseToken()
+        registrationViewModel.nextStep.observe(
+            viewLifecycleOwner,
+            Observer { nextStep ->
+                if (nextStep == 4) {
+                    // Go back to profile fragment after registration is complete.
+                    findNavController().navigate(R.id.action_destRegistration_to_destProfile)
                 }
             }
+        )
 
-            // TODO: [Refactor] This could be common, single observer
-            currentStep.setObserver { nextStep ->
-                if (nextStep == 2) {
-                    commitAutofillFields()
-                    findNavController().navigate(
-                        RegistrationFragmentDirections.nextStep()
-                    )
+        return FragmentRegistrationBinding.inflate(inflater, container, false)
+            .apply {
+                lifecycleOwner = this@RegistrationFragment
+                viewModel = registrationViewModel
+                // FIXME: Animate this !!
+                with(registrationViewModel.nextStep) {
+                    progress.progress = ((value * 100) / 3) + 1
+                    observe(viewLifecycleOwner, Observer {
+                        progress.progress = ((it * 100) / 3) + 1
+                    })
                 }
             }
-        }
-    }
-
-    // TODO: Autofill this OTP if same device.
-    private fun setStepTwoObservers() {
-        with(registrationViewModel) {
-
-            waiting.setObserver { isWaiting ->
-                if (isWaiting) {
-                    Log.d(TAG, "Waiting for otp verification")
-                    completeStepTwo()
-                }
-            }
-
-            currentStep.setObserver { nextStep ->
-                if (nextStep == 3) {
-                    findNavController().navigate(
-                        RegistrationFragmentDirections.nextStep()
-                    )
-                }
-            }
-        }
-    }
-
-    private fun setStepThreeObservers() {
-        with(registrationViewModel) {
-
-            registrationViewModel.fetchCollegeList()
-
-            waiting.setObserver { isWaiting ->
-                if (isWaiting) {
-                    Log.d(TAG, "Waiting for bitotsav id")
-                    completeStepThree()
-                }
-            }
-
-            allDone.setObserver { allDone ->
-                if (allDone) {
-                    Log.d(TAG, "Logging In")
-                    login()
-                }
-            }
-
-            currentStep.setObserver { nextStep ->
-                if (nextStep == 1) {
-                    // TODO: isLoggedIn can be checked to determine where to navigate to.
-                    findNavController().navigate(
-                        RegistrationFragmentDirections.nextStep()
-                    )
-                }
-            }
-
-        }
-    }
-
-    private fun fetchCaptchaResponseToken() {
-        if (context == null) return
-        SafetyNet.getClient(activity as Activity)
-            .verifyWithRecaptcha("6LeFRY4UAAAAAG3VLvn5cwTkmq41Y2U5HrkPIH69")
-            .addOnSuccessListener(activity as Activity) { response ->
-                if (response?.tokenResult?.isNotEmpty() == true) {
-                    registrationViewModel.completeStepOne(response.tokenResult)
-                }
-            }
-            .addOnFailureListener(activity as Activity) { e ->
-                if (e is ApiException) {
-                    // An error occurred when communicating with the
-                    // reCAPTCHA service. TODO: Refer to the status code to
-                    // handle the error appropriately.
-                    Log.e(
-                        "RegistrationVM.captcha",
-                        "Error: ${CommonStatusCodes.getStatusCodeString(e.statusCode)}",
-                        e
-                    )
-                } else {
-                    // A different, unknown type of error occurred.
-                    Log.e("RegistrationVM.captcha", "Error: ${e.message}", e)
-                }
-                with(registrationViewModel) {
-                    waiting.value = false
-                    registrationError.value = "Captcha error, try again."
-                }
-            }
+            .root
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(KEY_CURSTEP, registrationViewModel.currentStep.value)
-        RegistrationFields.email.text.value.let {
+        // TODO: Check if saving email and password is needed
+        registrationViewModel.fields.email.text.value.let {
             it.isNotEmpty().onTrue { outState.putString(KEY_EMAIL, it) }
         }
-        RegistrationFields.password.text.value.let {
+        registrationViewModel.fields.password.text.value.let {
             it.isNotEmpty().onTrue { outState.putString(KEY_PASSWORD, it) }
         }
+        outState.putInt(KEY_STEP, registrationViewModel.nextStep.value)
+        Log.d(TAG, "Saved email and password state")
         super.onSaveInstanceState(outState)
     }
 
-    private fun <T> LiveData<T>.setObserver(block: (T) -> Unit) {
-        observe(viewLifecycleOwner, Observer {
-            block.invoke(it)
-        })
+    override fun onDestroyView() {
+        with(registrationViewModel) {
+            waiting.value = false
+            allDone.value = false
+            loggedIn.value = false
+            registrationError.value = ""
+            nextStep.value = 1
+        }
+        super.onDestroyView()
     }
 
-    @SuppressLint("NewApi")
-    private fun commitAutofillFields() {
-        runOnMinApi(26) {
-            context?.getSystemService(AutofillManager::class.java)?.commit()
-        }
-    }
 }

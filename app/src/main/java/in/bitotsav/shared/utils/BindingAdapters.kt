@@ -4,7 +4,10 @@ import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.view.Gravity
 import android.widget.AutoCompleteTextView
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -36,16 +39,8 @@ fun setImportantForAutofill(view: TextInputLayout, isImportant: Boolean) {
     }
 }
 
-@BindingAdapter("passwordHidingEnabled")
-fun setPasswordHidingEnabled(view: TextInputEditText, isPass: Boolean) {
-    isPass.onTrue {
-        view.transformationMethod = PasswordTransformationMethod.getInstance()
-    }
-}
-
 @BindingAdapter("passwordToggleEnabled")
 fun setPasswordToggleEnabled(view: TextInputLayout, isPass: Boolean) {
-    Log.wtf("passwordToggle", "Yep, got: $isPass")
     view.isPasswordVisibilityToggleEnabled = isPass
 }
 
@@ -67,4 +62,13 @@ fun setActvAdapter(
         }
     }
 
+}
+
+@BindingAdapter("centerInLayout")
+fun setCenterInLayout(view: TextView, centerInLayout: Boolean) {
+    if (centerInLayout) {
+        (view.layoutParams as FrameLayout.LayoutParams).apply {
+            gravity = Gravity.CENTER
+        }
+    }
 }

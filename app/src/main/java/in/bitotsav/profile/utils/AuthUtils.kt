@@ -5,7 +5,6 @@ import `in`.bitotsav.profile.api.AuthenticationService
 import `in`.bitotsav.shared.exceptions.NetworkException
 import android.util.Log
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
@@ -13,33 +12,32 @@ private const val TAG = "AuthUtils"
 
 class AuthException(message: String) : Exception(message)
 
-//TODO: Client side verification of inputs
-
 //POST - /login - body: {email, password}
 //502 - Server error
 //403 - Incorrect credentials
 //200 - Success with {token} to be sent
-fun loginAsync(authService: AuthenticationService, email: String, password: String):
-        Deferred<Unit> {
-    return CoroutineScope(Dispatchers.Main).async {
-        val body = mapOf("email" to email, "password" to password)
-        val request = authService.loginAsync(body)
-        val response = request.await()
-        if (response.code() == 200) {
-            Log.d(TAG, "User:$email logged in")
-            CurrentUser.authToken = response.body()?.get("token")
-                ?: throw AuthException(
-                    "Empty token received from the server." +
-                            " Contact the tech team if this issue persists"
-                )
-        } else {
-            Log.d(TAG, "${response.code()}")
-            when (response.code()) {
-                403 -> throw AuthException("Incorrect email and/or password")
-                else -> throw NetworkException(
-                    "Server is currently facing some issues. Try again later"
-                )
-            }
+fun loginAsync(
+    authService: AuthenticationService,
+    email: String,
+    password: String
+) = CoroutineScope(Dispatchers.Main).async {
+    val body = mapOf("email" to email, "password" to password)
+    val request = authService.loginAsync(body)
+    val response = request.await()
+    if (response.code() == 200) {
+        Log.d(TAG, "User:$email logged in")
+        CurrentUser.authToken = response.body()?.get("token")
+            ?: throw AuthException(
+                "Empty token received from the server." +
+                        " Contact the tech team if this issue persists"
+            )
+    } else {
+        Log.d(TAG, "${response.code()}")
+        when (response.code()) {
+            403 -> throw AuthException("Incorrect email and/or password")
+            else -> throw NetworkException(
+                "Server is currently facing some issues. Try again later"
+            )
         }
     }
 }

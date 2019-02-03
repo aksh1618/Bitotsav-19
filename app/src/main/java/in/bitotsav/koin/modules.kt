@@ -24,7 +24,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 private const val baseUrl = "https://bitotsav.in/api/app/"
 
@@ -67,7 +66,7 @@ val retrofitModule = module {
             .build()
     }
 
-    single { get<Retrofit>().create(AuthenticationService::class.java) }
+    single<AuthenticationService> { get<Retrofit>().create(AuthenticationService::class.java) }
 }
 
 val sharedPrefsModule = module {

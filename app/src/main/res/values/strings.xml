@@ -23,6 +23,7 @@
     <string name="profile_label_logout">Logout</string>
 
     <!-- Registration -->
+    <string name="registration_title">Registration</string>
 
     <!-- Step 1 -->
     <string name="registration_label_name">Name</string>

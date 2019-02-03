@@ -41,7 +41,7 @@ class LoginFragment : Fragment() {
                 viewModel = loginViewModel
                 register.setOnClickListener(
                     Navigation.createNavigateOnClickListener(
-                        R.id.action_destLogin_to_destRegistrationStepOne
+                        R.id.action_destLogin_to_destRegistration
                     )
                 )
             }

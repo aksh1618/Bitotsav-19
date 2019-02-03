@@ -40,7 +40,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="@{tabbed ? View.VISIBLE : View.GONE}"
+            android:visibility="@{tabbed ? View.VISIBLE : View.GONE, default = gone}"
             app:tabIndicatorColor="@color/colorRed"
             app:tabIndicatorFullWidth="false"
             app:tabSelectedTextColor="@color/colorBlack"
