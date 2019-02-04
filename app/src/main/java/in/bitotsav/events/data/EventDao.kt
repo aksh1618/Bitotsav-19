@@ -14,6 +14,9 @@ interface EventDao {
     @Query("SELECT * FROM event")
     suspend fun getAllEvents(): List<Event>
 
+    @Query("SELECT * FROM event WHERE isStarred == 1")
+    suspend fun getAllStarred(): List<Event>
+
     @Query("SELECT DISTINCT category FROM event ")
     suspend fun getAllCategories(): List<String>
 

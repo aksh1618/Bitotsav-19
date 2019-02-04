@@ -24,6 +24,9 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
     @WorkerThread
     suspend fun getAllEvents() = eventDao.getAllEvents()
 
+    @WorkerThread
+    suspend fun getAllStarred() = eventDao.getAllStarred()
+
     fun getByDay(day: Int, starredOnly: Boolean = false) = when (starredOnly) {
         true -> eventDao.getStarredByDay(day)
         false -> eventDao.getByDay(day)

@@ -34,6 +34,21 @@ inline fun <reified T : Worker> scheduleUniqueWork(input: Data, uniqueWorkName: 
     WorkManager.getInstance().enqueueUniqueWork(uniqueWorkName, ExistingWorkPolicy.REPLACE, oneTimeWorkRequest)
 }
 
+fun scheduleReminderWork() {
+    val periodicWorkRequest =
+        PeriodicWorkRequest.Builder(ReminderWorker::class.java, 30, TimeUnit.MINUTES)
+            .build()
+    WorkManager.getInstance().enqueueUniquePeriodicWork(
+        ReminderWorkType.CHECK_UPCOMING_EVENTS.name,
+        ExistingPeriodicWorkPolicy.REPLACE,
+        periodicWorkRequest
+    )
+}
+
+fun cancelReminderWork() {
+    WorkManager.getInstance().cancelUniqueWork(ReminderWorkType.CHECK_UPCOMING_EVENTS.name)
+}
+
 inline fun <reified T : Worker> getWork(input: Data): OneTimeWorkRequest {
     val constraints: Constraints = Constraints.Builder().apply {
         setRequiredNetworkType(NetworkType.CONNECTED)

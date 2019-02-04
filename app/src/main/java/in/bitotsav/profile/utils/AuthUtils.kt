@@ -32,7 +32,7 @@ fun loginAsync(
                         " Contact the tech team if this issue persists"
             )
     } else {
-        Log.d(TAG, "${response.code()}")
+        Log.d(TAG, "Response Code: ${response.code()}")
         when (response.code()) {
             403 -> throw AuthException("Incorrect email and/or password")
             else -> throw NetworkException(
@@ -137,6 +137,7 @@ fun saveParticipantAsync(
         Log.d(TAG, "Registration complete. BitotsavId: $bitotsavId")
         return@async bitotsavId
     } else {
+        Log.d(TAG, "Response Code: ${response.code()}")
         throw NetworkException(
             "Server is currently facing some issues. Try again later"
         )
@@ -154,6 +155,7 @@ fun fetchCollegeListAsync(
         return@async response.body()?.get("colleges")
             ?: throw NetworkException("List of colleges is empty")
     } else {
+        Log.d(TAG, "Response Code: ${response.code()}")
         throw Exception("Unable to get list of colleges from the server")
     }
 }

@@ -13,11 +13,11 @@ import androidx.core.app.NotificationCompat
 import java.util.*
 
 enum class Channel(val id: String, val channelName: String){
-    ANNOUNCEMENT("announcement", "Announcement"),
-    EVENT("event", "Event"),
-    PM("pm", "Private Message"),
-    RESULT("result", "Result"),
-    STARRED("starred", "Starred")
+    ANNOUNCEMENT("announcement", "Announcement"), // Announcement icon
+    EVENT("event", "Event"), // TODO: Bitotsav logo vector
+    PM("pm", "Private Message"), // Priority high icon or profile icon
+    RESULT("result", "Result"), // Trophy icon
+    STARRED("starred", "Starred") // Star icon
 }
 
 /**
@@ -48,8 +48,7 @@ fun displayNotification(
 //    TODO("Set small icon, large icon and color")
     val channelId = channel.id
     val notificationBuilder = NotificationCompat.Builder(context, channelId)
-//        TODO: https://stackoverflow.com/questions/25317659/how-to-fix-android-app-remoteserviceexception-bad-notification-posted-from-pac
-        .setSmallIcon(R.drawable.ic_launcher_foreground)
+        .setSmallIcon(getIconByChannel(channel))
         .setStyle(bigTextStyle)
         .setContentTitle(title)
         .setContentText(content)
@@ -77,5 +76,15 @@ fun createNotificationChannels(context: Context){
         lockscreenVisibility = Notification.VISIBILITY_PUBLIC
     }
     notificationManager.createNotificationChannel(channel)
+    }
+}
+
+private fun getIconByChannel(channel: Channel): Int {
+    return when (channel) {
+        Channel.ANNOUNCEMENT -> R.drawable.ic_announcement_white_24dp
+        Channel.EVENT -> R.drawable.ic_schedule_white_24dp
+        Channel.PM -> R.drawable.ic_priority_high_white_24dp
+        Channel.RESULT -> R.drawable.ic_trophy_white_24dp
+        Channel.STARRED -> R.drawable.ic_info_white_24dp // TODO: Change this icon
     }
 }

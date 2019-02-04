@@ -56,6 +56,9 @@ class Bitotsav19 : Application() {
             get<SharedPreferences>().edit().putBoolean(IS_FIRST_RUN, false).apply()
         }
 
+//        TODO: Make sure this start on 15th and ends on 17th
+//        scheduleReminderWork()
+//        cancelReminderWork()
         // TODO: Remove this.
         val eventWork =
             getWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))

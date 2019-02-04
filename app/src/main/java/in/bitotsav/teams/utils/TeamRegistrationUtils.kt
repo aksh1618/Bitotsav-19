@@ -42,6 +42,7 @@ fun registerForEventAsync(
             Log.d(TAG, "Registered for event $eventId")
             return@async true
         } else {
+            Log.d(TAG, "Response Code: ${response.code()}")
             when (response.code()) {
                 404 -> throw Exception("Incorrect Bitotsav id and/or email id")
                 405 -> throw Exception("All members don't belong to the same college")
@@ -74,6 +75,7 @@ fun deregisterForEventAsync(
             Log.d(TAG, "De-registered for event $eventId")
             return@async true
         } else {
+            Log.d(TAG, "Response Code: ${response.code()}")
             when (response.code()) {
                 403 -> throw Exception("Not registered for this event or not the team leader")
                 else -> throw Exception("Server is currently facing some issues. Try again later")
@@ -109,6 +111,7 @@ fun registerForChampionshipAsync(
             Log.d(TAG, "Registered for Bitotsav championship")
             return@async true
         } else {
+            Log.d(TAG, "Response Code: ${response.code()}")
             when (response.code()) {
                 403 -> throw AuthException("Authentication failed")
                 404 -> throw Exception("Incorrect Bitotsav id and/or email id")
