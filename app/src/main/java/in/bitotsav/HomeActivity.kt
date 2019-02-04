@@ -15,7 +15,6 @@ import org.koin.androidx.viewmodel.ext.viewModel
 class HomeActivity : AppCompatActivity() {
 
     private val scheduleViewModel by viewModel<ScheduleViewModel>()
-    private val registrationViewModel by viewModel<RegistrationViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +32,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun finalizeViewModels() {
         scheduleViewModel.filterColors = filterColors
-        registrationViewModel.mColor = filterColors[0]
+        scheduleViewModel.mColor = filterColors[0]
     }
 
     // TODO: Get colors from resources

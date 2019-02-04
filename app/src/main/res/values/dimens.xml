@@ -2,6 +2,10 @@
 <resources>
     
     <dimen name="form_field_width">260dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="detail_text_size">16sp</dimen>
+    <dimen name="detail_margin_start">16dp</dimen>
+    <dimen name="detail_margin_start_intermediate">8dp</dimen>
     <!--<dimen name="form_field_height"></dimen>-->
 
 </resources>

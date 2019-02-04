@@ -25,7 +25,7 @@ class ScheduleDayFragment : Fragment() {
             .apply {
                 lifecycleOwner = this@ScheduleDayFragment
                 scheduleRecyclerView.apply {
-                    adapter = ScheduleAdapter().apply {
+                    adapter = ScheduleAdapter(viewLifecycleOwner).apply {
                         scheduleViewModel.dayWiseEventsArray[day - 1].observe(viewLifecycleOwner, Observer { events ->
                             submitList(events)
                         })

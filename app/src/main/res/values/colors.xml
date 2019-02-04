@@ -10,8 +10,11 @@
     <color name="colorRedDark">#900508</color>
     <color name="colorRed">#F0191E</color>
     <color name="colorOrange">#FF5722</color>
+    <color name="colorGold">#FFC107</color>
 
     <color name="background">@color/colorWhite</color>
     <color name="textColor">@android:color/primary_text_light</color>
+    <color name="textColorSecondary">#888693</color>
     <color name="errorTextColor">@color/colorOrange</color>
+    <color name="starColor">@color/colorGold</color>
 </resources>

@@ -23,7 +23,7 @@
             app:tabbed="@{true}"
             app:title="@{@string/schedule_title}" />
 
-        <!-- TODO: [WARN] Might break because of behavior string. -->
+        <!-- FIXME: [WARN] Might break because of behavior string. -->
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/dayPager"
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:id="@+id/filterFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/fab_margin"
             android:backgroundTint="@color/colorRed"
             android:onClick="@{() -> viewModel.showFiltersSheet()}"
             android:onLongClick="@{() -> viewModel.clearFilters()}"

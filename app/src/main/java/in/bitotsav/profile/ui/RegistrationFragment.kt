@@ -4,6 +4,7 @@ package `in`.bitotsav.profile.ui
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentRegistrationBinding
 import `in`.bitotsav.profile.data.RegistrationFields
+import `in`.bitotsav.shared.utils.getColorCompat
 import `in`.bitotsav.shared.utils.onTrue
 import android.os.Bundle
 import android.util.Log
@@ -14,10 +15,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.sharedViewModel
+import org.koin.androidx.viewmodel.ext.viewModel
 
 class RegistrationFragment : Fragment() {
 
-    private val registrationViewModel by sharedViewModel<RegistrationViewModel>()
+    private val registrationViewModel by viewModel<RegistrationViewModel>()
 
     companion object {
         const val TAG = "RegF"
@@ -42,6 +44,7 @@ class RegistrationFragment : Fragment() {
             registrationViewModel.fields = RegistrationFields()
             Log.d(TAG, "Reset all fields")
         }
+        registrationViewModel.mColor = context?.getColorCompat(R.color.colorRed) ?: 0
 
         registrationViewModel.nextStep.observe(
             viewLifecycleOwner,

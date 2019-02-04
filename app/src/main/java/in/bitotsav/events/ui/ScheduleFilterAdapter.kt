@@ -24,10 +24,6 @@ class ScheduleFilterAdapter(val viewModel: ScheduleViewModel) :
         holder.bind(getItem(position))
     }
 
-    fun submitFilterList(list: List<ScheduleFilter>) {
-        super.submitList(list)
-    }
-
     class ViewHolder(private val binding: ItemScheduleFilterBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ScheduleFilter) {
             binding.executeAfter {

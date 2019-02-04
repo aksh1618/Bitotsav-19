@@ -15,7 +15,15 @@
         android:id="@+id/destSchedule"
         android:name="in.bitotsav.events.ui.ScheduleFragment"
         android:label="fragment_schedule"
-        tools:layout="@layout/fragment_schedule" />
+        tools:layout="@layout/fragment_schedule">
+        <action
+            android:id="@+id/action_destSchedule_to_destEventDetail"
+            app:destination="@id/destEventDetail"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_top" />
+    </fragment>
 
     <fragment
         android:id="@+id/destFeed"
@@ -65,12 +73,30 @@
         android:name="in.bitotsav.profile.ui.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration">
+
         <action
             android:id="@+id/action_destRegistration_to_destProfile"
             app:destination="@id/destProfile"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popUpTo="@+id/destSchedule" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destEventDetail"
+        android:name="in.bitotsav.events.ui.EventDetailFragment"
+        android:label="fragment_event_detail"
+        tools:layout="@layout/fragment_event_detail">
+
+        <argument
+            android:name="eventDay"
+            app:argType="integer"/>
+
+        <argument
+            android:name="eventIndex"
+            app:argType="integer"/>
+
     </fragment>
 
 </navigation>

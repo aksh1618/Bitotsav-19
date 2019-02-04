@@ -29,6 +29,8 @@ abstract class BaseViewModel(
     private val parentJob = Job()
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Main
+
+    // FIXME: Rename this to uiScope
     protected val scope = CoroutineScope(coroutineContext)
 
     override fun onCleared() {
