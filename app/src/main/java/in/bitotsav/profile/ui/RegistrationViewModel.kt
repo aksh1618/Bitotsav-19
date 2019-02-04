@@ -154,7 +154,11 @@ class RegistrationViewModel(private val authService: AuthenticationService) :
                 registrationError.value = "Unknown Error :("
                 Log.e(TAG, null, e)
             } finally {
-                waiting.value = false
+                allDone.value.onFalse {
+                    // Stop waiting if there was an exception, otherwise keep waiting
+                    // for login.
+                    waiting.value = false
+                }
             }
         }
     }
@@ -163,7 +167,6 @@ class RegistrationViewModel(private val authService: AuthenticationService) :
         scope.launch {
             try {
 
-                waiting.value = true
                 delay(1000) // Server requires some time before login
                 loginAsync(
                     authService,
