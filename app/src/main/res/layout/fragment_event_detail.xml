@@ -47,7 +47,7 @@
             app:fabCradleMargin="4dp"
             app:hideOnScroll="true">
 
-            <ImageView
+            <ImageView android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -55,7 +55,7 @@
                 android:scaleY="1.2"
                 android:src="@drawable/ic_arrow_back_white_24dp" />
 
-            <ImageView
+            <ImageView android:id="@+id/share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"

@@ -13,12 +13,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class RegistrationViewModel(private val authService: AuthenticationService) :
-    BaseViewModel("RegVM") {
+class RegistrationViewModel(
+    private val authService: AuthenticationService
+) : BaseViewModel("RegVM") {
 
     // TODO: Should this be initialized or lateinit ?
     var fields = RegistrationFields()
-//    var currentStep = 1
     val nextStep = NonNullMutableLiveData(1)
     val registrationError = NonNullMutableLiveData("")
     val waiting = NonNullMutableLiveData(false)

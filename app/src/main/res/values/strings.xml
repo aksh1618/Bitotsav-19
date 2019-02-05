@@ -67,6 +67,7 @@
     <string name="event_format_prize">%,d Cash Prize</string>
     <string name="event_format_points">%,d Championship Points</string>
     <string name="event_format_leader_name">%s\'s Team</string>
+    <string name="event_format_share_title">Share %s with</string>
 
     <!--Images Content Descriptions-->
     <string name="desc_subscribe">Subscribe to alerts</string>

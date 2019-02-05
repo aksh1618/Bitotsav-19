@@ -9,6 +9,7 @@ import `in`.bitotsav.profile.data.UserRepository
 import `in`.bitotsav.profile.ui.LoginViewModel
 import `in`.bitotsav.profile.ui.ProfileViewModel
 import `in`.bitotsav.profile.ui.RegistrationViewModel
+import `in`.bitotsav.shared.ui.UiUtilViewModel
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
 import android.content.Context.MODE_PRIVATE
@@ -80,4 +81,5 @@ val viewModelsModule = module {
     viewModel { LoginViewModel(get()) }
     viewModel { ProfileViewModel() }
     viewModel { RegistrationViewModel(get()) }
+    viewModel { UiUtilViewModel() }
 }

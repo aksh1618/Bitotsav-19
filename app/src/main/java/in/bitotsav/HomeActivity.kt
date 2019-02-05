@@ -1,12 +1,15 @@
 package `in`.bitotsav
 
+import `in`.bitotsav.databinding.ActivityHomeBinding
 import `in`.bitotsav.events.ui.ScheduleViewModel
 import `in`.bitotsav.profile.ui.RegistrationViewModel
+import `in`.bitotsav.shared.ui.UiUtilViewModel
 import `in`.bitotsav.shared.utils.getColorCompat
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -15,10 +18,14 @@ import org.koin.androidx.viewmodel.ext.viewModel
 class HomeActivity : AppCompatActivity() {
 
     private val scheduleViewModel by viewModel<ScheduleViewModel>()
+    private val uiUtilViewModel by viewModel<UiUtilViewModel>()
+    private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        binding.viewModel = uiUtilViewModel
+        binding.lifecycleOwner = this
         handlePlatformLimitations()
         setupBottomNavMenu()
         finalizeViewModels()

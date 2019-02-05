@@ -76,7 +76,7 @@
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
-            android:autoLink="web"
+            android:autoLink="all"
             android:linksClickable="true"
             android:text="@{event.description}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
@@ -87,7 +87,7 @@
             tools:text="Team members will be separated and sent to various rooms where they have to solve quizzes on various topics such as gaming, etc. Rest of the topics will be disclosed during the event." />
 
         <!-- Rules -->
-
+        <!-- TODO [Refactor]: Use spans to insert bullets ? -->
         <TextView
             android:id="@+id/label_rules_text_view"
             android:layout_width="0dp"
@@ -111,7 +111,7 @@
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:autoLink="web"
+            android:autoLink="all"
             android:linksClickable="true"
             android:text="@{event.rules}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
@@ -223,6 +223,8 @@
             app:layout_constraintTop_toBottomOf="@+id/label_team_size_text_view"
             tools:textColor="@color/colorRed" />
 
+        <!-- Ranks -->
+
         <TextView
             android:id="@+id/rank1"
             android:layout_width="10dp"
@@ -272,7 +274,7 @@
 
         <TextView
             android:id="@+id/prize1"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginEnd="8dp"
@@ -285,7 +287,7 @@
 
         <TextView
             android:id="@+id/prize2"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginEnd="8dp"
@@ -298,7 +300,7 @@
 
         <TextView
             android:id="@+id/prize3"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginEnd="8dp"
@@ -313,7 +315,7 @@
 
         <TextView
             android:id="@+id/points1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:gravity="end"
@@ -327,7 +329,7 @@
 
         <TextView
             android:id="@+id/points2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:gravity="end"
@@ -341,7 +343,7 @@
 
         <TextView
             android:id="@+id/points3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:gravity="end"
@@ -391,7 +393,7 @@
             android:layout_marginEnd="8dp"
             android:autoLink="phone"
             android:linksClickable="true"
-            android:text="@{String.valueOf(event.contact1Number)}"
+            android:text="@{event.contact1Number > 0 ? String.valueOf(event.contact1Number) : ``}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
             android:textColorLink="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
@@ -423,7 +425,7 @@
             android:layout_marginEnd="8dp"
             android:autoLink="phone"
             android:linksClickable="true"
-            android:text="@{String.valueOf(event.contact2Number)}"
+            android:text="@{event.contact2Number > 0 ? String.valueOf(event.contact2Number) : ``}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
             android:textColorLink="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
@@ -535,7 +537,7 @@
         <View
             android:id="@+id/fab_padding_view"
             android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_height="124dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

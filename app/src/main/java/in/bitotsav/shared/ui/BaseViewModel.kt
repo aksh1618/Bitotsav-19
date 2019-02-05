@@ -13,7 +13,7 @@ abstract class BaseViewModel(
     protected val TAG: String = "BaseViewModel"
 ) : ViewModel() {
 
-    var mColor: Int = 0
+    var mColor: Int = 0xFF0000
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String>
         get() = _toastMessage

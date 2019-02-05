@@ -13,7 +13,8 @@
             android:name=".Bitotsav19"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".HomeActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            android:documentLaunchMode="intoExisting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

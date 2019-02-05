@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.viewModel
 
 class RegistrationFragment : Fragment() {
 
-    private val registrationViewModel by viewModel<RegistrationViewModel>()
+    private val registrationViewModel by sharedViewModel<RegistrationViewModel>()
 
     companion object {
         const val TAG = "RegF"
@@ -44,7 +44,7 @@ class RegistrationFragment : Fragment() {
             registrationViewModel.fields = RegistrationFields()
             Log.d(TAG, "Reset all fields")
         }
-        registrationViewModel.mColor = context?.getColorCompat(R.color.colorRed) ?: 0
+        registrationViewModel.mColor = context?.getColorCompat(R.color.colorRed) ?: 0xFF0000
 
         registrationViewModel.nextStep.observe(
             viewLifecycleOwner,

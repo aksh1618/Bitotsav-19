@@ -1,6 +1,7 @@
 package `in`.bitotsav.events.ui
 
 import `in`.bitotsav.databinding.FragmentScheduleBinding
+import `in`.bitotsav.shared.ui.UiUtilViewModel
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ class ScheduleFragment : Fragment() {
     }
 
     private val scheduleViewModel by sharedViewModel<ScheduleViewModel>()
+    private val uiUtilViewModel by sharedViewModel<UiUtilViewModel>()
     private lateinit var binding: FragmentScheduleBinding
     private var toast: Toast? = null
     private lateinit var sheetBehavior: BottomSheetBehavior<NestedScrollView>
@@ -33,6 +35,7 @@ class ScheduleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        uiUtilViewModel.showBottomNav()
         binding = FragmentScheduleBinding.inflate(inflater, container, false)
             // TODO: Putting everything from here on in onActivityCreated may increase performance.
             .apply {
