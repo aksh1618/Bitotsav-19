@@ -2,10 +2,12 @@ package `in`.bitotsav.events.ui
 
 import `in`.bitotsav.databinding.FragmentScheduleBinding
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -17,12 +19,14 @@ private var DAYS = 3
 
 class ScheduleFragment : Fragment() {
 
+    companion object {
+        private const val TAG = "ScheduleF"
+    }
+
     private val scheduleViewModel by sharedViewModel<ScheduleViewModel>()
     private lateinit var binding: FragmentScheduleBinding
     private var toast: Toast? = null
-    private val sheetBehavior by lazy {
-        BottomSheetBehavior.from(binding.bottomSheet.filterSheet)
-    }
+    private lateinit var sheetBehavior: BottomSheetBehavior<NestedScrollView>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +47,7 @@ class ScheduleFragment : Fragment() {
                 dayPager.adapter = ScheduleDayAdapter(childFragmentManager)
                 appBar.tabs.setupWithViewPager(dayPager)
             }
+        sheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.filterSheet)
         // TODO: May need to account for sheet closed on swipe
         scheduleViewModel.hideFiltersSheet()
         scheduleViewModel.isSheetVisible.observe(viewLifecycleOwner, Observer { isSheetVisible ->
