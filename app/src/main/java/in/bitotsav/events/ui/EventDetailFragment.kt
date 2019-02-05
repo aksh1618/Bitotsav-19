@@ -25,34 +25,34 @@ class EventDetailFragment : Fragment() {
     private val uiUtilViewModel by sharedViewModel<UiUtilViewModel>()
 
     private val args by navArgs<EventDetailFragmentArgs>()
-    private val eventDay by lazy { args.eventDay }
     private val eventId by lazy { args.eventId }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+
+        // Hide bottom nav, this fragment has its own bottom bar
         uiUtilViewModel.hideBottomNav()
+
         return FragmentEventDetailBinding.inflate(inflater, container, false)
             .apply {
                 lifecycleOwner = this@EventDetailFragment
-                viewModel = scheduleViewModel.apply {
-                    dayWiseEventsArray[eventDay - 1].value?.let {
-                        currentEvent.value = it.find { event -> event.id == eventId }
-                    }
-                    setObservers()
-                }
+                viewModel = scheduleViewModel.apply { setCurrentEvent(eventId) }
+                setObservers()
                 setClickListeners(this)
             }
             .root
     }
 
     private fun setObservers() {
-        scheduleViewModel.dayWiseEventsArray[eventDay - 1]
-            .observe(viewLifecycleOwner, Observer {
-                scheduleViewModel.currentEvent.value = it.find { event -> event.id == eventId }
+        scheduleViewModel.dayWiseEventsArray.forEach {
+            it.observe(viewLifecycleOwner, Observer {
+                scheduleViewModel.setCurrentEvent(eventId)
             })
+        }
     }
 
+    // TODO [Refactor]: Should be handled as menu or by live data events
     private fun setClickListeners(binding: FragmentEventDetailBinding) {
 
         binding.back.setOnClickListener {

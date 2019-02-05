@@ -51,9 +51,9 @@ class ScheduleViewModel(
         _isSheetVisible.value = false
 
         scope.launch(Dispatchers.IO) {
-            // TODO: Get from resources?
             allCategories = eventRepository.getAllCategories()
             // The events might not have been fetched in case of first run.
+            // TODO: Figure out if this is still needed with the json included.
             while (allCategories.isEmpty()) {
                 Log.i(
                     "ScheduleViewModel.init",
@@ -63,7 +63,7 @@ class ScheduleViewModel(
                 allCategories = eventRepository.getAllCategories()
             }
         }.invokeOnCompletion {
-            scope.launch(Dispatchers.Main) { refreshScheduleFilterList() }
+            scope.launch { refreshScheduleFilterList() }
         }
 
         (1..DAYS).forEach { day ->
@@ -140,6 +140,12 @@ class ScheduleViewModel(
 
     fun hideFiltersSheet() {
         _isSheetVisible.value = false
+    }
+
+    fun setCurrentEvent(id: Int) {
+        scope.launch {
+            currentEvent.value = eventRepository.getById(id)
+        }
     }
 
 }

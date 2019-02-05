@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation android:id="@+id/nav_registration"
-    app:startDestination="@id/destRegistrationStepOne"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:id="@+id/nav_registration"
+    app:startDestination="@id/destRegistrationStepOne">
 
     <fragment
         android:id="@+id/destRegistrationStepOne"
@@ -21,7 +21,7 @@
             app:destination="@+id/destRegistrationStepTwo"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            app:popUpTo="@+id/nav_registration"></action>
+            app:popUpTo="@+id/nav_registration" />
 
     </fragment>
 
@@ -41,7 +41,7 @@
             app:destination="@id/destRegistrationStepThree"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            app:popUpTo="@+id/nav_registration"></action>
+            app:popUpTo="@+id/nav_registration" />
 
     </fragment>
 

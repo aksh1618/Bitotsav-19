@@ -47,7 +47,8 @@
             app:fabCradleMargin="4dp"
             app:hideOnScroll="true">
 
-            <ImageView android:id="@+id/back"
+            <ImageView
+                android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -55,7 +56,8 @@
                 android:scaleY="1.2"
                 android:src="@drawable/ic_arrow_back_white_24dp" />
 
-            <ImageView android:id="@+id/share"
+            <ImageView
+                android:id="@+id/share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -80,10 +82,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@{viewModel.mColor}"
+            android:onClick="@{() -> viewModel.currentEvent.toggleStarred()}"
             android:src="@{viewModel.currentEvent.isStarred ? @drawable/ic_star_fill_white_24dp : @drawable/ic_star_border_white_24dp}"
             android:tint="@color/background"
             app:elevation="6dp"
-            android:onClick="@{() -> viewModel.currentEvent.toggleStarred()}"
             app:layout_anchor="@id/bottom_bar"
             app:rippleColor="@{viewModel.mColor}"
             tools:backgroundTint="@color/colorRed"

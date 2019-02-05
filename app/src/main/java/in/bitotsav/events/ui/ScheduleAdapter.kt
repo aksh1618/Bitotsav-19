@@ -6,7 +6,6 @@ import `in`.bitotsav.shared.utils.executeAfter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -19,7 +18,7 @@ class ScheduleAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemEventBinding.inflate(LayoutInflater.from(parent.context), parent,false),
+            ItemEventBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             lifecycleOwner
         )
     }
@@ -27,18 +26,16 @@ class ScheduleAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val event = getItem(position)
         holder.apply {
-            bind(event, createOnClickListener(event.day, event.id))
+            bind(event, createOnClickListener(event.id))
             itemView.tag = event
         }
     }
 
-    private fun createOnClickListener(eventDay: Int, eventId: Int): View.OnClickListener {
+    private fun createOnClickListener(eventId: Int): View.OnClickListener {
         return View.OnClickListener {
-            // TODO: Navigate to event detail.
-            Toast.makeText(it.context, eventDay.toString(), Toast.LENGTH_SHORT).show()
-            val direction = ScheduleFragmentDirections
-                .actionDestScheduleToDestEventDetail(eventDay, eventId)
-            it.findNavController().navigate(direction)
+            it.findNavController().navigate(
+                ScheduleFragmentDirections.showEventDetail(eventId)
+            )
         }
     }
 
