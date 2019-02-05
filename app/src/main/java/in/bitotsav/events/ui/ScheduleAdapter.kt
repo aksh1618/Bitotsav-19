@@ -27,17 +27,17 @@ class ScheduleAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val event = getItem(position)
         holder.apply {
-            bind(event, createOnClickListener(event.day, position))
+            bind(event, createOnClickListener(event.day, event.id))
             itemView.tag = event
         }
     }
 
-    private fun createOnClickListener(eventDay: Int, eventIndex: Int): View.OnClickListener {
+    private fun createOnClickListener(eventDay: Int, eventId: Int): View.OnClickListener {
         return View.OnClickListener {
             // TODO: Navigate to event detail.
             Toast.makeText(it.context, eventDay.toString(), Toast.LENGTH_SHORT).show()
             val direction = ScheduleFragmentDirections
-                .actionDestScheduleToDestEventDetail(eventDay, eventIndex)
+                .actionDestScheduleToDestEventDetail(eventDay, eventId)
             it.findNavController().navigate(direction)
         }
     }

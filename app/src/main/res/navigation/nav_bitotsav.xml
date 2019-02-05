@@ -20,9 +20,9 @@
             android:id="@+id/action_destSchedule_to_destEventDetail"
             app:destination="@id/destEventDetail"
             app:enterAnim="@anim/slide_in_bottom"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_top" />
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
     <fragment
@@ -94,7 +94,7 @@
             app:argType="integer"/>
 
         <argument
-            android:name="eventIndex"
+            android:name="eventId"
             app:argType="integer"/>
 
     </fragment>

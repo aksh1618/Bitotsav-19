@@ -27,8 +27,8 @@
 
     <!-- Step 1 -->
     <string name="registration_label_name">Name</string>
-    <string name="registration_label_phone">Phone No <small>(For First OTP)</small>> </string>
-    <string name="registration_label_email">Email <small>(For Second OTP)</small>></string>
+    <string name="registration_label_phone">Phone No <small><small>(For First OTP)</small></small></string>
+    <string name="registration_label_email">Email <small><small>(For Second OTP)</small></small></string>
     <string name="registration_label_password">Password</string>
     <string name="registration_label_next_step_one">Get OTPs</string>
 

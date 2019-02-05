@@ -3,7 +3,6 @@ package `in`.bitotsav.events.ui
 
 import `in`.bitotsav.databinding.FragmentEventDetailBinding
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,24 +20,8 @@ class EventDetailFragment : Fragment() {
     private val scheduleViewModel by sharedViewModel<ScheduleViewModel>()
 
     private val args by navArgs<EventDetailFragmentArgs>()
-    private val eventDay by lazy {
-        args.eventDay
-//        arguments?.let {
-//            EventDetailFragmentArgs.fromBundle(it).eventDay.apply {
-//                Log.v(TAG, "SafeArgs: Event day $this")
-//            }
-//        } ?: 0.apply { Log.e(TAG, "SafeArgs betrayed us") }
-    }
-
-    private val eventIndex by lazy {
-        args.eventIndex
-//        arguments?.let {
-//            EventDetailFragmentArgs.fromBundle(it).eventIndex.apply {
-//                Log.v(TAG, "SafeArgs: Event index $this")
-//            }
-//        } ?: 0.apply { Log.e(TAG, "SafeArgs betrayed us") }
-    }
-    private var eventId = 0
+    private val eventDay by lazy { args.eventDay }
+    private val eventId by lazy { args.eventId }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -47,9 +30,8 @@ class EventDetailFragment : Fragment() {
             .apply {
                 lifecycleOwner = this@EventDetailFragment
                 viewModel = scheduleViewModel.apply {
-                    with(dayWiseEventsArray[eventDay - 1]) {
-                        currentEvent.value = value!![eventIndex]
-                        eventId = value!![eventIndex].id
+                    dayWiseEventsArray[eventDay - 1].value?.let {
+                        currentEvent.value = it.find { event -> event.id == eventId }
                     }
                     setObservers()
                 }
@@ -60,13 +42,7 @@ class EventDetailFragment : Fragment() {
     private fun setObservers() {
         scheduleViewModel.dayWiseEventsArray[eventDay - 1]
             .observe(viewLifecycleOwner, Observer {
-                Log.d(TAG, "Detected change in event ${it[eventIndex].name}")
-                scheduleViewModel.currentEvent.value = when (eventId) {
-                    it[eventIndex].id -> it[eventIndex]
-                    // Might happen if event is added / deleted.
-                    else -> it.find { event -> event.id == eventId }
-
-                }
+                scheduleViewModel.currentEvent.value = it.find { event -> event.id == eventId }
             })
     }
 
