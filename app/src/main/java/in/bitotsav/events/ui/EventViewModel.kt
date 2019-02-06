@@ -56,11 +56,13 @@ class EventViewModel(
                 val event = this@with
                 event?.let {
                     currentEvent.value = event
-                    isUserRegistered.value = when (CurrentUser.isLoggedIn) {
-                        true -> event.id.toString() in CurrentUser.userTeams!!
-                        false -> false
-                    }
-                    prepareForRegistration(event)
+                    CurrentUser.isLoggedIn
+                        .onTrue {
+                            prepareForRegistration(event)
+                            event.id.toString() in CurrentUser.userTeams!!
+                        }.onFalse {
+                            isUserRegistered.value = false
+                        }
                 }
             }
         }
