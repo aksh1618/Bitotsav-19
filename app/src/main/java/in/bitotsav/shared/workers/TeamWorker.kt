@@ -52,17 +52,18 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
                 }
                 FETCH_BC_TEAM -> {
                     val teamName = inputData.getString("teamName")
-                        ?: throw NonRetryableException("Championship team not found for this user.")
+                    val user = User(
+                        CurrentUser.bitotsavId!!,
+                        CurrentUser.name!!,
+                        CurrentUser.email!!,
+                        teamName
+                    )
                     runBlocking {
-                        get<ChampionshipTeamRepository>().fetchChampionshipTeamAsync(teamName).await()
-                        val user = User(
-                            CurrentUser.bitotsavId!!,
-                            CurrentUser.name!!,
-                            CurrentUser.email!!,
-                            teamName
-                        )
                         get<UserRepository>().insert(user)
                         Log.d(TAG, "User inserted into DB")
+                        teamName?.let {
+                            get<ChampionshipTeamRepository>().fetchChampionshipTeamAsync(teamName).await()
+                        } ?: throw NonRetryableException("Championship team not found for this user.")
                     }
                 }
             }

@@ -3,6 +3,7 @@ package `in`.bitotsav.teams.utils
 import `in`.bitotsav.profile.utils.AuthException
 import `in`.bitotsav.teams.api.TeamRegistrationService
 import android.util.Log
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +31,7 @@ fun registerForChampionshipAsync(
         val authHeaderValue = "Authorization $authToken"
         val body = mapOf(
             "teamName" to teamName,
-            "teamMembers" to members.toString()
+            "teamMembers" to Gson().toJson(members)
         )
         val request
                 = TeamRegistrationService.api.registerForChampionshipAsync(authHeaderValue, body)

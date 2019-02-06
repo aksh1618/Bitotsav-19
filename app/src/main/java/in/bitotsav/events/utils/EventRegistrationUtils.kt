@@ -2,6 +2,7 @@ package `in`.bitotsav.events.utils
 
 import `in`.bitotsav.teams.api.TeamRegistrationService
 import android.util.Log
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -26,7 +27,7 @@ fun registerForEventAsync(
     val body = mapOf(
         "eventId" to eventId,
         "leaderId" to bitotsavId,
-        "members" to members.toString()
+        "members" to Gson().toJson(members)
     )
     val authHeaderValue = "Authorization $authToken"
     val request = TeamRegistrationService.api.registerForEventAsync(authHeaderValue, body)
@@ -37,7 +38,7 @@ fun registerForEventAsync(
         404 -> throw Exception("Incorrect Bitotsav id and/or email id")
         405 -> throw Exception("All members don't belong to the same college")
         409 -> throw Exception("One or more members are registered for the event")
-        500 -> throw Exception("You must be one of the members")
+//        500 -> throw Exception("You must be one of the members")
         else -> throw Exception("Server is currently facing some issues. Try again later")
     }
 }
