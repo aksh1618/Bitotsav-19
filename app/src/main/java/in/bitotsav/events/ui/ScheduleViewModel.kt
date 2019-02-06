@@ -42,8 +42,6 @@ class ScheduleViewModel(
     // TODO: Use switch map with double trigger for this
     val areFiltersActive = MutableLiveData<Boolean>()
 
-    val currentEvent = MutableLiveData<Event>()
-
     init {
         _showStarredOnly.value = false
         areFiltersActive.value = false
@@ -140,12 +138,6 @@ class ScheduleViewModel(
 
     fun hideFiltersSheet() {
         _isSheetVisible.value = false
-    }
-
-    fun setCurrentEvent(id: Int) {
-        scope.launch {
-            currentEvent.value = eventRepository.getById(id)
-        }
     }
 
 }

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="in.bitotsav.events.ui.ScheduleViewModel" />
+            type="in.bitotsav.events.ui.EventViewModel" />
 
     </data>
 

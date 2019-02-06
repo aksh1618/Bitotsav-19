@@ -2,6 +2,7 @@ package `in`.bitotsav.koin
 
 import `in`.bitotsav.database.AppDatabase
 import `in`.bitotsav.events.data.EventRepository
+import `in`.bitotsav.events.ui.EventViewModel
 import `in`.bitotsav.events.ui.ScheduleViewModel
 import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.profile.api.AuthenticationService
@@ -82,4 +83,5 @@ val viewModelsModule = module {
     viewModel { ProfileViewModel() }
     viewModel { RegistrationViewModel(get()) }
     viewModel { UiUtilViewModel() }
+    viewModel { EventViewModel(get()) }
 }

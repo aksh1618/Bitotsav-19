@@ -2,12 +2,15 @@ package `in`.bitotsav.shared.utils
 
 import `in`.bitotsav.R
 import android.content.Context
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
@@ -28,12 +31,12 @@ fun Context.getColorCompat(colorRes: Int): Int {
     return ContextCompat.getColor(this, colorRes)
 }
 
-fun Boolean.onTrue(block: () -> Unit): Boolean {
+inline fun Boolean.onTrue(block: () -> Unit): Boolean {
     if (this) block.invoke()
     return this
 }
 
-fun Boolean.onFalse(block: () -> Unit): Boolean {
+inline fun Boolean.onFalse(block: () -> Unit): Boolean {
     if (not()) block.invoke()
     return this
 }
@@ -47,4 +50,13 @@ fun String.isProperEmail() =
 
 fun AutoCompleteTextView.setEntries(entries: List<String>) {
     setAdapter(ArrayAdapter(context, R.layout.item_spinner, entries))
+}
+
+inline fun <T> LiveData<T>.setObserver(
+    lifecycleOwner: LifecycleOwner,
+    crossinline block: (T) -> Unit
+) {
+    observe(lifecycleOwner, Observer {
+        block.invoke(it)
+    })
 }
