@@ -41,6 +41,7 @@ class EventRegistrationAdapter(
             binding.executeAfter {
                 viewModel = this@ViewHolder.viewModel
                 this.member = eventRegistrationMember
+                // Need to set this *after* setting the viewModel, causes crash otherwise
                 lifecycleOwner = this@ViewHolder.lifecycleOwner
             }
         }

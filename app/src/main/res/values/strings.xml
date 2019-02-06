@@ -76,11 +76,16 @@
     <string name="event_format_points">%,d Championship Points</string>
     <string name="event_format_leader_name">%s\'s Team</string>
     <string name="event_format_share_title">Share %s with</string>
+    <string name="event_label_register">Register</string>
+    <string name="event_label_deregister">Deregister</string>
+    <string name="event_format_registration_message">See you at %s !!</string>
+    <string name="event_format_deregistration_message">Abandoned %s 😢</string>
 
     <!-- Event Registration -->
+    <string name="event_registration_label_format_title">%s Registration</string>
     <string name="event_registration_label_format_email">Member %d Email</string>
     <string name="event_registration_label_format_bitotsav_id">Member %d Bitotsav Id (B19/*****)</string>
-    <string name="event_registration_label_member_count">Member Count</string>
+    <string name="event_registration_label_member_count">Select Member Count</string>
     <string name="event_registration_label_register">Register</string>
 
 </resources>

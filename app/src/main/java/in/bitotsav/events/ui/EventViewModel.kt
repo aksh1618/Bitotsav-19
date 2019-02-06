@@ -5,6 +5,7 @@ import `in`.bitotsav.events.data.EventRegistrationMember
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.events.utils.Member
 import `in`.bitotsav.events.utils.deregisterForEventAsync
+import `in`.bitotsav.events.utils.registerForEventAsync
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.utils.NonNullMutableLiveData
 import `in`.bitotsav.profile.utils.syncUserAndRun
@@ -23,19 +24,12 @@ class EventViewModel(
     val currentEvent = MutableLiveData<Event>()
     val isUserRegistered = NonNullMutableLiveData(false)
 
-    var numMembersOptions = listOf<String>()
+    val numMembersOptions = NonNullMutableLiveData(listOf("1"))
     val numMembersString = NonNullMutableLiveData("1")
-    val membersToRegister by lazy {
-        mutableListOf(
-            EventRegistrationMember(
-                1,
-                CurrentUser.bitotsavId!!.substring(5),
-                CurrentUser.email!!
-            )
-        )
-    }
+    val membersToRegister = mutableListOf<EventRegistrationMember>()
 
     val registrationError = NonNullMutableLiveData("")
+    val deregistrationError = NonNullMutableLiveData("")
     val waiting = NonNullMutableLiveData(false)
     private val anyErrors: Boolean
         get() = membersToRegister
@@ -66,18 +60,33 @@ class EventViewModel(
                         true -> event.id.toString() in CurrentUser.userTeams!!
                         false -> false
                     }
-                    numMembersOptions = (event.minimumMembers..event.maximumMembers)
-                        .map { it.toString() }
-                    numMembersString.value = event.minimumMembers.toString()
-                    generateMembersToRegister(event.minimumMembers)
+                    prepareForRegistration(event)
                 }
             }
-            registrationError.value = ""
-            waiting.value = false
         }
     }
 
+    fun prepareForRegistration(event: Event) {
+        registrationError.value = ""
+        waiting.value = false
+        numMembersOptions.value = (event.minimumMembers..event.maximumMembers)
+            .map { it.toString() }
+        numMembersString.value = event.minimumMembers.toString()
+        // To reset errors
+        membersToRegister.clear()
+        generateMembersToRegister(event.minimumMembers)
+    }
+
     fun generateMembersToRegister(numMembers: Int) {
+        if (membersToRegister.isEmpty()) {
+            membersToRegister.add(
+                EventRegistrationMember(
+                    1,
+                    CurrentUser.bitotsavId!!.substring(5),
+                    CurrentUser.email!!
+                )
+            )
+        }
         if (numMembers == membersToRegister.size) return
         while (numMembers < membersToRegister.size) {
             membersToRegister.removeAt(numMembers)
@@ -95,28 +104,26 @@ class EventViewModel(
 
     private fun attemptRegistration() {
         scope.launch {
+            val members = membersToRegister
+                .filter { ("BT19/" + it.bitotsavId.text.value) != CurrentUser.bitotsavId }
+                .map { Member(("BT19/" + it.bitotsavId.text.value), it.email.text.value) }
             try {
 
-                val members = membersToRegister.map {
-                    Member("B19/" + it.bitotsavId.text.value, it.email.text.value)
+                registerForEventAsync(
+                    CurrentUser.authToken!!,
+                    currentEvent.value!!.id,
+                    CurrentUser.bitotsavId!!,
+                    members
+                ).await()
+                syncUserAndRun {
+                    currentEvent.value?.setStarred()
+                    isUserRegistered.value = true
+                    waiting.value = false
                 }
-                Log.d(TAG, members.toString())
-                waiting.value = false
-//                registerForEventAsync(
-//                    CurrentUser.authToken!!,
-//                    currentEvent.value!!.id,
-//                    CurrentUser.bitotsavId!!,
-//                    members
-//                ).await()
-//                syncUserAndRun {
-//                    isUserRegistered.value = true
-//                    waiting.value = false
-//                    toast("Registration successful !!")
-//                }
 
             } catch (e: Exception) {
                 error(e.message ?: "Some error occurred :( Try again.")
-                Log.e(TAG, e.message, e)
+                Log.e(TAG, members.toString(), e)
                 waiting.value = false
             }
         }
@@ -135,11 +142,10 @@ class EventViewModel(
                 syncUserAndRun {
                     isUserRegistered.value = false
                     waiting.value = false
-                    toast("Deregistration successful !!")
                 }
 
             } catch (e: Exception) {
-                error(e.message ?: "Some error occurred :( Try again.")
+                deregistrationError.value = e.message ?: "Some error occurred :( Try again."
                 Log.e(TAG, e.message, e)
                 waiting.value = false
             }
@@ -159,7 +165,9 @@ class EventViewModel(
     }
 
     fun deregister() {
+        deregistrationError.value = ""
         isUserRegistered.value.onFalse { toast("Not registered!"); return }
+        waiting.value = true
         attemptDeregistration()
     }
 

@@ -21,7 +21,7 @@ fun registerForEventAsync(
     authToken: String,
     eventId: Int,
     bitotsavId: String,
-    members: List<Member>
+    members: List<Member> // All except logged in one
 ) = CoroutineScope(Dispatchers.Main).async {
     val body = mapOf(
         "eventId" to eventId,
@@ -31,17 +31,14 @@ fun registerForEventAsync(
     val authHeaderValue = "Authorization $authToken"
     val request = TeamRegistrationService.api.registerForEventAsync(authHeaderValue, body)
     val response = request.await()
-    if (response.code() == 200) {
-        Log.d(TAG, "Registered for event $eventId")
-        return@async true
-    } else {
-        Log.d(TAG, "Response Code: ${response.code()}")
-        when (response.code()) {
-            404 -> throw Exception("Incorrect Bitotsav id and/or email id")
-            405 -> throw Exception("All members don't belong to the same college")
-            409 -> throw Exception("One or more members are registered for the event")
-            else -> throw Exception("Server is currently facing some issues. Try again later")
-        }
+    Log.d(TAG, "Response Code: ${response.code()}")
+    when (response.code()) {
+        200 -> Log.d(TAG, "Registered for event $eventId")
+        404 -> throw Exception("Incorrect Bitotsav id and/or email id")
+        405 -> throw Exception("All members don't belong to the same college")
+        409 -> throw Exception("One or more members are registered for the event")
+        500 -> throw Exception("You must be one of the members")
+        else -> throw Exception("Server is currently facing some issues. Try again later")
     }
 }
 
@@ -61,14 +58,10 @@ fun deregisterForEventAsync(
         bitotsavId.substringAfter("/")
     )
     val response = request.await()
-    if (response.code() == 200) {
-        Log.d(TAG, "De-registered for event $eventId")
-        return@async true
-    } else {
-        Log.d(TAG, "Response Code: ${response.code()}")
-        when (response.code()) {
-            403 -> throw Exception("Not registered for this event or not the team leader")
-            else -> throw Exception("Server is currently facing some issues. Try again later")
-        }
+    Log.d(TAG, "Response Code: ${response.code()}")
+    when (response.code()) {
+        200 -> Log.d(TAG, "De-registered for event $eventId")
+        403 -> throw Exception("Not registered for this event or not the team leader")
+        else -> throw Exception("Server is currently facing some issues. Try again later")
     }
 }

@@ -72,6 +72,7 @@ class ScheduleFragment : Fragment() {
     private fun setListObserver(adapter: ScheduleFilterAdapter) {
         scheduleViewModel.filters.observe(viewLifecycleOwner, Observer { filters ->
             adapter.submitList(filters)
+            adapter.notifyDataSetChanged()
         })
     }
 

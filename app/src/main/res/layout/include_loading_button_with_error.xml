@@ -72,7 +72,6 @@
             android:text="@{errorText}"
             android:textColor="@color/errorTextColor"
             android:textStyle="italic"
-            android:visibility="@{``.equals(errorText) ? View.GONE : View.VISIBLE}"
             tools:text="Error Message" />
 
     </LinearLayout>

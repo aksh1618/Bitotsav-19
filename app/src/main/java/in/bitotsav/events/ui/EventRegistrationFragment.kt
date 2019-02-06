@@ -1,7 +1,9 @@
 package `in`.bitotsav.events.ui
 
+import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentEventRegistrationBinding
 import `in`.bitotsav.profile.CurrentUser
+import `in`.bitotsav.shared.utils.onFalse
 import `in`.bitotsav.shared.utils.onTrue
 import `in`.bitotsav.shared.utils.or
 import `in`.bitotsav.shared.utils.setObserver
@@ -20,6 +22,7 @@ class EventRegistrationFragment : Fragment() {
 
     companion object {
         private const val TAG = "EventRegF"
+        private const val KEY_BACK_PRESSED = "back_pressed"
     }
 
     private val eventViewModel by sharedViewModel<EventViewModel>()
@@ -42,6 +45,14 @@ class EventRegistrationFragment : Fragment() {
             (eventViewModel.currentEvent.value == null).onTrue { toast("Event not found!") }
         ).onTrue { findNavController().navigateUp() }
 
+        savedInstanceState?.getBoolean(KEY_BACK_PRESSED)?.onFalse {
+            Log.v(TAG, "Preserving instance state.")
+        } ?: run {
+            // Clear fields if back was pressed
+            Log.d(TAG, "Clearing fields")
+            eventViewModel.prepareForRegistration(eventViewModel.currentEvent.value!!)
+        }
+
         return FragmentEventRegistrationBinding.inflate(inflater, container, false)
             .apply {
                 viewModel = eventViewModel
@@ -50,7 +61,6 @@ class EventRegistrationFragment : Fragment() {
                 }
                 lifecycleOwner = this@EventRegistrationFragment
                 setObservers()
-                Log.d(TAG, "How to ")
             }
             .root
     }
@@ -60,12 +70,6 @@ class EventRegistrationFragment : Fragment() {
 
             numMembersString.setObserver(viewLifecycleOwner) { numMembers ->
                 generateMembersToRegister(numMembers.toInt())
-                membersToRegister.forEach {
-                    Log.d(
-                        TAG,
-                        "Member for recycler view: ${it.bitotsavId.text.value}, ${it.bitotsavId.errorText.value}"
-                    )
-                }
                 adapter.submitList(membersToRegister)
                 adapter.notifyDataSetChanged()
             }
@@ -73,7 +77,12 @@ class EventRegistrationFragment : Fragment() {
             isUserRegistered.setObserver(viewLifecycleOwner) { registered ->
                 if (registered) {
                     // TODO: Show success in some way
-                    toast("Registration Successful !!")
+                    this@EventRegistrationFragment.toast(
+                        getString(
+                            R.string.event_format_registration_message,
+                            eventViewModel.currentEvent.value?.name ?: ""
+                        )
+                    )
                     findNavController().navigateUp()
                 }
             }
@@ -81,8 +90,15 @@ class EventRegistrationFragment : Fragment() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(KEY_BACK_PRESSED, false)
+        super.onSaveInstanceState(outState)
+    }
+
     private fun toast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
 }
+
+// FIXME [WARN]: Ask for confirmation before going back from registration

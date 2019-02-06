@@ -8,6 +8,7 @@ import `in`.bitotsav.shared.ui.UiUtilViewModel
 import `in`.bitotsav.shared.utils.getColorCompat
 import `in`.bitotsav.shared.utils.onFalse
 import `in`.bitotsav.shared.utils.onTrue
+import `in`.bitotsav.shared.utils.setObserver
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +16,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import org.koin.androidx.viewmodel.ext.sharedViewModel
@@ -52,11 +52,20 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun setObservers() {
+
         scheduleViewModel.dayWiseEventsArray.forEach {
-            it.observe(viewLifecycleOwner, Observer {
+            it.setObserver(viewLifecycleOwner) {
                 eventViewModel.setCurrentEvent(eventId)
-            })
+            }
         }
+
+        eventViewModel.deregistrationError.setObserver(viewLifecycleOwner) { error ->
+            error.isNotBlank().onTrue {
+                toast(error)
+                eventViewModel.deregistrationError.value = ""
+            }
+        }
+
     }
 
     // TODO [Refactor]: Should be handled as menu or by live data events
@@ -87,13 +96,13 @@ class EventDetailFragment : Fragment() {
         binding.register.setOnClickListener {
 
             CurrentUser.isLoggedIn.onFalse {
-                Toast.makeText(context, "Not Logged In !", Toast.LENGTH_SHORT).show()
+                toast("Not Logged In !")
                 return@setOnClickListener
             }
 
             eventViewModel.isUserRegistered.value
                 .onTrue {
-                    // TODO [WARN]: Add Confirmation Dialog
+                    // FIXME [WARN]: Add Confirmation Dialog
                     eventViewModel.deregister()
                 }
                 .onFalse {
@@ -103,6 +112,10 @@ class EventDetailFragment : Fragment() {
                     )
                 }
         }
+    }
+
+    private fun toast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
 }
