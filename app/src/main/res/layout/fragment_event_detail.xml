@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="in.bitotsav.events.ui.ScheduleViewModel" />
+            type="in.bitotsav.events.ui.EventViewModel" />
 
     </data>
 
@@ -51,7 +51,7 @@
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="16dp"
                 android:scaleX="1.2"
                 android:scaleY="1.2"
                 android:src="@drawable/ic_arrow_back_white_24dp" />
@@ -71,8 +71,9 @@
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/background"
                 android:filterTouchesWhenObscured="true"
-                android:text="Register"
+                android:text="@{viewModel.isUserRegistered ? @string/event_label_deregister : @string/event_label_register}"
                 android:textColor="@{viewModel.mColor}"
+                tools:text="Register"
                 tools:textColor="@color/colorRed" />
 
         </com.google.android.material.bottomappbar.BottomAppBar>

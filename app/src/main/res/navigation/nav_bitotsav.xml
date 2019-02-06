@@ -94,7 +94,24 @@
         <argument
             android:name="eventId"
             app:argType="integer" />
+        <action
+            android:id="@+id/registerForEvent"
+            app:destination="@id/destEventRegistration"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/destEventRegistration"
+        android:name="in.bitotsav.events.ui.EventRegistrationFragment"
+        android:label="Event Registration"
+        tools:layout="@layout/fragment_event_registration" >
+        <argument
+            android:name="eventId"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
 
 </navigation>

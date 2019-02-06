@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">Bitotsav \'19</string>
 
+    <!--Images Content Descriptions-->
+    <string name="desc_subscribe">Subscribe to alerts</string>
+    <string name="desc_event_description">Hide or show description</string>
+    <string name="desc_share_feed_message">Share</string>
+    <string name="desc_bit_logo">BIT Mesra</string>
+    <string name="event_details_short">%s • %s</string>
+
     <!-- Home -->
     <string name="schedule_title">Schedule</string>
     <string name="info_title">Info</string>
@@ -54,6 +61,7 @@
     <string name="event_label_venue">Venue</string>
     <string name="event_label_contact">Contact</string>
     <string name="event_label_result">Result</string>
+    <string name="event_label_category">Category</string>
     <string name="event_label_team_size">Team Size</string>
     <string name="event_label_prizes">Up For Grabs</string>
     <string name="event_label_rank1">1</string>
@@ -68,13 +76,16 @@
     <string name="event_format_points">%,d Championship Points</string>
     <string name="event_format_leader_name">%s\'s Team</string>
     <string name="event_format_share_title">Share %s with</string>
+    <string name="event_label_register">Register</string>
+    <string name="event_label_deregister">Deregister</string>
+    <string name="event_format_registration_message">See you at %s !!</string>
+    <string name="event_format_deregistration_message">Abandoned %s 😢</string>
 
-    <!--Images Content Descriptions-->
-    <string name="desc_subscribe">Subscribe to alerts</string>
-    <string name="desc_event_description">Hide or show description</string>
-    <string name="desc_share_feed_message">Share</string>
-    <string name="desc_bit_logo">BIT Mesra</string>
-    <string name="event_details_short">%s • %s</string>
-    <string name="event_label_category">Category</string>
+    <!-- Event Registration -->
+    <string name="event_registration_label_format_title">%s Registration</string>
+    <string name="event_registration_label_format_email">Member %d Email</string>
+    <string name="event_registration_label_format_bitotsav_id">Member %d Bitotsav Id (B19/*****)</string>
+    <string name="event_registration_label_member_count">Select Member Count</string>
+    <string name="event_registration_label_register">Register</string>
 
 </resources>

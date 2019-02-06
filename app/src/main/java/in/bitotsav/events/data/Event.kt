@@ -1,5 +1,6 @@
 package `in`.bitotsav.events.data
 
+import `in`.bitotsav.shared.utils.onFalse
 import android.util.Log
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -67,12 +68,20 @@ data class Event(
     }
 
     fun toggleStarred() {
-        Log.d("EventKt", "Starred: $isStarred")
         isStarred = isStarred.not()
-        Log.d("EventKt", "Starred: $isStarred")
         CoroutineScope(Dispatchers.IO).async {
             get<EventRepository>().insert(this@Event)
             Log.d("EventKt", "Inserted: $name")
+        }
+    }
+
+    fun setStarred() {
+        isStarred.onFalse {
+            isStarred = true
+            CoroutineScope(Dispatchers.IO).async {
+                get<EventRepository>().insert(this@Event)
+                Log.d("EventKt", "Inserted: $name")
+            }
         }
     }
 }

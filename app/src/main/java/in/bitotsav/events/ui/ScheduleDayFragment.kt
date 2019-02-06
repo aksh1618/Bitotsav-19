@@ -28,6 +28,7 @@ class ScheduleDayFragment : Fragment() {
                     adapter = ScheduleAdapter(viewLifecycleOwner).apply {
                         scheduleViewModel.dayWiseEventsArray[day - 1].observe(viewLifecycleOwner, Observer { events ->
                             submitList(events)
+                            notifyDataSetChanged()
                         })
                     }
                 }
