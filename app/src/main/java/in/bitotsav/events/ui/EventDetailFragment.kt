@@ -11,9 +11,11 @@ import `in`.bitotsav.shared.utils.onTrue
 import `in`.bitotsav.shared.utils.setObserver
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -32,6 +34,7 @@ class EventDetailFragment : Fragment() {
 
     private val args by navArgs<EventDetailFragmentArgs>()
     private val eventId by lazy { args.eventId }
+    private lateinit var binding: FragmentEventDetailBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -41,17 +44,24 @@ class EventDetailFragment : Fragment() {
         uiUtilViewModel.hideBottomNav()
         eventViewModel.mColor = context?.getColorCompat(R.color.colorRed) ?: 0xFF0000
 
-        return FragmentEventDetailBinding.inflate(inflater, container, false)
+        binding = FragmentEventDetailBinding.inflate(inflater, container, false)
             .apply {
                 lifecycleOwner = this@EventDetailFragment
                 viewModel = eventViewModel.apply { setCurrentEvent(eventId) }
                 setObservers()
                 setClickListeners(this)
             }
-            .root
+        return binding.root
     }
 
     private fun setObservers() {
+
+        eventViewModel.toastMessage.setObserver(viewLifecycleOwner) { message ->
+            message.isNotBlank().onTrue {
+                toast(message)
+                eventViewModel.toast("")
+            }
+        }
 
         scheduleViewModel.dayWiseEventsArray.forEach {
             it.setObserver(viewLifecycleOwner) {
@@ -63,6 +73,7 @@ class EventDetailFragment : Fragment() {
             error.isNotBlank().onTrue {
                 toast(error)
                 eventViewModel.deregistrationError.value = ""
+                binding.register.text = getString(R.string.event_label_deregister)
             }
         }
 
@@ -100,10 +111,13 @@ class EventDetailFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            eventViewModel.isUserRegistered.value
+            eventViewModel.isUserAlreadyRegistered
                 .onTrue {
+                    Log.d(TAG, "Deregistering...")
                     // FIXME [WARN]: Add Confirmation Dialog
                     eventViewModel.deregister()
+                    // FIXME: Can be fixed on using LiveData
+                    binding.register.text = getString(R.string.event_label_register)
                 }
                 .onFalse {
                     // TODO :

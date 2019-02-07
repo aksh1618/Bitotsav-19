@@ -24,6 +24,8 @@ abstract class BaseViewModel(
 
     fun toast(message: String) {
         _toastMessage.value = message
+        // TODO: Adding this line might help avoid duplicate toasts
+//        _toastMessage.value = ""
     }
 
     private val parentJob = Job()

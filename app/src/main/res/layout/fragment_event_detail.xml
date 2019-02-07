@@ -73,7 +73,7 @@
                 android:layout_marginEnd="16dp"
                 app:backgroundTint="@color/background"
                 android:filterTouchesWhenObscured="true"
-                android:text="@{CurrentUser.userTeams.contains(viewModel.currentEvent.id) ? @string/event_label_deregister : @string/event_label_register}"
+                android:text="@{viewModel.userAlreadyRegistered ? @string/event_label_deregister : @string/event_label_register}"
                 android:textColor="@{viewModel.mColor}"
                 tools:text="Register"
                 tools:textColor="@color/colorRed" />

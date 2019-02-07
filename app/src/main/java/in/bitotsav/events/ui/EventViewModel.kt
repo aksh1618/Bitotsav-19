@@ -169,16 +169,19 @@ class EventViewModel(
     fun register() {
         error("")
         anyErrors.onTrue { return }
-        isUserRegistered.value.onTrue { toast("Already registered!"); return }
+        isUserAlreadyRegistered.onTrue { toast("Already registered!"); return }
         waiting.value = true
         attemptRegistration()
     }
 
     fun deregister() {
         deregistrationError.value = ""
-        isUserRegistered.value.onFalse { toast("Not registered!"); return }
+        isUserAlreadyRegistered.onFalse { toast("Not registered!"); return }
         waiting.value = true
         attemptDeregistration()
     }
+
+    val isUserAlreadyRegistered
+        get() = currentEvent.value?.id.toString() in CurrentUser.userTeams ?: mapOf()
 
 }
