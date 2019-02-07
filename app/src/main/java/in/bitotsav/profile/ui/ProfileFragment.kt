@@ -62,6 +62,7 @@ class ProfileFragment : Fragment() {
                     submitList(profileViewModel.user.value?.getRegistrationHistory())
                 }
                 setObservers()
+                setClickListeners(this)
             }
             .root
     }
@@ -82,6 +83,15 @@ class ProfileFragment : Fragment() {
             }
         }
     }
+
+    private fun setClickListeners(binding: FragmentProfileBinding) {
+        binding.content.register.setOnClickListener {
+            findNavController().navigate(
+                ProfileFragmentDirections.registerForChampionship()
+            )
+        }
+    }
+
 
     override fun onDestroyView() {
         profileViewModel.waitingForLogout.value = false

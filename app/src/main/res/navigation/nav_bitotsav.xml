@@ -43,6 +43,13 @@
             android:id="@+id/action_destProfile_to_destLogin"
             app:destination="@+id/destLogin"
             app:popUpTo="@+id/destSchedule" />
+        <action
+            android:id="@+id/registerForChampionship"
+            app:destination="@id/destChampionshipRegistration"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     </fragment>
 
@@ -113,5 +120,9 @@
             app:argType="integer"
             android:defaultValue="1" />
     </fragment>
+    <fragment
+        android:id="@+id/destChampionshipRegistration"
+        android:name="in.bitotsav.profile.ui.ChampionshipRegistrationFragment"
+        android:label=" Championship Registration" />
 
 </navigation>
