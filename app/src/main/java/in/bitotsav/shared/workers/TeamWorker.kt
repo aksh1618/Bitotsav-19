@@ -63,7 +63,7 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
                         Log.d(TAG, "User inserted into DB")
                         teamName?.let {
                             get<ChampionshipTeamRepository>().fetchChampionshipTeamAsync(teamName).await()
-                        } ?: throw NonRetryableException("Championship team not found for this user.")
+                        } ?: Log.d(TAG, "Championship team not found for this user.")
                     }
                 }
             }

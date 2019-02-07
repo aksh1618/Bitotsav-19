@@ -34,7 +34,11 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
 
     fun getByCategories(vararg categories: String) = eventDao.getByCategories(*categories)
 
-    fun getByCategoriesForDay(day: Int, starredOnly: Boolean = false, vararg categories: String) = when (starredOnly) {
+    fun getByCategoriesForDay(
+        day: Int,
+        starredOnly: Boolean = false,
+        vararg categories: String
+    ) = when (starredOnly) {
         true -> eventDao.getStarredByCategoriesForDay(day, *categories)
         false -> eventDao.getByCategoriesForDay(day, *categories)
     }
@@ -56,7 +60,8 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
 
     fun getEventsFromLocalJson() {
         val eventsJsonString: String =
-            get().koin.get<Context>().resources.openRawResource(R.raw.events_init).bufferedReader()
+            get().koin.get<Context>().resources.openRawResource(R.raw.events_init)
+                .bufferedReader()
                 .use { it.readText() }
         val events = Gson().fromJson(eventsJsonString, Array<Event>::class.java)
         CoroutineScope(Dispatchers.IO).async {
@@ -100,7 +105,8 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
             val request = EventService.api.getAllAsync()
             val response = request.await()
             if (response.code() == 200) {
-                val events = response.body() ?: throw NetworkException("Response body is empty")
+                val events =
+                    response.body() ?: throw NetworkException("Response body is empty")
                 Log.d(TAG, "All Events received from the server")
                 events.forEachParallel {
                     it.setProperties(isStarred(it.id) ?: false)

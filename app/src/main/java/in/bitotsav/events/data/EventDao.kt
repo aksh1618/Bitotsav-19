@@ -20,19 +20,19 @@ interface EventDao {
     @Query("SELECT DISTINCT category FROM event ")
     suspend fun getAllCategories(): List<String>
 
-    @Query("SELECT * FROM event WHERE day = :day")
+    @Query("SELECT * FROM event WHERE day = :day ORDER BY timestamp")
     fun getByDay(day: Int): LiveData<List<Event>>
 
-    @Query("SELECT * FROM event WHERE isStarred = 1 AND day = :day")
+    @Query("SELECT * FROM event WHERE isStarred = 1 AND day = :day ORDER BY timestamp")
     fun getStarredByDay(day: Int): LiveData<List<Event>>
 
-    @Query("SELECT * FROM event WHERE category IN(:categories)")
+    @Query("SELECT * FROM event WHERE category IN(:categories) ORDER BY timestamp")
     fun getByCategories(vararg categories: String): LiveData<List<Event>>
 
-    @Query("SELECT * FROM event WHERE category IN(:categories) AND day = :day")
+    @Query("SELECT * FROM event WHERE category IN(:categories) AND day = :day ORDER BY timestamp")
     fun getByCategoriesForDay(day: Int, vararg categories: String): LiveData<List<Event>>
 
-    @Query("SELECT * FROM event WHERE isStarred = 1 AND category IN(:categories) AND day = :day")
+    @Query("SELECT * FROM event WHERE isStarred = 1 AND category IN(:categories) AND day = :day ORDER BY timestamp")
     fun getStarredByCategoriesForDay(day: Int, vararg categories: String): LiveData<List<Event>>
 
     @Query("SELECT * FROM event WHERE id = :id")
