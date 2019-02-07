@@ -20,7 +20,7 @@ data class User(
     var score: Int = runBlocking { championshipTeam?.let { get<ChampionshipTeamRepository>().getScoreByName(it) } ?: 0 }
     // [{"eventId":{eventName:"eventName",teamName:"teamName",rank:"rank"**}}]  Note: All values are strings
     var teams: Map<String, Map<String, String>> = getUserTeams()
-    //    [{id:{email, name}}]
+    //    [{id:{"email": email, "name": name}}]
     var members: Map<String, Map<String, String>> = getTeamMembers()
 
     private fun getUserTeams(): Map<String, Map<String, String>> {
@@ -42,4 +42,23 @@ data class User(
     private fun getTeamMembers(): Map<String, Map<String, String>> {
         return CurrentUser.teamMembers ?: mapOf()
     }
+
+    fun getChampionshipTeamMembers() =
+        members.map { (id, member) ->
+            ChampionshipTeamMember(
+                id,
+                member.getValue("name"),
+                member.getValue("email")
+            )
+        }
+
+    fun getRegistrationHistory() =
+        teams.map { (id, registration) ->
+            RegistrationHistoryItem(
+                id.toInt() + 1,
+                registration.getValue("eventName"),
+                registration.getValue("teamName"),
+                registration.getValue("rank")
+            )
+        }
 }

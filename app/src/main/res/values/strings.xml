@@ -26,9 +26,6 @@
     <string name="login_label_login">Login</string>
     <string name="login_label_register">Register</string>
 
-    <!-- Profile -->
-    <string name="profile_label_logout">Logout</string>
-
     <!-- Registration -->
     <string name="registration_title">Registration</string>
 
@@ -81,11 +78,25 @@
     <string name="event_format_registration_message">See you at %s !!</string>
     <string name="event_format_deregistration_message">Abandoned %s 😢</string>
 
-    <!-- Event Registration -->
-    <string name="event_registration_label_format_title">%s Registration</string>
-    <string name="event_registration_label_format_email">Member %d Email</string>
-    <string name="event_registration_label_format_bitotsav_id">Member %d Bitotsav Id (B19/*****)</string>
-    <string name="event_registration_label_member_count">Select Member Count</string>
-    <string name="event_registration_label_register">Register</string>
+    <!-- Team Registration -->
+    <string name="team_registration_label_format_title">%s Registration</string>
+    <string name="team_registration_label_format_email">Member %d Email</string>
+    <string name="team_registration_label_format_bitotsav_id">Member %d Bitotsav Id (B19/*****)</string>
+    <string name="event_team_registration_label_member_count">Select Member Count</string>
+    <string name="event_team_registration_label_register">Register</string>
+    <string name="championship_team_registration_label_team_name">Team Name</string>
+    <string name="championship_team_registration_label_register">Register</string>
+
+    <!-- Profile -->
+    <string name="profile_label_format_title">Hi %s !!</string>
+    <string name="profile_label_bitotsav_credentials">Your Bitotsav Details</string>
+    <string name="profile_label_bitotsav_id">Bitotsav ID</string>
+    <string name="profile_label_email">Registered Email</string>
+    <string name="profile_label_register">Register for Championship</string>
+    <string name="profile_label_championship_team">Championship Team</string>
+    <string name="profile_label_championship_score">Championship Score</string>
+    <string name="profile_label_registrations">Registrations</string>
+    <string name="profile_label_logout">Logout</string>
+    <string name="profile_format_registration_message">Welcome to the Championship, %s!!</string>
 
 </resources>

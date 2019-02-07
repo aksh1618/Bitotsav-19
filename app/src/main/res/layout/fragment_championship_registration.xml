@@ -2,13 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".events.ui.EventRegistrationFragment">
+    tools:context=".profile.ui.ChampionshipRegistrationFragment">
 
     <data>
 
+        <import type="android.text.InputType" />
+
         <variable
             name="viewModel"
-            type="in.bitotsav.events.ui.EventViewModel" />
+            type="in.bitotsav.profile.ui.ProfileViewModel" />
 
     </data>
 
@@ -21,7 +23,7 @@
             layout="@layout/include_app_bar"
             app:color="@{viewModel.mColor}"
             app:tabbed="@{false}"
-            app:title="@{@string/team_registration_label_format_title(viewModel.currentEvent.name)}" />
+            app:title="@{@string/team_registration_label_format_title(`Bitotsav Championship`)}" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -38,31 +40,14 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="32dp">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/memberCountLayout"
-                    style="@style/Widget.Bitotsav.TextInput"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:hint="@string/event_team_registration_label_member_count"
-                    app:boxStrokeColor="@{viewModel.mColor}"
-                    app:passwordToggleTint="@{viewModel.mColor}">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/memberCountEditText"
-                        style="@style/TextAppearance.Bitotsav.Body1"
-                        android:layout_width="@dimen/form_field_width"
-                        android:layout_height="wrap_content"
-                        android:completionThreshold="0"
-                        android:inputType="text"
-                        android:paddingLeft="12dp"
-                        android:text="@={viewModel.numMembersString}"
-                        app:actvAdapter="@{viewModel.numMembersOptions}"
-                        app:useAsSpinner="@{true}" />
-
-                </com.google.android.material.textfield.TextInputLayout>
+                <include
+                    android:id="@+id/event"
+                    layout="@layout/include_edit_text"
+                    app:autofillHints="@{``}"
+                    app:color="@{viewModel.mColor}"
+                    app:hint="@{@string/championship_team_registration_label_team_name}"
+                    app:inputType="@{InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL}"
+                    app:target="@{viewModel.teamName}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/memberDetails"
@@ -77,13 +62,14 @@
                     layout="@layout/include_loading_button_with_error"
                     app:color="@{viewModel.mColor}"
                     app:errorText="@{viewModel.registrationError}"
-                    app:label="@{@string/event_team_registration_label_register}"
+                    app:label="@{@string/championship_team_registration_label_register}"
                     app:listener="@{() -> viewModel.register()}"
-                    app:loading="@{viewModel.waiting}" />
+                    app:loading="@{viewModel.waitingForRegistration}" />
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

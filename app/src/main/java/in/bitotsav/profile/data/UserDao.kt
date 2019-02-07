@@ -9,7 +9,7 @@ import androidx.room.Query
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user")
-    fun get(): LiveData<User>
+    fun get(): LiveData<User?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(user: User)

@@ -1,7 +1,6 @@
 package `in`.bitotsav.events.ui
 
 import `in`.bitotsav.events.data.Event
-import `in`.bitotsav.events.data.EventRegistrationMember
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.events.utils.Member
 import `in`.bitotsav.events.utils.deregisterForEventAsync
@@ -13,6 +12,7 @@ import `in`.bitotsav.shared.ui.BaseViewModel
 import `in`.bitotsav.shared.utils.onFalse
 import `in`.bitotsav.shared.utils.onTrue
 import `in`.bitotsav.shared.utils.or
+import `in`.bitotsav.teams.data.RegistrationMember
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
@@ -26,7 +26,7 @@ class EventViewModel(
 
     val numMembersOptions = NonNullMutableLiveData(listOf("1"))
     val numMembersString = NonNullMutableLiveData("1")
-    val membersToRegister = mutableListOf<EventRegistrationMember>()
+    val membersToRegister = mutableListOf<RegistrationMember>()
 
     val registrationError = NonNullMutableLiveData("")
     val deregistrationError = NonNullMutableLiveData("")
@@ -82,7 +82,7 @@ class EventViewModel(
     fun generateMembersToRegister(numMembers: Int) {
         if (membersToRegister.isEmpty()) {
             membersToRegister.add(
-                EventRegistrationMember(
+                RegistrationMember(
                     1,
                     CurrentUser.bitotsavId!!.substring(5),
                     CurrentUser.email!!
@@ -94,10 +94,10 @@ class EventViewModel(
             membersToRegister.removeAt(numMembers)
         }
         while (numMembers > membersToRegister.size) {
-            membersToRegister.add(EventRegistrationMember(membersToRegister.size + 1))
+            membersToRegister.add(RegistrationMember(membersToRegister.size + 1))
         }
         membersToRegister.forEach {
-            Log.d(
+            Log.v(
                 TAG,
                 "Member for recycler view: ${it.bitotsavId.text.value}, ${it.bitotsavId.errorText.value}"
             )
@@ -108,6 +108,14 @@ class EventViewModel(
         scope.launch {
             val members = membersToRegister
                 .filter { ("BT19/" + it.bitotsavId.text.value) != CurrentUser.bitotsavId }
+                .apply {
+                    (size == numMembersString.value.toInt() - 1).onFalse {
+                        error("You must one of the members.")
+                        Log.e(TAG, "Attempted registration without own entry.")
+                        waiting.value = false
+                        return@launch
+                    }
+                }
                 .map { Member(("BT19/" + it.bitotsavId.text.value), it.email.text.value) }
             try {
 
