@@ -96,6 +96,11 @@ class EventRegistrationFragment : Fragment() {
         super.onSaveInstanceState(outState)
     }
 
+    override fun onDestroy() {
+        eventViewModel.isUserRegistered.value = false
+        super.onDestroy()
+    }
+
     private fun toast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
