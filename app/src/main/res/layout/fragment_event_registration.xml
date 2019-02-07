@@ -21,7 +21,7 @@
             layout="@layout/include_app_bar"
             app:color="@{viewModel.mColor}"
             app:tabbed="@{false}"
-            app:title="@{@string/event_registration_label_format_title(viewModel.currentEvent.name)}" />
+            app:title="@{@string/team_registration_label_format_title(viewModel.currentEvent.name)}" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:hint="@string/event_registration_label_member_count"
+                    android:hint="@string/event_team_registration_label_member_count"
                     app:boxStrokeColor="@{viewModel.mColor}"
                     app:passwordToggleTint="@{viewModel.mColor}">
 
@@ -77,7 +77,7 @@
                     layout="@layout/include_loading_button_with_error"
                     app:color="@{viewModel.mColor}"
                     app:errorText="@{viewModel.registrationError}"
-                    app:label="@{@string/event_registration_label_register}"
+                    app:label="@{@string/event_team_registration_label_register}"
                     app:listener="@{() -> viewModel.register()}"
                     app:loading="@{viewModel.waiting}" />
 

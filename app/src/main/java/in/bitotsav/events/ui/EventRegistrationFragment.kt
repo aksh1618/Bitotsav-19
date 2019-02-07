@@ -7,6 +7,7 @@ import `in`.bitotsav.shared.utils.onFalse
 import `in`.bitotsav.shared.utils.onTrue
 import `in`.bitotsav.shared.utils.or
 import `in`.bitotsav.shared.utils.setObserver
+import `in`.bitotsav.teams.ui.TeamRegistrationAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,7 +31,7 @@ class EventRegistrationFragment : Fragment() {
     private val args by navArgs<EventRegistrationFragmentArgs>()
     private val eventId by lazy { args.eventId }
     val adapter by lazy {
-        EventRegistrationAdapter(
+        TeamRegistrationAdapter(
             this@EventRegistrationFragment,
             eventViewModel
         )
@@ -49,7 +50,7 @@ class EventRegistrationFragment : Fragment() {
             Log.v(TAG, "Preserving instance state.")
         } ?: run {
             // Clear fields if back was pressed
-            Log.d(TAG, "Clearing fields")
+            Log.v(TAG, "Clearing fields")
             eventViewModel.prepareForRegistration(eventViewModel.currentEvent.value!!)
         }
 

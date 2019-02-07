@@ -1,10 +1,10 @@
-package `in`.bitotsav.events.data
+package `in`.bitotsav.teams.data
 
 import `in`.bitotsav.profile.utils.MutableLiveDataTextWithValidation
 import `in`.bitotsav.shared.utils.isLong
 import `in`.bitotsav.shared.utils.isProperEmail
 
-class EventRegistrationMember (val index: Int, id: String = "", email: String = "") {
+class RegistrationMember (val index: Int, id: String = "", email: String = "") {
 
     private val requiredValidation: String.() -> Boolean = { isNotBlank() }
     private val requiredValidationErrorPair = requiredValidation to "Required"
@@ -28,3 +28,5 @@ class EventRegistrationMember (val index: Int, id: String = "", email: String = 
     )
 
 }
+
+data class Member(val memberId: String, val memberEmail: String)

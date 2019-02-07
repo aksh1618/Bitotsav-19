@@ -1,9 +1,9 @@
-package `in`.bitotsav.events.ui
+package `in`.bitotsav.teams.ui
 
 import `in`.bitotsav.databinding.ItemMemberDetailsBinding
-import `in`.bitotsav.events.data.EventRegistrationMember
+import `in`.bitotsav.shared.ui.BaseViewModel
+import `in`.bitotsav.teams.data.RegistrationMember
 import `in`.bitotsav.shared.utils.executeAfter
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class EventRegistrationAdapter(
+class TeamRegistrationAdapter(
     val lifecycleOwner: LifecycleOwner,
-    val viewModel: EventViewModel
-) : ListAdapter<EventRegistrationMember, EventRegistrationAdapter.ViewHolder>(DiffCallback()) {
+    val viewModel: BaseViewModel
+) : ListAdapter<RegistrationMember, TeamRegistrationAdapter.ViewHolder>(
+    DiffCallback()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -35,23 +37,23 @@ class EventRegistrationAdapter(
     class ViewHolder(
         private val binding: ItemMemberDetailsBinding,
         val lifecycleOwner: LifecycleOwner,
-        val viewModel: EventViewModel
+        val viewModel: BaseViewModel
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(eventRegistrationMember: EventRegistrationMember) {
+        fun bind(registrationMember: RegistrationMember) {
             binding.executeAfter {
-                viewModel = this@ViewHolder.viewModel
-                this.member = eventRegistrationMember
+                color = this@ViewHolder.viewModel.mColor
+                this.member = registrationMember
                 // Need to set this *after* setting the viewModel, causes crash otherwise
                 lifecycleOwner = this@ViewHolder.lifecycleOwner
             }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<EventRegistrationMember>() {
-        override fun areItemsTheSame(oldItem: EventRegistrationMember, newItem: EventRegistrationMember): Boolean =
+    class DiffCallback : DiffUtil.ItemCallback<RegistrationMember>() {
+        override fun areItemsTheSame(oldItem: RegistrationMember, newItem: RegistrationMember): Boolean =
             oldItem.index == newItem.index
 
-        override fun areContentsTheSame(oldItem: EventRegistrationMember, newItem: EventRegistrationMember): Boolean =
+        override fun areContentsTheSame(oldItem: RegistrationMember, newItem: RegistrationMember): Boolean =
             oldItem.bitotsavId.text.value == newItem.bitotsavId.text.value
     }
 }
