@@ -16,10 +16,10 @@ import kotlinx.coroutines.withContext
 import org.koin.core.context.GlobalContext.get
 import java.io.IOException
 
-class ProfileViewModel : BaseViewModel("ProfileVM") {
+class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileVM") {
 
-    val user = MutableLiveData<CurrentUser>()
-    val loading = NonNullMutableLiveData(false)
+    val user = userRepository.get()
+    val waitingForLogout = NonNullMutableLiveData(false)
     val loggedOut = NonNullMutableLiveData(false)
 
     init {
@@ -32,8 +32,12 @@ class ProfileViewModel : BaseViewModel("ProfileVM") {
         }
     }
 
+    fun syncUser() {
+        syncUserAndRun { Log.d(TAG, "${user.value?.name}'s profile synced") }
+    }
+
     fun logout() {
-        loading.value = true
+        waitingForLogout.value = true
         deleteFcmTokenFromServer()
         CurrentUser.clearAllFields()
         // Delete previous FCM token to avoid conflicts
@@ -50,7 +54,6 @@ class ProfileViewModel : BaseViewModel("ProfileVM") {
             withContext(Dispatchers.IO) {
                 get().koin.get<UserRepository>().delete()
                 loggedOut.postValue(true)
-                user.postValue(CurrentUser)
             }
         }
     }

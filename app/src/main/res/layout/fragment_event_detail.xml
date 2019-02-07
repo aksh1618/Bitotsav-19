@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="in.bitotsav.profile.CurrentUser" />
+
         <variable
             name="viewModel"
             type="in.bitotsav.events.ui.EventViewModel" />
@@ -69,9 +71,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/background"
+                app:backgroundTint="@color/background"
                 android:filterTouchesWhenObscured="true"
-                android:text="@{viewModel.isUserRegistered ? @string/event_label_deregister : @string/event_label_register}"
+                android:text="@{CurrentUser.userTeams.contains(viewModel.currentEvent.id) ? @string/event_label_deregister : @string/event_label_register}"
                 android:textColor="@{viewModel.mColor}"
                 tools:text="Register"
                 tools:textColor="@color/colorRed" />

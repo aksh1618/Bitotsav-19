@@ -26,9 +26,6 @@
     <string name="login_label_login">Login</string>
     <string name="login_label_register">Register</string>
 
-    <!-- Profile -->
-    <string name="profile_label_logout">Logout</string>
-
     <!-- Registration -->
     <string name="registration_title">Registration</string>
 
@@ -89,5 +86,17 @@
     <string name="event_team_registration_label_register">Register</string>
     <string name="championship_team_registration_label_team_name">Team Name</string>
     <string name="championship_team_registration_label_register">Register</string>
+
+    <!-- Profile -->
+    <string name="profile_label_format_title">Hi %s !!</string>
+    <string name="profile_label_bitotsav_credentials">Your Bitotsav Details</string>
+    <string name="profile_label_bitotsav_id">Bitotsav ID</string>
+    <string name="profile_label_email">Registered Email</string>
+    <string name="profile_label_register">Register for Championship</string>
+    <string name="profile_label_championship_team">Championship Team</string>
+    <string name="profile_label_championship_score">Championship Score</string>
+    <string name="profile_label_registrations">Registrations</string>
+    <string name="profile_label_logout">Logout</string>
+    <string name="profile_format_registration_message">Welcome to the Championship, %s!!</string>
 
 </resources>
