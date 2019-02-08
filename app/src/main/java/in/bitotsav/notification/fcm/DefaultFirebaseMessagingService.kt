@@ -56,7 +56,7 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
             try {
                 updateType = UpdateType.valueOf(remoteMessage.data["type"] ?: return)
             } catch (e: IllegalArgumentException) {
-                Log.e(TAG, e.message)
+                Log.e(TAG, e.message ?: "Illegal Argument exception")
                 return
             }
 

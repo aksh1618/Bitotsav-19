@@ -156,7 +156,7 @@ class EventViewModel(
 
             } catch (e: Exception) {
                 deregistrationError.value = e.message ?: "Some error occurred :( Try again."
-                Log.e(TAG, e.message, e)
+                Log.e(TAG, e.message ?: "Unknown Error", e)
                 waiting.value = false
             }
         }

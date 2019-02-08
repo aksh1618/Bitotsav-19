@@ -1,6 +1,8 @@
 package `in`.bitotsav.shared.workers
 
 import `in`.bitotsav.profile.CurrentUser
+import `in`.bitotsav.profile.data.User
+import `in`.bitotsav.profile.data.UserRepository
 import `in`.bitotsav.profile.utils.AuthException
 import `in`.bitotsav.profile.utils.fetchProfileDetailsAsync
 import `in`.bitotsav.shared.exceptions.NonRetryableException
@@ -10,11 +12,13 @@ import android.content.Context
 import android.util.Log
 import androidx.work.*
 import kotlinx.coroutines.runBlocking
+import org.koin.core.context.GlobalContext.get
 
 private const val TAG = "ProfileWorker"
 
 enum class ProfileWorkType {
     FETCH_PROFILE,
+    SET_USER
 }
 
 class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
@@ -23,21 +27,38 @@ class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context
         try {
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
-            val authToken = CurrentUser.authToken
-                ?: throw NonRetryableException("Auth token is empty")
-            runBlocking { fetchProfileDetailsAsync(authToken).await() }
-            Log.d(TAG, "Fetching completed")
-            fetchUserTeams()
+            when (type) {
+                ProfileWorkType.FETCH_PROFILE -> {
+                    val authToken = CurrentUser.authToken
+                        ?: throw NonRetryableException("Auth token is empty")
+                    runBlocking { fetchProfileDetailsAsync(authToken).await() }
+                    Log.d(TAG, "Fetching completed")
+                    fetchUserTeams()
+                }
+                ProfileWorkType.SET_USER -> {
+                    val user = User(
+                        CurrentUser.bitotsavId!!,
+                        CurrentUser.name!!,
+                        CurrentUser.email!!,
+                        CurrentUser.championshipTeamName
+                    )
+                    runBlocking {
+                        get().koin.get<UserRepository>().insert(user)
+                        Log.d(TAG, "User inserted into DB")
+                    }
+                }
+            }
+
             return Result.success()
         } catch (e: NonRetryableException) {
-            Log.d(TAG, e.message)
+            Log.d(TAG, e.message ?: "Non-retryable exception")
             return Result.failure()
         } catch (e: AuthException) {
-            Log.d(TAG, e.message)
+            Log.d(TAG, e.message ?: "Authentication exception")
             // TODO: Delete token
             return Result.failure()
         } catch (e: Exception) {
-            Log.d(TAG, e.message)
+            Log.d(TAG, e.message ?: "Unknown Error")
             return Result.retry()
         }
     }
@@ -66,12 +87,18 @@ class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context
         val cleanupWork = getWork<TeamWorker>(
             workDataOf("type" to TeamWorkType.CLEAN_OLD_TEAMS.name)
         )
+        val setUserWork = getWork<ProfileWorker>(
+            workDataOf("type" to ProfileWorkType.SET_USER.name)
+        )
         if (fetchUserTeamWorks.isEmpty()) {
-            WorkManager.getInstance().enqueueUniqueWork(
+            WorkManager.getInstance().beginUniqueWork(
                 "FETCH_ALL_USER_TEAMS",
                 ExistingWorkPolicy.REPLACE,
                 fetchChampionshipTeamWork
             )
+                .then(cleanupWork)
+                .then(setUserWork)
+                .enqueue()
         } else {
             WorkManager.getInstance().beginUniqueWork(
                 "FETCH_ALL_USER_TEAMS",
@@ -80,6 +107,7 @@ class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context
             )
                 .then(fetchChampionshipTeamWork)
                 .then(cleanupWork)
+                .then(setUserWork)
                 .enqueue()
         }
     }

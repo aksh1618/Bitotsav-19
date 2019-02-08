@@ -64,7 +64,9 @@ data class Event(
 
     private fun getTimestampFromString(day: Int, timeString: String): Long {
         val (hours, minutes) = timeString.split(":").map { it.toInt() }
-        return GregorianCalendar(2019, 2, day + 14, hours, minutes).timeInMillis
+        val timestamp = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
+        timestamp.set(2019, 1, day + 14, hours, minutes)
+        return timestamp.timeInMillis
     }
 
     fun toggleStarred() {

@@ -52,10 +52,10 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
             }
             return Result.success()
         } catch (e: NonRetryableException) {
-            Log.d(TAG, e.message)
+            Log.d(TAG, e.message ?: "Non-retryable exception")
             return Result.failure()
         } catch (e: Exception) {
-            Log.d(TAG, e.message)
+            Log.d(TAG, e.message ?: "Unknown Error")
             return Result.retry()
         }
     }

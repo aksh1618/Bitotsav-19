@@ -7,6 +7,8 @@ import `in`.bitotsav.koin.sharedPrefsModule
 import `in`.bitotsav.koin.viewModelsModule
 import `in`.bitotsav.notification.utils.createNotificationChannels
 import `in`.bitotsav.shared.utils.getWork
+import `in`.bitotsav.shared.utils.scheduleStartReminderWork
+import `in`.bitotsav.shared.utils.scheduleStopReminderWork
 import `in`.bitotsav.shared.workers.EventWorkType
 import `in`.bitotsav.shared.workers.EventWorker
 import `in`.bitotsav.shared.workers.ResultWorkType
@@ -56,9 +58,6 @@ class Bitotsav19 : Application() {
             get<SharedPreferences>().edit().putBoolean(IS_FIRST_RUN, false).apply()
         }
 
-//        TODO: Make sure this start on 15th and ends on 17th
-//        scheduleReminderWork()
-//        cancelReminderWork()
         // TODO: Remove this.
         val eventWork =
             getWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
@@ -74,6 +73,11 @@ class Bitotsav19 : Application() {
         }
 
         get<EventRepository>().getEventsFromLocalJson()
+        //        TODO: Make sure this start on 15th and ends on 17th
+        scheduleStartReminderWork()
+        scheduleStopReminderWork()
+//        startReminderWork()
+//        cancelReminderWork()
     }
 }
 

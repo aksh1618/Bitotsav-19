@@ -1,8 +1,12 @@
 package `in`.bitotsav.shared.utils
 
 import `in`.bitotsav.shared.workers.*
+import android.util.Log
 import androidx.work.*
+import java.util.*
 import java.util.concurrent.TimeUnit
+
+private const val TAG = "WorkerUtils"
 
 const val delay = 0L
 
@@ -34,9 +38,11 @@ inline fun <reified T : Worker> scheduleUniqueWork(input: Data, uniqueWorkName: 
     WorkManager.getInstance().enqueueUniqueWork(uniqueWorkName, ExistingWorkPolicy.REPLACE, oneTimeWorkRequest)
 }
 
-fun scheduleReminderWork() {
+fun startReminderWork() {
+    Log.d(TAG, "Starting reminder work")
     val periodicWorkRequest =
         PeriodicWorkRequest.Builder(ReminderWorker::class.java, 30, TimeUnit.MINUTES)
+            .setInputData(workDataOf("type" to ReminderWorkType.CHECK_UPCOMING_EVENTS.name))
             .build()
     WorkManager.getInstance().enqueueUniquePeriodicWork(
         ReminderWorkType.CHECK_UPCOMING_EVENTS.name,
@@ -46,7 +52,52 @@ fun scheduleReminderWork() {
 }
 
 fun cancelReminderWork() {
+    Log.d(TAG, "Stopping reminder work.")
     WorkManager.getInstance().cancelUniqueWork(ReminderWorkType.CHECK_UPCOMING_EVENTS.name)
+}
+
+fun scheduleStartReminderWork() {
+//    TODO: Set startTime as initial delay
+    Log.d(TAG, "on scheduleStartReminderWork")
+    val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
+    calendar.set(2019, 1, 15, 7, 0)
+    val startTime = calendar.timeInMillis - System.currentTimeMillis()
+    val testStartTime = 10 * 60 * 1000
+    val oneTimeWorkRequest = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
+        .setInputData(workDataOf("type" to ReminderWorkType.START_REMINDER_WORK.name))
+//        .setInitialDelay(testStartTime, TimeUnit.MILLISECONDS)
+        .setInitialDelay(startTime, TimeUnit.MILLISECONDS)
+        .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
+        .build()
+
+    WorkManager.getInstance().enqueueUniqueWork(
+        ReminderWorkType.START_REMINDER_WORK.name,
+        ExistingWorkPolicy.REPLACE,
+        oneTimeWorkRequest
+    )
+}
+
+fun scheduleStopReminderWork() {
+//    TODO: Set endTime as initial delay
+    Log.d(TAG, "on scheduleStopReminderWork")
+    val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
+//    calendar.set(2019, 1, 8, 4, 20)
+    calendar.set(2019, 1, 17, 20, 0)
+    val delay = calendar.timeInMillis - System.currentTimeMillis()
+    val testDelay = calendar.timeInMillis - System.currentTimeMillis()
+    Log.d(TAG, "Test time: $testDelay")
+    val oneTimeWorkRequest = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
+        .setInputData(workDataOf("type" to ReminderWorkType.STOP_REMINDER_WORK.name))
+        .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+//        .setInitialDelay(testDelay, TimeUnit.MILLISECONDS)
+        .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
+        .build()
+
+    WorkManager.getInstance().enqueueUniqueWork(
+        ReminderWorkType.STOP_REMINDER_WORK.name,
+        ExistingWorkPolicy.REPLACE,
+        oneTimeWorkRequest
+    )
 }
 
 inline fun <reified T : Worker> getWork(input: Data): OneTimeWorkRequest {

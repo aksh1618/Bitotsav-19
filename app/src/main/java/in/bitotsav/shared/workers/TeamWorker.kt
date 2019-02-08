@@ -1,8 +1,5 @@
 package `in`.bitotsav.shared.workers
 
-import `in`.bitotsav.profile.CurrentUser
-import `in`.bitotsav.profile.data.User
-import `in`.bitotsav.profile.data.UserRepository
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.workers.TeamWorkType.*
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
@@ -52,15 +49,15 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
                 }
                 FETCH_BC_TEAM -> {
                     val teamName = inputData.getString("teamName")
-                    val user = User(
-                        CurrentUser.bitotsavId!!,
-                        CurrentUser.name!!,
-                        CurrentUser.email!!,
-                        teamName
-                    )
+//                    val user = User(
+//                        CurrentUser.bitotsavId!!,
+//                        CurrentUser.name!!,
+//                        CurrentUser.email!!,
+//                        teamName
+//                    )
                     runBlocking {
-                        get<UserRepository>().insert(user)
-                        Log.d(TAG, "User inserted into DB")
+                        //                        get<UserRepository>().insert(user)
+//                        Log.d(TAG, "User inserted into DB")
                         teamName?.let {
                             get<ChampionshipTeamRepository>().fetchChampionshipTeamAsync(teamName).await()
                         } ?: Log.d(TAG, "Championship team not found for this user.")
@@ -69,7 +66,7 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
             }
             return Result.success()
         } catch (e: NonRetryableException) {
-            Log.d(TAG, e.message ?: "Unknown Error")
+            Log.d(TAG, e.message ?: "Non-retryable exception")
             return Result.failure()
         } catch (e: Exception) {
             Log.d(TAG, e.message ?: "Unknown Error")

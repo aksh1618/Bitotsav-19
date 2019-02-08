@@ -29,7 +29,7 @@ class FeedWorker(context: Context, params: WorkerParameters): Worker(context, pa
             }
             return Result.success()
         } catch (e: Exception) {
-            Log.d(TAG, e.message)
+            Log.d(TAG, e.message ?: "Unknown Error")
             return Result.retry()
         }
     }

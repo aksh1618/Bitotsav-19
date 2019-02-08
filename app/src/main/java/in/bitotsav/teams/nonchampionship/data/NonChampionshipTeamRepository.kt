@@ -102,7 +102,7 @@ class NonChampionshipTeamRepository(
                             teamName = event.position3["championsipTeam"]
                     }
                 } catch (e: NoSuchElementException) {
-                    Log.e(TAG, e.message)
+                    Log.e(TAG, e.message ?: "No such element exception")
                 }
 
                 if (teamName.isNullOrEmpty() || teamName == "-1") teamName = "${members.values.first()}'s team"

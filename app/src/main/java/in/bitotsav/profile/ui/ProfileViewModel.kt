@@ -12,6 +12,7 @@ import `in`.bitotsav.shared.utils.onTrue
 import `in`.bitotsav.shared.utils.or
 import `in`.bitotsav.teams.data.Member
 import `in`.bitotsav.teams.data.RegistrationMember
+import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
 import `in`.bitotsav.teams.utils.registerForChampionshipAsync
 import android.util.Log
 import com.google.firebase.iid.FirebaseInstanceId
@@ -158,13 +159,14 @@ class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileV
                 try {
                     FirebaseInstanceId.getInstance().deleteInstanceId()
                 } catch (e: IOException) {
-                    Log.e(TAG, e.message, e)
+                    Log.e(TAG, e.message ?: "IO Exception", e)
                 }
             }
         }
         scope.launch {
             withContext(Dispatchers.IO) {
                 get().koin.get<UserRepository>().delete()
+                get().koin.get<NonChampionshipTeamRepository>().cleanupUserTeams()
                 loggedOut.postValue(true)
             }
         }

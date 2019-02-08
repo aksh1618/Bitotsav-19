@@ -35,7 +35,7 @@ class RegistrationViewModel(
                 )
                 Log.v(TAG, "College options fetched")
             } catch (e: Exception) {
-                Log.w(TAG, e.message, e)
+                Log.w(TAG, e.message ?: "Unknown Error", e)
             }
         }
     }
