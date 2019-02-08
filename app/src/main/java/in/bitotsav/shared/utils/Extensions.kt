@@ -2,6 +2,7 @@ package `in`.bitotsav.shared.utils
 
 import `in`.bitotsav.R
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -59,4 +60,13 @@ inline fun <T> LiveData<T>.setObserver(
     observe(lifecycleOwner, Observer {
         block.invoke(it)
     })
+}
+
+fun Context.shareText(shareTitle: String, textToShare: String) {
+    val shareIntent = Intent().apply {
+        action = Intent.ACTION_SEND
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, textToShare)
+    }
+    startActivity(Intent.createChooser(shareIntent, shareTitle))
 }

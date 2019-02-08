@@ -34,12 +34,16 @@ class SimpleRecyclerViewAdapter<T : SimpleRecyclerViewAdapter.SimpleItem>(
 
     class DiffCallback<T : SimpleItem> : DiffUtil.ItemCallback<T>() {
         override fun areItemsTheSame(oldItem: T, newItem: T): Boolean =
-            oldItem.id == newItem.id
+            oldItem.getUniqueIdentifier() == newItem.getUniqueIdentifier()
 
         override fun areContentsTheSame(oldItem: T, newItem: T):
                 Boolean =
-            oldItem.id == newItem.id
+            oldItem == newItem
     }
 
-    abstract class SimpleItem(val id: Int)
+    abstract class SimpleItem {
+        abstract fun getUniqueIdentifier(): String
+        abstract override fun equals(other: Any?): Boolean
+        abstract override fun hashCode(): Int
+    }
 }

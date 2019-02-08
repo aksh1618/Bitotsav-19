@@ -101,6 +101,7 @@
         <argument
             android:name="eventId"
             app:argType="integer" />
+
         <action
             android:id="@+id/registerForEvent"
             app:destination="@id/destEventRegistration"
@@ -110,19 +111,31 @@
             app:popExitAnim="@anim/nav_default_exit_anim" />
 
     </fragment>
+
     <fragment
         android:id="@+id/destEventRegistration"
         android:name="in.bitotsav.events.ui.EventRegistrationFragment"
         android:label="Event Registration"
-        tools:layout="@layout/fragment_event_registration" >
+        tools:layout="@layout/fragment_event_registration">
+
         <argument
             android:name="eventId"
-            app:argType="integer"
-            android:defaultValue="1" />
+            android:defaultValue="1"
+            app:argType="integer" />
+
     </fragment>
+
     <fragment
         android:id="@+id/destChampionshipRegistration"
         android:name="in.bitotsav.profile.ui.ChampionshipRegistrationFragment"
         android:label=" Championship Registration" />
+
+    <action
+        android:id="@+id/action_global_destEventDetail"
+        app:destination="@id/destEventDetail"
+        app:enterAnim="@anim/slide_in_bottom"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/slide_out_bottom" />
 
 </navigation>

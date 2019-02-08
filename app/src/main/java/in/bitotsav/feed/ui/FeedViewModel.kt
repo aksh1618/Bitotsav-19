@@ -1,7 +1,10 @@
 package `in`.bitotsav.feed.ui
 
-import androidx.lifecycle.ViewModel
+import `in`.bitotsav.feed.data.FeedRepository
+import `in`.bitotsav.shared.ui.BaseViewModel
 
-class FeedViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class FeedViewModel(feedRepository: FeedRepository) : BaseViewModel() {
+
+    val feed = feedRepository.getAll()
+
 }

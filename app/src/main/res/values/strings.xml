@@ -73,6 +73,7 @@
     <string name="event_format_points">%,d Championship Points</string>
     <string name="event_format_leader_name">%s\'s Team</string>
     <string name="event_format_share_title">Share %s with</string>
+    <string name="event_format_share_text">Have you heard about %1$s ? Check it out! #Bitotsav19 #ColorsOfAsia\n%2$s</string>
     <string name="event_label_register">Register</string>
     <string name="event_label_deregister">Deregister</string>
     <string name="event_format_registration_message">See you at %s !!</string>
@@ -98,5 +99,9 @@
     <string name="profile_label_registrations">Registrations</string>
     <string name="profile_label_logout">Logout</string>
     <string name="profile_format_registration_message">Welcome to the Championship, %s!!</string>
+
+    <!-- Feed -->
+    <string name="feed_format_share_title">Share %s</string>
+    <string name="feed_format_share_text">%s \n#Bitotsav19 #ColorsOfAsia</string>
 
 </resources>
