@@ -2,6 +2,7 @@ package `in`.bitotsav.profile.utils
 
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.api.AuthenticationService
+import `in`.bitotsav.shared.exceptions.AuthException
 import `in`.bitotsav.shared.exceptions.NetworkException
 import android.util.Log
 import kotlinx.coroutines.CoroutineScope
@@ -9,8 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
 private const val TAG = "AuthUtils"
-
-class AuthException(message: String) : Exception(message)
 
 //POST - /login - body: {email, password}
 //502 - Server error

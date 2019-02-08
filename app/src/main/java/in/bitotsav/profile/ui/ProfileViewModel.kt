@@ -21,6 +21,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.core.context.GlobalContext.get
 import java.io.IOException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileVM") {
 
@@ -125,7 +127,14 @@ class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileV
                 }
 
             } catch (e: Exception) {
-                error(e.message ?: "Some error occurred :( Try again.")
+                when (e) {
+                    is UnknownHostException, is SocketTimeoutException -> {
+                        error("Unable to reach bitotsav.in")
+                    }
+                    else -> {
+                        error(e.message ?: "Some error occurred :( Try again.")
+                    }
+                }
                 Log.e(TAG, members.toString(), e)
                 waitingForRegistration.value = false
             }

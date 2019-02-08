@@ -18,7 +18,7 @@ enum class EventWorkType {
     FETCH_ALL_EVENTS
 }
 
-class EventWorker(context: Context, params: WorkerParameters): Worker(context, params), KoinComponent {
+class EventWorker(context: Context, params: WorkerParameters) : Worker(context, params), KoinComponent {
 
     override fun doWork(): Result {
         try {

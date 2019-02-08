@@ -12,7 +12,7 @@ import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
 import java.util.*
 
-enum class Channel(val id: String, val channelName: String){
+enum class Channel(val id: String, val channelName: String) {
     ANNOUNCEMENT("announcement", "Announcement"), // Announcement icon
     EVENT("event", "Event"), // TODO: Bitotsav logo vector
     PM("pm", "Private Message"), // Priority high icon or profile icon
@@ -63,19 +63,19 @@ fun displayNotification(
 }
 
 @TargetApi(26)
-fun createNotificationChannels(context: Context){
+fun createNotificationChannels(context: Context) {
 //    TODO("Fix notification channel for MIUI")
     val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     Channel.values().forEach {
         val channel = NotificationChannel(it.id, it.channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
-        setSound(defaultSoundUri, null)
-        enableLights(true)
-        enableVibration(true)
-        lockscreenVisibility = Notification.VISIBILITY_PUBLIC
-    }
-    notificationManager.createNotificationChannel(channel)
+            setSound(defaultSoundUri, null)
+            enableLights(true)
+            enableVibration(true)
+            lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+        }
+        notificationManager.createNotificationChannel(channel)
     }
 }
 
@@ -85,6 +85,6 @@ private fun getIconByChannel(channel: Channel): Int {
         Channel.EVENT -> R.drawable.ic_schedule_white_24dp
         Channel.PM -> R.drawable.ic_priority_high_white_24dp
         Channel.RESULT -> R.drawable.ic_trophy_white_24dp
-        Channel.STARRED -> R.drawable.ic_info_white_24dp // TODO: Change this icon
+        Channel.STARRED -> R.drawable.ic_star_fill_white_24dp
     }
 }

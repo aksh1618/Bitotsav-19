@@ -1,6 +1,6 @@
 package `in`.bitotsav.teams.utils
 
-import `in`.bitotsav.profile.utils.AuthException
+import `in`.bitotsav.shared.exceptions.AuthException
 import `in`.bitotsav.teams.api.TeamRegistrationService
 import `in`.bitotsav.teams.data.Member
 import android.util.Log

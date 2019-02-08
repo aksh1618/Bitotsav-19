@@ -16,6 +16,8 @@ import `in`.bitotsav.teams.data.RegistrationMember
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 class EventViewModel(
     private val eventRepository: EventRepository
@@ -132,7 +134,14 @@ class EventViewModel(
                 }
 
             } catch (e: Exception) {
-                error(e.message ?: "Some error occurred :( Try again.")
+                when (e) {
+                    is UnknownHostException, is SocketTimeoutException -> {
+                        error("Unable to reach bitotsav.in")
+                    }
+                    else -> {
+                        error(e.message ?: "Some error occurred :( Try again.")
+                    }
+                }
                 Log.e(TAG, members.toString(), e)
                 waiting.value = false
             }
@@ -155,7 +164,14 @@ class EventViewModel(
                 }
 
             } catch (e: Exception) {
-                deregistrationError.value = e.message ?: "Some error occurred :( Try again."
+                when (e) {
+                    is UnknownHostException, is SocketTimeoutException -> {
+                        deregistrationError.value = "Unable to reach bitotsav.in"
+                    }
+                    else -> {
+                        deregistrationError.value = e.message ?: "Some error occurred :( Try again."
+                    }
+                }
                 Log.e(TAG, e.message ?: "Unknown Error", e)
                 waiting.value = false
             }

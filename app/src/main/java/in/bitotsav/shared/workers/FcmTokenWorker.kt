@@ -17,7 +17,7 @@ enum class FcmTokenWorkType {
     DELETE_TOKEN
 }
 
-class FcmTokenWorker(context: Context, params: WorkerParameters): Worker(context, params) {
+class FcmTokenWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
 
     override fun doWork(): Result {
         try {

@@ -2,8 +2,8 @@ package `in`.bitotsav.teams.ui
 
 import `in`.bitotsav.databinding.ItemMemberDetailsBinding
 import `in`.bitotsav.shared.ui.BaseViewModel
-import `in`.bitotsav.teams.data.RegistrationMember
 import `in`.bitotsav.shared.utils.executeAfter
+import `in`.bitotsav.teams.data.RegistrationMember
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner

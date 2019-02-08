@@ -2,14 +2,11 @@ package `in`.bitotsav.shared.utils
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.view.Gravity
 import android.widget.AutoCompleteTextView
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 @BindingAdapter("errorText")

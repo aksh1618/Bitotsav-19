@@ -3,7 +3,6 @@ package `in`.bitotsav.events.ui
 import `in`.bitotsav.databinding.FragmentScheduleBinding
 import `in`.bitotsav.shared.ui.UiUtilViewModel
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

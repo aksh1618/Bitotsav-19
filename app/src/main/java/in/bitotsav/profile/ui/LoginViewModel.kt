@@ -2,15 +2,14 @@ package `in`.bitotsav.profile.ui
 
 import `in`.bitotsav.notification.utils.sendFcmTokenToServer
 import `in`.bitotsav.profile.api.AuthenticationService
-import `in`.bitotsav.profile.utils.AuthException
 import `in`.bitotsav.profile.utils.NonNullMutableLiveData
 import `in`.bitotsav.profile.utils.loginAsync
 import `in`.bitotsav.profile.utils.syncUserAndRun
+import `in`.bitotsav.shared.exceptions.AuthException
 import `in`.bitotsav.shared.ui.BaseViewModel
 import `in`.bitotsav.shared.utils.onTrue
 import `in`.bitotsav.shared.utils.or
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val authService: AuthenticationService) : BaseViewModel() {

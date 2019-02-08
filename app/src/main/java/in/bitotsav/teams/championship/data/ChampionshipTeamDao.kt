@@ -9,7 +9,7 @@ import androidx.room.Query
 @Dao
 interface ChampionshipTeamDao {
     @Query("SELECT * FROM championshipteam")
-    fun getAll() : LiveData<List<ChampionshipTeam>>
+    fun getAll(): LiveData<List<ChampionshipTeam>>
 
     @Query("SELECT * FROM championshipteam WHERE name = :name")
     suspend fun getByName(name: String): ChampionshipTeam?

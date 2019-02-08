@@ -2,7 +2,6 @@ package `in`.bitotsav
 
 import `in`.bitotsav.databinding.ActivityHomeBinding
 import `in`.bitotsav.events.ui.ScheduleViewModel
-import `in`.bitotsav.profile.ui.RegistrationViewModel
 import `in`.bitotsav.shared.ui.UiUtilViewModel
 import `in`.bitotsav.shared.utils.getColorCompat
 import android.os.Build

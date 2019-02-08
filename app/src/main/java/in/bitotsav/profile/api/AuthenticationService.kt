@@ -1,9 +1,7 @@
 package `in`.bitotsav.profile.api
 
 import kotlinx.coroutines.Deferred
-import org.koin.core.context.GlobalContext.get
 import retrofit2.Response
-import retrofit2.Retrofit
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

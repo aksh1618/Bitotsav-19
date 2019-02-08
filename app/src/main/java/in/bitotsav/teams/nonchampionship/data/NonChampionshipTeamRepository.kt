@@ -65,7 +65,6 @@ class NonChampionshipTeamRepository(
                 Log.d(TAG, "Team retrieved from DB. eventId: $eventId, teamLeaderId: $teamLeaderId")
                 @Suppress("UNCHECKED_CAST")
                 val members = response.body()?.get("teamMembers") as Map<String, String>
-//                TODO("Retrieve all parameters")
                 val event = get<EventRepository>().getById(eventId)
 //                eventPosition1: {
 //                    teamLeader: req.body.eventPosition1,

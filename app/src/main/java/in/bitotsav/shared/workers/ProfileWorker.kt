@@ -3,8 +3,8 @@ package `in`.bitotsav.shared.workers
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.data.User
 import `in`.bitotsav.profile.data.UserRepository
-import `in`.bitotsav.profile.utils.AuthException
 import `in`.bitotsav.profile.utils.fetchProfileDetailsAsync
+import `in`.bitotsav.shared.exceptions.AuthException
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.getWork
 import `in`.bitotsav.shared.workers.ProfileWorkType.valueOf

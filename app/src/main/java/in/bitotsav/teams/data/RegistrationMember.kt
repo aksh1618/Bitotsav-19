@@ -4,7 +4,7 @@ import `in`.bitotsav.profile.utils.MutableLiveDataTextWithValidation
 import `in`.bitotsav.shared.utils.isLong
 import `in`.bitotsav.shared.utils.isProperEmail
 
-class RegistrationMember (val index: Int, id: String = "", email: String = "") {
+class RegistrationMember(val index: Int, id: String = "", email: String = "") {
 
     private val requiredValidation: String.() -> Boolean = { isNotBlank() }
     private val requiredValidationErrorPair = requiredValidation to "Required"

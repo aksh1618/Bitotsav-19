@@ -4,9 +4,6 @@ import `in`.bitotsav.profile.utils.MutableLiveDataTextWithValidation
 import `in`.bitotsav.profile.utils.NonNullMutableLiveData
 import `in`.bitotsav.shared.utils.isLong
 import `in`.bitotsav.shared.utils.isProperEmail
-import `in`.bitotsav.shared.utils.onFalse
-import `in`.bitotsav.shared.utils.onTrue
-import android.util.Log
 
 class RegistrationFields {
 

@@ -17,7 +17,7 @@ enum class FeedWorkType {
     FETCH_FEEDS
 }
 
-class FeedWorker(context: Context, params: WorkerParameters): Worker(context, params), KoinComponent {
+class FeedWorker(context: Context, params: WorkerParameters) : Worker(context, params), KoinComponent {
 
     override fun doWork(): Result {
         try {

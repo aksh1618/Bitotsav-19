@@ -60,13 +60,15 @@ fun scheduleStartReminderWork() {
 //    TODO: Set startTime as initial delay
     Log.d(TAG, "on scheduleStartReminderWork")
     val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
-    calendar.set(2019, 1, 15, 7, 0)
-    val startTime = calendar.timeInMillis - System.currentTimeMillis()
-    val testStartTime = 10 * 60 * 1000
+    calendar.set(2019, 1, 9, 0, 0)
+//    calendar.set(2019, 1, 15, 7, 0)
+//    val startTime = calendar.timeInMillis - System.currentTimeMillis()
+    val testStartTime = calendar.timeInMillis - System.currentTimeMillis()
+//    val testStartTime = 10 * 60 * 1000
     val oneTimeWorkRequest = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
         .setInputData(workDataOf("type" to ReminderWorkType.START_REMINDER_WORK.name))
-//        .setInitialDelay(testStartTime, TimeUnit.MILLISECONDS)
-        .setInitialDelay(startTime, TimeUnit.MILLISECONDS)
+        .setInitialDelay(testStartTime, TimeUnit.MILLISECONDS)
+//        .setInitialDelay(startTime, TimeUnit.MILLISECONDS)
         .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
         .build()
 
@@ -81,15 +83,15 @@ fun scheduleStopReminderWork() {
 //    TODO: Set endTime as initial delay
     Log.d(TAG, "on scheduleStopReminderWork")
     val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
-//    calendar.set(2019, 1, 8, 4, 20)
-    calendar.set(2019, 1, 17, 20, 0)
-    val delay = calendar.timeInMillis - System.currentTimeMillis()
+    calendar.set(2019, 1, 9, 2, 20)
+//    calendar.set(2019, 1, 17, 20, 0)
+//    val delay = calendar.timeInMillis - System.currentTimeMillis()
     val testDelay = calendar.timeInMillis - System.currentTimeMillis()
     Log.d(TAG, "Test time: $testDelay")
     val oneTimeWorkRequest = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
         .setInputData(workDataOf("type" to ReminderWorkType.STOP_REMINDER_WORK.name))
-        .setInitialDelay(delay, TimeUnit.MILLISECONDS)
-//        .setInitialDelay(testDelay, TimeUnit.MILLISECONDS)
+//        .setInitialDelay(delay, TimeUnit.MILLISECONDS)
+        .setInitialDelay(testDelay, TimeUnit.MILLISECONDS)
         .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
         .build()
 

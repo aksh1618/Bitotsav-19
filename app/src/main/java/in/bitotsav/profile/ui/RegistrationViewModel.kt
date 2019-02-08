@@ -4,6 +4,7 @@ import `in`.bitotsav.notification.utils.sendFcmTokenToServer
 import `in`.bitotsav.profile.api.AuthenticationService
 import `in`.bitotsav.profile.data.RegistrationFields
 import `in`.bitotsav.profile.utils.*
+import `in`.bitotsav.shared.exceptions.AuthException
 import `in`.bitotsav.shared.exceptions.NetworkException
 import `in`.bitotsav.shared.ui.BaseViewModel
 import `in`.bitotsav.shared.utils.onFalse

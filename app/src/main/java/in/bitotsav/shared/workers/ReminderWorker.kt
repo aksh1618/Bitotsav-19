@@ -28,6 +28,7 @@ enum class ReminderWorkType {
 class ReminderWorker(context: Context, params: WorkerParameters) : Worker(context, params), KoinComponent {
     override fun doWork(): Result {
         try {
+//            TODO: Remove test code
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             when (type) {

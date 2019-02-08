@@ -2,6 +2,7 @@ package `in`.bitotsav.profile.utils
 
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.api.ProfileService
+import `in`.bitotsav.shared.exceptions.AuthException
 import `in`.bitotsav.shared.exceptions.NetworkException
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.getWork
