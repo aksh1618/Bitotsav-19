@@ -8,7 +8,7 @@ import androidx.room.Query
 
 @Dao
 interface FeedDao {
-    @Query("SELECT * FROM feed")
+    @Query("SELECT * FROM feed ORDER BY timestamp DESC")
     fun getAll(): LiveData<List<Feed>>
 
     @Query("SELECT MAX(timestamp) FROM feed")
