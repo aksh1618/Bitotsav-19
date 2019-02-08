@@ -1,5 +1,6 @@
 package `in`.bitotsav.profile.ui
 
+import `in`.bitotsav.NavBitotsavDirections
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentProfileBinding
 import `in`.bitotsav.databinding.ItemRegistrationHistoryBinding
@@ -15,6 +16,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.sharedViewModel
 
@@ -31,10 +33,11 @@ class ProfileFragment : Fragment() {
             { inflater, parent, bool ->
                 ItemRegistrationHistoryBinding.inflate(inflater, parent, bool)
             },
-            { itemBinding, item ->
+            { itemBinding, registrationHistoryItem ->
                 (itemBinding as ItemRegistrationHistoryBinding).executeAfter {
-                    this.item = item
+                    this.item = registrationHistoryItem
                     this.color = profileViewModel.mColor
+                    this.listener = getHistoryEventClickListener(registrationHistoryItem)
                     lifecycleOwner = this@ProfileFragment
                 }
             }
@@ -92,6 +95,12 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun getHistoryEventClickListener(registrationHistoryItem: RegistrationHistoryItem) =
+        View.OnClickListener {
+            it.findNavController().navigate(
+                NavBitotsavDirections.actionGlobalDestEventDetail(registrationHistoryItem.eventId)
+            )
+        }
 
     override fun onDestroyView() {
         profileViewModel.waitingForLogout.value = false

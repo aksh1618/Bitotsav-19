@@ -9,7 +9,9 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
+import android.os.Bundle
 import androidx.core.app.NotificationCompat
+import androidx.navigation.NavDeepLinkBuilder
 import java.util.*
 
 enum class Channel(val id: String, val channelName: String) {
@@ -28,19 +30,10 @@ fun displayNotification(
     content: String,
     timestamp: Long,
     channel: Channel,
-    intent: Intent,
+    pendingIntent: PendingIntent,
     context: Context
 ) {
     val uniqueId = (Math.log(Date().time.toDouble()) * 1000000000000000L % Integer.MAX_VALUE).toInt()
-
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-
-    val pendingIntent = PendingIntent.getActivity(
-        context,
-        uniqueId,
-        intent,
-        PendingIntent.FLAG_ONE_SHOT
-    )
 
     val bigTextStyle = NotificationCompat.BigTextStyle()
     bigTextStyle.bigText(content)
@@ -88,3 +81,18 @@ private fun getIconByChannel(channel: Channel): Int {
         Channel.STARRED -> R.drawable.ic_star_fill_white_24dp
     }
 }
+
+fun getFeedPendingIntent(context: Context) =
+    NavDeepLinkBuilder(context)
+        .setGraph(R.navigation.nav_bitotsav)
+        .setDestination(R.id.destFeed)
+        .createPendingIntent()
+
+fun getEventDetailPendingIntent(context: Context, eventId: Int) =
+    NavDeepLinkBuilder(context)
+        .setGraph(R.navigation.nav_bitotsav)
+        .setDestination(R.id.destEventDetail)
+        .setArguments(Bundle().apply {
+            putInt("eventId", eventId)
+        })
+        .createPendingIntent()

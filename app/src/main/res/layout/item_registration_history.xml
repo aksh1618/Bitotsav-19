@@ -13,12 +13,17 @@
             name="item"
             type="in.bitotsav.profile.data.RegistrationHistoryItem" />
 
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:onClick="@{listener}">
 
         <!--<TextView-->
         <!--android:id="@+id/index"-->

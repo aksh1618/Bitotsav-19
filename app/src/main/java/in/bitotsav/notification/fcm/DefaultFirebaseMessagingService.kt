@@ -1,17 +1,13 @@
 package `in`.bitotsav.notification.fcm
 
-import `in`.bitotsav.HomeActivity
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.feed.data.Feed
 import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.feed.data.FeedType
-import `in`.bitotsav.notification.utils.Channel
-import `in`.bitotsav.notification.utils.displayNotification
-import `in`.bitotsav.notification.utils.sendFcmTokenToServer
+import `in`.bitotsav.notification.utils.*
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.utils.*
 import `in`.bitotsav.shared.workers.*
-import android.content.Intent
 import android.util.Log
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
@@ -100,14 +96,12 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
                     CoroutineScope(Dispatchers.IO).async {
                         get<FeedRepository>().insert(feed)
                     }
-//                    TODO("Pass appropriate intent")
-                    val intent = Intent(this, HomeActivity::class.java)
                     displayNotification(
                         title,
                         content,
                         timestamp,
                         channel,
-                        intent,
+                        getFeedPendingIntent(this),
                         this
                     )
                 }
@@ -159,14 +153,12 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
                         get<FeedRepository>().insert(feed)
                     }
                     if (isStarred) channel = Channel.STARRED
-//                    TODO("Pass appropriate intent")
-                    val intent = Intent(this, HomeActivity::class.java)
                     displayNotification(
                         title,
                         content,
                         timestamp,
                         channel,
-                        intent,
+                        getEventDetailPendingIntent(this, eventId),
                         applicationContext
                     )
                 }

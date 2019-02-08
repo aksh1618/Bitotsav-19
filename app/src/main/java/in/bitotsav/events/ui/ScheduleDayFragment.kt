@@ -17,6 +17,7 @@ import org.koin.androidx.viewmodel.ext.sharedViewModel
 class ScheduleDayFragment : Fragment() {
 
     companion object {
+        private const val TAG = "SchedDayF"
         private const val ARG_DAY = "day"
         fun newInstance(day: Int) = ScheduleDayFragment().apply {
             arguments = Bundle().apply {

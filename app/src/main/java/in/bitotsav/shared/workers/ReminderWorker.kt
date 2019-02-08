@@ -1,15 +1,15 @@
 package `in`.bitotsav.shared.workers
 
-import `in`.bitotsav.HomeActivity
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
+import `in`.bitotsav.notification.utils.getEventDetailPendingIntent
+import `in`.bitotsav.notification.utils.getFeedPendingIntent
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.cancelReminderWork
 import `in`.bitotsav.shared.utils.startReminderWork
 import `in`.bitotsav.shared.workers.ReminderWorkType.valueOf
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -25,7 +25,8 @@ enum class ReminderWorkType {
     STOP_REMINDER_WORK
 }
 
-class ReminderWorker(context: Context, params: WorkerParameters) : Worker(context, params), KoinComponent {
+class ReminderWorker(context: Context, params: WorkerParameters) : Worker(context, params),
+    KoinComponent {
     override fun doWork(): Result {
         try {
 //            TODO: Remove test code
@@ -47,7 +48,6 @@ class ReminderWorker(context: Context, params: WorkerParameters) : Worker(contex
                     val timePeriod = 45 * 60 * 1000
                     val currentTimestamp = System.currentTimeMillis()
                     val futureTimestamp = currentTimestamp + timePeriod
-                    val intent = Intent(applicationContext, HomeActivity::class.java)
                     events.forEach {
                         if (it.timestamp in currentTimestamp..futureTimestamp) {
                             val timeInMinutes = (it.timestamp - currentTimestamp) / (60 * 1000)
@@ -56,7 +56,7 @@ class ReminderWorker(context: Context, params: WorkerParameters) : Worker(contex
                                 "Event ${it.name} is about to begin in $timeInMinutes minutes.",
                                 currentTimestamp,
                                 Channel.PM,
-                                intent,
+                                getEventDetailPendingIntent(applicationContext, it.id),
                                 applicationContext
                             )
                         }
@@ -72,6 +72,12 @@ class ReminderWorker(context: Context, params: WorkerParameters) : Worker(contex
 }
 
 private fun checkNotification(title: String, context: Context) {
-    val intent = Intent(context, HomeActivity::class.java)
-    displayNotification(title, "Test content", System.currentTimeMillis(), Channel.ANNOUNCEMENT, intent, context)
+    displayNotification(
+        title,
+        "Test content",
+        System.currentTimeMillis(),
+        Channel.ANNOUNCEMENT,
+        getFeedPendingIntent(context),
+        context
+    )
 }

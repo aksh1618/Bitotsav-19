@@ -1,17 +1,16 @@
 package `in`.bitotsav.shared.workers
 
-import `in`.bitotsav.HomeActivity
 import `in`.bitotsav.events.data.Event
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
+import `in`.bitotsav.notification.utils.getEventDetailPendingIntent
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.forEachParallel
 import `in`.bitotsav.shared.workers.ResultWorkType.valueOf
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -26,7 +25,8 @@ enum class ResultWorkType {
     WINNING_TEAMS
 }
 
-class ResultWorker(context: Context, params: WorkerParameters) : Worker(context, params), KoinComponent {
+class ResultWorker(context: Context, params: WorkerParameters) : Worker(context, params),
+    KoinComponent {
 
     override fun doWork(): Result {
         try {
@@ -83,8 +83,6 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
     private fun checkAndHandleIfUsersTeam(event: Event) {
         val leaderId = CurrentUser.userTeams?.get(event.id.toString())
         val position: String?
-//                TODO("Pass appropriate intent")
-        val intent = Intent(applicationContext, HomeActivity::class.java)
         Log.d(TAG, "Analysing winners for event: $event.id")
         leaderId?.get("leaderId")?.let {
             position = when (it) {
@@ -94,8 +92,7 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
                 else -> null
             }
             position?.let {
-                val eventName = runBlocking { get<EventRepository>().getNameById(event.id) }
-                    ?: throw NonRetryableException("Event name not found for: ${event.id}")
+                val eventName = event.name
                 val title = "Congratulations!"
                 val content = "Your team secured $position position in $eventName."
                 displayNotification(
@@ -103,7 +100,7 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
                     content,
                     System.currentTimeMillis(),
                     Channel.PM,
-                    intent,
+                    getEventDetailPendingIntent(applicationContext, event.id),
                     applicationContext
                 )
             }
