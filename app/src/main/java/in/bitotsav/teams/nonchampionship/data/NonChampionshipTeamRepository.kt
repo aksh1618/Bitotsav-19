@@ -89,16 +89,16 @@ class NonChampionshipTeamRepository(
                 try {
                     if (teamLeaderId == event?.position1?.get("teamLeader")) {
                         rank = 1
-                        if (event.position1.getValue("championshipTeam") != "-1")
-                            teamName = event.position1["championsipTeam"]
+                        if ("-1" != event.position1["championshipTeam"])
+                            teamName = event.position1["championshipTeam"]
                     } else if (teamLeaderId == event?.position2?.get("teamLeader")) {
                         rank = 2
-                        if (event.position2.getValue("championshipTeam") != "-1")
-                            teamName = event.position2["championsipTeam"]
+                        if ("-1" != event.position2["championshipTeam"])
+                            teamName = event.position2["championshipTeam"]
                     } else if (teamLeaderId == event?.position3?.get("teamLeader")) {
                         rank = 3
-                        if (event.position3.getValue("championshipTeam") != "-1")
-                            teamName = event.position3["championsipTeam"]
+                        if ("-1" != event.position3["championshipTeam"])
+                            teamName = event.position3["championshipTeam"]
                     }
                 } catch (e: NoSuchElementException) {
                     Log.e(TAG, e.message ?: "No such element exception")
