@@ -5,17 +5,12 @@ import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentEventDetailBinding
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.ui.UiUtilViewModel
-import `in`.bitotsav.shared.utils.getColorCompat
-import `in`.bitotsav.shared.utils.onFalse
-import `in`.bitotsav.shared.utils.onTrue
-import `in`.bitotsav.shared.utils.setObserver
-import android.content.Intent
+import `in`.bitotsav.shared.utils.*
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -88,20 +83,12 @@ class EventDetailFragment : Fragment() {
 
         binding.share.setOnClickListener {
             // FIXME [WARN] : Use deep link here.
-            val link = "TODO"
-            val shareIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                type = "text/plain"
-                putExtra(
-                    Intent.EXTRA_TEXT, "Have you heard about " +
-                            "${eventViewModel.currentEvent.value?.name} ? Check it out! $link"
-                )
+            eventViewModel.currentEvent.value?.let {
+                val link = "TODO"
+                val textToShare = getString(R.string.event_format_share_text, it.name, link)
+                val shareTitle = getString(R.string.event_format_share_title, it.name)
+                context?.shareText(shareTitle, textToShare)
             }
-            val shareTitle = getString(
-                R.string.event_format_share_title,
-                eventViewModel.currentEvent.value?.name ?: ""
-            )
-            startActivity(Intent.createChooser(shareIntent, shareTitle))
         }
 
         binding.register.setOnClickListener {
@@ -120,12 +107,16 @@ class EventDetailFragment : Fragment() {
                     binding.register.text = getString(R.string.event_label_register)
                 }
                 .onFalse {
-                    // TODO :
                     findNavController().navigate(
                         EventDetailFragmentDirections.registerForEvent().setEventId(eventId)
                     )
                 }
         }
+    }
+
+    override fun onDestroyView() {
+        uiUtilViewModel.showBottomNav()
+        super.onDestroyView()
     }
 
     private fun toast(message: String) {

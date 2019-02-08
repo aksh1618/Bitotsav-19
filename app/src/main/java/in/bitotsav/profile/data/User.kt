@@ -53,9 +53,9 @@ data class User(
         }
 
     fun getRegistrationHistory() =
-        teams.map { (id, registration) ->
+        teams.map { (eventId, registration) ->
             RegistrationHistoryItem(
-                id.toInt() + 1,
+                eventId.toInt(),
                 registration.getValue("eventName"),
                 registration.getValue("teamName"),
                 registration.getValue("rank")

@@ -1,5 +1,7 @@
 package `in`.bitotsav.events.data
 
+import `in`.bitotsav.shared.ui.SimpleRecyclerViewAdapter
+import `in`.bitotsav.shared.ui.SimpleRecyclerViewAdapter.SimpleItem
 import `in`.bitotsav.shared.utils.onFalse
 import android.util.Log
 import androidx.room.Entity
@@ -49,7 +51,7 @@ data class Event(
     @SerializedName("eventPosition1") val position1: Map<String, String>?,
     @SerializedName("eventPosition2") val position2: Map<String, String>?,
     @SerializedName("eventPosition3") val position3: Map<String, String>?
-) : KoinComponent {
+) : SimpleItem(), KoinComponent {
     // Using @Transient also makes room ignore the property
     @Expose(serialize = false, deserialize = false)
     var timestamp = getTimestampFromString(day, timeString)
@@ -86,4 +88,7 @@ data class Event(
             }
         }
     }
+
+    override fun getUniqueIdentifier() = id.toString()
+
 }
