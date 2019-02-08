@@ -109,7 +109,10 @@ class EventViewModel(
     private fun attemptRegistration() {
         scope.launch {
             val members = membersToRegister
-                .filter { ("BT19/" + it.bitotsavId.text.value) != CurrentUser.bitotsavId }
+                .filter {
+                    ("BT19/" + it.bitotsavId.text.value) != CurrentUser.bitotsavId ||
+                            it.email.text.value != CurrentUser.email
+                }
                 .apply {
                     (size == numMembersString.value.toInt() - 1).onFalse {
                         error("You must one of the members.")

@@ -104,7 +104,10 @@ class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileV
     private fun attemptRegistration() {
         scope.launch {
             val members = membersToRegister
-                .filter { ("BT19/" + it.bitotsavId.text.value) != CurrentUser.bitotsavId }
+                .filter {
+                    ("BT19/" + it.bitotsavId.text.value) != CurrentUser.bitotsavId ||
+                            it.email.text.value != CurrentUser.email
+                }
                 .apply {
                     (size == CHAMPIONSHIP_TEAM_SIZE - 1).onFalse {
                         error("You must one of the members.")
