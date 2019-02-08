@@ -80,7 +80,7 @@ val sharedPrefsModule = module {
 
 val viewModelsModule = module {
     viewModel { ScheduleViewModel(get()) }
-    viewModel { LoginViewModel(get()) }
+    viewModel { LoginViewModel(get(), get()) }
     viewModel { ProfileViewModel(get()) }
     viewModel { RegistrationViewModel(get()) }
     viewModel { UiUtilViewModel() }

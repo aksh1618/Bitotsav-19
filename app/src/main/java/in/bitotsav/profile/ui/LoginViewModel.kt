@@ -2,24 +2,31 @@ package `in`.bitotsav.profile.ui
 
 import `in`.bitotsav.notification.utils.sendFcmTokenToServer
 import `in`.bitotsav.profile.api.AuthenticationService
+import `in`.bitotsav.profile.data.UserRepository
 import `in`.bitotsav.profile.utils.NonNullMutableLiveData
 import `in`.bitotsav.profile.utils.loginAsync
 import `in`.bitotsav.profile.utils.syncUserAndRun
 import `in`.bitotsav.shared.exceptions.AuthException
 import `in`.bitotsav.shared.ui.BaseViewModel
+import `in`.bitotsav.shared.utils.onFalse
 import `in`.bitotsav.shared.utils.onTrue
 import `in`.bitotsav.shared.utils.or
 import android.util.Log
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val authService: AuthenticationService) : BaseViewModel() {
+class LoginViewModel(
+    private val authService: AuthenticationService,
+    private val userRepository: UserRepository
+    ) : BaseViewModel() {
+
+    val user = userRepository.get()
 
     val loginEmail = NonNullMutableLiveData("")
     val loginPassword = NonNullMutableLiveData("")
     val loginEmailErrorText = NonNullMutableLiveData("")
     val loginPasswordErrorText = NonNullMutableLiveData("")
     val loginErrorText = NonNullMutableLiveData("")
-    val loggedIn = NonNullMutableLiveData(false)
+    var loggedIn = false
     // Being observed by data binding
     val loading = NonNullMutableLiveData(false)
 
@@ -40,6 +47,7 @@ class LoginViewModel(private val authService: AuthenticationService) : BaseViewM
             loading.value = true
             try {
                 loginAsync(authService, loginEmail.value, loginPassword.value).await()
+                loggedIn = true
                 fetchUserAndLogin()
             } catch (exception: AuthException) {
                 loginErrorText.value = exception.message ?: "Authentication Error"
@@ -53,7 +61,9 @@ class LoginViewModel(private val authService: AuthenticationService) : BaseViewM
                     ?: "Unknown Error!!"
                 Log.e("LoginViewModel.login", null, exception)
             } finally {
-                loading.value = false
+                loggedIn.onFalse {
+                    loading.value = false
+                }
             }
         }
     }
@@ -69,7 +79,6 @@ class LoginViewModel(private val authService: AuthenticationService) : BaseViewM
 
     private fun fetchUserAndLogin() = syncUserAndRun {
         sendFcmTokenToServer()
-        loading.value = false
-        loggedIn.value = true
+        loggedIn = false
     }
 }

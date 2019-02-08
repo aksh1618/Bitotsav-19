@@ -3,13 +3,9 @@ package `in`.bitotsav.profile.ui
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentLoginBinding
 import `in`.bitotsav.profile.CurrentUser
-import `in`.bitotsav.shared.utils.getColorCompat
-import `in`.bitotsav.shared.utils.isProperEmail
-import `in`.bitotsav.shared.utils.runOnMinApi
-import `in`.bitotsav.shared.utils.toast
+import `in`.bitotsav.shared.utils.*
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,13 +53,13 @@ class LoginFragment : Fragment() {
                 this@LoginFragment.context?.let { message.toast(it) }
             })
 
-            loggedIn.observe(viewLifecycleOwner, Observer { isLoggedIn ->
-                if (isLoggedIn) {
-                    Log.d("login observer", "CurrentUser logged in")
+            user.setObserver(viewLifecycleOwner) { user ->
+                user?.let {
                     commitAutofillFields()
+                    loading.value = false
                     findNavController().navigate(R.id.action_destLogin_to_destProfile)
                 }
-            })
+            }
 
             loginEmail.observe(viewLifecycleOwner, Observer { emailText ->
                 loginPasswordErrorText.value = ""
