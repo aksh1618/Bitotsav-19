@@ -9,20 +9,16 @@ class MapConverter {
         @TypeConverter
         @JvmStatic
         fun fromMap(value: Map<String, String>): String {
-            return value.toString().drop(1).dropLast(1)
+            return Gson().toJson(value)
         }
 
         @TypeConverter
         @JvmStatic
         fun toMap(value: String): Map<String, String> {
-            if (value.isNullOrEmpty()) {
-                return mapOf()
-            } else {
-                return value.split(",").associate {
-                    val (left, right) = it.split("=")
-                    left to right
-                }
-            }
+            return value.let {
+                val type = object : TypeToken<Map<String, String>>() {}.type
+                Gson().fromJson<Map<String, String>>(value, type)
+            } ?: mapOf()
         }
 
         @TypeConverter
