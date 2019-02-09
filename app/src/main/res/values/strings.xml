@@ -31,8 +31,12 @@
 
     <!-- Step 1 -->
     <string name="registration_label_name">Name</string>
-    <string name="registration_label_phone">Phone No <small><small>(For First OTP)</small></small></string>
-    <string name="registration_label_email">Email <small><small>(For Second OTP)</small></small></string>
+    <string name="registration_label_phone">
+        Phone No <small><small>(For First OTP)</small></small>
+    </string>
+    <string name="registration_label_email">
+        Email <small><small>(For Second OTP)</small></small>
+    </string>
     <string name="registration_label_password">Password</string>
     <string name="registration_label_next_step_one">Get OTPs</string>
 
@@ -74,7 +78,9 @@
     <string name="event_format_points">%,d Championship Points</string>
     <string name="event_format_leader_name">%s\'s Team</string>
     <string name="event_format_share_title">Share %s with</string>
-    <string name="event_format_share_text">Have you heard about %1$s ? Check it out! #Bitotsav19 #ColorsOfAsia\n%2$s</string>
+    <string name="event_format_share_text">
+        Have you heard about %1$s ? Check it out! #Bitotsav19 #ColorsOfAsia\n%2$s
+    </string>
     <string name="event_label_register">Register</string>
     <string name="event_label_deregister">Deregister</string>
     <string name="event_format_registration_message">See you at %s !!</string>
@@ -83,7 +89,9 @@
     <!-- Team Registration -->
     <string name="team_registration_label_format_title">%s Registration</string>
     <string name="team_registration_label_format_email">Member %d Email</string>
-    <string name="team_registration_label_format_bitotsav_id">Member %d Bitotsav Id (B19/*****)</string>
+    <string name="team_registration_label_format_bitotsav_id">
+        Member %d Bitotsav Id (BT19/*****)
+    </string>
     <string name="event_team_registration_label_member_count">Select Member Count</string>
     <string name="event_team_registration_label_register">Register</string>
     <string name="championship_team_registration_label_team_name">Team Name</string>
@@ -99,10 +107,123 @@
     <string name="profile_label_championship_score">Championship Score</string>
     <string name="profile_label_registrations">Registrations</string>
     <string name="profile_label_logout">Logout</string>
-    <string name="profile_format_registration_message">Welcome to the Championship, %s!!</string>
+    <string name="profile_format_registration_message">
+        Welcome to the Championship, %s!!
+    </string>
 
     <!-- Feed -->
     <string name="feed_format_share_title">Share %s</string>
     <string name="feed_format_share_text">%s \n#Bitotsav19 #ColorsOfAsia</string>
+
+    <!-- Info -->
+    <string name="info_title_bitotsav_bit">Bitotsav</string>
+    <string name="info_title_contact">Contact Us</string>
+    <string name="info_title_about_app">About App</string>
+
+    <!-- Bitotsav -->
+    <string name="info_bitotsav_bitotsav_19_label">Bitotsav 19</string>
+    <string name="info_bitotsav_bitotsav_19_content">
+        Deemed as an institute of national importance, Birla Institute of Technology, Mesra,
+        is one of the country\'s most honourable and distinguished educational university.
+        It was founded and established by the visionary industrialist, B.M. Birla over more
+        than six decades ago, and has been creating waves of success ever since. The massive
+        850 acre campus has been home to diverse cultures, multitudinous talent, and
+        inspiring leaders.\n\n
+
+        BIT Mesra has not only produced some of the finest technocrats in the country, but
+        has also churned out winners in professions as diverse as music, art, and
+        literature. Our annual cultural extravaganza, BITOTSAV, is an affluent celebration
+        of the rich cultural heritage that resides in our country, and an attempt to revel
+        in the euphoric essence of India\'s cultural potency. BITOTSAV has a plethora of
+        events to realize its cause of bringing students from all spheres and from all
+        places, together, to enjoy culture while supporting something of societal
+        importance. As the grandeur of BITOTSAV keeps on growing, this year\'s BITOTSAV is
+        set to be majestic: bigger and better than ever before. With enthralling events,
+        mesmerizing nights, enticing performances by prominent celebrities and a whole lot
+        of dance and music, we welcome you to BITOTSAV19.
+    </string>
+    <string name="info_bitotsav_theme_label">Theme: Colours Of Asia</string>
+    <string name="info_bitotsav_theme_content">
+        “We are, at almost every point of our day, immersed in cultural diversity: faces,
+        clothes, smells, attitudes, values, traditions, behaviours, beliefs, rituals.”
+
+        <annotation alignment="end">
+            \n- Randa Abdel-Fattah
+        </annotation>\n\n
+
+        From the ‘Khokhloma’ painting symbolizing the high importance of forests and nature in
+        Russian culture and its history; to ‘Liwa’ the traditional dance performed in
+        Eastern Arabia; from the traditional Chinese ‘Qipao’ dress, to over 720 dialects and
+        22 official languages in India; form ‘yakuniku’ a Japanese style of cooking, to
+        ‘Teochew opera’ in Singapore; a deep vein of history courses through all the
+        countries of Asia. Culture has ever since been the lifeblood of any vibrant society
+        to tell their stories, celebrate, remember the past, entertain and envisage the
+        future. The variant forms of art, architecture and language, folk music,
+        invigorating dance and eclectic cuisines, marks off even various regions in a
+        country characterizing their inherent traditional origin through different
+        civilizations. Melding of culture and traditions through globalisation and
+        technological advances have increased their historically grounded and validated
+        contributions and brought about much needed futuristic changes. Through the theme
+        “Celebration of Cultures-Colours of Asia” BITOTSAV’19 procures to contribute in its
+        own distinctive way to celebrate the rich, large, complex and variegated cultures of
+        humanity.
+    </string>
+    <string name="info_bitotsav_social_cause_label">Social Cause: विशेष</string>
+    <string name="info_bitotsav_social_cause_content">
+        Pertaining from birth or caused through unavoidable circumstances or accident,
+        disability has always been considered as a character to endow compassion, pity and
+        empathy. While throughout the world many changes have taken place in status and
+        treatment of persons with disabilities, the remnants of tradition and past belief
+        influence present-day practices affecting such groups. Even today, our country has
+        about 30 million handicaps, out of which 50% are uneducated. In a society embracing
+        illiteracy and apartheid on grounds of one’s physical disabilities, the situations
+        of the incapacitated are still in dire straits. Discriminative attitude can
+        stigmatize persons with disabilities, imposing artificial limitations upon them,
+        denying them equal opportunities for development and living, and inequitably
+        demoting them to second-class citizens to be pitied.\n\n
+
+        Started back in 1960, the Disability Rights Movement has thrived to bring forth a change in
+        the world by breaking institutional, physical and societal barriers that had been
+        preventing people with disabilities from living their lives like other citizens.
+        This BITOTSAV we pledge to part take in and contribute our bit to secure equal
+        opportunities and equal rights for all people with disabilities.
+    </string>
+    <string name="info_bitotsav_social_campaign_label">Social Campaign: Lost In Echoes</string>
+    <string name="info_bitotsav_social_campaign_content">
+        If we trace the trails of time, we come across various art forms, be it music, dance
+        or the fine arts, which have, over time, lost their sheen and significance. But
+        their grandeur and pageantry are unparalleled. India has, since time immemorial,
+        been a country which has boasted of unity in diversity and the multifarious nature
+        of our country is exhibited in its rich cultural heritage. But due to modernisation,
+        this vibrant culture is getting lost. From the Madhubani painting of Bihar to he
+        Toda embroidery of the Nilgiri hills, these art forms, which show us our glorious
+        past are gradually attriting and it is about time that we do something about it. In
+        an effort to revive the the magnificence of our rich culture, we at BITOTSAV\'19 have
+        pledged to bring to the fore, such art forms via various awareness campaigns,
+        workshops and talks.
+    </string>
+    <string name="info_bitotsav_online_campaign_label">
+        Online Campaign: Responsible Netizenship
+    </string>
+    <string name="info_bitotsav_online_campaign_content">
+        To acquaint one and all with this term, a Netizen is a general word that is used for
+        any person that uses the internet. A responsible Netizen is one who abides by the
+        rules of the online world. Of course, the internet is not restricted to a set of
+        rules and regulations, and is subject to use as and how desired by the end
+        consumer. This is where the concept of responsible Netizenship kicks in. A
+        responsible netizen, is a person who has a moral approach towards the usage of the
+        internet: one who respects the online community, and abides by the so called
+        \'Netiquettes\'.\n\n
+
+        To spread awareness regarding the same, this year\'s social campaign for BITOTSAV is
+        chosen as Responsible Netizenship. As the usage of internet increases manifold, it
+        becomes imperative to ensure that people use it with a certain sense of
+        responsibility. The entire BITOTSAV\'19 team will strive to ensure that people learn
+        about the duties and responsibilities of a netizen, and urge others to do the same.
+        As the usage of the internet is increasing manifold, it is very imperative to be
+        responsible whilst using it. The entire BITOTSAV\'19 team will strive to ensure that
+        people learn about the duties and responsibilities of a netizen, and urge others to
+        do the same.
+    </string>
 
 </resources>

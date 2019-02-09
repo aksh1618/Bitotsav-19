@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="content"
+            type="int" />
+
+        <variable
+            name="color"
+            type="int" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_rectangle"
+            android:padding="16dp"
+            android:text="@{title}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+            android:textColor="@{contentView.getVisibility() == View.GONE ? @color/textColor : color}"
+            app:expandedColor="@{color}"
+            app:hideOnClick="@{contentView}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rotateOnClick="@{arrow}"
+            tools:text="About Bitotsav"
+            tools:textColor="@color/colorRed" />
+
+        <ImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:rotation="@{contentView.getVisibility() == View.GONE ? 0f : 180f}"
+            android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+            android:tint="@{contentView.getVisibility() == View.GONE ? @color/textColor : color}"
+            app:layout_constraintBottom_toBottomOf="@+id/titleView"
+            app:layout_constraintEnd_toEndOf="@+id/titleView"
+            app:layout_constraintTop_toTopOf="@+id/titleView"
+            tools:tint="@color/colorRed" />
+
+        <TextView
+            android:id="@+id/contentView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
+            android:autoLink="all"
+            android:visibility="gone"
+            app:annotatedText="@{content}"
+            app:layout_constraintEnd_toEndOf="@+id/titleView"
+            app:layout_constraintStart_toStartOf="@+id/titleView"
+            app:layout_constraintTop_toBottomOf="@+id/titleView"
+            tools:text="@string/info_bitotsav_theme_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

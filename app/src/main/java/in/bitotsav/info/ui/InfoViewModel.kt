@@ -1,7 +1,14 @@
 package `in`.bitotsav.info.ui
 
+import `in`.bitotsav.shared.ui.BaseViewModel
 import androidx.lifecycle.ViewModel
 
-class InfoViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class InfoViewModel : BaseViewModel() {
+
+    fun feedback() {
+
+    }
+
+
+
 }
