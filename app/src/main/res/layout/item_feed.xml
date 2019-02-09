@@ -26,17 +26,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:onClick="@{listener}">
+        android:onClick="@{listener}"
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@{feed.title}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/share"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Notification title" />
@@ -46,45 +49,52 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:text="@{feed.content}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/share"
             app:layout_constraintStart_toStartOf="@+id/title"
             app:layout_constraintTop_toBottomOf="@+id/title"
             tools:text="There has been a change in something about which you have now been notified." />
 
         <TextView
             android:id="@+id/type"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@{feed.getTypeLabel()}"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="@+id/content"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toStartOf="@+id/share"
             app:layout_constraintStart_toStartOf="@+id/content"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/content"
             tools:text="Announcement" />
 
         <TextView
             android:id="@+id/timestamp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
             android:text="@{feed.getTimeString()}"
-            app:layout_constraintBottom_toBottomOf="@+id/type"
-            app:layout_constraintStart_toStartOf="@+id/content"
-            app:layout_constraintTop_toTopOf="@+id/type"
+            app:layout_constraintEnd_toStartOf="@+id/share"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/type"
             tools:text="14 Feb, 11:45 AM" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:onClick="@{shareListener}"
+            android:padding="8dp"
             android:src="@drawable/ic_share_white_24dp"
             android:tint="@{color}"
-            app:layout_constraintEnd_toEndOf="@+id/content"
-            app:layout_constraintTop_toBottomOf="@+id/content"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title"
             tools:tint="@color/colorRed" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
