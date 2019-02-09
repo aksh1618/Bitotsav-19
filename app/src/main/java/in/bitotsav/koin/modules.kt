@@ -84,6 +84,6 @@ val viewModelsModule = module {
     viewModel { ProfileViewModel(get()) }
     viewModel { RegistrationViewModel(get()) }
     viewModel { UiUtilViewModel() }
-    viewModel { EventViewModel(get()) }
+    viewModel { EventViewModel(get(), get()) }
     viewModel { FeedViewModel(get()) }
 }

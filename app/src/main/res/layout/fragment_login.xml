@@ -67,14 +67,14 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/login"
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
             android:layout_height="52dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@{viewModel.mColor}"
+            app:backgroundTint="@{viewModel.mColor}"
             android:ems="10"
             android:enabled="@{``.equals(viewModel.loginEmailErrorText)}"
             android:filterTouchesWhenObscured="true"
@@ -95,14 +95,14 @@
             android:visibility="@{viewModel.loading ? View.VISIBLE: View.GONE}"
             tools:progressTint="@color/colorRed" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/register"
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
             android:layout_height="52dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@{viewModel.mColor}"
+            app:backgroundTint="@{viewModel.mColor}"
             android:ems="10"
             android:filterTouchesWhenObscured="true"
             android:text="@string/login_label_register"

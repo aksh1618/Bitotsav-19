@@ -7,6 +7,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 
 @BindingAdapter("errorText")
@@ -68,4 +69,9 @@ fun setCenterInLayout(view: TextView, centerInLayout: Boolean) {
             gravity = Gravity.CENTER
         }
     }
+}
+
+@BindingAdapter("backgroundTint")
+fun setBackgroundTint(button: MaterialButton, color: Int) {
+    button.backgroundTintList = ColorStateList.valueOf(color)
 }

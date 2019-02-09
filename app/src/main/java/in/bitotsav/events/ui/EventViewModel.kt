@@ -6,6 +6,7 @@ import `in`.bitotsav.events.utils.Member
 import `in`.bitotsav.events.utils.deregisterForEventAsync
 import `in`.bitotsav.events.utils.registerForEventAsync
 import `in`.bitotsav.profile.CurrentUser
+import `in`.bitotsav.profile.data.UserRepository
 import `in`.bitotsav.profile.utils.NonNullMutableLiveData
 import `in`.bitotsav.profile.utils.syncUserAndRun
 import `in`.bitotsav.shared.ui.BaseViewModel
@@ -20,8 +21,11 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 class EventViewModel(
-    private val eventRepository: EventRepository
+    private val eventRepository: EventRepository,
+    private val userRepository: UserRepository
 ) : BaseViewModel("EventVM") {
+
+    val user = userRepository.get()
 
     val currentEvent = MutableLiveData<Event>()
     val isUserRegistered = NonNullMutableLiveData(false)
@@ -58,13 +62,11 @@ class EventViewModel(
                 val event = this@with
                 event?.let {
                     currentEvent.value = event
-                    CurrentUser.isLoggedIn
-                        .onTrue {
-                            prepareForRegistration(event)
-                            event.id.toString() in CurrentUser.userTeams!!
-                        }.onFalse {
-                            isUserRegistered.value = false
-                        }
+                    user.value?.let {
+                        prepareForRegistration(event)
+                    } ?: run {
+                        isUserRegistered.value = false
+                    }
                 }
             }
         }
@@ -86,8 +88,8 @@ class EventViewModel(
             membersToRegister.add(
                 RegistrationMember(
                     1,
-                    CurrentUser.bitotsavId!!.substring(5),
-                    CurrentUser.email!!
+                    user.value!!.id.substring(5),
+                    user.value!!.email
                 )
             )
         }
@@ -110,8 +112,8 @@ class EventViewModel(
         scope.launch {
             val members = membersToRegister
                 .filter {
-                    ("BT19/" + it.bitotsavId.text.value) != CurrentUser.bitotsavId ||
-                            it.email.text.value != CurrentUser.email
+                    ("BT19/" + it.bitotsavId.text.value) != user.value!!.id ||
+                            it.email.text.value != user.value!!.email
                 }
                 .apply {
                     (size == numMembersString.value.toInt() - 1).onFalse {
@@ -127,7 +129,7 @@ class EventViewModel(
                 registerForEventAsync(
                     CurrentUser.authToken!!,
                     currentEvent.value!!.id,
-                    CurrentUser.bitotsavId!!,
+                    user.value!!.id,
                     members
                 ).await()
                 syncUserAndRun {
@@ -158,7 +160,7 @@ class EventViewModel(
                 deregisterForEventAsync(
                     CurrentUser.authToken!!,
                     currentEvent.value!!.id,
-                    CurrentUser.bitotsavId!!
+                    user.value!!.id
                 ).await()
 
                 syncUserAndRun {
@@ -172,7 +174,8 @@ class EventViewModel(
                         deregistrationError.value = "Unable to reach bitotsav.in"
                     }
                     else -> {
-                        deregistrationError.value = e.message ?: "Some error occurred :( Try again."
+                        deregistrationError.value =
+                            e.message ?: "Some error occurred :( Try again."
                     }
                 }
                 Log.e(TAG, e.message ?: "Unknown Error", e)
@@ -201,6 +204,6 @@ class EventViewModel(
     }
 
     val isUserAlreadyRegistered
-        get() = currentEvent.value?.id.toString() in CurrentUser.userTeams ?: mapOf()
+        get() = currentEvent.value?.id.toString() in user.value?.teams ?: mapOf()
 
 }

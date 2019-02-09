@@ -93,24 +93,23 @@ class EventDetailFragment : Fragment() {
 
         binding.register.setOnClickListener {
 
-            CurrentUser.isLoggedIn.onFalse {
+            eventViewModel.user.value?.let {
+                eventViewModel.isUserAlreadyRegistered
+                    .onTrue {
+                        Log.d(TAG, "Deregistering...")
+                        // FIXME [WARN]: Add Confirmation Dialog
+                        toast("Deregistering...")
+                        eventViewModel.deregister()
+                    }
+                    .onFalse {
+                        findNavController().navigate(
+                            EventDetailFragmentDirections.registerForEvent().setEventId(eventId)
+                        )
+                    }
+            } ?: run {
+                Log.v(TAG, "Attempting registration without logging in.")
                 toast("Not Logged In !")
-                return@setOnClickListener
             }
-
-            eventViewModel.isUserAlreadyRegistered
-                .onTrue {
-                    Log.d(TAG, "Deregistering...")
-                    // FIXME [WARN]: Add Confirmation Dialog
-                    eventViewModel.deregister()
-                    // FIXME: Can be fixed on using LiveData
-                    binding.register.text = getString(R.string.event_label_register)
-                }
-                .onFalse {
-                    findNavController().navigate(
-                        EventDetailFragmentDirections.registerForEvent().setEventId(eventId)
-                    )
-                }
         }
     }
 
