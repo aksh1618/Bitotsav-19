@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout2">
 
     <data>
 
@@ -22,68 +23,70 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{listener}"
         android:orientation="vertical"
-        android:paddingBottom="8dp"
-        android:onClick="@{listener}">
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/event_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@{event.name}"
-            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/star"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Name" />
+            tools:text="Blitzkreig" />
 
         <TextView
             android:id="@+id/event_day"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(event.day)}"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/event_name"
-            app:layout_constraintTop_toTopOf="@+id/imageView2"
-            tools:text="Day 1" />
-
-        <TextView
-            android:id="@+id/event_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{event.description}"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:text="@{@string/event_format_time_venue(event.timeString, event.venue)}"
+            app:layout_constraintEnd_toStartOf="@+id/star"
             app:layout_constraintStart_toStartOf="@+id/event_name"
             app:layout_constraintTop_toBottomOf="@+id/event_name"
-            tools:text="Really cool event!" />
+            tools:text="14:00 • Room 236" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/event_description"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@{event.description}"-->
+            <!--tools:layout_editor_absoluteX="246dp"-->
+            <!--tools:layout_editor_absoluteY="37dp"-->
+            <!--tools:text="Really cool event!" />-->
 
         <TextView
             android:id="@+id/event_category"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@{event.category}"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="@+id/event_description"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="@+id/event_description"
-            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/star"
+            app:layout_constraintStart_toStartOf="@+id/event_name"
+            app:layout_constraintTop_toBottomOf="@+id/event_day"
             tools:text="Fun &amp; Run" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="@{() -> event.toggleStarred()}"
+            android:padding="8dp"
             android:src="@{event.isStarred ? @drawable/ic_star_fill_white_24dp : @drawable/ic_star_border_white_24dp}"
             android:tint="@{color}"
-            android:onClick="@{() -> event.toggleStarred()}"
-            app:layout_constraintEnd_toEndOf="@+id/event_description"
-            app:layout_constraintTop_toBottomOf="@+id/event_description"
+            app:layout_constraintBottom_toBottomOf="@+id/event_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/event_name"
             tools:src="@drawable/ic_star_border_white_24dp"
             tools:tint="@color/colorRed" />
 

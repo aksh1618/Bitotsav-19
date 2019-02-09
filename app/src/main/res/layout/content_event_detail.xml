@@ -48,7 +48,7 @@
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:text="@{@string/event_format_time_venue(event.timeString, event.day)}"
+            android:text="@{@string/event_format_time(event.timeString, event.day)}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

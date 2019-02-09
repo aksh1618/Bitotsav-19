@@ -17,7 +17,7 @@
     <!-- Schedule -->
     <string name="filters_label_sheet_title">Filters</string>
     <string name="filters_label_clear_all">Clear All</string>
-    <string name="filters_label_starred">Starred</string>
+    <string name="filters_label_starred">Starred Only</string>
 
     <!-- Login -->
     <string name="login_label_email">Email</string>
@@ -67,7 +67,8 @@
     <string name="event_placeholder_tba">TBA</string>
     <string name="event_placeholder_tba_long">To Be Announced</string>
     <string name="event_placeholder_no_coordinators">Contact events team.</string>
-    <string name="event_format_time_venue">%1$s (Day %2$d)</string>
+    <string name="event_format_time">%1$s (Day %2$d)</string>
+    <string name="event_format_time_venue">%1$s • %2$s</string>
     <string name="event_format_team_size">%1$d - %2$d</string>
     <string name="event_format_prize">%,d Cash Prize</string>
     <string name="event_format_points">%,d Championship Points</string>
