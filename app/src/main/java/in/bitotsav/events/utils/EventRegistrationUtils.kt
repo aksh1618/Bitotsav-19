@@ -37,8 +37,8 @@ fun registerForEventAsync(
         200 -> Log.d(TAG, "Registered for event $eventId")
         404 -> throw Exception("Incorrect Bitotsav id and/or email id")
         405 -> throw Exception("All members don't belong to the same college")
+        408 -> throw Exception("Registration for this event has been closed")
         409 -> throw Exception("One or more members are registered for the event")
-//        500 -> throw Exception("You must be one of the members")
         else -> throw Exception("Server is currently facing some issues. Try again later")
     }
 }
@@ -63,6 +63,7 @@ fun deregisterForEventAsync(
     when (response.code()) {
         200 -> Log.d(TAG, "De-registered for event $eventId")
         403 -> throw Exception("Not registered for this event or not the team leader")
+        408 -> throw Exception("De-registration for this event has been closed")
         else -> throw Exception("Server is currently facing some issues. Try again later")
     }
 }

@@ -46,7 +46,7 @@ fun startReminderWork() {
             .build()
     WorkManager.getInstance().enqueueUniquePeriodicWork(
         ReminderWorkType.CHECK_UPCOMING_EVENTS.name,
-        ExistingPeriodicWorkPolicy.REPLACE,
+        ExistingPeriodicWorkPolicy.KEEP,
         periodicWorkRequest
     )
 }
@@ -64,6 +64,7 @@ fun scheduleStartReminderWork() {
 //    calendar.set(2019, 1, 15, 7, 0)
 //    val startTime = calendar.timeInMillis - System.currentTimeMillis()
     val testStartTime = calendar.timeInMillis - System.currentTimeMillis()
+    Log.d(TAG, "Test start delay: $testStartTime")
 //    val testStartTime = 10 * 60 * 1000
     val oneTimeWorkRequest = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
         .setInputData(workDataOf("type" to ReminderWorkType.START_REMINDER_WORK.name))

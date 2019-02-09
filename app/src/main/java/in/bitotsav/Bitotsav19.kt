@@ -7,9 +7,8 @@ import `in`.bitotsav.koin.sharedPrefsModule
 import `in`.bitotsav.koin.viewModelsModule
 import `in`.bitotsav.notification.utils.createNotificationChannels
 import `in`.bitotsav.shared.utils.getWork
-import `in`.bitotsav.shared.utils.scheduleStartReminderWork
-import `in`.bitotsav.shared.utils.scheduleStopReminderWork
 import `in`.bitotsav.shared.utils.scheduleWork
+import `in`.bitotsav.shared.utils.startReminderWork
 import `in`.bitotsav.shared.workers.*
 import android.app.Application
 import android.content.SharedPreferences
@@ -23,6 +22,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import java.util.*
 
 class Bitotsav19 : Application() {
     companion object {
@@ -51,6 +51,8 @@ class Bitotsav19 : Application() {
             modules(repositoriesModule, retrofitModule, viewModelsModule, sharedPrefsModule)
         }
 
+        checkAndScheduleReminderWork()
+
         if (get<SharedPreferences>().getBoolean(IS_FIRST_RUN, true)) {
             init()
             get<SharedPreferences>().edit().putBoolean(IS_FIRST_RUN, false).apply()
@@ -73,9 +75,15 @@ class Bitotsav19 : Application() {
         }
 
         get<EventRepository>().getEventsFromLocalJson()
-        //        TODO: Make sure this start on 15th and ends on 17th
-        scheduleStartReminderWork()
-        scheduleStopReminderWork()
+    }
+
+    private fun checkAndScheduleReminderWork() {
+        val currentTimestamp = System.currentTimeMillis()
+        val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
+        calendar.set(2019, 1, 17, 20, 0)
+        val endOfBitotsav = calendar.timeInMillis
+        if (currentTimestamp < endOfBitotsav)
+            startReminderWork()
     }
 }
 
