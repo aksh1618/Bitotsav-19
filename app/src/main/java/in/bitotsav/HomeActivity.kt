@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.WindowManager
+import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
@@ -16,6 +17,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.viewModel
 
 class HomeActivity : AppCompatActivity() {
+
+    enum class Theme(@StyleRes val themeRes: Int) {
+        RED(R.style.AppThemeRed),
+        GREEN(R.style.AppTheme)
+    }
 
     private val uiUtilViewModel by viewModel<UiUtilViewModel>()
     private lateinit var binding: ActivityHomeBinding
@@ -26,10 +32,11 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
+        setTheme(Theme.values().random().themeRes)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.viewModel = uiUtilViewModel
+        uiUtilViewModel.mColor = primaryColor
         binding.lifecycleOwner = this
         handlePlatformLimitations()
         setupBottomNavMenu()

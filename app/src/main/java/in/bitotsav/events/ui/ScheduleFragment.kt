@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.koin.androidx.viewmodel.ext.sharedViewModel
+import org.koin.androidx.viewmodel.ext.viewModel
 
 private var DAYS = 3
 
@@ -37,7 +38,7 @@ class ScheduleFragment : Fragment() {
     // TODO: Get colors from resources
     private val filterColors: List<Int> by lazy {
         listOf(
-            context?.let { it.getColorCompat(R.color.colorRed) } ?: 0xFF0000
+            context?.getColorCompat(R.color.colorRed) ?: 0xFF0000
         )
     }
 
@@ -50,6 +51,11 @@ class ScheduleFragment : Fragment() {
         uiUtilViewModel.showBottomNav()
         // TODO: May need to account for sheet closed on swipe
         scheduleViewModel.hideFiltersSheet()
+        scheduleViewModel.setupFilters()
+        scheduleViewModel.filterColors = filterColors
+        scheduleViewModel.mColor = TypedValue().apply {
+            activity?.theme?.resolveAttribute(R.attr.colorPrimary, this, true)
+        }.data
 
         return FragmentScheduleBinding.inflate(inflater, container, false)
             // TODO: Putting everything from here on in onActivityCreated may increase performance.
@@ -76,6 +82,7 @@ class ScheduleFragment : Fragment() {
                     else -> sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 }
             })
+
         scheduleViewModel.toastMessage.observe(viewLifecycleOwner, Observer { toastMessage ->
             if (!toastMessage.isNullOrEmpty()) {
                 toast?.cancel()
