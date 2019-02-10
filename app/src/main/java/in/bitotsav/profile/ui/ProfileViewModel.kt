@@ -57,7 +57,7 @@ class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileV
             },
             (membersToRegister.distinctBy {
                 Pair(it.bitotsavId, it.email)
-            }.size == numMembersString.value.toInt()).onTrue {
+            }.size < numMembersString.value.toInt()).onTrue {
                 error("Duplicate Entries")
             },
             membersToRegister

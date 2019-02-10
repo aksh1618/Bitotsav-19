@@ -78,7 +78,7 @@
     <string name="event_format_leader_name">%s\'s Team</string>
     <string name="event_format_share_title">Share %s with</string>
     <string name="event_format_share_text">
-        Have you heard about %1$s ? Check it out! #bitotsav_19 #colours_of_asia\n%2$s
+        Have you heard about %1$s? Check it out! #bitotsav_19 #colours_of_asia\n%2$s
     </string>
     <string name="event_label_register">Register</string>
     <string name="event_label_deregister">Deregister</string>
@@ -228,6 +228,8 @@
     <!-- Contact -->
     <string name="info_contact_label_faculty">Faculty Coordinators</string>
     <string name="info_contact_label_student">Student Coordinators</string>
+    <string name="info_contact_label_accommodation">Hospitality</string>
+    <string name="info_contact_label_events">Event Coordinators</string>
     <string name="info_contact_faculty1_name">Dr. Kirti Avishek</string>
     <string name="info_contact_faculty1_contact">kavishek@bitmesra.ac.in</string>
     <string name="info_contact_faculty2_name">Dr. Mrinal Pathak</string>
@@ -236,6 +238,14 @@
     <string name="info_contact_student1_contact">+91 7903002489</string>
     <string name="info_contact_student2_name">Aakrati Jain</string>
     <string name="info_contact_student2_contact">+91 9425797926</string>
+    <string name="info_contact_accommodation1_name">Anamika</string>
+    <string name="info_contact_accommodation1_contact">+91 9523693602</string>
+    <string name="info_contact_accommodation2_name">Shaurya</string>
+    <string name="info_contact_accommodation2_contact">+91 7292887963</string>
+    <string name="info_contact_events1_name">Samadrito Bose</string>
+    <string name="info_contact_events1_contact">+91 7292887967</string>
+    <string name="info_contact_events2_name">Niveditha Ravichandar</string>
+    <string name="info_contact_events2_contact">+91 7292887872</string>
     <string name="info_contact_location_uri">https://maps.app.goo.gl/354f8</string>
     <string name="info_contact_email_uri">mailto:bitotsav@bitmesra.ac.in</string>
     <string name="info_contact_website_uri">https://bitotsav.in</string>
