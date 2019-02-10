@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".info.ui.InfoPageFragment">
+
+    <data>
+
+        <variable
+            name="color"
+            type="int" />
+
+    </data>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="116dp">
+
+            <TextView
+                android:id="@+id/facultyLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:text="@string/info_contact_label_faculty"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+                android:textColor="@{color}"
+                tools:textColor="@color/colorRed" />
+
+            <include
+                android:id="@+id/faculty1"
+                layout="@layout/include_contact_info"
+                app:color="@{color}"
+                app:contact="@{@string/info_contact_faculty1_contact}"
+                app:name="@{@string/info_contact_faculty1_name}" />
+
+            <include
+                android:id="@+id/faculty2"
+                layout="@layout/include_contact_info"
+                app:color="@{color}"
+                app:contact="@{@string/info_contact_faculty2_contact}"
+                app:name="@{@string/info_contact_faculty2_name}" />
+
+            <TextView
+                android:id="@+id/studentLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:text="@string/info_contact_label_student"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+                android:textColor="@{color}"
+                tools:textColor="@color/colorRed" />
+
+            <include
+                android:id="@+id/student1"
+                layout="@layout/include_contact_info"
+                app:color="@{color}"
+                app:contact="@{@string/info_contact_student1_contact}"
+                app:name="@{@string/info_contact_student1_name}" />
+
+            <include
+                android:id="@+id/student2"
+                layout="@layout/include_contact_info"
+                app:color="@{color}"
+                app:contact="@{@string/info_contact_student2_contact}"
+                app:name="@{@string/info_contact_student2_name}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:tint="@{color}"
+                    tools:tint="@color/colorRed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_pin_outline_black_24dp"
+                    app:uriOnClick="@{@string/info_contact_location_uri}" />
+
+                <ImageView
+                    android:tint="@{color}"
+                    tools:tint="@color/colorRed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_globe_outline_black_24dp"
+                    app:uriOnClick="@{@string/info_contact_website_uri}" />
+
+                <ImageView
+                    android:tint="@{color}"
+                    tools:tint="@color/colorRed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_email_outline_black_24dp"
+                    app:uriOnClick="@{@string/info_contact_email_uri}" />
+
+                <ImageView
+                    android:tint="@{color}"
+                    tools:tint="@color/colorRed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_facebook_outline_black_24dp"
+                    app:uriOnClick="@{@string/info_contact_facebook_uri}" />
+
+                <ImageView
+                    android:tint="@{color}"
+                    tools:tint="@color/colorRed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:layout_gravity="center_vertical"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_instagram_outline_black_24dp"
+                    app:uriOnClick="@{@string/info_contact_instagram_uri}" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

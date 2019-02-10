@@ -6,6 +6,7 @@ import `in`.bitotsav.events.ui.EventViewModel
 import `in`.bitotsav.events.ui.ScheduleViewModel
 import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.feed.ui.FeedViewModel
+import `in`.bitotsav.info.ui.InfoViewModel
 import `in`.bitotsav.profile.api.AuthenticationService
 import `in`.bitotsav.profile.data.UserRepository
 import `in`.bitotsav.profile.ui.LoginViewModel
@@ -86,4 +87,5 @@ val viewModelsModule = module {
     viewModel { UiUtilViewModel() }
     viewModel { EventViewModel(get(), get()) }
     viewModel { FeedViewModel(get()) }
+    viewModel { InfoViewModel() }
 }
