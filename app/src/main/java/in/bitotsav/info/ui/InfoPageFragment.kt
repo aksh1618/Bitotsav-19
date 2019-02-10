@@ -1,6 +1,7 @@
 package `in`.bitotsav.info.ui
 
 import `in`.bitotsav.R
+import `in`.bitotsav.databinding.FragmentInfoPageAboutBinding
 import `in`.bitotsav.databinding.FragmentInfoPageBitotsavBinding
 import `in`.bitotsav.databinding.FragmentInfoPageContactBinding
 import `in`.bitotsav.info.ui.InfoPageFragment.InfoPage.*
@@ -47,12 +48,17 @@ class InfoPageFragment : Fragment() {
                 .inflate(inflater, container, false)
                 .apply { color = infoViewModel.mColor }
 
+            ABOUT -> FragmentInfoPageAboutBinding
+                .inflate(inflater, container, false)
+                .apply { color = infoViewModel.mColor }
+
         }.root
     }
 
     enum class InfoPage(val title: Int) {
         BITOTSAV(R.string.info_title_bitotsav_bit),
-        CONTACT(R.string.info_title_contact)
+        CONTACT(R.string.info_title_contact),
+        ABOUT(R.string.info_title_about_app)
     }
 
 }

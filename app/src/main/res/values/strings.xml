@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Bitotsav \'19</string>
+    <string name="app_version">1.0.0</string>
 
     <!--Images Content Descriptions-->
     <string name="desc_subscribe">Subscribe to alerts</string>
@@ -168,7 +169,7 @@
         own distinctive way to celebrate the rich, large, complex and variegated cultures of
         humanity.
     </string>
-    <string name="info_bitotsav_social_cause_label">Social Cause: विशेष</string>
+    <string name="info_bitotsav_social_cause_label">Social Cause: विशेष (Vishesh)</string>
     <string name="info_bitotsav_social_cause_content">
         Pertaining from birth or caused through unavoidable circumstances or accident,
         disability has always been considered as a character to endow compassion, pity and
@@ -242,5 +243,34 @@
     <string name="info_contact_website_uri">https://bitotsav.in</string>
     <string name="info_contact_facebook_uri">https://facebook.com/bitotsav</string>
     <string name="info_contact_instagram_uri">https://instagram.com/bitotsav_19</string>
+
+    <!-- Dev -->
+    <string name="info_about_dev1_name">Aakarshit Uppal</string>
+    <string name="info_about_dev1_role">App Design &amp; Development</string>
+    <string name="info_about_dev1_github">https://github.com/aksh1618</string>
+    <string name="info_about_dev1_facebook">https://facebook.com/aksh1618</string>
+    <string name="info_about_dev1_linkedin">https://linkedin.com/in/aakarshit-uppal</string>
+    <string name="info_about_dev1_twitter">https://twitter.com/aksh1618</string>
+    <string name="info_about_dev2_name">Ashank Anshuman</string>
+    <string name="info_about_dev2_role">Backend Development</string>
+    <string name="info_about_dev2_github">https://github.com/iamashank</string>
+    <string name="info_about_dev2_facebook">https://facebook.com/ashank.anshuman</string>
+    <string name="info_about_dev2_linkedin">https://linkedin.com/in/ashankanshuman</string>
+    <string name="info_about_dev2_twitter">https://twitter.com/iamashank</string>
+    <string name="info_about_dev3_name">Sushant K. Gupta</string>
+    <string name="info_about_dev3_role">Server API Development</string>
+    <string name="info_about_dev3_github">https://github.com/sonudoo</string>
+    <string name="info_about_dev3_facebook">https://facebook.com/sushantgupta4</string>
+    <string name="info_about_dev3_linkedin">https://linkedin.com/in/sushant-gupta-2a6510139</string>
+    <string name="info_about_dev3_twitter">https://twitter.com/sonudoo</string>
+    <string name="info_about_dev4_name">Ayush Raj</string>
+    <string name="info_about_dev4_role">Graphics &amp; Equipment Support</string>
+    <string name="info_about_dev4_github">https://github.com/ayushraj29</string>
+    <string name="info_about_dev4_facebook">https://facebook.com/ayush.raj.7524</string>
+    <string name="info_about_dev4_linkedin">https://linkedin.com/in/ayushraj2912</string>
+    <string name="info_about_dev4_twitter">https://twitter.com/ethereal2912</string>
+    <string name="info_about_label_devs">Team</string>
+    <string name="info_about_label_app">App</string>
+    <string name="info_about_format_app_name">%1$s\nv%2$s</string>
 
 </resources>
