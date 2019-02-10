@@ -104,6 +104,7 @@ class ProfileFragment : Fragment() {
 
     override fun onDestroyView() {
         profileViewModel.waitingForLogout.value = false
+        profileViewModel.waitingForRegistration.value = false
         super.onDestroyView()
     }
 }

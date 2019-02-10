@@ -86,6 +86,11 @@ class ChampionshipRegistrationFragment : Fragment() {
         super.onSaveInstanceState(outState)
     }
 
+    override fun onDestroyView() {
+        profileViewModel.championshipTeamRegistered.value = false
+        super.onDestroyView()
+    }
+
     private fun toast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }

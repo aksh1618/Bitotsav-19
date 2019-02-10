@@ -25,39 +25,48 @@ class ScheduleFragment : Fragment() {
 
     private val scheduleViewModel by sharedViewModel<ScheduleViewModel>()
     private val uiUtilViewModel by sharedViewModel<UiUtilViewModel>()
-    private lateinit var binding: FragmentScheduleBinding
+
     private var toast: Toast? = null
+
     private lateinit var sheetBehavior: BottomSheetBehavior<NestedScrollView>
+    private val filterAdapter by lazy { ScheduleFilterAdapter(scheduleViewModel) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         uiUtilViewModel.showBottomNav()
-        binding = FragmentScheduleBinding.inflate(inflater, container, false)
+        // TODO: May need to account for sheet closed on swipe
+        scheduleViewModel.hideFiltersSheet()
+
+        return FragmentScheduleBinding.inflate(inflater, container, false)
             // TODO: Putting everything from here on in onActivityCreated may increase performance.
             .apply {
                 lifecycleOwner = this@ScheduleFragment
                 viewModel = scheduleViewModel
-                bottomSheet.filterGridRecyclerView.apply {
-                    adapter = ScheduleFilterAdapter(scheduleViewModel).apply { setListObserver(this) }
-                    // This causes the adapter to not populate holders on coming back from another fragment.
-                    // setHasFixedSize(true)
-                }
+                bottomSheet.filterGridRecyclerView.adapter = filterAdapter
+                sheetBehavior = BottomSheetBehavior.from(bottomSheet.filterSheet)
                 dayPager.offscreenPageLimit = DAYS - 1
                 dayPager.adapter = ScheduleDayAdapter(childFragmentManager)
                 appBar.tabs.setupWithViewPager(dayPager)
+                setObservers()
             }
-        sheetBehavior = BottomSheetBehavior.from(binding.bottomSheet.filterSheet)
-        // TODO: May need to account for sheet closed on swipe
-        scheduleViewModel.hideFiltersSheet()
-        scheduleViewModel.isSheetVisible.observe(viewLifecycleOwner, Observer { isSheetVisible ->
-            when (isSheetVisible) {
-                true -> sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                else -> sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-            }
-        })
+            .root
+    }
+
+    private fun setObservers() {
+
+        scheduleViewModel.isSheetVisible.observe(
+            viewLifecycleOwner,
+            Observer { isSheetVisible ->
+                when (isSheetVisible) {
+                    true -> sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    else -> sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                }
+            })
+
         scheduleViewModel.toastMessage.observe(viewLifecycleOwner, Observer { toastMessage ->
             if (!toastMessage.isNullOrEmpty()) {
                 toast?.cancel()
@@ -65,14 +74,12 @@ class ScheduleFragment : Fragment() {
                 toast?.show()
             }
         })
-        return binding.root
-    }
 
-    private fun setListObserver(adapter: ScheduleFilterAdapter) {
         scheduleViewModel.filters.observe(viewLifecycleOwner, Observer { filters ->
-            adapter.submitList(filters)
-            adapter.notifyDataSetChanged()
+            filterAdapter.submitList(filters)
+            filterAdapter.notifyDataSetChanged()
         })
+
     }
 
     inner class ScheduleDayAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
