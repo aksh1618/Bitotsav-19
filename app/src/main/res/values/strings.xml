@@ -226,4 +226,21 @@
         do the same.
     </string>
 
+    <!-- Contact -->
+    <string name="info_contact_label_faculty">Faculty Coordinators</string>
+    <string name="info_contact_label_student">Student Coordinators</string>
+    <string name="info_contact_faculty1_name">Dr. Kirti Avishek</string>
+    <string name="info_contact_faculty1_contact">kavishek@bitmesra.ac.in</string>
+    <string name="info_contact_faculty2_name">Dr. Mrinal Pathak</string>
+    <string name="info_contact_faculty2_contact">mrinalpathak@gmail.com</string>
+    <string name="info_contact_student1_name">Gyan Vardhan</string>
+    <string name="info_contact_student1_contact">+91 7903002489</string>
+    <string name="info_contact_student2_name">Aakrati Jain</string>
+    <string name="info_contact_student2_contact">+91 9425797926</string>
+    <string name="info_contact_location_uri">https://maps.app.goo.gl/354f8</string>
+    <string name="info_contact_email_uri">mailto:bitotsav@bitmesra.ac.in</string>
+    <string name="info_contact_website_uri">https://bitotsav.in</string>
+    <string name="info_contact_facebook_uri">https://facebook.com/bitotsav</string>
+    <string name="info_contact_instagram_uri">https://instagram.com/bitotsav_19</string>
+
 </resources>

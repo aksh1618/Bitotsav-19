@@ -3,7 +3,9 @@ package `in`.bitotsav.shared.utils
 import `in`.bitotsav.R
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.ColorStateList
+import android.net.Uri
 import android.text.SpannableString
 import android.util.Log
 import android.view.Gravity
@@ -112,5 +114,12 @@ fun hideOnClick(clicked: TextView, toHide: TextView, toRotate: ImageView, color:
                 toRotate.imageTintList = ColorStateList.valueOf(normalColor)
             }
         }
+    }
+}
+
+@BindingAdapter("uriOnClick")
+fun openLinkOnClick(imageView: ImageView, uri: String) {
+    imageView.setOnClickListener {
+        it.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(uri)))
     }
 }

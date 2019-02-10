@@ -2,17 +2,15 @@ package `in`.bitotsav.info.ui
 
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentInfoPageBitotsavBinding
-import `in`.bitotsav.info.ui.InfoPageFragment.InfoPage.ABOUT_BITOTSAV
+import `in`.bitotsav.databinding.FragmentInfoPageContactBinding
+import `in`.bitotsav.info.ui.InfoPageFragment.InfoPage.*
 import `in`.bitotsav.shared.utils.getColorCompat
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.sharedViewModel
-import org.koin.androidx.viewmodel.ext.viewModel
 
 class InfoPageFragment : Fragment() {
 
@@ -41,7 +39,11 @@ class InfoPageFragment : Fragment() {
 
         return when (page) {
 
-            ABOUT_BITOTSAV -> FragmentInfoPageBitotsavBinding
+            BITOTSAV -> FragmentInfoPageBitotsavBinding
+                .inflate(inflater, container, false)
+                .apply { color = infoViewModel.mColor }
+
+            CONTACT -> FragmentInfoPageContactBinding
                 .inflate(inflater, container, false)
                 .apply { color = infoViewModel.mColor }
 
@@ -49,7 +51,8 @@ class InfoPageFragment : Fragment() {
     }
 
     enum class InfoPage(val title: Int) {
-        ABOUT_BITOTSAV(R.string.info_title_bitotsav_bit)
+        BITOTSAV(R.string.info_title_bitotsav_bit),
+        CONTACT(R.string.info_title_contact)
     }
 
 }
