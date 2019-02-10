@@ -86,7 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/event_name"
             tools:src="@drawable/ic_star_border_white_24dp"
-            tools:tint="@color/colorRed" />
+            tools:tint="?colorPrimary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

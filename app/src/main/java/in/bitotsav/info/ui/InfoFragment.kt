@@ -5,6 +5,7 @@ import `in`.bitotsav.databinding.FragmentInfoBinding
 import `in`.bitotsav.info.ui.InfoPageFragment.InfoPage
 import `in`.bitotsav.shared.utils.getColorCompat
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +28,10 @@ class InfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
 
-        context?.let { infoViewModel.mColor = it.getColorCompat(R.color.colorRed) }
+//        context?.let { infoViewModel.mColor = it.getColorCompat(R.color.colorRed) }
+        infoViewModel.mColor = TypedValue().apply {
+            activity?.theme?.resolveAttribute(R.attr.colorPrimary, this, true)
+        }.data
 
         return FragmentInfoBinding.inflate(inflater, container, false)
             .apply {

@@ -8,6 +8,7 @@ import `in`.bitotsav.shared.ui.UiUtilViewModel
 import `in`.bitotsav.shared.utils.*
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +38,11 @@ class EventDetailFragment : Fragment() {
 
         // Hide bottom nav, this fragment has its own bottom bar
         uiUtilViewModel.hideBottomNav()
-        eventViewModel.mColor = context?.getColorCompat(R.color.colorRed) ?: 0xFF0000
+        eventViewModel.mColor = TypedValue().apply {
+            activity?.theme?.resolveAttribute(R.attr.colorPrimary, this, true)
+        }.data
+
+//        mColor = context?.getColorCompat(R.color.colorRed) ?: 0xFF0000
 
         binding = FragmentEventDetailBinding.inflate(inflater, container, false)
             .apply {

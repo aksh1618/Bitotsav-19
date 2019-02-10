@@ -12,6 +12,7 @@ import `in`.bitotsav.shared.utils.getColorCompat
 import `in`.bitotsav.shared.utils.setObserver
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,9 +49,13 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        context?.let {
-            profileViewModel.mColor = it.getColorCompat(R.color.colorRed)
-        }
+//        context?.let {
+//            profileViewModel.mColor = it.getColorCompat(R.color.colorRed)
+//        }
+
+        profileViewModel.mColor = TypedValue().apply {
+            activity?.theme?.resolveAttribute(R.attr.colorPrimary, this, true)
+        }.data
 
         when (CurrentUser.isLoggedIn) {
             true -> profileViewModel.syncUser()

@@ -67,7 +67,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="32dp"
-                app:color="@{@color/colorRed}"
+                app:color="@{@color/starColor}"
                 app:label="@{@string/filters_label_starred}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/filterGridRecyclerView"

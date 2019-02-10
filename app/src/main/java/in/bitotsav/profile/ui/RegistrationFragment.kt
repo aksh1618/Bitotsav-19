@@ -4,11 +4,11 @@ package `in`.bitotsav.profile.ui
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentRegistrationBinding
 import `in`.bitotsav.profile.data.RegistrationFields
-import `in`.bitotsav.shared.utils.getColorCompat
 import `in`.bitotsav.shared.utils.onTrue
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +44,11 @@ class RegistrationFragment : Fragment() {
             registrationViewModel.fields = RegistrationFields()
             Log.d(TAG, "Reset all fields")
         }
-        registrationViewModel.mColor = context?.getColorCompat(R.color.colorRed) ?: 0xFF0000
+        registrationViewModel.mColor = TypedValue().apply {
+            activity?.theme?.resolveAttribute(R.attr.colorPrimary, this, true)
+        }.data
+
+//            .mColor = context?.getColorCompat(R.color.colorRed) ?: 0xFF0000
 
         registrationViewModel.nextStep.observe(
             viewLifecycleOwner,

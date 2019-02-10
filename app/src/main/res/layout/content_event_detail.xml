@@ -103,7 +103,7 @@
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description_text_view"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <TextView
             android:id="@+id/rules_text_view"
@@ -135,7 +135,7 @@
             android:textColor="@{color}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rules_text_view"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <TextView
             android:id="@+id/category_text_view"
@@ -163,7 +163,7 @@
             android:textColor="@{color}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/category_text_view"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <!-- FIXME: Text color on this -->
         <TextView
@@ -194,7 +194,7 @@
             android:textColor="@{color}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/status_text_view"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <TextView
             android:id="@+id/team_size_text_view"
@@ -222,7 +222,7 @@
             android:textColor="@{color}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_team_size_text_view"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <!-- Ranks -->
 
@@ -406,7 +406,7 @@
             android:textColor="@{color}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/points3"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <TextView
             android:id="@+id/contact1_name_text_view"
@@ -487,7 +487,7 @@
             android:textColor="@{color}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contact2_name_text_view"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <!-- Result - Ranks -->
 

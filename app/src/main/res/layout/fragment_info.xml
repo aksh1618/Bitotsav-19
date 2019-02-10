@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:backgroundTint="@{viewModel.mColor}"
-            tools:backgroundTint="@color/colorRed"
+            tools:backgroundTint="?colorPrimary"
             android:onClick="@{() -> viewModel.feedback()}"
             android:src="@drawable/ic_feedback_white_24dp"
             app:layout_anchor="@+id/infoPager"

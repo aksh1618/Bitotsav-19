@@ -38,7 +38,7 @@
                 android:text="@string/info_contact_label_faculty"
                 android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
                 android:textColor="@{color}"
-                tools:textColor="@color/colorRed" />
+                tools:textColor="?colorPrimary" />
 
             <include
                 android:id="@+id/faculty1"
@@ -65,7 +65,7 @@
                 android:text="@string/info_contact_label_student"
                 android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
                 android:textColor="@{color}"
-                tools:textColor="@color/colorRed" />
+                tools:textColor="?colorPrimary" />
 
             <include
                 android:id="@+id/student1"
@@ -142,7 +142,7 @@
 
                 <ImageView
                     android:tint="@{color}"
-                    tools:tint="@color/colorRed"
+                    tools:tint="?colorPrimary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -153,7 +153,7 @@
 
                 <ImageView
                     android:tint="@{color}"
-                    tools:tint="@color/colorRed"
+                    tools:tint="?colorPrimary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -164,7 +164,7 @@
 
                 <ImageView
                     android:tint="@{color}"
-                    tools:tint="@color/colorRed"
+                    tools:tint="?colorPrimary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -175,7 +175,7 @@
 
                 <ImageView
                     android:tint="@{color}"
-                    tools:tint="@color/colorRed"
+                    tools:tint="?colorPrimary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -186,7 +186,7 @@
 
                 <ImageView
                     android:tint="@{color}"
-                    tools:tint="@color/colorRed"
+                    tools:tint="?colorPrimary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

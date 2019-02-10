@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <TextView
             android:id="@+id/bitotsavIdLabel"
@@ -61,7 +61,7 @@
             app:layout_constraintEnd_toStartOf="@+id/bitotsavId"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bitotsavCredentialsLabel"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <TextView
             android:id="@+id/bitotsavId"
@@ -89,7 +89,7 @@
             app:layout_constraintEnd_toStartOf="@+id/registeredEmail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bitotsavIdLabel"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <TextView
             android:id="@+id/registeredEmail"
@@ -123,7 +123,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/championshipScoreLabel"
-            tools:backgroundTint="@color/colorRed"
+            tools:backgroundTint="?colorPrimary"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Group
@@ -145,7 +145,7 @@
             app:layout_constraintEnd_toStartOf="@+id/championshipTeam"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registeredEmailLabel"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <TextView
             android:id="@+id/championshipTeam"
@@ -173,7 +173,7 @@
             app:layout_constraintEnd_toStartOf="@+id/championshipScore"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/championshipTeamLabel"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <TextView
             android:id="@+id/championshipScore"
@@ -204,7 +204,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/register"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/registrations"
@@ -252,7 +252,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registrations"
-            tools:backgroundTint="@color/colorRed" />
+            tools:backgroundTint="?colorPrimary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -48,22 +48,6 @@ class ScheduleViewModel(
         categoriesToShow.value = ALL_CATEGORIES
         _isSheetVisible.value = false
 
-        scope.launch(Dispatchers.IO) {
-            allCategories = eventRepository.getAllCategories()
-            // The events might not have been fetched in case of first run.
-            // TODO: Figure out if this is still needed with the json included.
-            while (allCategories.isEmpty()) {
-                Log.i(
-                    "ScheduleViewModel.init",
-                    "Retrying fetching categories after a half second delay..."
-                )
-                delay(500)
-                allCategories = eventRepository.getAllCategories()
-            }
-        }.invokeOnCompletion {
-            scope.launch { refreshScheduleFilterList() }
-        }
-
         (1..DAYS).forEach { day ->
             val liveEventsList = Transformations.switchMap(
                 DoubleTriggerLiveData(categoriesToShow, _showStarredOnly)
@@ -84,6 +68,24 @@ class ScheduleViewModel(
                 liveEventsList,
                 dayWiseVisibleEventsListArray[day - 1]::setValue
             )
+        }
+    }
+
+    fun setupFilters() {
+        scope.launch(Dispatchers.IO) {
+            allCategories = eventRepository.getAllCategories()
+            // The events might not have been fetched in case of first run.
+            // TODO: Figure out if this is still needed with the json included.
+            while (allCategories.isEmpty()) {
+                Log.i(
+                    "ScheduleViewModel.init",
+                    "Retrying fetching categories after a half second delay..."
+                )
+                delay(500)
+                allCategories = eventRepository.getAllCategories()
+            }
+        }.invokeOnCompletion {
+            scope.launch { refreshScheduleFilterList() }
         }
     }
 

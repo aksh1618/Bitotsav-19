@@ -47,7 +47,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:rotateOnClick="@{arrow}"
             tools:text="About Bitotsav"
-            tools:textColor="@color/colorRed" />
+            tools:textColor="?colorPrimary" />
 
         <ImageView
             android:id="@+id/arrow"
@@ -60,7 +60,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/titleView"
             app:layout_constraintEnd_toEndOf="@+id/titleView"
             app:layout_constraintTop_toTopOf="@+id/titleView"
-            tools:tint="@color/colorRed" />
+            tools:tint="?colorPrimary" />
 
         <TextView
             android:id="@+id/contentView"

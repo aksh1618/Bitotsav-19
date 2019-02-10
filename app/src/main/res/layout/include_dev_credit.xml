@@ -147,7 +147,7 @@
                 android:tint="@{color}"
                 android:visibility="@{linkedin.length() > 0 ? View.VISIBLE : View.GONE}"
                 app:uriOnClick="@{linkedin}"
-                tools:tint="@color/colorRed" />
+                tools:tint="?colorPrimary" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -159,7 +159,7 @@
                 android:tint="@{color}"
                 android:visibility="@{facebook.length() > 0 ? View.VISIBLE : View.GONE}"
                 app:uriOnClick="@{facebook}"
-                tools:tint="@color/colorRed" />
+                tools:tint="?colorPrimary" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -171,7 +171,7 @@
                 android:tint="@{color}"
                 android:visibility="@{twitter.length() > 0 ? View.VISIBLE : View.GONE}"
                 app:uriOnClick="@{twitter}"
-                tools:tint="@color/colorRed" />
+                tools:tint="?colorPrimary" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -184,7 +184,7 @@
                 android:tint="@{color}"
                 android:visibility="@{github.length() > 0 ? View.VISIBLE : View.GONE}"
                 app:uriOnClick="@{github}"
-                tools:tint="@color/colorRed" />
+                tools:tint="?colorPrimary" />
 
         </LinearLayout>
 

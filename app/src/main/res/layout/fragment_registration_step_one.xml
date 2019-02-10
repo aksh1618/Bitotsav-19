@@ -42,7 +42,6 @@
                 app:inputType="@{InputType.TYPE_TEXT_VARIATION_PERSON_NAME}"
                 app:target="@{fields.name}" />
 
-            <!-- TODO: Indicate this will be used for OTP -->
             <include
                 android:id="@+id/phone"
                 layout="@layout/include_edit_text"
@@ -52,7 +51,6 @@
                 app:inputType="@{InputType.TYPE_CLASS_PHONE}"
                 app:target="@{fields.phone}" />
 
-            <!-- TODO: Indicate this will be used for OTP -->
             <include
                 android:id="@+id/email"
                 layout="@layout/include_edit_text"

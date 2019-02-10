@@ -48,7 +48,7 @@
 
         app:rippleColor="@{color}"
 
-        tools:chipBackgroundColor="@color/colorRed"
+        tools:chipBackgroundColor="?colorPrimary"
         tools:text="Filter"
         tools:textColor="@color/colorWhite" />
 

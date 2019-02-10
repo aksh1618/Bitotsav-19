@@ -1,8 +1,11 @@
 package `in`.bitotsav.events.ui
 
+import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentScheduleBinding
 import `in`.bitotsav.shared.ui.UiUtilViewModel
+import `in`.bitotsav.shared.utils.getColorCompat
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +33,13 @@ class ScheduleFragment : Fragment() {
 
     private lateinit var sheetBehavior: BottomSheetBehavior<NestedScrollView>
     private val filterAdapter by lazy { ScheduleFilterAdapter(scheduleViewModel) }
+
+    // TODO: Get colors from resources
+    private val filterColors: List<Int> by lazy {
+        listOf(
+            context?.let { it.getColorCompat(R.color.colorRed) } ?: 0xFF0000
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,7 +76,6 @@ class ScheduleFragment : Fragment() {
                     else -> sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 }
             })
-
         scheduleViewModel.toastMessage.observe(viewLifecycleOwner, Observer { toastMessage ->
             if (!toastMessage.isNullOrEmpty()) {
                 toast?.cancel()
@@ -93,3 +102,4 @@ class ScheduleFragment : Fragment() {
         }
     }
 }
+

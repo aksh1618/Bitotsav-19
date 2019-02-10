@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="@{tabbed ? View.VISIBLE : View.GONE, default = gone}"
-            app:tabIndicatorColor="@color/colorRed"
+            app:tabIndicatorColor="?colorPrimary"
             app:tabIndicatorFullWidth="false"
             app:tabSelectedTextColor="@color/colorBlack"
             app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Body1" />

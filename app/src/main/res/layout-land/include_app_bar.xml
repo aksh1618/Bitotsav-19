@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
                 android:visibility="@{tabbed ? View.VISIBLE : View.GONE}"
-                app:tabIndicatorColor="@color/colorRed"
+                app:tabIndicatorColor="?colorPrimary"
                 app:tabIndicatorFullWidth="false"
                 app:tabSelectedTextColor="@color/colorBlack"
                 app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Body1" />

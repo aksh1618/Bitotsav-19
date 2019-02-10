@@ -29,9 +29,11 @@
             android:layout_height="wrap_content"
             android:autofillHints=".AUTOFILL_HINT_EMAIL_ADDRESS"
             android:hint="@string/login_label_email"
-            app:boxStrokeColor="@color/colorRed"
+            app:boxStrokeColor="?colorPrimary"
             app:errorEnabled="true"
-            app:errorText="@{viewModel.loginEmailErrorText}">
+            app:errorText="@{viewModel.loginEmailErrorText}"
+            app:errorTextAppearance="@style/TextInputLayout.ErrorText"
+            app:hintTextAppearance="@style/TextInputLayout.HintText">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
@@ -40,7 +42,8 @@
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:text="@={viewModel.loginEmail}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textCursorDrawable="@drawable/cursor_drawable" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,10 +54,12 @@
             android:layout_marginTop="8dp"
             android:autofillHints=".AUTOFILL_HINT_PASSWORD"
             android:hint="@string/login_label_password"
-            app:passwordToggleEnabled="true"
-            app:boxStrokeColor="@color/colorRed"
+            app:boxStrokeColor="?colorPrimary"
             app:errorEnabled="true"
-            app:errorText="@{viewModel.loginPasswordErrorText}">
+            app:errorText="@{viewModel.loginPasswordErrorText}"
+            app:errorTextAppearance="@style/TextInputLayout.ErrorText"
+            app:hintTextAppearance="@style/TextInputLayout.HintText"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Password"
@@ -63,7 +68,8 @@
                 android:ems="10"
                 android:inputType="textPassword"
                 android:text="@={viewModel.loginPassword}"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textCursorDrawable="@drawable/cursor_drawable" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +80,6 @@
             android:layout_height="52dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            app:backgroundTint="@{viewModel.mColor}"
             android:ems="10"
             android:enabled="@{``.equals(viewModel.loginEmailErrorText)}"
             android:filterTouchesWhenObscured="true"
@@ -82,7 +87,8 @@
             android:text="@string/login_label_login"
             android:textColor="@color/colorWhite"
             android:visibility="@{viewModel.loading ? View.GONE: View.VISIBLE}"
-            tools:backgroundTint="@color/colorRed" />
+            app:backgroundTint="@{viewModel.mColor}"
+            tools:backgroundTint="?colorPrimary" />
 
         <androidx.core.widget.ContentLoadingProgressBar
             style="@style/Widget.AppCompat.ProgressBar"
@@ -90,10 +96,10 @@
             android:layout_height="52dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
+            android:indeterminateTint="@{viewModel.mColor}"
             android:padding="8dp"
-            android:progressTint="@{viewModel.mColor}"
             android:visibility="@{viewModel.loading ? View.VISIBLE: View.GONE}"
-            tools:progressTint="@color/colorRed" />
+            tools:indeterminateTint="?colorPrimary" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/register"
@@ -102,12 +108,12 @@
             android:layout_height="52dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            app:backgroundTint="@{viewModel.mColor}"
             android:ems="10"
             android:filterTouchesWhenObscured="true"
             android:text="@string/login_label_register"
             android:textColor="@color/colorWhite"
-            tools:backgroundTint="@color/colorRed" />
+            app:backgroundTint="@{viewModel.mColor}"
+            tools:backgroundTint="?colorPrimary" />
 
         <TextView
             android:id="@+id/loginErrorTextView"
@@ -115,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@{viewModel.loginErrorText}"
-            android:textColor="@color/colorRed"
+            android:textColor="?colorPrimaryDark"
             android:textStyle="italic"
             android:visibility="@{``.equals(viewModel.loginErrorText) ? View.GONE : View.VISIBLE}"
             tools:text="Error Message" />

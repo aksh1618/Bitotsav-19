@@ -44,7 +44,7 @@
             android:src="@drawable/ic_trophy_white_24dp"
             app:layout_anchor="@+id/feed"
             android:visibility="gone"
-            tools:backgroundTint="@color/colorRed"
+            tools:backgroundTint="?colorPrimary"
             app:layout_anchorGravity="end|bottom" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

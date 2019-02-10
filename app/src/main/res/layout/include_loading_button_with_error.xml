@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -30,9 +30,9 @@
     </data>
 
     <LinearLayout
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <com.google.android.material.button.MaterialButton
@@ -42,15 +42,15 @@
             android:layout_height="52dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            app:backgroundTint="@{color}"
             android:ems="10"
             android:filterTouchesWhenObscured="true"
             android:onClick="@{listener}"
             android:text="@{label}"
             android:textColor="@color/colorWhite"
             android:visibility="@{loading ? View.GONE: View.VISIBLE}"
-            tools:text="Click Me!"
-            tools:backgroundTint="@color/colorRed" />
+            app:backgroundTint="@{color}"
+            tools:backgroundTint="?colorPrimary"
+            tools:text="Click Me!" />
 
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/progress"
@@ -59,10 +59,10 @@
             android:layout_height="52dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
+            android:indeterminateTint="@{color}"
             android:padding="8dp"
-            android:progressTint="@{color}"
             android:visibility="@{loading ? View.VISIBLE: View.GONE}"
-            tools:progressTint="@color/colorRed" />
+            tools:indeterminateTint="?colorPrimary" />
 
         <TextView
             android:id="@+id/error"
@@ -71,7 +71,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:text="@{errorText}"
-            android:textColor="@color/errorTextColor"
+            android:textColor="?colorPrimaryDark"
             android:textStyle="italic"
             tools:text="Error Message" />
 

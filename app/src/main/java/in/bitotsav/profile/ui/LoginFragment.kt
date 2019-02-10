@@ -5,6 +5,7 @@ import `in`.bitotsav.databinding.FragmentLoginBinding
 import `in`.bitotsav.shared.utils.*
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,10 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_destLogin_to_destProfile)
         }
 
-        context?.let { loginViewModel.mColor = it.getColorCompat(R.color.colorRed) }
+//        context?.let { loginViewModel.mColor = it.getColorCompat(R.color.colorRed) }
+        loginViewModel.mColor = TypedValue().apply {
+            activity?.theme?.resolveAttribute(R.attr.colorPrimary, this, true)
+        }.data
         setObservers()
 
         return FragmentLoginBinding.inflate(inflater, container, false)

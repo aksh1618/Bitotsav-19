@@ -12,6 +12,7 @@ import `in`.bitotsav.shared.utils.getColorCompat
 import `in`.bitotsav.shared.utils.setObserver
 import `in`.bitotsav.shared.utils.shareText
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,9 +46,12 @@ class FeedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        context?.let {
-            feedViewModel.mColor = it.getColorCompat(R.color.colorRed)
-        }
+//        context?.let {
+//            feedViewModel.mColor = it.getColorCompat(R.color.colorRed)
+//        }
+        feedViewModel.mColor = TypedValue().apply {
+            activity?.theme?.resolveAttribute(R.attr.colorPrimary, this, true)
+        }.data
 
         return FragmentFeedBinding.inflate(inflater, container, false)
             .apply {
