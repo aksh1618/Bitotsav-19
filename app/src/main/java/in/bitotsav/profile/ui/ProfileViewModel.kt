@@ -27,10 +27,13 @@ import java.net.UnknownHostException
 class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileVM") {
 
     companion object {
-        const val CHAMPIONSHIP_TEAM_SIZE = 8
+        const val CHAMPIONSHIP_MIN_TEAM_SIZE = 6
+        const val CHAMPIONSHIP_MAX_TEAM_SIZE = 8
     }
 
     val championshipTeamRegistered = NonNullMutableLiveData(false)
+    val numMembersOptions = NonNullMutableLiveData(listOf("6"))
+    val numMembersString = NonNullMutableLiveData("6")
 
     val user = userRepository.get()
     val waitingForLogout = NonNullMutableLiveData(false)
@@ -51,6 +54,11 @@ class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileV
                 }
             }.errorText.value.isNotBlank().onTrue {
                 error("Error(s) in some field(s)")
+            },
+            (membersToRegister.distinctBy {
+                Pair(it.bitotsavId, it.email)
+            }.size == numMembersString.value.toInt()).onTrue {
+                error("Duplicate Entries")
             },
             membersToRegister
                 .apply {
@@ -74,12 +82,15 @@ class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileV
     fun prepareForRegistration() {
         registrationError.value = ""
         waitingForRegistration.value = false
+        numMembersOptions.value = (CHAMPIONSHIP_MIN_TEAM_SIZE..CHAMPIONSHIP_MAX_TEAM_SIZE)
+            .map { it.toString() }
+        numMembersString.value = CHAMPIONSHIP_MIN_TEAM_SIZE.toString()
         // To reset errors
         teamName = MutableLiveDataTextWithValidation(
             requiredValidation to "Required"
         )
         membersToRegister.clear()
-        generateMembersToRegister(CHAMPIONSHIP_TEAM_SIZE)
+        generateMembersToRegister(CHAMPIONSHIP_MIN_TEAM_SIZE)
     }
 
     fun generateMembersToRegister(numMembers: Int) {
@@ -109,7 +120,7 @@ class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileV
                             it.email.text.value != CurrentUser.email
                 }
                 .apply {
-                    (size == CHAMPIONSHIP_TEAM_SIZE - 1).onFalse {
+                    (size == numMembersString.value.toInt() - 1).onFalse {
                         error("You must one of the members.")
                         Log.e(TAG, "Attempted registration without own entry.")
                         waitingForRegistration.value = false

@@ -72,6 +72,12 @@ class ChampionshipRegistrationFragment : Fragment() {
                 }
             }
 
+            numMembersString.setObserver(viewLifecycleOwner) { numMembers ->
+                generateMembersToRegister(numMembers.toInt())
+                adapter.submitList(membersToRegister)
+                adapter.notifyDataSetChanged()
+            }
+
         }
     }
 

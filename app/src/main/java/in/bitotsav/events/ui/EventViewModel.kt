@@ -38,23 +38,30 @@ class EventViewModel(
     val deregistrationError = NonNullMutableLiveData("")
     val waiting = NonNullMutableLiveData(false)
     private val anyErrors: Boolean
-        get() = membersToRegister
-            .apply {
-                forEach {
-                    it.bitotsavId.text.value.isBlank().onTrue {
-                        it.bitotsavId.errorText.value = "Required."
-                    }
-                    it.email.text.value.isBlank().onTrue {
-                        it.email.errorText.value = "Required."
+        get() = Boolean.or(
+            (membersToRegister.distinctBy {
+                Pair(it.bitotsavId, it.email)
+            }.size == numMembersString.value.toInt()).onTrue {
+                error("Duplicate Entries")
+            },
+            membersToRegister
+                .apply {
+                    forEach {
+                        it.bitotsavId.text.value.isBlank().onTrue {
+                            it.bitotsavId.errorText.value = "Required."
+                        }
+                        it.email.text.value.isBlank().onTrue {
+                            it.email.errorText.value = "Required."
+                        }
                     }
                 }
-            }
-            .any { member ->
-                Boolean.or(
-                    member.bitotsavId.errorText.value.isNotBlank(),
-                    member.email.errorText.value.isNotBlank()
-                )
-            }.onTrue { error("Error(s) in some field(s)") }
+                .any { member ->
+                    Boolean.or(
+                        member.bitotsavId.errorText.value.isNotBlank(),
+                        member.email.errorText.value.isNotBlank()
+                    )
+                }.onTrue { error("Error(s) in some field(s)") }
+        )
 
     fun setCurrentEvent(id: Int) {
         scope.launch {
@@ -99,12 +106,6 @@ class EventViewModel(
         }
         while (numMembers > membersToRegister.size) {
             membersToRegister.add(RegistrationMember(membersToRegister.size + 1))
-        }
-        membersToRegister.forEach {
-            Log.v(
-                TAG,
-                "Member for recycler view: ${it.bitotsavId.text.value}, ${it.bitotsavId.errorText.value}"
-            )
         }
     }
 
