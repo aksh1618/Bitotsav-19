@@ -23,7 +23,6 @@
     <!-- Login -->
     <string name="login_label_email">Email</string>
     <string name="login_label_password">Password</string>
-    <!-- TODO [Refactor]: Could this be 'Begin' ? -->
     <string name="login_label_login">Login</string>
     <string name="login_label_register">Register</string>
 
@@ -44,7 +43,7 @@
     <!-- Step 2 -->
     <string name="registration_label_phoneOtp">Phone OTP</string>
     <string name="registration_label_emailOtp">Email OTP</string>
-    <string name="registration_label_next_step_two">Verify OTPs</string>
+    <string name="registration_label_next_step_two">Verify</string>
 
     <!-- Step 3 -->
     <string name="registration_label_gender">Gender</string>
@@ -52,8 +51,7 @@
     <string name="registration_label_year">Year</string>
     <string name="registration_label_rollNo">Roll No</string>
     <string name="registration_label_source">Source</string>
-    <!-- TODO [Refactor]: Should this be 'Get Bitotsav ID' ? -->
-    <string name="registration_label_next_step_three">Let\'s Rock !!</string>
+    <string name="registration_label_next_step_three">Finish</string>
 
     <!-- Event Detail -->
     <string name="event_label_description">Description</string>
@@ -66,25 +64,25 @@
     <string name="event_label_category">Category</string>
     <string name="event_label_team_size">Team Size</string>
     <string name="event_label_prizes">Up For Grabs</string>
-    <string name="event_label_rank1">1</string>
-    <string name="event_label_rank2">2</string>
-    <string name="event_label_rank3">3</string>
+    <string name="event_label_rank1">1st</string>
+    <string name="event_label_rank2">2nd</string>
+    <string name="event_label_rank3">3rd</string>
     <string name="event_placeholder_tba">TBA</string>
     <string name="event_placeholder_tba_long">To Be Announced</string>
     <string name="event_placeholder_no_coordinators">Contact events team.</string>
     <string name="event_format_time">%1$s (Day %2$d)</string>
     <string name="event_format_time_venue">%1$s • %2$s</string>
     <string name="event_format_team_size">%1$d - %2$d</string>
-    <string name="event_format_prize">%,d Cash Prize</string>
+    <string name="event_format_prize">Prizes worth ₹%,d</string>
     <string name="event_format_points">%,d Championship Points</string>
     <string name="event_format_leader_name">%s\'s Team</string>
     <string name="event_format_share_title">Share %s with</string>
     <string name="event_format_share_text">
-        Have you heard about %1$s ? Check it out! #Bitotsav19 #ColorsOfAsia\n%2$s
+        Have you heard about %1$s ? Check it out! #bitotsav_19 #colours_of_asia\n%2$s
     </string>
     <string name="event_label_register">Register</string>
     <string name="event_label_deregister">Deregister</string>
-    <string name="event_format_registration_message">See you at %s !!</string>
+    <string name="event_format_registration_message">See you at %s 🎉</string>
     <string name="event_format_deregistration_message">Abandoned %s 😢</string>
 
     <!-- Team Registration -->
@@ -99,7 +97,7 @@
     <string name="championship_team_registration_label_register">Register</string>
 
     <!-- Profile -->
-    <string name="profile_label_format_title">Hi %s !!</string>
+    <string name="profile_label_format_title">Hi %s 🙋</string>
     <string name="profile_label_bitotsav_credentials">Your Bitotsav Details</string>
     <string name="profile_label_bitotsav_id">Bitotsav ID</string>
     <string name="profile_label_email">Registered Email</string>
@@ -109,12 +107,12 @@
     <string name="profile_label_registrations">Registrations</string>
     <string name="profile_label_logout">Logout</string>
     <string name="profile_format_registration_message">
-        Welcome to the Championship, %s!!
+        Welcome to the Championship, %s 🎉
     </string>
 
     <!-- Feed -->
-    <string name="feed_format_share_title">Share %s</string>
-    <string name="feed_format_share_text">%s \n#Bitotsav19 #ColorsOfAsia</string>
+    <string name="feed_format_share_title">Share Update (%s)</string>
+    <string name="feed_format_share_text">%s \n#bitotsav_19 #colours_of_asia</string>
 
     <!-- Info -->
     <string name="info_title_bitotsav_bit">Bitotsav</string>

@@ -7,10 +7,11 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Bundle
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.NotificationCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.NavDeepLinkBuilder
 import java.util.*
 
@@ -42,6 +43,7 @@ fun displayNotification(
     val channelId = channel.id
     val notificationBuilder = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(getIconByChannel(channel))
+        .setLargeIcon(AppCompatResources.getDrawable(context, R.drawable.ic_bitotsav_red_24dp)!!.toBitmap())
         .setStyle(bigTextStyle)
         .setContentTitle(title)
         .setContentText(content)

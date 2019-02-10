@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorRed</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/background</item>
@@ -14,6 +14,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.Launcher">
+        <!--<item name="android:windowBackground">@drawable/launch_screen</item>-->
+    </style>
 
     <style name="TextAppearance.Bitotsav.BottomNavigationView" parent="@style/Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="android:textColor">@color/main_nav_item</item>
@@ -41,7 +44,7 @@
     <style name="Widget.Bitotsav" parent="@android:style/Widget" />
 
     <style name="Widget.Bitotsav.MainNav" parent="@style/Widget.MaterialComponents.BottomNavigationView.Colored">
-        <item name="android:background">@color/colorRed</item>
+        <item name="android:background">?colorPrimary</item>
         <item name="itemIconTint">@color/main_nav_item</item>
         <item name="labelVisibilityMode">selected</item>
         <item name="itemTextAppearanceActive">

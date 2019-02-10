@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@{@string/event_format_time(event.timeString, event.day)}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="2dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@{event.venue}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:autoLink="all"
             android:linksClickable="true"
             android:text="@{event.description}"
@@ -94,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/event_label_rules"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
             android:textColor="@{color}"
@@ -110,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:autoLink="all"
             android:linksClickable="true"
             android:text="@{event.rules}"
@@ -141,7 +142,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start_intermediate"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@{event.category}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
             app:layout_constraintBottom_toBottomOf="@+id/label_category_text_view"
@@ -170,7 +171,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start_intermediate"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@{event.status}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
             android:textColor='@{event.status.equalsIgnoreCase("cancelled") ? @color/errorTextColor : ((event.status.equalsIgnoreCase("ongoing")) ? color : @color/textColorSecondary)}'
@@ -200,7 +201,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@{(event.minimumMembers == event.maximumMembers) ? String.valueOf(event.minimumMembers) : @string/event_format_team_size(event.minimumMembers, event.maximumMembers)}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
             app:layout_constraintBottom_toBottomOf="@+id/label_team_size_text_view"
@@ -227,48 +228,39 @@
 
         <TextView
             android:id="@+id/rank1"
-            android:layout_width="10dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="4dp"
-            android:gravity="end"
             android:text="@string/event_label_rank1"
-            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
             android:visibility="@{(event.prize1 > 0 || event.points1 > 0) ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toStartOf="@+id/prize1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_prizes_text_view" />
 
         <TextView
             android:id="@+id/rank2"
-            android:layout_width="10dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
-            android:layout_marginTop="4dp"
-            android:gravity="end"
+            android:layout_marginTop="8dp"
             android:text="@string/event_label_rank2"
-            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
             android:visibility="@{(event.prize2 > 0 || event.points2 > 0) ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toStartOf="@+id/prize2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/prize1" />
+            app:layout_constraintTop_toBottomOf="@+id/points1" />
 
         <TextView
             android:id="@+id/rank3"
-            android:layout_width="10dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
-            android:layout_marginTop="4dp"
-            android:gravity="end"
+            android:layout_marginTop="8dp"
             android:text="@string/event_label_rank3"
-            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
             android:visibility="@{(event.prize3 > 0 || event.points3 > 0) ? View.VISIBLE : View.GONE}"
-            app:layout_constraintEnd_toStartOf="@+id/prize3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/prize2" />
+            app:layout_constraintTop_toBottomOf="@+id/points2" />
 
         <!-- Prizes - Cash -->
 
@@ -276,7 +268,7 @@
             android:id="@+id/prize1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="@{(event.prize1 > 0) ? @string/event_format_prize(event.prize1) : ``}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
@@ -289,7 +281,7 @@
             android:id="@+id/prize2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="@{(event.prize2 > 0) ? @string/event_format_prize(event.prize2) : ``}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
@@ -302,7 +294,7 @@
             android:id="@+id/prize3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="@{(event.prize3 > 0) ? @string/event_format_prize(event.prize3) : ``}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
@@ -317,7 +309,7 @@
             android:id="@+id/points1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:gravity="end"
             android:text='@{(event.points1 == 0) ? `` : @string/event_format_points(event.points1)}'
             android:textAlignment="textEnd"
@@ -328,10 +320,56 @@
             tools:text="75 Championship Points" />
 
         <TextView
+            android:id="@+id/resultPoints1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            android:text='@{(event.position1.get("points") == null || event.position1.get("points").equals("0")) ? `--` : @string/event_format_points(Integer.parseInt(event.position1.get("points")))}'
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/result_name1"
+            app:layout_constraintTop_toTopOf="@+id/result_name1"
+            tools:text="75 Championship Points" />
+
+        <TextView
+            android:id="@+id/resultPoints2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            android:text='@{(event.position2.get("points") == null || event.position2.get("points").equals("0")) ? `--` : @string/event_format_points(Integer.parseInt(event.position2.get("points")))}'
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/result_name2"
+            app:layout_constraintTop_toTopOf="@+id/result_name2"
+            tools:text="75 Championship Points" />
+
+        <TextView
+            android:id="@+id/resultPoints3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            android:text='@{(event.position3.get("points") == null || event.position3.get("points").equals("0")) ? `--` : @string/event_format_points(Integer.parseInt(event.position3.get("points")))}'
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/result_name3"
+            app:layout_constraintTop_toTopOf="@+id/result_name3"
+            tools:text="75 Championship Points" />
+
+        <TextView
             android:id="@+id/points2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:gravity="end"
             android:text='@{(event.points2 == 0) ? `` : @string/event_format_points(event.points2)}'
             android:textAlignment="textEnd"
@@ -345,7 +383,7 @@
             android:id="@+id/points3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:gravity="end"
             android:text='@{(event.points3 == 0) ? `` : @string/event_format_points(event.points3)}'
             android:textAlignment="textEnd"
@@ -367,7 +405,7 @@
             android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
             android:textColor="@{color}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rank3"
+            app:layout_constraintTop_toBottomOf="@+id/points3"
             tools:textColor="@color/colorRed" />
 
         <TextView
@@ -390,7 +428,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:autoLink="phone"
             android:background="@drawable/ripple_circle"
             android:linksClickable="true"
@@ -423,7 +461,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:autoLink="phone"
             android:background="@drawable/ripple_circle"
             android:linksClickable="true"
@@ -455,43 +493,34 @@
 
         <TextView
             android:id="@+id/result_rank1"
-            android:layout_width="10dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="4dp"
-            android:gravity="end"
             android:text="@string/event_label_rank1"
-            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
-            app:layout_constraintEnd_toStartOf="@+id/result_name1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_result_text_view" />
 
         <TextView
             android:id="@+id/result_rank2"
-            android:layout_width="10dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="4dp"
-            android:gravity="end"
             android:text="@string/event_label_rank2"
-            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
-            app:layout_constraintEnd_toStartOf="@+id/result_name2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result_name1" />
 
         <TextView
             android:id="@+id/result_rank3"
-            android:layout_width="10dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="4dp"
-            android:gravity="end"
             android:text="@string/event_label_rank3"
-            android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
-            app:layout_constraintEnd_toStartOf="@+id/result_name3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result_name2" />
 
@@ -501,11 +530,13 @@
             android:id="@+id/result_name1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="@{(event.position1.get(`teamLeader`) == null ) ? @string/event_placeholder_tba : ((event.position1.get(`championshipTeam`).equals(`-1`)) ? @string/event_format_leader_name(event.position1.get(`teamLeaderName`)) : event.position1.get(`championshipTeam`))}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/resultPoints1"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/result_rank1"
             app:layout_constraintTop_toTopOf="@+id/result_rank1"
             tools:text="Aakarshit's Team" />
@@ -514,11 +545,11 @@
             android:id="@+id/result_name2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detail_margin_start"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:text="@{(event.position2.get(`teamLeader`) == null ) ? @string/event_placeholder_tba : ((event.position2.get(`championshipTeam`).equals(`-1`)) ? @string/event_format_leader_name(event.position2.get(`teamLeaderName`)) : event.position2.get(`championshipTeam`))}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/resultPoints2"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/result_rank2"
             app:layout_constraintTop_toTopOf="@+id/result_rank2"
             tools:text="Morphine" />
@@ -527,11 +558,12 @@
             android:id="@+id/result_name3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="@{(event.position3.get(`teamLeader`) == null ) ? @string/event_placeholder_tba : ((event.position3.get(`championshipTeam`).equals(`-1`)) ? @string/event_format_leader_name(event.position3.get(`teamLeaderName`)) : event.position3.get(`championshipTeam`))}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/resultPoints3"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/result_rank3"
             app:layout_constraintTop_toTopOf="@+id/result_rank3"
             tools:text="Cocaine" />

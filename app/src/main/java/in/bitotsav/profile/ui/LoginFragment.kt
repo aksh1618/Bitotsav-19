@@ -2,7 +2,6 @@ package `in`.bitotsav.profile.ui
 
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentLoginBinding
-import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.utils.*
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -25,8 +24,9 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        if (CurrentUser.isLoggedIn)
+        loginViewModel.user.value?.let {
             findNavController().navigate(R.id.action_destLogin_to_destProfile)
+        }
 
         context?.let { loginViewModel.mColor = it.getColorCompat(R.color.colorRed) }
         setObservers()
