@@ -110,6 +110,10 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/nav_default_exit_anim" />
 
+        <deepLink
+            android:id="@+id/eventDeepLink"
+            app:uri="app.bitotsav.in/event/{eventId}" />
+
     </fragment>
 
     <fragment

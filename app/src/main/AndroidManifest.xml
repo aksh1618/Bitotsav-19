@@ -15,6 +15,7 @@
         <activity android:name=".HomeActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
             android:documentLaunchMode="intoExisting">
+            <nav-graph android:value="@navigation/nav_bitotsav"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

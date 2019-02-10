@@ -26,18 +26,18 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <!--<TextView-->
-            <!--android:id="@+id/name_text_view"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginStart="8dp"@dimen/detail_margin_start-->
-            <!--android:layout_marginTop="16dp"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--android:text="@{event.name}"-->
-            <!--android:textAppearance="@style/TextAppearance.Bitotsav.Heading2"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--tools:text="Event Name" />-->
+        <!--android:id="@+id/name_text_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="8dp"@dimen/detail_margin_start-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:text="@{event.name}"-->
+        <!--android:textAppearance="@style/TextAppearance.Bitotsav.Heading2"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--tools:text="Event Name" />-->
 
         <!-- Date and Venue -->
 
@@ -377,8 +377,8 @@
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginTop="4dp"
             android:text="@{event.contact1Name}"
-            android:visibility="@{(event.contact1Name == null || event.contact1Name.length() == 0) ? View.GONE : View.VISIBLE}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
+            android:visibility="@{(event.contact1Name == null || event.contact1Name.length() == 0) ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toStartOf="@+id/contact1_num_text_view"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
@@ -392,6 +392,7 @@
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginEnd="8dp"
             android:autoLink="phone"
+            android:background="@drawable/ripple_circle"
             android:linksClickable="true"
             android:text="@{event.contact1Number > 0 ? String.valueOf(event.contact1Number) : ``}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
@@ -424,6 +425,7 @@
             android:layout_marginStart="@dimen/detail_margin_start"
             android:layout_marginEnd="8dp"
             android:autoLink="phone"
+            android:background="@drawable/ripple_circle"
             android:linksClickable="true"
             android:text="@{event.contact2Number > 0 ? String.valueOf(event.contact2Number) : ``}"
             android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
@@ -496,43 +498,43 @@
         <!-- Result - Team Names -->
 
         <TextView
-                android:id="@+id/result_name1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detail_margin_start"
-                android:layout_marginEnd="8dp"
-                android:text="@{(event.position1.get(`teamLeader`) == null ) ? @string/event_placeholder_tba : ((event.position1.get(`championshipTeam`).equals(`-1`)) ? @string/event_format_leader_name(event.position1.get(`teamLeaderName`)) : event.position1.get(`championshipTeam`))}"
-                android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/result_rank1"
-                app:layout_constraintTop_toTopOf="@+id/result_rank1"
-                tools:text="Aakarshit's Team"/>
+            android:id="@+id/result_name1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginEnd="8dp"
+            android:text="@{(event.position1.get(`teamLeader`) == null ) ? @string/event_placeholder_tba : ((event.position1.get(`championshipTeam`).equals(`-1`)) ? @string/event_format_leader_name(event.position1.get(`teamLeaderName`)) : event.position1.get(`championshipTeam`))}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/result_rank1"
+            app:layout_constraintTop_toTopOf="@+id/result_rank1"
+            tools:text="Aakarshit's Team" />
 
         <TextView
-                android:id="@+id/result_name2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detail_margin_start"
-                android:layout_marginEnd="8dp"
-                android:text="@{(event.position2.get(`teamLeader`) == null ) ? @string/event_placeholder_tba : ((event.position2.get(`championshipTeam`).equals(`-1`)) ? @string/event_format_leader_name(event.position2.get(`teamLeaderName`)) : event.position2.get(`championshipTeam`))}"
-                android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/result_rank2"
-                app:layout_constraintTop_toTopOf="@+id/result_rank2"
-                tools:text="Morphine"/>
+            android:id="@+id/result_name2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginEnd="8dp"
+            android:text="@{(event.position2.get(`teamLeader`) == null ) ? @string/event_placeholder_tba : ((event.position2.get(`championshipTeam`).equals(`-1`)) ? @string/event_format_leader_name(event.position2.get(`teamLeaderName`)) : event.position2.get(`championshipTeam`))}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/result_rank2"
+            app:layout_constraintTop_toTopOf="@+id/result_rank2"
+            tools:text="Morphine" />
 
         <TextView
-                android:id="@+id/result_name3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/detail_margin_start"
-                android:layout_marginEnd="8dp"
-                android:text="@{(event.position3.get(`teamLeader`) == null ) ? @string/event_placeholder_tba : ((event.position3.get(`championshipTeam`).equals(`-1`)) ? @string/event_format_leader_name(event.position3.get(`teamLeaderName`)) : event.position3.get(`championshipTeam`))}"
-                android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/result_rank3"
-                app:layout_constraintTop_toTopOf="@+id/result_rank3"
-                tools:text="Cocaine"/>
+            android:id="@+id/result_name3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginEnd="8dp"
+            android:text="@{(event.position3.get(`teamLeader`) == null ) ? @string/event_placeholder_tba : ((event.position3.get(`championshipTeam`).equals(`-1`)) ? @string/event_format_leader_name(event.position3.get(`teamLeaderName`)) : event.position3.get(`championshipTeam`))}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/result_rank3"
+            app:layout_constraintTop_toTopOf="@+id/result_rank3"
+            tools:text="Cocaine" />
 
         <View
             android:id="@+id/fab_padding_view"

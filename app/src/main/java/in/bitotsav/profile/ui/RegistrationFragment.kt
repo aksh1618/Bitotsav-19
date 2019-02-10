@@ -6,6 +6,7 @@ import `in`.bitotsav.databinding.FragmentRegistrationBinding
 import `in`.bitotsav.profile.data.RegistrationFields
 import `in`.bitotsav.shared.utils.getColorCompat
 import `in`.bitotsav.shared.utils.onTrue
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -59,11 +60,18 @@ class RegistrationFragment : Fragment() {
             .apply {
                 lifecycleOwner = this@RegistrationFragment
                 viewModel = registrationViewModel
-                // FIXME: Animate this !!
                 with(registrationViewModel.nextStep) {
-                    progress.progress = ((value * 100) / 3) + 1
+                    ObjectAnimator.ofInt(progress, "progress", ((value * 100) / 3) + 1)
+                        .apply {
+                            duration = 500
+                            start()
+                        }
                     observe(viewLifecycleOwner, Observer {
-                        progress.progress = ((it * 100) / 3) + 1
+                        ObjectAnimator.ofInt(progress, "progress", ((it * 100) / 3) + 1)
+                            .apply {
+                                duration = 500
+                                start()
+                            }
                     })
                 }
             }

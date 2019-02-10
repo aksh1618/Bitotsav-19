@@ -84,7 +84,7 @@ class EventDetailFragment : Fragment() {
         binding.share.setOnClickListener {
             // FIXME [WARN] : Use deep link here.
             eventViewModel.currentEvent.value?.let {
-                val link = "TODO"
+                val link = "app.bitotsav.in/event/${it.id}"
                 val textToShare = getString(R.string.event_format_share_text, it.name, link)
                 val shareTitle = getString(R.string.event_format_share_title, it.name)
                 context?.shareText(shareTitle, textToShare)
