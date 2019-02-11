@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".profile.ui.ProfileFragment"
+    tools:showIn="@layout/fragment_profile">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.profile.ui.ProfileViewModel" />
+
+        <variable
+            name="user"
+            type="in.bitotsav.profile.data.User" />
+
+    </data>
+
+    <!--<FrameLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"/>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:paddingBottom="32dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="25dp">
+
+        <!-- TODO [Refactor]: Is this necessary ? -->
+
+        <TextView
+            android:id="@+id/bitotsavCredentialsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/profile_label_bitotsav_credentials"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+            android:textColor="@{viewModel.mColor}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:textColor="?colorPrimary" />
+
+        <TextView
+            android:id="@+id/bitotsavIdLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/profile_label_bitotsav_id"
+            android:textColor="@{viewModel.mColor}"
+            app:layout_constraintEnd_toStartOf="@+id/bitotsavId"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bitotsavCredentialsLabel"
+            tools:textColor="?colorPrimary" />
+
+        <TextView
+            android:id="@+id/bitotsavId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            android:text="@{user.id}"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/bitotsavIdLabel"
+            app:layout_constraintTop_toTopOf="@+id/bitotsavIdLabel"
+            tools:text="BT19/10014" />
+
+        <TextView
+            android:id="@+id/registeredEmailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/profile_label_email"
+            android:textColor="@{viewModel.mColor}"
+            app:layout_constraintEnd_toStartOf="@+id/registeredEmail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bitotsavIdLabel"
+            tools:textColor="?colorPrimary" />
+
+        <TextView
+            android:id="@+id/registeredEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            android:text="@{user.email}"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/registeredEmailLabel"
+            app:layout_constraintTop_toTopOf="@+id/registeredEmailLabel"
+            tools:text="aksh1618.d@gmail.com" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:filterTouchesWhenObscured="true"
+            android:text="@string/profile_label_register"
+            android:textColor="@color/colorWhite"
+            android:visibility="@{(user.championshipTeam == null || user.championshipTeam.length() == 0) ? View.VISIBLE : View.GONE}"
+            app:backgroundTint="@{viewModel.mColor}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/championshipScoreLabel"
+            tools:backgroundTint="?colorPrimary"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/championshipDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{(user.championshipTeam == null || user.championshipTeam.length() == 0) ? View.GONE : View.VISIBLE}"
+            app:constraint_referenced_ids="championshipTeamLabel,championshipTeam,championshipScoreLabel,championshipScore"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/championshipTeamLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/profile_label_championship_team"
+            android:textColor="@{viewModel.mColor}"
+            app:layout_constraintEnd_toStartOf="@+id/championshipTeam"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registeredEmailLabel"
+            tools:textColor="?colorPrimary" />
+
+        <TextView
+            android:id="@+id/championshipTeam"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            android:text="@{user.championshipTeam}"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/championshipTeamLabel"
+            app:layout_constraintTop_toTopOf="@+id/championshipTeamLabel"
+            tools:text="Morphine" />
+
+        <TextView
+            android:id="@+id/championshipScoreLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/profile_label_championship_score"
+            android:textColor="@{viewModel.mColor}"
+            app:layout_constraintEnd_toStartOf="@+id/championshipScore"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/championshipTeamLabel"
+            tools:textColor="?colorPrimary" />
+
+        <TextView
+            android:id="@+id/championshipScore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            android:text="@{String.valueOf(user.score)}"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/championshipScoreLabel"
+            app:layout_constraintTop_toTopOf="@+id/championshipScoreLabel"
+            tools:text="550" />
+
+        <TextView
+            android:id="@+id/RegistrationsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/profile_label_registrations"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+            android:textColor="@{viewModel.mColor}"
+            android:visibility="@{user.teams.size == 0 ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register"
+            tools:textColor="?colorPrimary" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/registrations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/RegistrationsLabel"
+            tools:listitem="@layout/item_registration_history"/>
+
+        <!--<androidx.viewpager.widget.ViewPager-->
+        <!--android:id="@+id/registrationsViewPager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/RegistrationsLabel">-->
+
+        <!--<androidx.viewpager.widget.PagerTabStrip-->
+        <!--android:id="@+id/registrationsTabs"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="top"-->
+        <!--android:currentTab="0" />-->
+
+        <!--</androidx.viewpager.widget.ViewPager>-->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/logout"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            app:backgroundTint="@{viewModel.mColor}"
+            android:ems="10"
+            android:filterTouchesWhenObscured="true"
+            android:onClick="@{() -> viewModel.logout()}"
+            android:text="@string/profile_label_logout"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registrations"
+            tools:backgroundTint="?colorPrimary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

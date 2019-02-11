@@ -1,3 +1,352 @@
 <resources>
     <string name="app_name">Bitotsav \'19</string>
+    <string name="app_version">1.0.0</string>
+    <string name="app_url_play_store">https://play.google.com/store/apps/details?id=in.bitotsav</string>
+
+    <!--Images Content Descriptions-->
+    <string name="desc_subscribe">Subscribe to alerts</string>
+    <string name="desc_event_description">Hide or show description</string>
+    <string name="desc_share_feed_message">Share</string>
+    <string name="desc_bit_logo">BIT Mesra</string>
+    <string name="event_details_short">%s • %s</string>
+
+    <!-- Home -->
+    <string name="schedule_title">Schedule</string>
+    <string name="info_title">Info</string>
+    <string name="feed_title">Updates</string>
+    <string name="profile_title">Profile</string>
+
+    <!-- Schedule -->
+    <string name="filters_label_sheet_title">Filters</string>
+    <string name="filters_label_clear_all">Clear All</string>
+    <string name="filters_label_starred">Starred Only</string>
+
+    <!-- Login -->
+    <string name="login_label_email">Email</string>
+    <string name="login_label_password">Password</string>
+    <string name="login_label_login">Login</string>
+    <string name="login_label_register">Register</string>
+
+    <!-- Registration -->
+    <string name="registration_title">Registration</string>
+
+    <!-- Step 1 -->
+    <string name="registration_label_name">Name</string>
+    <string name="registration_label_phone">
+        Phone No <small><small>(For First OTP)</small></small>
+    </string>
+    <string name="registration_label_email">
+        Email <small><small>(For Second OTP)</small></small>
+    </string>
+    <string name="registration_label_password">Password</string>
+    <string name="registration_label_next_step_one">Get OTPs</string>
+
+    <!-- Step 2 -->
+    <string name="registration_label_phoneOtp">Phone OTP</string>
+    <string name="registration_label_emailOtp">Email OTP</string>
+    <string name="registration_label_next_step_two">Verify</string>
+
+    <!-- Step 3 -->
+    <string name="registration_label_gender">Gender</string>
+    <string name="registration_label_college">College</string>
+    <string name="registration_label_year">Year</string>
+    <string name="registration_label_rollNo">Roll No</string>
+    <string name="registration_label_source">Source</string>
+    <string name="registration_label_next_step_three">Finish</string>
+
+    <!-- Event Detail -->
+    <string name="event_label_description">Description</string>
+    <string name="event_label_rules">Rules</string>
+    <string name="event_label_status">Status</string>
+    <string name="event_label_time">Time</string>
+    <string name="event_label_venue">Venue</string>
+    <string name="event_label_contact">Contact</string>
+    <string name="event_label_result">Result</string>
+    <string name="event_label_category">Category</string>
+    <string name="event_label_team_size">Team Size</string>
+    <string name="event_label_prizes">Up For Grabs</string>
+    <string name="event_label_rank1">1st</string>
+    <string name="event_label_rank2">2nd</string>
+    <string name="event_label_rank3">3rd</string>
+    <string name="event_placeholder_tba">TBA</string>
+    <string name="event_placeholder_tba_long">To Be Announced</string>
+    <string name="event_placeholder_no_coordinators">Contact events team.</string>
+    <string name="event_format_time">%1$s (Day %2$d)</string>
+    <string name="event_format_time_venue">%1$s • %2$s</string>
+    <string name="event_format_team_size">%1$d - %2$d</string>
+    <string name="event_format_prize">Prizes worth ₹%,d</string>
+    <string name="event_format_points">%,d Championship Points</string>
+    <string name="event_format_leader_name">%s\'s Team</string>
+    <string name="event_format_share_title">Share %s with</string>
+    <string name="event_format_share_text">
+        Have you heard about %1$s? Check it out! #bitotsav_19 #colours_of_asia\n%2$s
+    </string>
+    <string name="event_label_register">Register</string>
+    <string name="event_label_deregister">Deregister</string>
+    <string name="event_format_registration_message">See you at %s 🎉</string>
+    <string name="event_format_deregistration_message">Abandoned %s 😢</string>
+
+    <!-- Team Registration -->
+    <string name="team_registration_label_format_title">%s Registration</string>
+    <string name="team_registration_label_format_email">Member %d Email</string>
+    <string name="team_registration_label_format_bitotsav_id">
+        Member %d Bitotsav Id (BT19/*****)
+    </string>
+    <string name="event_team_registration_label_member_count">Select Member Count</string>
+    <string name="event_team_registration_label_register">Register</string>
+    <string name="championship_team_registration_label_team_name">Team Name</string>
+    <string name="championship_team_registration_label_register">Register</string>
+
+    <!-- Profile -->
+    <string name="profile_label_format_title">Hi %s !</string>
+    <string name="profile_label_bitotsav_credentials">Your Bitotsav Details</string>
+    <string name="profile_label_bitotsav_id">Bitotsav ID</string>
+    <string name="profile_label_email">Registered Email</string>
+    <string name="profile_label_register">Register for Championship</string>
+    <string name="profile_label_championship_team">Championship Team</string>
+    <string name="profile_label_championship_score">Championship Score</string>
+    <string name="profile_label_registrations">Registrations</string>
+    <string name="profile_label_logout">Logout</string>
+    <string name="profile_format_registration_message">
+        Welcome to the Championship, %s 🎉
+    </string>
+
+    <!-- Feed -->
+    <string name="feed_format_share_title">Share Update (%s)</string>
+    <string name="feed_format_share_text">%s \n#bitotsav_19 #colours_of_asia</string>
+
+    <!-- Info -->
+    <string name="info_title_bitotsav_bit">Bitotsav</string>
+    <string name="info_title_contact">Contact Us</string>
+    <string name="info_title_about_app">About App</string>
+
+    <!-- Bitotsav -->
+    <string name="info_bitotsav_bitotsav_19_label">Bitotsav 19</string>
+    <string name="info_bitotsav_bitotsav_19_content">
+        Deemed as an institute of national importance, Birla Institute of Technology, Mesra,
+        is one of the country\'s most honourable and distinguished educational university.
+        It was founded and established by the visionary industrialist, B.M. Birla over more
+        than six decades ago, and has been creating waves of success ever since. The massive
+        850 acre campus has been home to diverse cultures, multitudinous talent, and
+        inspiring leaders.\n\n
+
+        BIT Mesra has not only produced some of the finest technocrats in the country, but
+        has also churned out winners in professions as diverse as music, art, and
+        literature. Our annual cultural extravaganza, BITOTSAV, is an affluent celebration
+        of the rich cultural heritage that resides in our country, and an attempt to revel
+        in the euphoric essence of India\'s cultural potency. BITOTSAV has a plethora of
+        events to realize its cause of bringing students from all spheres and from all
+        places, together, to enjoy culture while supporting something of societal
+        importance. As the grandeur of BITOTSAV keeps on growing, this year\'s BITOTSAV is
+        set to be majestic: bigger and better than ever before. With enthralling events,
+        mesmerizing nights, enticing performances by prominent celebrities and a whole lot
+        of dance and music, we welcome you to BITOTSAV19.
+    </string>
+    <string name="info_bitotsav_theme_label">Theme: Colours Of Asia</string>
+    <string name="info_bitotsav_theme_content">
+        “We are, at almost every point of our day, immersed in cultural diversity: faces,
+        clothes, smells, attitudes, values, traditions, behaviours, beliefs, rituals.”
+
+        <annotation alignment="end">
+            \n- Randa Abdel-Fattah
+        </annotation>\n\n
+
+        From the ‘Khokhloma’ painting symbolizing the high importance of forests and nature in
+        Russian culture and its history; to ‘Liwa’ the traditional dance performed in
+        Eastern Arabia; from the traditional Chinese ‘Qipao’ dress, to over 720 dialects and
+        22 official languages in India; form ‘yakuniku’ a Japanese style of cooking, to
+        ‘Teochew opera’ in Singapore; a deep vein of history courses through all the
+        countries of Asia. Culture has ever since been the lifeblood of any vibrant society
+        to tell their stories, celebrate, remember the past, entertain and envisage the
+        future. The variant forms of art, architecture and language, folk music,
+        invigorating dance and eclectic cuisines, marks off even various regions in a
+        country characterizing their inherent traditional origin through different
+        civilizations. Melding of culture and traditions through globalisation and
+        technological advances have increased their historically grounded and validated
+        contributions and brought about much needed futuristic changes. Through the theme
+        “Celebration of Cultures-Colours of Asia” BITOTSAV’19 procures to contribute in its
+        own distinctive way to celebrate the rich, large, complex and variegated cultures of
+        humanity.
+    </string>
+    <string name="info_bitotsav_social_cause_label">Social Cause: विशेष (Vishesh)</string>
+    <string name="info_bitotsav_social_cause_content">
+        Pertaining from birth or caused through unavoidable circumstances or accident,
+        disability has always been considered as a character to endow compassion, pity and
+        empathy. While throughout the world many changes have taken place in status and
+        treatment of persons with disabilities, the remnants of tradition and past belief
+        influence present-day practices affecting such groups. Even today, our country has
+        about 30 million handicaps, out of which 50% are uneducated. In a society embracing
+        illiteracy and apartheid on grounds of one’s physical disabilities, the situations
+        of the incapacitated are still in dire straits. Discriminative attitude can
+        stigmatize persons with disabilities, imposing artificial limitations upon them,
+        denying them equal opportunities for development and living, and inequitably
+        demoting them to second-class citizens to be pitied.\n\n
+
+        Started back in 1960, the Disability Rights Movement has thrived to bring forth a change in
+        the world by breaking institutional, physical and societal barriers that had been
+        preventing people with disabilities from living their lives like other citizens.
+        This BITOTSAV we pledge to part take in and contribute our bit to secure equal
+        opportunities and equal rights for all people with disabilities.
+    </string>
+    <string name="info_bitotsav_social_campaign_label">Social Campaign: Lost In Echoes</string>
+    <string name="info_bitotsav_social_campaign_content">
+        If we trace the trails of time, we come across various art forms, be it music, dance
+        or the fine arts, which have, over time, lost their sheen and significance. But
+        their grandeur and pageantry are unparalleled. India has, since time immemorial,
+        been a country which has boasted of unity in diversity and the multifarious nature
+        of our country is exhibited in its rich cultural heritage. But due to modernisation,
+        this vibrant culture is getting lost. From the Madhubani painting of Bihar to he
+        Toda embroidery of the Nilgiri hills, these art forms, which show us our glorious
+        past are gradually attriting and it is about time that we do something about it. In
+        an effort to revive the the magnificence of our rich culture, we at BITOTSAV\'19 have
+        pledged to bring to the fore, such art forms via various awareness campaigns,
+        workshops and talks.
+    </string>
+    <string name="info_bitotsav_online_campaign_label">
+        Online Campaign: Responsible Netizenship
+    </string>
+    <string name="info_bitotsav_online_campaign_content">
+        To acquaint one and all with this term, a Netizen is a general word that is used for
+        any person that uses the internet. A responsible Netizen is one who abides by the
+        rules of the online world. Of course, the internet is not restricted to a set of
+        rules and regulations, and is subject to use as and how desired by the end
+        consumer. This is where the concept of responsible Netizenship kicks in. A
+        responsible netizen, is a person who has a moral approach towards the usage of the
+        internet: one who respects the online community, and abides by the so called
+        \'Netiquettes\'.\n\n
+
+        To spread awareness regarding the same, this year\'s social campaign for BITOTSAV is
+        chosen as Responsible Netizenship. As the usage of internet increases manifold, it
+        becomes imperative to ensure that people use it with a certain sense of
+        responsibility. The entire BITOTSAV\'19 team will strive to ensure that people learn
+        about the duties and responsibilities of a netizen, and urge others to do the same.
+        As the usage of the internet is increasing manifold, it is very imperative to be
+        responsible whilst using it. The entire BITOTSAV\'19 team will strive to ensure that
+        people learn about the duties and responsibilities of a netizen, and urge others to
+        do the same.
+    </string>
+
+    <!-- Contact -->
+    <string name="info_contact_label_faculty">Faculty Coordinators</string>
+    <string name="info_contact_label_student">Student Coordinators</string>
+    <string name="info_contact_label_accommodation">Hospitality</string>
+    <string name="info_contact_label_events">Event Coordinators</string>
+    <string name="info_contact_faculty1_name">Dr. Kirti Avishek</string>
+    <string name="info_contact_faculty1_contact">kavishek@bitmesra.ac.in</string>
+    <string name="info_contact_faculty2_name">Shri Mrinal Pathak</string>
+    <string name="info_contact_faculty2_contact">mrinalpathak@gmail.com</string>
+    <string name="info_contact_student1_name">Gyan Vardhan</string>
+    <string name="info_contact_student1_contact">+91 7903002489</string>
+    <string name="info_contact_student2_name">Aakrati Jain</string>
+    <string name="info_contact_student2_contact">+91 9425797926</string>
+    <string name="info_contact_accommodation1_name">Anamika</string>
+    <string name="info_contact_accommodation1_contact">+91 9523693602</string>
+    <string name="info_contact_accommodation2_name">Shaurya</string>
+    <string name="info_contact_accommodation2_contact">+91 7292887963</string>
+    <string name="info_contact_events1_name">Samadrito Bose</string>
+    <string name="info_contact_events1_contact">+91 7292887967</string>
+    <string name="info_contact_events2_name">Nivedhitha Ravichandar</string>
+    <string name="info_contact_events2_contact">+91 7292887872</string>
+    <string name="info_contact_location_uri">https://maps.app.goo.gl/354f8</string>
+    <string name="info_contact_email_uri">mailto:bitotsav@bitmesra.ac.in</string>
+    <string name="info_contact_website_uri">https://bitotsav.in</string>
+    <string name="info_contact_facebook_uri">https://facebook.com/bitotsav</string>
+    <string name="info_contact_instagram_uri">https://instagram.com/bitotsav_19</string>
+
+    <!-- Dev -->
+    <string name="info_about_dev1_name">Aakarshit Uppal</string>
+    <string name="info_about_dev1_role">App Design &amp; Development</string>
+    <string name="info_about_dev1_github">https://github.com/aksh1618</string>
+    <string name="info_about_dev1_facebook">https://facebook.com/aksh1618</string>
+    <string name="info_about_dev1_linkedin">https://linkedin.com/in/aakarshit-uppal</string>
+    <string name="info_about_dev1_twitter">https://twitter.com/aksh1618</string>
+    <string name="info_about_dev2_name">Ashank Anshuman</string>
+    <string name="info_about_dev2_role">Backend Development</string>
+    <string name="info_about_dev2_github">https://github.com/iamashank</string>
+    <string name="info_about_dev2_facebook">https://facebook.com/ashank.anshuman</string>
+    <string name="info_about_dev2_linkedin">https://linkedin.com/in/ashankanshuman</string>
+    <string name="info_about_dev2_twitter">https://twitter.com/iamashank</string>
+    <string name="info_about_dev3_name">Sushant K. Gupta</string>
+    <string name="info_about_dev3_role">Server API Development</string>
+    <string name="info_about_dev3_github">https://github.com/sonudoo</string>
+    <string name="info_about_dev3_facebook">https://facebook.com/sushantgupta4</string>
+    <string name="info_about_dev3_linkedin">https://linkedin.com/in/sushant-gupta-2a6510139</string>
+    <string name="info_about_dev3_twitter">https://twitter.com/sonudoo</string>
+    <string name="info_about_dev4_name">Ayush Raj</string>
+    <string name="info_about_dev4_role">Graphics &amp; Equipment Support</string>
+    <string name="info_about_dev4_github">https://github.com/ayushraj29</string>
+    <string name="info_about_dev4_facebook">https://facebook.com/ayush.raj.7524</string>
+    <string name="info_about_dev4_linkedin">https://linkedin.com/in/ayushraj2912</string>
+    <string name="info_about_dev4_twitter">https://twitter.com/ethereal2912</string>
+    <string name="info_about_label_devs">Team</string>
+    <string name="info_about_label_app">App</string>
+    <string name="info_about_format_app_name">%1$s\nv%2$s</string>
+    <string name="info_about_dev_mail">mailto:ashankanshuman.dev@gmail.com</string>
+    <string name="info_about_info">https://bitotsav.in/app</string>
+    <string name="info_about_label_credits">Credits</string>
+    <string name="info_about_credit1_name">Nithash Majumdar</string>
+    <string name="info_about_credit1_role">App Testing &amp; Bug Hunting</string>
+    <string name="info_about_credit2_name">Bliss Sinha</string>
+    <string name="info_about_credit2_role">Play Account Payment</string>
+    <string name="info_about_credit3_name">App Killer Manager</string>
+    <string name="info_about_credit3_role">
+        Copyright © 2019 thelittlefireman\n
+        https://github.com/thelittlefireman/AppKillerManager
+    </string>
+    <string name="info_about_credit4_name">Smart App Rate</string>
+    <string name="info_about_credit4_role">
+        <![CDATA[Copyright © 2016 Code My Brains Out
+        https://github.com/codemybrainsout/smart-app-rate
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+        ]]>
+    </string>
+    <string name="info_about_credit5_name">Source Sans Pro</string>
+    <string name="info_about_credit5_role">
+<![CDATA[
+        This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is available with a FAQ at: http://scripts.sil.org/OFL
+]]></string>
+    <string name="info_about_credit6_name">Eva Icons</string>
+    <string name="info_about_credit6_role">
+        <![CDATA[Copyright © Akveo Team akveo.com
+        https://github.com/akveo/eva-icons
+
+        MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+        ]]>
+    </string>
+
+    <string name="login_privacy_policy"><u>Privacy Policy</u></string>
+    <string name="login_privacy_policy_link">https://kutt.it/b19pp</string>
+    <string name="login_terms_and_conditions"><u>Terms &amp; Conditions</u></string>
+    <string name="login_terms_and_conditions_link">https://kutt.it/b19tnc</string>
+
 </resources>

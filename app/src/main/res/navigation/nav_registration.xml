@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_registration"
+    app:startDestination="@id/destRegistrationStepOne">
+
+    <fragment
+        android:id="@+id/destRegistrationStepOne"
+        android:name="in.bitotsav.profile.ui.RegistrationStepFragment"
+        android:label="Registration Step 1"
+        tools:layout="@layout/fragment_registration_step_one">
+
+        <argument
+            android:name="registrationStepNumber"
+            android:defaultValue="1"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/next_step"
+            app:destination="@+id/destRegistrationStepTwo"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpTo="@+id/nav_registration" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destRegistrationStepTwo"
+        android:name="in.bitotsav.profile.ui.RegistrationStepFragment"
+        android:label="Registration Step 2"
+        tools:layout="@layout/fragment_registration_step_one">
+
+        <argument
+            android:name="registrationStepNumber"
+            android:defaultValue="2"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/next_step"
+            app:destination="@id/destRegistrationStepThree"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpTo="@+id/nav_registration" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destRegistrationStepThree"
+        android:name="in.bitotsav.profile.ui.RegistrationStepFragment"
+        android:label="Registration Step 3"
+        tools:layout="@layout/fragment_registration_step_one">
+
+        <argument
+            android:name="registrationStepNumber"
+            android:defaultValue="3"
+            app:argType="integer" />
+
+    </fragment>
+
+</navigation>

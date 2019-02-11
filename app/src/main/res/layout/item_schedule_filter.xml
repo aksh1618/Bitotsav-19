@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="scheduleFilter"
+            type="in.bitotsav.events.ui.ScheduleFilter" />
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.events.ui.ScheduleViewModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp">
+
+        <include
+            android:id="@+id/starredFilter"
+            layout="@layout/include_filter_pill"
+            app:color="@{scheduleFilter.color}"
+            app:label="@{scheduleFilter.label}"
+            app:listener="@{() -> viewModel.toggleCategoryFilter(scheduleFilter.label)}"
+            app:selected="@{scheduleFilter.isSelected}" />
+
+    </FrameLayout>
+
+</layout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="color"
+            type="int" />
+
+        <variable
+            name="selected"
+            type="boolean" />
+
+        <variable
+            name="label"
+            type="String" />
+
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <com.google.android.material.chip.Chip
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checkable="true"
+        android:checked="@{selected}"
+        android:onClickListener="@{listener}"
+
+        android:text="@{label}"
+
+        android:textColor="@{selected ? @color/colorWhite: @color/textColor}"
+        app:checkedIcon="@drawable/ic_close_circle_white_16dp"
+        app:checkedIconEnabled="true"
+        app:checkedIconVisible="@color/colorWhite"
+
+        app:chipBackgroundColor="@{selected ? color : @color/colorWhite}"
+        app:chipIcon="@drawable/ic_add_circle_white_16dp"
+
+        app:chipIconSize="16dp"
+        app:chipIconTint="@{color}"
+        app:chipStartPadding="8dp"
+        app:chipStrokeColor="@{color}"
+        app:chipStrokeWidth="1dp"
+
+        app:rippleColor="@{color}"
+
+        tools:chipBackgroundColor="?colorPrimary"
+        tools:text="Filter"
+        tools:textColor="@color/colorWhite" />
+
+</layout>

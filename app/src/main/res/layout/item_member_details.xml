@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.text.InputType" />
+
+        <variable
+            name="member"
+            type="in.bitotsav.teams.data.RegistrationMember" />
+
+        <variable
+            name="color"
+            type="int" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="8dp">
+
+        <include
+            android:id="@+id/bitotsavId"
+            layout="@layout/include_edit_text"
+            app:autofillHints="@{``}"
+            app:color="@{color}"
+            app:hint="@{@string/team_registration_label_format_bitotsav_id(member.index)}"
+            app:inputType="@{InputType.TYPE_CLASS_PHONE}"
+            app:target="@{member.bitotsavId}" />
+
+        <include
+            android:id="@+id/email"
+            layout="@layout/include_edit_text"
+            app:autofillHints="@{``}"
+            app:color="@{color}"
+            app:hint="@{@string/team_registration_label_format_email(member.index)}"
+            app:inputType="@{InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS}"
+            app:target="@{member.email}" />
+
+    </LinearLayout>
+
+</layout>

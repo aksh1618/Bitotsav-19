@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".feed.ui.FeedFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.feed.ui.FeedViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/appBar"
+            layout="@layout/include_app_bar"
+            app:color="@{@color/background}"
+            app:tabbed="@{false}"
+            app:title="@{@string/feed_title}" />
+
+        <!-- FIXME: [WARN] Might break because of behavior string. -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/feed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="32dp"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarDefaultDelayBeforeFade="10000"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_feed" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/leaderboardFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@{viewModel.mColor}"
+            android:src="@drawable/ic_trophy_white_24dp"
+            android:visibility="gone"
+            app:layout_anchor="@+id/feed"
+            app:layout_anchorGravity="end|bottom"
+            tools:backgroundTint="?colorPrimary" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

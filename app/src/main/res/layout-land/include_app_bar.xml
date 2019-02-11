@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="tabbed"
+            type="boolean" />
+
+        <variable
+            name="color"
+            type="int" />
+
+    </data>
+
+    <com.google.android.material.appbar.AppBarLayout
+        style="@style/Widget.Bitotsav.AppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:visibility="@{tabbed ? View.VISIBLE : View.GONE}"
+                app:tabIndicatorColor="?colorPrimary"
+                app:tabIndicatorFullWidth="false"
+                app:tabSelectedTextColor="@color/colorBlack"
+                app:tabTextAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/titleTextView"
+                style="@style/TextAppearance.Bitotsav.Heading2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:centerInLayout="@{!tabbed}"
+                android:padding="12dp"
+                android:text="@{title}"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+                tools:text="Home" />
+
+        </FrameLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+</layout>

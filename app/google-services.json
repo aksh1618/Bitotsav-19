@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "617479536853",
+    "firebase_url": "https://bitotsav-19.firebaseio.com",
+    "project_id": "bitotsav-19",
+    "storage_bucket": "bitotsav-19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617479536853:android:edf2391e0a1bf0d5",
+        "android_client_info": {
+          "package_name": "in.bitotsav"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617479536853-cvobl57t4dh76ovanbcseiitrvvrvptr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9MifCRfVIUQob70JyBqg0GMeg2dtJxEc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

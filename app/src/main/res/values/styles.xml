@@ -1,11 +1,132 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/source_sans_pro</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <!-- Handled in code -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- splash Screen -->
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- Theme 1: <Red> -->
+    <style name="AppThemeRed" parent="AppTheme">
+        <item name="colorPrimary">@color/colorRed</item>
+        <item name="colorPrimaryDark">@color/colorRedDark</item>
+    </style>
+
+    <style name="AppThemeFuchsia" parent="AppTheme">
+        <item name="colorPrimary">@color/colorPurple</item>
+        <item name="colorPrimaryDark">@color/colorPurpleDark</item>
+    </style>
+
+    <style name="AppThemeGreen" parent="AppTheme">
+        <item name="colorPrimary">@color/colorGreen</item>
+        <item name="colorPrimaryDark">@color/colorGreenDark</item>
+    </style>
+
+    <style name="AppThemeIndigo" parent="AppTheme">
+        <item name="colorPrimary">@color/colorIndigo</item>
+        <item name="colorPrimaryDark">@color/colorIndigoDark</item>
+    </style>
+
+    <style name="AppThemeOrange" parent="AppTheme">
+        <item name="colorPrimary">@color/colorOrange</item>
+        <item name="colorPrimaryDark">@color/colorOrangeDark</item>
+    </style>
+
+    <!--<style name="AppThemeGreen" parent="AppTheme">-->
+        <!--<item name="colorPrimary">@color/colorRed</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorRedDark</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppThemeGreen" parent="AppTheme">-->
+        <!--<item name="colorPrimary">@color/colorRed</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorRedDark</item>-->
+    <!--</style>-->
+
+    <style name="TextInputLayout.HintText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextInputLayout.ErrorText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColor">?attr/colorPrimaryDark</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.Bitotsav.BottomNavigationView" parent="@style/Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:textColor">@color/main_nav_item</item>
+    </style>
+
+    <style name="TextAppearance.Bitotsav.BottomNavigationView.Active">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Bitotsav.Heading1" parent="@style/TextAppearance.MaterialComponents.Headline4" />
+
+    <style name="TextAppearance.Bitotsav.Heading2" parent="@style/TextAppearance.MaterialComponents.Headline5" />
+
+    <style name="TextAppearance.Bitotsav.Heading3" parent="@style/TextAppearance.MaterialComponents.Headline6" />
+
+    <style name="TextAppearance.Bitotsav.Body1" parent="@style/TextAppearance.MaterialComponents.Body1" />
+
+    <style name="TextAppearance.Bitotsav.Body2" parent="@style/TextAppearance.MaterialComponents.Body2" />
+
+    <style name="TextAppearance.Bitotsav.Body3" parent="@style/TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/textColorSecondary</item>
+    </style>
+
+    <style name="Widget.Bitotsav" parent="@android:style/Widget" />
+
+    <style name="Widget.Bitotsav.MainNav" parent="@style/Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:background">?colorPrimary</item>
+        <item name="itemIconTint">@color/main_nav_item</item>
+        <item name="labelVisibilityMode">selected</item>
+        <item name="itemTextAppearanceActive">
+            @style/TextAppearance.Bitotsav.BottomNavigationView.Active
+        </item>
+        <item name="itemTextAppearanceInactive">
+            @style/TextAppearance.Bitotsav.BottomNavigationView
+        </item>
+        <item name="android:theme">@style/ThemeOverlay.MaterialComponents.Dark</item>
+    </style>
+
+    <style name="AppTheme.PopupTheme" parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <style name="Widget.Bitotsav.AppBar" parent="@style/Widget.Design.AppBarLayout">
+        <item name="popupTheme">@style/AppTheme.PopupTheme</item>
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:elevation">8dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Widget.Bitotsav.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense" />
+
+    <style name="Widget.Bitotsav.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textAppearance">
+            @style/TextAppearance.MaterialComponents.Body1
+        </item>
+        <item name="android:layout_height">52dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:filterTouchesWhenObscured">true</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
 </resources>

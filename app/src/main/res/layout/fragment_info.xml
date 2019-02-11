@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".info.ui.InfoFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.info.ui.InfoViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/appBar"
+            layout="@layout/include_app_bar"
+            app:color="@{@color/background}"
+            app:tabbed="@{true}"
+            app:title="@{@string/info_title}" />
+
+        <!-- FIXME: [WARN] Might break because of behavior string. -->
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/infoPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:preview="@layout/fragment_info_page_bitotsav"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/feedbackFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:backgroundTint="@{viewModel.mColor}"
+                tools:backgroundTint="?colorPrimary"
+                android:src="@drawable/ic_feedback_white_24dp"
+                app:layout_anchor="@+id/infoPager"
+                app:layout_anchorGravity="end|bottom" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

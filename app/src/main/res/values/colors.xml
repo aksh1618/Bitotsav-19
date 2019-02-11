@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#4D950D</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorDisabledWhite">#C8D2FE</color>
+
+    <color name="colorGold">#FFC107</color>
+
+    <color name="colorPurple">#B33771</color>
+    <color name="colorPurpleDark">#6D214F</color>
+
+    <color name="colorRed">#FF6B81</color>
+    <color name="colorRedDark">#FF4757</color>
+
+    <color name="colorIndigo">#3B3B98</color>
+    <color name="colorIndigoDark">#182C61</color>
+
+    <color name="colorGreen">#2ed573</color>
+    <color name="colorGreenDark">#05c46B</color>
+
+    <color name="colorOrange">#FFC048</color>
+    <color name="colorOrangeDark">#FF5722</color>
+
+    <color name="background">@color/colorWhite</color>
+    <color name="textColor">@android:color/primary_text_light</color>
+    <color name="textColorSecondary">#888693</color>
+    <color name="errorTextColor">@color/colorOrange</color>
+    <color name="starColor">@color/colorGold</color>
+    <color name="separatorColor">#20000000</color>
+
+    <color name="categoryColor1">#37c89d</color>
+    <color name="categoryColor2">#fad137</color>
+    <color name="categoryColor3">#25e9ff</color>
+    <color name="categoryColor4">#fbbea9</color>
+    <color name="categoryColor5">#ff9e81</color>
+    <color name="categoryColor6">#564ddc</color>
+    <color name="categoryColor7">#ffebb6</color>
+    <color name="categoryColor8">#fd9027</color>
+    <color name="categoryColor9">#97dd63</color>
+    <color name="categoryColor10">#8da0fc</color>
+    <color name="categoryColor11">#8da0fc</color>
+
+    <array name="categoryColors">
+        <item>@color/categoryColor1</item>
+        <item>@color/categoryColor2</item>
+        <item>@color/categoryColor3</item>
+        <item>@color/categoryColor4</item>
+        <item>@color/categoryColor5</item>
+        <item>@color/categoryColor6</item>
+        <item>@color/categoryColor7</item>
+        <item>@color/categoryColor8</item>
+        <item>@color/categoryColor9</item>
+        <item>@color/categoryColor10</item>
+        <item>@color/categoryColor11</item>
+    </array>
+
 </resources>

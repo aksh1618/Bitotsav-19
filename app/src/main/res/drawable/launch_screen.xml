@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <item>
+        <bitmap android:src="@drawable/resplash"
+            android:gravity="fill"/>
+    </item>
+    <item>
+        <bitmap android:src="@drawable/img_bitotsav_white_400"
+            android:gravity="center"/>
+    </item>
+</layer-list>

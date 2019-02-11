@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout3">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="role"
+            type="String" />
+
+        <variable
+            name="facebook"
+            type="String" />
+
+        <variable
+            name="linkedin"
+            type="String" />
+
+        <variable
+            name="twitter"
+            type="String" />
+
+        <variable
+            name="github"
+            type="String" />
+
+        <variable
+            name="pic"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="color"
+            type="int" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="8dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/picView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="12dp"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/links"
+            app:layout_constraintEnd_toStartOf="@+id/nameView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/nameView">
+
+            <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@{pic}"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <!--<FrameLayout-->
+        <!--android:id="@+id/picView"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@{pic}"-->
+        <!--android:background="@drawable/masked_dev_1"/>-->
+
+        <!--</FrameLayout>-->
+
+        <TextView
+            android:id="@+id/nameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:paddingTop="8dp"
+            android:text="@{name}"
+            android:ems="8"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Heading3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/picView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Aakarshit Uppal" />
+
+        <TextView
+            android:id="@+id/roleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:textAlignment="center"
+            android:text="@{role}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/picView"
+            app:layout_constraintTop_toBottomOf="@+id/nameView"
+            tools:text="Android Developer" />
+
+        <LinearLayout
+            android:id="@+id/links"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/picView"
+            app:layout_constraintTop_toBottomOf="@+id/roleView">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_linkedin_outline_black_24dp"
+                android:tint="@{color}"
+                android:visibility="@{linkedin.length() > 0 ? View.VISIBLE : View.GONE}"
+                app:uriOnClick="@{linkedin}"
+                tools:tint="?colorPrimary" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_facebook_outline_black_24dp"
+                android:tint="@{color}"
+                android:visibility="@{facebook.length() > 0 ? View.VISIBLE : View.GONE}"
+                app:uriOnClick="@{facebook}"
+                tools:tint="?colorPrimary" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_twitter_outline_black_24dp"
+                android:tint="@{color}"
+                android:visibility="@{twitter.length() > 0 ? View.VISIBLE : View.GONE}"
+                app:uriOnClick="@{twitter}"
+                tools:tint="?colorPrimary" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_github_outline_black_24dp"
+                android:tint="@{color}"
+                android:visibility="@{github.length() > 0 ? View.VISIBLE : View.GONE}"
+                app:uriOnClick="@{github}"
+                tools:tint="?colorPrimary" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

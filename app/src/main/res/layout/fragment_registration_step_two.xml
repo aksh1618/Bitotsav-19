@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".profile.ui.RegistrationStepFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.InputType" />
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.profile.ui.RegistrationViewModel" />
+
+        <variable
+            name="fields"
+            type="in.bitotsav.profile.data.RegistrationFields" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/phoneOtp"
+                layout="@layout/include_edit_text"
+                app:autofillHints="@{``}"
+                app:color="@{viewModel.mColor}"
+                app:hint="@{@string/registration_label_phoneOtp}"
+                app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
+                app:target="@{fields.phoneOtp}" />
+
+            <include
+                android:id="@+id/emailOtp"
+                layout="@layout/include_edit_text"
+                app:autofillHints="@{``}"
+                app:color="@{viewModel.mColor}"
+                app:hint="@{@string/registration_label_emailOtp}"
+                app:inputType="@{InputType.TYPE_CLASS_NUMBER}"
+                app:target="@{fields.emailOtp}" />
+
+            <include
+                android:id="@+id/next"
+                layout="@layout/include_loading_button_with_error"
+                app:color="@{viewModel.mColor}"
+                app:errorText="@{viewModel.registrationError}"
+                app:label="@{@string/registration_label_next_step_two}"
+                app:listener="@{() -> viewModel.next()}"
+                app:loading="@{viewModel.waiting}" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</layout>

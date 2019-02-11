@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bitotsav"
+    app:startDestination="@id/destSchedule">
+
+    <fragment
+        android:id="@+id/destInfo"
+        android:name="in.bitotsav.info.ui.InfoFragment"
+        android:label="fragment_info"
+        tools:layout="@layout/fragment_info" />
+
+    <fragment
+        android:id="@+id/destSchedule"
+        android:name="in.bitotsav.events.ui.ScheduleFragment"
+        android:label="fragment_schedule"
+        tools:layout="@layout/fragment_schedule">
+
+        <action
+            android:id="@+id/showEventDetail"
+            app:destination="@+id/destEventDetail"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/slide_out_bottom" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destFeed"
+        android:name="in.bitotsav.feed.ui.FeedFragment"
+        android:label="fragment_feed"
+        tools:layout="@layout/fragment_feed" />
+
+    <fragment
+        android:id="@+id/destProfile"
+        android:name="in.bitotsav.profile.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+
+        <action
+            android:id="@+id/action_destProfile_to_destLogin"
+            app:destination="@+id/destLogin"
+            app:popUpTo="@+id/destSchedule" />
+        <action
+            android:id="@+id/registerForChampionship"
+            app:destination="@id/destChampionshipRegistration"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destLogin"
+        android:name="in.bitotsav.profile.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_destLogin_to_destRegistration"
+            app:destination="@id/destRegistration"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/destLogin" />
+
+        <action
+            android:id="@+id/action_destLogin_to_destProfile"
+            app:destination="@id/destProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@+id/destSchedule" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destRegistration"
+        android:name="in.bitotsav.profile.ui.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration">
+
+        <action
+            android:id="@+id/action_destRegistration_to_destProfile"
+            app:destination="@id/destProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@+id/destSchedule" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destEventDetail"
+        android:name="in.bitotsav.events.ui.EventDetailFragment"
+        android:label="fragment_event_detail"
+        tools:layout="@layout/fragment_event_detail">
+
+        <argument
+            android:name="eventId"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/registerForEvent"
+            app:destination="@id/destEventRegistration"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+
+        <deepLink
+            android:id="@+id/eventDeepLink"
+            app:uri="bitotsav.in/event/{eventId}"
+            android:autoVerify="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destEventRegistration"
+        android:name="in.bitotsav.events.ui.EventRegistrationFragment"
+        android:label="Event Registration"
+        tools:layout="@layout/fragment_event_registration">
+
+        <argument
+            android:name="eventId"
+            android:defaultValue="1"
+            app:argType="integer" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/destChampionshipRegistration"
+        android:name="in.bitotsav.profile.ui.ChampionshipRegistrationFragment"
+        android:label=" Championship Registration" />
+
+    <action
+        android:id="@+id/action_global_destEventDetail"
+        app:destination="@id/destEventDetail"
+        app:enterAnim="@anim/slide_in_bottom"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/slide_out_bottom" />
+
+</navigation>

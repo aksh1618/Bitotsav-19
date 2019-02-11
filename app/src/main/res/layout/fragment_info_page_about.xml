@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".info.ui.InfoPageFragment">
+
+    <data>
+
+        <variable
+            name="color"
+            type="int" />
+
+    </data>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:paddingBottom="116dp">
+
+            <include
+                android:id="@+id/dev1"
+                layout="@layout/include_dev_credit"
+                app:color="@{color}"
+                app:facebook="@{@string/info_about_dev1_facebook}"
+                app:role="@{@string/info_about_dev1_role}"
+                app:github="@{@string/info_about_dev1_github}"
+                app:linkedin="@{@string/info_about_dev1_linkedin}"
+                app:name="@{@string/info_about_dev1_name}"
+                app:pic="@{@drawable/img_dev1}"
+                app:twitter="@{@string/info_about_dev1_twitter}" />
+
+            <include
+                android:id="@+id/dev2"
+                layout="@layout/include_dev_credit"
+                app:color="@{color}"
+                app:facebook="@{@string/info_about_dev2_facebook}"
+                app:role="@{@string/info_about_dev2_role}"
+                app:github="@{@string/info_about_dev2_github}"
+                app:linkedin="@{@string/info_about_dev2_linkedin}"
+                app:name="@{@string/info_about_dev2_name}"
+                app:pic="@{@drawable/img_dev2}"
+                app:twitter="@{@string/info_about_dev2_twitter}" />
+
+            <include
+                android:id="@+id/dev3"
+                layout="@layout/include_dev_credit"
+                app:color="@{color}"
+                app:facebook="@{@string/info_about_dev3_facebook}"
+                app:role="@{@string/info_about_dev3_role}"
+                app:github="@{@string/info_about_dev3_github}"
+                app:linkedin="@{@string/info_about_dev3_linkedin}"
+                app:name="@{@string/info_about_dev3_name}"
+                app:pic="@{@drawable/img_dev3}"
+                app:twitter="@{@string/info_about_dev3_twitter}" />
+
+            <include
+                android:id="@+id/dev4"
+                layout="@layout/include_dev_credit"
+                app:color="@{color}"
+                app:facebook="@{@string/info_about_dev4_facebook}"
+                app:role="@{@string/info_about_dev4_role}"
+                app:github="@{@string/info_about_dev4_github}"
+                app:linkedin="@{@string/info_about_dev4_linkedin}"
+                app:name="@{@string/info_about_dev4_name}"
+                app:pic="@{@drawable/img_dev4}"
+                app:twitter="@{@string/info_about_dev4_twitter}" />
+
+            <ImageView
+                android:id="@+id/bitotsavLogo"
+                android:layout_marginTop="32dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_bitotsav_white_24dp"
+                android:tint="@{color}"
+                tools:tint="?colorPrimary" />
+
+            <TextView
+                android:id="@+id/appVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:textStyle="bold"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@{@string/info_about_format_app_name(@string/app_name, @string/app_version)}"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+                android:textColor="@{color}"
+                tools:text="Bitotsav '19\nv1.0.0"
+                tools:textColor="?colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:padding="16dp"
+                        android:src="@drawable/ic_star_border_white_24dp"
+                        android:tint="@{color}"
+                        app:uriOnClick="@{@string/app_url_play_store}"
+                        tools:tint="?colorPrimary" />
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:padding="16dp"
+                        android:src="@drawable/ic_email_outline_black_24dp"
+                        android:tint="@{color}"
+                        app:uriOnClick="@{@string/info_about_dev_mail}"
+                        tools:tint="?colorPrimary" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_info_white_24dp"
+                    android:tint="@{color}"
+                    app:uriOnClick="@{@string/info_about_info}"
+                    tools:tint="?colorPrimary" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/creditsLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:textStyle="bold"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_label_credits"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+                android:textColor="@{color}"
+                tools:textColor="?colorPrimary" />
+
+            <TextView
+                android:id="@+id/credit1Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit1_name"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body1" />
+
+            <TextView
+                android:id="@+id/credit1Role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit1_role"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body2" />
+
+            <TextView
+                android:id="@+id/credit2Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit2_name"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body1" />
+
+            <TextView
+                android:id="@+id/credit2Role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit2_role"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body2" />
+
+            <TextView
+                android:id="@+id/credit3Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit3_name"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body1" />
+
+            <TextView
+                android:id="@+id/credit3Role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:autoLink="all"
+                android:linksClickable="true"
+                android:textColorLink="@color/textColor"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit3_role"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body2" />
+
+            <TextView
+                android:id="@+id/credit4Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit4_name"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body1" />
+
+            <TextView
+                android:id="@+id/credit4Role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:autoLink="all"
+                android:linksClickable="true"
+                android:textColorLink="@color/textColor"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit4_role"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body2" />
+
+            <TextView
+                android:id="@+id/credit5Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit5_name"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body1" />
+
+            <TextView
+                android:id="@+id/credit5Role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:autoLink="all"
+                android:linksClickable="true"
+                android:textColorLink="@color/textColor"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit5_role"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body2" />
+
+            <TextView
+                android:id="@+id/credit6Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit6_name"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body1" />
+
+            <TextView
+                android:id="@+id/credit6Role"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:autoLink="all"
+                android:linksClickable="true"
+                android:textColorLink="@color/textColor"
+                android:paddingBottom="12dp"
+                android:textAlignment="center"
+                android:text="@string/info_about_credit6_role"
+                android:textAppearance="@style/TextAppearance.Bitotsav.Body2" />
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

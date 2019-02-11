@@ -1,0 +1,138 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="in.bitotsav.events.ui.EventDetailFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.events.ui.EventViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/include_app_bar"
+            app:color="@{viewModel.mColor}"
+            app:tabbed="@{false}"
+            app:title="@{viewModel.currentEvent.name}" />
+
+        <ScrollView
+            android:id="@+id/event_detail_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/app_bar"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <include
+                android:id="@+id/content"
+                layout="@layout/content_event_detail"
+                app:color="@{viewModel.mColor}"
+                app:event="@{viewModel.currentEvent}" />
+
+        </ScrollView>
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="?colorPrimary"
+            app:fabAlignmentMode="center"
+            app:fabCradleMargin="4dp"
+            app:hideOnScroll="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="16dp"
+                    android:scaleX="1.2"
+                    android:scaleY="1.2"
+                    android:src="@drawable/ic_arrow_back_white_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/share"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_share_white_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline1"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/back"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteY="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:filterTouchesWhenObscured="true"
+                    android:text="@{viewModel.user.teams.containsKey(String.valueOf(viewModel.currentEvent.id)) ? @string/event_label_deregister : @string/event_label_register}"
+                    android:textColor="@{viewModel.mColor}"
+                    android:visibility="@{System.currentTimeMillis() > (viewModel.currentEvent.timestamp + 1800000) ? View.GONE : View.VISIBLE}"
+                    app:backgroundTint="@color/background"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:rippleColor="@{viewModel.mColor}"
+                    tools:text="Register"
+                    tools:textColor="?colorPrimary" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.35" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.60" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@{viewModel.mColor}"
+            android:onClick="@{() -> viewModel.currentEvent.toggleStarred()}"
+            android:src="@{viewModel.currentEvent.isStarred ? @drawable/ic_star_fill_white_24dp : @drawable/ic_star_border_white_24dp}"
+            android:tint="@color/background"
+            app:elevation="6dp"
+            app:layout_anchor="@id/bottom_bar"
+            app:rippleColor="@color/colorWhite"
+            tools:backgroundTint="?colorPrimary"
+            tools:src="@drawable/ic_star_border_white_24dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+

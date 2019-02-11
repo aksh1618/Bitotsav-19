@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".profile.ui.RegistrationStepFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="android.text.InputType" />
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.profile.ui.RegistrationViewModel" />
+
+        <variable
+            name="fields"
+            type="in.bitotsav.profile.data.RegistrationFields" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/name"
+                layout="@layout/include_edit_text"
+                app:autofillHints="@{View.AUTOFILL_HINT_NAME}"
+                app:color="@{viewModel.mColor}"
+                app:hint="@{@string/registration_label_name}"
+                app:inputType="@{InputType.TYPE_TEXT_VARIATION_PERSON_NAME}"
+                app:target="@{fields.name}" />
+
+            <include
+                android:id="@+id/phone"
+                layout="@layout/include_edit_text"
+                app:autofillHints="@{View.AUTOFILL_HINT_PHONE}"
+                app:color="@{viewModel.mColor}"
+                app:hint="@{@string/registration_label_phone}"
+                app:inputType="@{InputType.TYPE_CLASS_PHONE}"
+                app:target="@{fields.phone}" />
+
+            <include
+                android:id="@+id/email"
+                layout="@layout/include_edit_text"
+                app:autofillHints="@{View.AUTOFILL_HINT_EMAIL_ADDRESS}"
+                app:color="@{viewModel.mColor}"
+                app:hint="@{@string/registration_label_email}"
+                app:inputType="@{InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS}"
+                app:target="@{fields.email}" />
+
+            <!-- TODO: Indicate this will mailed and then removed -->
+            <include
+                android:id="@+id/password"
+                layout="@layout/include_edit_text"
+                app:autofillHints="@{``}"
+                app:color="@{viewModel.mColor}"
+                app:hint="@{@string/registration_label_password}"
+                app:inputType="@{InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD}"
+                app:isPass="@{true}"
+                app:target="@{fields.password}" />
+
+            <include
+                android:id="@+id/next"
+                layout="@layout/include_loading_button_with_error"
+                app:color="@{viewModel.mColor}"
+                app:errorText="@{viewModel.registrationError}"
+                app:label="@{@string/registration_label_next_step_one}"
+                app:listener="@{() -> viewModel.next()}"
+                app:loading="@{viewModel.waiting}" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</layout>

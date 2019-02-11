@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".events.ui.ScheduleFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.events.ui.ScheduleViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/appBar"
+            layout="@layout/include_app_bar"
+            app:color="@{@color/background}"
+            app:tabbed="@{true}"
+            app:title="@{@string/schedule_title}" />
+
+        <!-- FIXME: [WARN] Might break because of behavior string. -->
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/dayPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:preview="@layout/fragment_schedule_day"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/filterFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@{viewModel.mColor}"
+            android:onClick="@{() -> viewModel.showFiltersSheet()}"
+            android:onLongClick="@{() -> viewModel.clearFilters()}"
+            android:src="@drawable/ic_funnel_outline_white_24dp"
+            tools:backgroundTint="?colorPrimary"
+            app:layout_anchor="@+id/dayPager"
+            app:layout_anchorGravity="end|bottom" />
+
+        <include
+            android:id="@+id/bottomSheet"
+            layout="@layout/include_filter_sheet"
+            app:viewModel="@{viewModel}" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

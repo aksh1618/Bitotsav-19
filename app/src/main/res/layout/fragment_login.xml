@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".profile.ui.LoginFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.profile.ui.LoginViewModel" />
+
+    </data>
+
+    <!-- TODO [Refactor]: Use includes for layouts (and thus add ids, use color) -->
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <!-- TODO: Do something about hint color on focus -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Bitotsav.TextInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints=".AUTOFILL_HINT_EMAIL_ADDRESS"
+            android:hint="@string/login_label_email"
+            app:boxStrokeColor="?colorPrimary"
+            app:errorEnabled="true"
+            app:errorText="@{viewModel.loginEmailErrorText}"
+            app:errorTextAppearance="@style/TextInputLayout.ErrorText"
+            app:hintTextAppearance="@style/TextInputLayout.HintText">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="@dimen/form_field_width"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.loginEmail}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textCursorDrawable="@drawable/cursor_drawable" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Bitotsav.TextInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints=".AUTOFILL_HINT_PASSWORD"
+            android:hint="@string/login_label_password"
+            app:boxStrokeColor="?colorPrimary"
+            app:errorEnabled="true"
+            app:errorText="@{viewModel.loginPasswordErrorText}"
+            app:errorTextAppearance="@style/TextInputLayout.ErrorText"
+            app:hintTextAppearance="@style/TextInputLayout.HintText"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Password"
+                android:layout_width="@dimen/form_field_width"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:text="@={viewModel.loginPassword}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textCursorDrawable="@drawable/cursor_drawable" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/login"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:enabled="@{``.equals(viewModel.loginEmailErrorText)}"
+            android:filterTouchesWhenObscured="true"
+            android:onClick="@{() -> viewModel.login()}"
+            android:text="@string/login_label_login"
+            android:textColor="@color/colorWhite"
+            android:visibility="@{viewModel.loading ? View.GONE: View.VISIBLE}"
+            app:backgroundTint="@{viewModel.mColor}"
+            tools:backgroundTint="?colorPrimary" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:indeterminateTint="@{viewModel.mColor}"
+            android:padding="8dp"
+            android:visibility="@{viewModel.loading ? View.VISIBLE: View.GONE}"
+            tools:indeterminateTint="?colorPrimary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/register"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:filterTouchesWhenObscured="true"
+            android:text="@string/login_label_register"
+            android:textColor="@color/colorWhite"
+            app:backgroundTint="@{viewModel.mColor}"
+            tools:backgroundTint="?colorPrimary" />
+
+        <TextView
+            android:id="@+id/loginErrorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@{viewModel.loginErrorText}"
+            android:textColor="?colorPrimaryDark"
+            android:textStyle="italic"
+            android:visibility="@{``.equals(viewModel.loginErrorText) ? View.GONE : View.VISIBLE}"
+            tools:text="Error Message" />
+
+        <TextView
+            android:id="@+id/privacyPolicyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/login_privacy_policy"
+            android:textColor="?colorPrimaryDark"
+            uriOnClick="@{@string/login_privacy_policy_link}" />
+
+        <TextView
+            android:id="@+id/termsAndConditionsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/login_terms_and_conditions"
+            android:textColor="?colorPrimaryDark"
+            uriOnClick="@{@string/login_terms_and_conditions_link}" />
+
+    </LinearLayout>
+</layout>
