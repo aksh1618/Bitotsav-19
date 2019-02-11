@@ -36,10 +36,8 @@ class ScheduleFragment : Fragment() {
     private val filterAdapter by lazy { ScheduleFilterAdapter(scheduleViewModel) }
 
     // TODO: Get colors from resources
-    private val filterColors: List<Int> by lazy {
-        listOf(
-            context?.getColorCompat(R.color.colorRed) ?: 0xFF0000
-        )
+    private val filterColors by lazy {
+        context?.resources?.getIntArray(R.array.categoryColors) ?: intArrayOf(scheduleViewModel.mColor)
     }
 
     override fun onCreateView(

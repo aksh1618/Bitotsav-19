@@ -282,5 +282,6 @@
     <string name="info_about_label_app">App</string>
     <string name="info_about_format_app_name">%1$s\nv%2$s</string>
     <string name="info_about_dev_mail">mailto:ashankanshuman.dev@gmail.com</string>
+    <string name="info_about_info">https://bitotsav.in/app</string>
 
 </resources>

@@ -161,7 +161,7 @@
                     android:padding="16dp"
                     android:src="@drawable/ic_info_white_24dp"
                     android:tint="@{color}"
-                    app:uriOnClick="@{@string/info_contact_facebook_uri}"
+                    app:uriOnClick="@{@string/info_about_info}"
                     tools:tint="?colorPrimary" />
 
             </LinearLayout>

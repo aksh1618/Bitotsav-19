@@ -37,7 +37,7 @@ class ScheduleViewModel(
         get() = Array<LiveData<List<Event>>>(DAYS) { dayWiseVisibleEventsListArray[it] }
     val filters: LiveData<List<ScheduleFilter>>
         get() = scheduleFiltersList
-    lateinit var filterColors: List<Int>
+    lateinit var filterColors: IntArray
     private lateinit var allCategories: List<String>
     // TODO: Use switch map with double trigger for this
     val areFiltersActive = MutableLiveData<Boolean>()
@@ -90,10 +90,10 @@ class ScheduleViewModel(
     }
 
     private fun refreshScheduleFilterList() {
-        scheduleFiltersList.value = allCategories.map { category ->
+        scheduleFiltersList.value = allCategories.mapIndexed { i, category ->
             ScheduleFilter(
                 category,
-                filterColors[0],
+                filterColors[i],
                 categoriesToShow.value?.contains(category) ?: false
             )
         }

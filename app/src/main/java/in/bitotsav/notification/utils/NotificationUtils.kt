@@ -42,7 +42,7 @@ fun displayNotification(
     val channelId = channel.id
     val notificationBuilder = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(getIconByChannel(channel))
-        .setLargeIcon(AppCompatResources.getDrawable(context, R.drawable.ic_bitotsav_red_24dp)!!.toBitmap())
+        .setLargeIcon(AppCompatResources.getDrawable(context, R.mipmap.ic_launcher_round)!!.toBitmap())
         .setStyle(bigTextStyle)
         .setContentTitle(title)
         .setContentText(content)

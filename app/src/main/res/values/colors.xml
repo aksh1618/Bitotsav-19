@@ -17,4 +17,31 @@
     <color name="textColorSecondary">#888693</color>
     <color name="errorTextColor">@color/colorOrange</color>
     <color name="starColor">@color/colorGold</color>
+
+    <color name="categoryColor1">#37c89d</color>
+    <color name="categoryColor2">#fad137</color>
+    <color name="categoryColor3">#25e9ff</color>
+    <color name="categoryColor4">#fbbea9</color>
+    <color name="categoryColor5">#ff9e81</color>
+    <color name="categoryColor6">#564ddc</color>
+    <color name="categoryColor7">#ffebb6</color>
+    <color name="categoryColor8">#fd9027</color>
+    <color name="categoryColor9">#97dd63</color>
+    <color name="categoryColor10">#8da0fc</color>
+    <color name="categoryColor11">#8da0fc</color>
+
+    <array name="categoryColors">
+        <item>@color/categoryColor1</item>
+        <item>@color/categoryColor2</item>
+        <item>@color/categoryColor3</item>
+        <item>@color/categoryColor4</item>
+        <item>@color/categoryColor5</item>
+        <item>@color/categoryColor6</item>
+        <item>@color/categoryColor7</item>
+        <item>@color/categoryColor8</item>
+        <item>@color/categoryColor9</item>
+        <item>@color/categoryColor10</item>
+        <item>@color/categoryColor11</item>
+    </array>
+
 </resources>
