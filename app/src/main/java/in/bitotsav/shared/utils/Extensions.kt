@@ -11,6 +11,7 @@ import android.text.style.AlignmentSpan
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
@@ -88,3 +89,17 @@ fun SpannableString.getAlignedText() =
                 )
             }
     }
+
+fun Context.onConfirmation(action: String, block: () -> Unit) {
+    AlertDialog.Builder(this)
+        .setTitle("$action Confirmations")
+        .setMessage("Are you sure you want to proceed with $action?")
+        .setPositiveButton("Yes") { _, _ ->
+            block.invoke()
+        }
+        .setNegativeButton("No") { _, _ ->
+            "$action cancelled".toast(this)
+        }
+        .create()
+        .show()
+}

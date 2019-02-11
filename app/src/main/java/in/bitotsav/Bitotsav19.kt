@@ -46,8 +46,6 @@ class Bitotsav19 : Application() {
             androidContext(this@Bitotsav19)
             // Enable logging, log.INFO by default
             androidLogger()
-            // Use properties from assets/koin.properties
-            androidFileProperties()
             modules(repositoriesModule, retrofitModule, viewModelsModule, sharedPrefsModule)
         }
 

@@ -39,7 +39,7 @@
             android:backgroundTint="@{viewModel.mColor}"
             android:onClick="@{() -> viewModel.showFiltersSheet()}"
             android:onLongClick="@{() -> viewModel.clearFilters()}"
-            android:src="@drawable/ic_filter_white_24dp"
+            android:src="@drawable/ic_funnel_outline_white_24dp"
             tools:backgroundTint="?colorPrimary"
             app:layout_anchor="@+id/dayPager"
             app:layout_anchorGravity="end|bottom" />
