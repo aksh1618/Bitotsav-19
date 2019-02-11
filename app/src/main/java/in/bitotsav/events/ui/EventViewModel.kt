@@ -17,6 +17,8 @@ import `in`.bitotsav.teams.data.RegistrationMember
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
@@ -65,12 +67,14 @@ class EventViewModel(
 
     fun setCurrentEvent(id: Int) {
         scope.launch {
-            with(eventRepository.getById(id)) {
-                val event = this@with
-                event?.let {
-                    currentEvent.value = event
+            val event = runBlocking {
+                eventRepository.getById(id)
+            }
+            event?.let {
+                with(event) {
+                    currentEvent.value = this
                     user.value?.let {
-                        prepareForRegistration(event)
+                        prepareForRegistration(this)
                     } ?: run {
                         isUserRegistered.value = false
                     }
