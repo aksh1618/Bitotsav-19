@@ -18,6 +18,7 @@ import android.util.Log
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.koin.core.context.GlobalContext.get
 import java.io.IOException
@@ -188,8 +189,10 @@ class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileV
         }
         scope.launch {
             withContext(Dispatchers.IO) {
-                get().koin.get<UserRepository>().delete()
-                get().koin.get<NonChampionshipTeamRepository>().cleanupUserTeams()
+                runBlocking {
+                    get().koin.get<UserRepository>().delete()
+                    get().koin.get<NonChampionshipTeamRepository>().cleanupUserTeams()
+                }
                 loggedOut.postValue(true)
             }
         }
