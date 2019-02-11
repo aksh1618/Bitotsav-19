@@ -71,11 +71,13 @@ class InfoFragment : Fragment() {
                 .title("How was your experience with us?")
                 .positiveButtonText("Not Now")
                 .negativeButtonText("Never")
+                .positiveButtonTextColor(R.color.textColor)
+                .negativeButtonTextColor(R.color.textColorSecondary)
                 .formTitle("Submit Feedback")
                 .formHint("Tell us where we can improve")
                 .formSubmitText("Submit")
                 .formCancelText("Cancel")
-                .playstoreUrl("YOUR_URL")
+                .playstoreUrl(getString(R.string.app_url_play_store))
                 .onRatingBarFormSumbit { feedback ->
                     val intent = Intent(Intent.ACTION_SENDTO).apply {
                         data = Uri.parse("mailto:")

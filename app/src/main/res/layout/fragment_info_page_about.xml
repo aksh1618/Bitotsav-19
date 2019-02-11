@@ -132,26 +132,26 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_star_border_white_24dp"
-                    android:tint="@{color}"
-                    app:uriOnClick="@{@string/info_contact_website_uri}"
-                    tools:tint="?colorPrimary" />
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:padding="16dp"
+                        android:src="@drawable/ic_star_border_white_24dp"
+                        android:tint="@{color}"
+                        app:uriOnClick="@{@string/app_url_play_store}"
+                        tools:tint="?colorPrimary" />
 
                 <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_email_outline_black_24dp"
-                    android:tint="@{color}"
-                    app:uriOnClick="@{@string/info_contact_email_uri}"
-                    tools:tint="?colorPrimary" />
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:padding="16dp"
+                        android:src="@drawable/ic_email_outline_black_24dp"
+                        android:tint="@{color}"
+                        app:uriOnClick="@{@string/info_about_dev_mail}"
+                        tools:tint="?colorPrimary" />
 
                 <ImageView
                     android:layout_width="0dp"

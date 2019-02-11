@@ -64,11 +64,11 @@
             app:layout_constraintTop_toTopOf="@+id/nameView">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bitotsav_black_400" />
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@{pic}"/>
 
         </androidx.cardview.widget.CardView>
 
