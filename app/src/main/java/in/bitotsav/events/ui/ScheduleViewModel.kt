@@ -3,14 +3,13 @@ package `in`.bitotsav.events.ui
 import `in`.bitotsav.events.data.Event
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.shared.ui.BaseViewModel
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class ScheduleViewModel(
     private val eventRepository: EventRepository
@@ -73,18 +72,9 @@ class ScheduleViewModel(
 
     fun setupFilters() {
         scope.launch(Dispatchers.IO) {
-            allCategories = eventRepository.getAllCategories()
-            // The events might not have been fetched in case of first run.
-            // TODO: Figure out if this is still needed with the json included.
-            while (allCategories.isEmpty()) {
-                Log.i(
-                    "ScheduleViewModel.init",
-                    "Retrying fetching categories after a half second delay..."
-                )
-                delay(500)
+            runBlocking {
                 allCategories = eventRepository.getAllCategories()
             }
-        }.invokeOnCompletion {
             scope.launch { refreshScheduleFilterList() }
         }
     }

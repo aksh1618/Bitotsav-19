@@ -10,10 +10,7 @@ import `in`.bitotsav.teams.api.NonChampionshipTeamService
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
 import org.koin.core.get
 
@@ -38,8 +35,10 @@ class NonChampionshipTeamRepository(
     suspend fun cleanupUserTeams() {
         get<AppDatabase>().beginTransaction()
         try {
-            nonChampionshipTeamDao.deleteUserOldTeams()
-            nonChampionshipTeamDao.changeTempStatus()
+            runBlocking {
+                nonChampionshipTeamDao.deleteUserOldTeams()
+                nonChampionshipTeamDao.changeTempStatus()
+            }
 
             get<AppDatabase>().setTransactionSuccessful()
         } finally {
