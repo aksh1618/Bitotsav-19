@@ -28,12 +28,15 @@
             android:id="@+id/feed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="false"
             android:paddingTop="8dp"
             android:paddingBottom="32dp"
-            android:clipToPadding="false"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarDefaultDelayBeforeFade="10000"
+            android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:listitem="@layout/item_event" />
+            tools:listitem="@layout/item_feed" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/leaderboardFab"
@@ -42,10 +45,10 @@
             android:layout_margin="@dimen/fab_margin"
             android:backgroundTint="@{viewModel.mColor}"
             android:src="@drawable/ic_trophy_white_24dp"
-            app:layout_anchor="@+id/feed"
             android:visibility="gone"
-            tools:backgroundTint="?colorPrimary"
-            app:layout_anchorGravity="end|bottom" />
+            app:layout_anchor="@+id/feed"
+            app:layout_anchorGravity="end|bottom"
+            tools:backgroundTint="?colorPrimary" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

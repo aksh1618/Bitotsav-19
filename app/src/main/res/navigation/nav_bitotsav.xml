@@ -112,7 +112,8 @@
 
         <deepLink
             android:id="@+id/eventDeepLink"
-            app:uri="app.bitotsav.in/event/{eventId}" />
+            app:uri="bitotsav.in/event/{eventId}"
+            android:autoVerify="true" />
 
     </fragment>
 

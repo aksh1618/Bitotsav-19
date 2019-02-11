@@ -3,15 +3,15 @@ package `in`.bitotsav.shared.utils
 import `in`.bitotsav.R
 import android.content.Context
 import android.content.Intent
-import android.text.*
 import android.text.Annotation
+import android.text.Layout
+import android.text.SpannableString
+import android.text.Spanned
 import android.text.style.AlignmentSpan
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.text.toSpannable
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
@@ -80,7 +80,6 @@ fun SpannableString.getAlignedText() =
         getSpans(0, length, Annotation::class.java)
             .filter { it.key == "alignment" && it.value == "end" }
             .forEach {
-                Log.d("Extensions", "Found annotation: ${this.getSpanStart(it)}, ${this.getSpanEnd(it)}")
                 setSpan(
                     AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE),
                     this.getSpanStart(it),

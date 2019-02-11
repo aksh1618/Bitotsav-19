@@ -6,7 +6,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
+import android.text.Spannable
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.TextUtils
+import android.text.style.BulletSpan
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -17,6 +21,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
+
 
 @BindingAdapter("errorText")
 fun setErrorText(view: TextInputLayout, text: String) {
@@ -91,7 +96,7 @@ fun setAnnotatedText(textView: TextView, stringRes: Int) {
 }
 
 @BindingAdapter("hideOnClick", "rotateOnClick", "expandedColor")
-fun hideOnClick(clicked: TextView, toHide: TextView, toRotate: ImageView, color:Int) {
+fun hideOnClick(clicked: TextView, toHide: TextView, toRotate: ImageView, color: Int) {
     clicked.setOnClickListener {
         when (toHide.visibility) {
             View.GONE -> {
@@ -121,5 +126,28 @@ fun hideOnClick(clicked: TextView, toHide: TextView, toRotate: ImageView, color:
 fun openLinkOnClick(imageView: ImageView, uri: String) {
     imageView.setOnClickListener {
         it.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(uri)))
+    }
+}
+
+@BindingAdapter("bulletText", "bulletColor")
+fun setBulletText(textView: TextView, string: String?, bulletColor: Int) {
+    string?.let {
+        val lines = TextUtils.split(string, "\n")
+        val spannableStringBuilder = SpannableStringBuilder()
+        for (index in lines.indices) {
+            val line = lines[index]
+            val length = spannableStringBuilder.length
+            spannableStringBuilder.append(line)
+            if (index != lines.size - 1) {
+                spannableStringBuilder.append("\n")
+            } else if (TextUtils.isEmpty(line)) {
+                spannableStringBuilder.append("\u200B")
+            }
+            spannableStringBuilder.setSpan(
+                BulletSpan(30, bulletColor), length, length + 1,
+                Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+            )
+        }
+        textView.text = spannableStringBuilder
     }
 }

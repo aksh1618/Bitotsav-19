@@ -8,9 +8,12 @@
         android:id="@+id/scheduleRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarDefaultDelayBeforeFade="10000"
         android:paddingTop="8dp"
         android:paddingBottom="32dp"
-        android:clipToPadding="false"
+        android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_event" />
 
