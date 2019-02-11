@@ -57,6 +57,7 @@ data class Event(
     @Expose(serialize = false, deserialize = false)
     var timestamp = getTimestampFromString(day, timeString)
 
+    // Must be called when creating an instance using Gson to initialise these params.
     fun setProperties(isStarred: Boolean) {
         this.timestamp = getTimestampFromString(day, timeString)
         this.isStarred = isStarred

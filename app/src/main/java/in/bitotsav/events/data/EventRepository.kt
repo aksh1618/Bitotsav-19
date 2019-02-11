@@ -64,8 +64,12 @@ class EventRepository(private val eventDao: EventDao) : Repository<Event> {
                 .bufferedReader()
                 .use { it.readText() }
         val events = Gson().fromJson(eventsJsonString, Array<Event>::class.java)
+        val listOfEvents = events.toList()
         CoroutineScope(Dispatchers.IO).async {
-            insert(*events)
+            listOfEvents.forEachParallel {
+                it.setProperties(false)
+            }
+            insert(*listOfEvents.toTypedArray())
             Log.d(TAG, "Inserted events into DB from local json file.")
         }
     }
