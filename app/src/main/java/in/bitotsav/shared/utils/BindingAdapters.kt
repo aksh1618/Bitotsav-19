@@ -123,7 +123,7 @@ fun hideOnClick(clicked: TextView, toHide: TextView, toRotate: ImageView, color:
 }
 
 @BindingAdapter("uriOnClick")
-fun openLinkOnClick(imageView: ImageView, uri: String) {
+fun openLinkOnClick(imageView: View, uri: String) {
     imageView.setOnClickListener {
         it.context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(uri)))
     }

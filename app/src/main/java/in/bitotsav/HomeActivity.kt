@@ -4,6 +4,8 @@ import `in`.bitotsav.databinding.ActivityHomeBinding
 import `in`.bitotsav.shared.ui.UiUtilViewModel
 import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.Log
 import android.util.TypedValue
 import android.view.WindowManager
 import androidx.annotation.StyleRes
@@ -20,7 +22,10 @@ class HomeActivity : AppCompatActivity() {
 
     enum class Theme(@StyleRes val themeRes: Int) {
         RED(R.style.AppThemeRed),
-        GREEN(R.style.AppTheme)
+        GREEN(R.style.AppThemeGreen),
+        BLUE(R.style.AppThemeIndigo),
+        PURPLE(R.style.AppThemeFuchsia),
+        ORANGE(R.style.AppThemeOrange)
     }
 
     private val uiUtilViewModel by viewModel<UiUtilViewModel>()
@@ -33,6 +38,10 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(Theme.values().random().themeRes)
+        DisplayMetrics().apply {
+            windowManager.defaultDisplay.getMetrics(this)
+            Log.wtf("MAIN", "$xdpi, $ydpi")
+        }
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.viewModel = uiUtilViewModel

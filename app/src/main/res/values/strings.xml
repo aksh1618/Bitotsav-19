@@ -98,7 +98,7 @@
     <string name="championship_team_registration_label_register">Register</string>
 
     <!-- Profile -->
-    <string name="profile_label_format_title">Hi %s 🙋</string>
+    <string name="profile_label_format_title">Hi %s !</string>
     <string name="profile_label_bitotsav_credentials">Your Bitotsav Details</string>
     <string name="profile_label_bitotsav_id">Bitotsav ID</string>
     <string name="profile_label_email">Registered Email</string>
@@ -245,7 +245,7 @@
     <string name="info_contact_accommodation2_contact">+91 7292887963</string>
     <string name="info_contact_events1_name">Samadrito Bose</string>
     <string name="info_contact_events1_contact">+91 7292887967</string>
-    <string name="info_contact_events2_name">Niveditha Ravichandar</string>
+    <string name="info_contact_events2_name">Nivedhitha Ravichandar</string>
     <string name="info_contact_events2_contact">+91 7292887872</string>
     <string name="info_contact_location_uri">https://maps.app.goo.gl/354f8</string>
     <string name="info_contact_email_uri">mailto:bitotsav@bitmesra.ac.in</string>
@@ -283,5 +283,70 @@
     <string name="info_about_format_app_name">%1$s\nv%2$s</string>
     <string name="info_about_dev_mail">mailto:ashankanshuman.dev@gmail.com</string>
     <string name="info_about_info">https://bitotsav.in/app</string>
+    <string name="info_about_label_credits">Credits</string>
+    <string name="info_about_credit1_name">Nithash Majumdar</string>
+    <string name="info_about_credit1_role">App Testing &amp; Bug Hunting</string>
+    <string name="info_about_credit2_name">Bliss Sinha</string>
+    <string name="info_about_credit2_role">Play Account Payment</string>
+    <string name="info_about_credit3_name">App Killer Manager</string>
+    <string name="info_about_credit3_role">
+        Copyright © 2019 thelittlefireman\n
+        https://github.com/thelittlefireman/AppKillerManager
+    </string>
+    <string name="info_about_credit4_name">Smart App Rate</string>
+    <string name="info_about_credit4_role">
+        <![CDATA[Copyright © 2016 Code My Brains Out
+        https://github.com/codemybrainsout/smart-app-rate
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+        ]]>
+    </string>
+    <string name="info_about_credit5_name">Source Sans Pro</string>
+    <string name="info_about_credit5_role">
+<![CDATA[
+        This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is available with a FAQ at: http://scripts.sil.org/OFL
+]]></string>
+    <string name="info_about_credit6_name">Eva Icons</string>
+    <string name="info_about_credit6_role">
+        <![CDATA[Copyright © Akveo Team akveo.com
+        https://github.com/akveo/eva-icons
+
+        MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+        ]]>
+    </string>
+
+    <string name="login_privacy_policy"><u>Privacy Policy</u></string>
+    <string name="login_privacy_policy_link">https://kutt.it/b19pp</string>
+    <string name="login_terms_and_conditions"><u>Terms &amp; Conditions</u></string>
+    <string name="login_terms_and_conditions_link">https://kutt.it/b19tnc</string>
 
 </resources>

@@ -40,8 +40,8 @@ class EventViewModel(
     private val anyErrors: Boolean
         get() = Boolean.or(
             (membersToRegister.distinctBy {
-                Pair(it.bitotsavId, it.email)
-            }.size < numMembersString.value.toInt()).onTrue {
+                Pair(it.bitotsavId.text.value, it.email.text.value)
+            }.size < membersToRegister.size).onTrue {
                 error("Duplicate Entries")
             },
             membersToRegister

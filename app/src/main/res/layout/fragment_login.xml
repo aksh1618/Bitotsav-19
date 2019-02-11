@@ -126,5 +126,23 @@
             android:visibility="@{``.equals(viewModel.loginErrorText) ? View.GONE : View.VISIBLE}"
             tools:text="Error Message" />
 
+        <TextView
+            android:id="@+id/privacyPolicyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/login_privacy_policy"
+            android:textColor="?colorPrimaryDark"
+            uriOnClick="@{@string/login_privacy_policy_link}" />
+
+        <TextView
+            android:id="@+id/termsAndConditionsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/login_terms_and_conditions"
+            android:textColor="?colorPrimaryDark"
+            uriOnClick="@{@string/login_terms_and_conditions_link}" />
+
     </LinearLayout>
 </layout>

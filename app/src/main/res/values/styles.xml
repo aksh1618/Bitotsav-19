@@ -3,6 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/source_sans_pro</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -14,9 +15,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <!-- Splash Screen -->
+    <!-- splash Screen -->
     <style name="AppTheme.Launcher">
-        <!--<item name="android:windowBackground">@drawable/launch_screen</item>-->
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <!-- Theme 1: <Red> -->
@@ -25,15 +27,25 @@
         <item name="colorPrimaryDark">@color/colorRedDark</item>
     </style>
 
-    <!--<style name="AppThemeGreen" parent="AppTheme">-->
-        <!--<item name="colorPrimary">@color/colorRed</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorRedDark</item>-->
-    <!--</style>-->
+    <style name="AppThemeFuchsia" parent="AppTheme">
+        <item name="colorPrimary">@color/colorPurple</item>
+        <item name="colorPrimaryDark">@color/colorPurpleDark</item>
+    </style>
 
-    <!--<style name="AppThemeGreen" parent="AppTheme">-->
-        <!--<item name="colorPrimary">@color/colorRed</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorRedDark</item>-->
-    <!--</style>-->
+    <style name="AppThemeGreen" parent="AppTheme">
+        <item name="colorPrimary">@color/colorGreen</item>
+        <item name="colorPrimaryDark">@color/colorGreenDark</item>
+    </style>
+
+    <style name="AppThemeIndigo" parent="AppTheme">
+        <item name="colorPrimary">@color/colorIndigo</item>
+        <item name="colorPrimaryDark">@color/colorIndigoDark</item>
+    </style>
+
+    <style name="AppThemeOrange" parent="AppTheme">
+        <item name="colorPrimary">@color/colorOrange</item>
+        <item name="colorPrimaryDark">@color/colorOrangeDark</item>
+    </style>
 
     <!--<style name="AppThemeGreen" parent="AppTheme">-->
         <!--<item name="colorPrimary">@color/colorRed</item>-->

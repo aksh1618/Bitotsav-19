@@ -56,8 +56,8 @@ class ProfileViewModel(userRepository: UserRepository) : BaseViewModel("ProfileV
                 error("Error(s) in some field(s)")
             },
             (membersToRegister.distinctBy {
-                Pair(it.bitotsavId, it.email)
-            }.size < numMembersString.value.toInt()).onTrue {
+                Pair(it.bitotsavId.text.value, it.email.text.value)
+            }.size < membersToRegister.size).onTrue {
                 error("Duplicate Entries")
             },
             membersToRegister

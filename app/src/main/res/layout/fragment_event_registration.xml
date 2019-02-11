@@ -43,6 +43,8 @@
                     style="@style/Widget.Bitotsav.TextInput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:errorTextAppearance="@style/TextInputLayout.ErrorText"
+                    app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
