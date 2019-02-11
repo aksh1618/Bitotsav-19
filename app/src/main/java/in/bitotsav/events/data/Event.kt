@@ -25,7 +25,7 @@ data class Event(
     @SerializedName("eventRules") val rules: String,
     @SerializedName("eventContact1Name") val contact1Name: String,
     @SerializedName("eventContact1Number") val contact1Number: Long,
-//    TODO: This can be null or empty. Handle it in UI accordingly
+//    This can be null or empty. Handle it in UI accordingly
     @SerializedName("eventContact2Name") val contact2Name: String? = null,
     @SerializedName("eventContact2Number") val contact2Number: Long? = null,
     @SerializedName("eventPoints1") val points1: Int,
@@ -40,12 +40,12 @@ data class Event(
     @SerializedName("eventPrize1") val prize1: Int,
     @SerializedName("eventPrize2") val prize2: Int,
     @SerializedName("eventPrize3") val prize3: Int,
-//    TODO: Note: Default value is empty map
+//    Note: Default value is empty map
 //    eventPosition1: {
-//    teamLeader: req.body.eventPosition1,
-//    teamLeaderName: map[req.body.eventPosition1].name,
-//    championshipTeam: (team1 != null) ? team1 : "-1",
-//    points: (team1 != null) ? event.eventPoints1 : 0
+//    teamLeader: String,
+//    teamLeaderName: String,
+//    championshipTeam: String = "-1",
+//    points: String = 0
 //}
     @SerializedName("eventPosition1") val position1: Map<String, String>?,
     @SerializedName("eventPosition2") val position2: Map<String, String>?,

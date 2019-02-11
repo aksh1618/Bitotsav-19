@@ -20,7 +20,6 @@ private const val TAG = "TeamRegistrationUtils"
 //405 - All members don't belong to same college
 //409 - Team name already taken or Some member is already registered for the event
 //200 - Success
-//TODO: - Incorrect errors
 fun registerForChampionshipAsync(
     authToken: String,
     teamName: String,
@@ -44,6 +43,7 @@ fun registerForChampionshipAsync(
                 403 -> throw AuthException("Authentication failed")
                 404 -> throw Exception("Incorrect Bitotsav id and/or email id")
                 405 -> throw Exception("All members don't belong to the same college")
+                408 -> throw Exception("Registration for Bitotsav Championship has been closed")
                 409 -> throw Exception("Team name already taken or one or more members are already registered")
                 else -> throw Exception("Server is currently facing some issues. Try again later")
             }

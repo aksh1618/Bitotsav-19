@@ -64,7 +64,7 @@ fun registerAsync(
     val request = authService.registerAsync(body)
     val response = request.await()
     when (response.code()) {
-        200 -> Log.d(TAG, "Registration Stage 1 complete")
+        200 -> run { Log.d(TAG, "Registration Stage 1 complete") }
         403 -> throw AuthException("Captcha verification failed")
         409 -> throw AuthException("Email id is already registered")
         else -> throw NetworkException(
@@ -92,7 +92,7 @@ fun verifyAsync(
     val request = authService.verifyAsync(body)
     val response = request.await()
     when (response.code()) {
-        200 -> Log.d(TAG, "Registration Stage 2: OTP verification complete")
+        200 -> run { Log.d(TAG, "Registration Stage 2: OTP verification complete") }
 
         403 -> throw AuthException("Incorrect OTP(s)")
         400 -> throw AuthException(

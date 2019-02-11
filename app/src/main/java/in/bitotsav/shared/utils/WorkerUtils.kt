@@ -3,12 +3,11 @@ package `in`.bitotsav.shared.utils
 import `in`.bitotsav.shared.workers.*
 import android.util.Log
 import androidx.work.*
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 private const val TAG = "WorkerUtils"
 
-const val delay = 0L
+const val delayDuration = 0L
 
 inline fun <reified T : Worker> scheduleWork(input: Data) {
     val constraints: Constraints = Constraints.Builder().apply {
@@ -16,7 +15,7 @@ inline fun <reified T : Worker> scheduleWork(input: Data) {
     }.build()
     val oneTimeWorkRequest = OneTimeWorkRequest.Builder(T::class.java)
         .setInputData(input)
-        .setInitialDelay(delay, TimeUnit.SECONDS)
+        .setInitialDelay(delayDuration, TimeUnit.SECONDS)
         .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
         .setConstraints(constraints)
         .build()
@@ -30,7 +29,7 @@ inline fun <reified T : Worker> scheduleUniqueWork(input: Data, uniqueWorkName: 
     }.build()
     val oneTimeWorkRequest = OneTimeWorkRequest.Builder(T::class.java)
         .setInputData(input)
-        .setInitialDelay(delay, TimeUnit.SECONDS)
+        .setInitialDelay(delayDuration, TimeUnit.SECONDS)
         .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
         .setConstraints(constraints)
         .build()
@@ -56,52 +55,50 @@ fun cancelReminderWork() {
     WorkManager.getInstance().cancelUniqueWork(ReminderWorkType.CHECK_UPCOMING_EVENTS.name)
 }
 
-fun scheduleStartReminderWork() {
-//    TODO: Set startTime as initial delay
-    Log.d(TAG, "on scheduleStartReminderWork")
-    val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
-    calendar.set(2019, 1, 9, 0, 0)
-//    calendar.set(2019, 1, 15, 7, 0)
-//    val startTime = calendar.timeInMillis - System.currentTimeMillis()
-    val testStartTime = calendar.timeInMillis - System.currentTimeMillis()
-    Log.d(TAG, "Test start delay: $testStartTime")
-//    val testStartTime = 10 * 60 * 1000
-    val oneTimeWorkRequest = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
-        .setInputData(workDataOf("type" to ReminderWorkType.START_REMINDER_WORK.name))
-        .setInitialDelay(testStartTime, TimeUnit.MILLISECONDS)
-//        .setInitialDelay(startTime, TimeUnit.MILLISECONDS)
-        .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
-        .build()
+//fun scheduleStartReminderWork() {
+//    Log.d(TAG, "on scheduleStartReminderWork")
+//    val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
+//    calendar.set(2019, 1, 9, 0, 0)
+////    calendar.set(2019, 1, 15, 7, 0)
+////    val startTime = calendar.timeInMillis - System.currentTimeMillis()
+//    val testStartTime = calendar.timeInMillis - System.currentTimeMillis()
+//    Log.d(TAG, "Test start delayDuration: $testStartTime")
+////    val testStartTime = 10 * 60 * 1000
+//    val oneTimeWorkRequest = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
+//        .setInputData(workDataOf("type" to ReminderWorkType.START_REMINDER_WORK.name))
+//        .setInitialDelay(testStartTime, TimeUnit.MILLISECONDS)
+////        .setInitialDelay(startTime, TimeUnit.MILLISECONDS)
+//        .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
+//        .build()
+//
+//    WorkManager.getInstance().enqueueUniqueWork(
+//        ReminderWorkType.START_REMINDER_WORK.name,
+//        ExistingWorkPolicy.REPLACE,
+//        oneTimeWorkRequest
+//    )
+//}
 
-    WorkManager.getInstance().enqueueUniqueWork(
-        ReminderWorkType.START_REMINDER_WORK.name,
-        ExistingWorkPolicy.REPLACE,
-        oneTimeWorkRequest
-    )
-}
-
-fun scheduleStopReminderWork() {
-//    TODO: Set endTime as initial delay
-    Log.d(TAG, "on scheduleStopReminderWork")
-    val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
-    calendar.set(2019, 1, 9, 2, 20)
-//    calendar.set(2019, 1, 17, 20, 0)
-//    val delay = calendar.timeInMillis - System.currentTimeMillis()
-    val testDelay = calendar.timeInMillis - System.currentTimeMillis()
-    Log.d(TAG, "Test time: $testDelay")
-    val oneTimeWorkRequest = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
-        .setInputData(workDataOf("type" to ReminderWorkType.STOP_REMINDER_WORK.name))
-//        .setInitialDelay(delay, TimeUnit.MILLISECONDS)
-        .setInitialDelay(testDelay, TimeUnit.MILLISECONDS)
-        .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
-        .build()
-
-    WorkManager.getInstance().enqueueUniqueWork(
-        ReminderWorkType.STOP_REMINDER_WORK.name,
-        ExistingWorkPolicy.REPLACE,
-        oneTimeWorkRequest
-    )
-}
+//fun scheduleStopReminderWork() {
+//    Log.d(TAG, "on scheduleStopReminderWork")
+//    val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
+//    calendar.set(2019, 1, 9, 2, 20)
+////    calendar.set(2019, 1, 17, 20, 0)
+////    val delayDuration = calendar.timeInMillis - System.currentTimeMillis()
+//    val testDelay = calendar.timeInMillis - System.currentTimeMillis()
+//    Log.d(TAG, "Test time: $testDelay")
+//    val oneTimeWorkRequest = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
+//        .setInputData(workDataOf("type" to ReminderWorkType.STOP_REMINDER_WORK.name))
+////        .setInitialDelay(delayDuration, TimeUnit.MILLISECONDS)
+//        .setInitialDelay(testDelay, TimeUnit.MILLISECONDS)
+//        .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
+//        .build()
+//
+//    WorkManager.getInstance().enqueueUniqueWork(
+//        ReminderWorkType.STOP_REMINDER_WORK.name,
+//        ExistingWorkPolicy.REPLACE,
+//        oneTimeWorkRequest
+//    )
+//}
 
 inline fun <reified T : Worker> getWork(input: Data): OneTimeWorkRequest {
     val constraints: Constraints = Constraints.Builder().apply {
@@ -109,7 +106,7 @@ inline fun <reified T : Worker> getWork(input: Data): OneTimeWorkRequest {
     }.build()
     return OneTimeWorkRequest.Builder(T::class.java)
         .setInputData(input)
-        .setInitialDelay(delay, TimeUnit.SECONDS)
+        .setInitialDelay(delayDuration, TimeUnit.SECONDS)
         .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
         .setConstraints(constraints)
         .build()

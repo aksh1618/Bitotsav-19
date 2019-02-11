@@ -36,7 +36,6 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
         val response = request.await()
         if (response.code() == 200) {
             Log.d(TAG, "Participant details received from server")
-//            ("Store participant details here")
 //            "teamMembers": [
 //            {
 //                "name": $name,

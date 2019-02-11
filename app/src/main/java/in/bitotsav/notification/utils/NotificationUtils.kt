@@ -39,7 +39,6 @@ fun displayNotification(
     val bigTextStyle = NotificationCompat.BigTextStyle()
     bigTextStyle.bigText(content)
 
-//    TODO("Set small icon, large icon and color")
     val channelId = channel.id
     val notificationBuilder = NotificationCompat.Builder(context, channelId)
         .setSmallIcon(getIconByChannel(channel))

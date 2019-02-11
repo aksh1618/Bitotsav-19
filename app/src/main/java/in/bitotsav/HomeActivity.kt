@@ -1,9 +1,7 @@
 package `in`.bitotsav
 
 import `in`.bitotsav.databinding.ActivityHomeBinding
-import `in`.bitotsav.events.ui.ScheduleViewModel
 import `in`.bitotsav.shared.ui.UiUtilViewModel
-import `in`.bitotsav.shared.utils.getColorCompat
 import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
@@ -14,6 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.thelittlefireman.appkillermanager.managers.KillerManager
+import com.thelittlefireman.appkillermanager.ui.DialogKillerManagerBuilder
 import org.koin.androidx.viewmodel.ext.viewModel
 
 class HomeActivity : AppCompatActivity() {
@@ -40,6 +40,11 @@ class HomeActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         handlePlatformLimitations()
         setupBottomNavMenu()
+
+        // AppKillerManager
+        startDialog(KillerManager.Actions.ACTION_AUTOSTART)
+        startDialog(KillerManager.Actions.ACTION_NOTIFICATIONS)
+        startDialog(KillerManager.Actions.ACTION_POWERSAVING)
     }
 
     private fun setupBottomNavMenu() {
@@ -56,5 +61,9 @@ class HomeActivity : AppCompatActivity() {
                 statusBarColor = primaryColor
             }
         }
+    }
+
+    private fun startDialog(actions: KillerManager.Actions) {
+        DialogKillerManagerBuilder().setContext(this).setAction(actions).show()
     }
 }

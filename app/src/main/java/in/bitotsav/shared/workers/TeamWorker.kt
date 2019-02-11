@@ -56,8 +56,6 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
 //                        teamName
 //                    )
                     runBlocking {
-                        //                        get<UserRepository>().insert(user)
-//                        Log.d(TAG, "User inserted into DB")
                         teamName?.let {
                             get<ChampionshipTeamRepository>().fetchChampionshipTeamAsync(teamName).await()
                         } ?: Log.d(TAG, "Championship team not found for this user.")
