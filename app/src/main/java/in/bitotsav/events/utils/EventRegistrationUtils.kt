@@ -1,6 +1,7 @@
 package `in`.bitotsav.events.utils
 
 import `in`.bitotsav.teams.api.TeamRegistrationService
+import `in`.bitotsav.teams.data.Member
 import android.util.Log
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
@@ -8,8 +9,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 
 private const val TAG = "EventRegistrationUtils"
-
-data class Member(val memberId: String, val memberEmail: String)
 
 //POST - /eventRegistration - headers: {token:"Authorization <token_value>"}
 // - body: {members[] {memberId, memberEmail}, eventId, leaderId}
@@ -29,6 +28,7 @@ fun registerForEventAsync(
         "leaderId" to bitotsavId,
         "members" to Gson().toJson(members)
     )
+    Log.d(TAG, body.toString())
     val authHeaderValue = "Authorization $authToken"
     val request = TeamRegistrationService.api.registerForEventAsync(authHeaderValue, body)
     val response = request.await()

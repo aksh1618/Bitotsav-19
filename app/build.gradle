@@ -12,8 +12,8 @@ android {
         applicationId "in.bitotsav"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.2"
         kapt {
             arguments {
                 arg("room.schemaLocation", "$projectDir/schemas".toString())
@@ -22,6 +22,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             shrinkResources true
             minifyEnabled true

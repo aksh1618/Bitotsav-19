@@ -2,7 +2,6 @@ package `in`.bitotsav.events.ui
 
 import `in`.bitotsav.events.data.Event
 import `in`.bitotsav.events.data.EventRepository
-import `in`.bitotsav.events.utils.Member
 import `in`.bitotsav.events.utils.deregisterForEventAsync
 import `in`.bitotsav.events.utils.registerForEventAsync
 import `in`.bitotsav.profile.CurrentUser
@@ -13,12 +12,12 @@ import `in`.bitotsav.shared.ui.BaseViewModel
 import `in`.bitotsav.shared.utils.onFalse
 import `in`.bitotsav.shared.utils.onTrue
 import `in`.bitotsav.shared.utils.or
+import `in`.bitotsav.teams.data.Member
 import `in`.bitotsav.teams.data.RegistrationMember
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
