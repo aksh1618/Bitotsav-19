@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="in.bitotsav.events.ui.ScheduleViewModel" />
@@ -14,6 +16,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
+        android:animateLayoutChanges="true"
         android:layout_height="match_parent">
 
         <include
@@ -35,6 +38,7 @@
             android:id="@+id/filterFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="@{viewModel.filterFabVisible ? View.VISIBLE : View.INVISIBLE}"
             android:layout_margin="@dimen/fab_margin"
             android:backgroundTint="@{viewModel.mColor}"
             android:onClick="@{() -> viewModel.showFiltersSheet()}"

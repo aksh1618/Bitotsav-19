@@ -3,7 +3,6 @@ package `in`.bitotsav.events.ui
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentScheduleBinding
 import `in`.bitotsav.shared.ui.UiUtilViewModel
-import `in`.bitotsav.shared.utils.getColorCompat
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -15,11 +14,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.koin.androidx.viewmodel.ext.sharedViewModel
-import org.koin.androidx.viewmodel.ext.viewModel
 
-private var DAYS = 3
+var DAYS = 3
 
 class ScheduleFragment : Fragment() {
 
@@ -37,7 +36,8 @@ class ScheduleFragment : Fragment() {
 
     // TODO: Get colors from resources
     private val filterColors by lazy {
-        context?.resources?.getIntArray(R.array.categoryColors) ?: intArrayOf(scheduleViewModel.mColor)
+        context?.resources?.getIntArray(R.array.categoryColors)
+            ?: intArrayOf(scheduleViewModel.mColor)
     }
 
     override fun onCreateView(
@@ -62,8 +62,19 @@ class ScheduleFragment : Fragment() {
                 viewModel = scheduleViewModel
                 bottomSheet.filterGridRecyclerView.adapter = filterAdapter
                 sheetBehavior = BottomSheetBehavior.from(bottomSheet.filterSheet)
-                dayPager.offscreenPageLimit = DAYS - 1
+                dayPager.offscreenPageLimit = DAYS
                 dayPager.adapter = ScheduleDayAdapter(childFragmentManager)
+                dayPager.addOnPageChangeListener(
+                    object : ViewPager.SimpleOnPageChangeListener() {
+                        override fun onPageSelected(position: Int) {
+                            scheduleViewModel.hideFiltersSheet()
+                            scheduleViewModel.filterFabVisible.value = when (position) {
+                                DAYS -> false
+                                else -> true
+                            }
+                        }
+                    })
+
                 appBar.tabs.setupWithViewPager(dayPager)
                 setObservers()
             }
@@ -75,9 +86,9 @@ class ScheduleFragment : Fragment() {
         scheduleViewModel.isSheetVisible.observe(
             viewLifecycleOwner,
             Observer { isSheetVisible ->
-                when (isSheetVisible) {
-                    true -> sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                    else -> sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                sheetBehavior.state = when (isSheetVisible) {
+                    true -> BottomSheetBehavior.STATE_EXPANDED
+                    else -> BottomSheetBehavior.STATE_HIDDEN
                 }
             })
 
@@ -97,13 +108,16 @@ class ScheduleFragment : Fragment() {
     }
 
     inner class ScheduleDayAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
-        override fun getCount() = DAYS
+        override fun getCount() = DAYS + 1
         override fun getItem(position: Int): Fragment {
             return ScheduleDayFragment.newInstance(position + 1)
         }
 
         override fun getPageTitle(position: Int): CharSequence {
-            return "Day ${position + 1}"
+            return when (position) {
+                DAYS -> return "Nights"
+                else -> "Day ${position + 1}"
+            }
         }
     }
 }

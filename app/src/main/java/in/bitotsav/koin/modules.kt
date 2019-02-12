@@ -3,6 +3,7 @@ package `in`.bitotsav.koin
 import `in`.bitotsav.database.AppDatabase
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.events.ui.EventViewModel
+import `in`.bitotsav.events.ui.NightViewModel
 import `in`.bitotsav.events.ui.ScheduleViewModel
 import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.feed.ui.FeedViewModel
@@ -88,4 +89,5 @@ val viewModelsModule = module {
     viewModel { EventViewModel(get(), get()) }
     viewModel { FeedViewModel(get()) }
     viewModel { InfoViewModel() }
+    viewModel { NightViewModel() }
 }

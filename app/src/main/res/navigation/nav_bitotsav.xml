@@ -25,6 +25,14 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/slide_out_bottom" />
 
+        <action
+            android:id="@+id/showNightDetail"
+            app:destination="@+id/destNightDetail"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/slide_out_bottom" />
+
     </fragment>
 
     <fragment
@@ -118,6 +126,18 @@
     </fragment>
 
     <fragment
+        android:id="@+id/destNightDetail"
+        android:name="in.bitotsav.events.ui.NightDetailFragment"
+        android:label="fragment_night_detail"
+        tools:layout="@layout/fragment_night_detail">
+
+        <argument
+            android:name="nightId"
+            app:argType="integer" />
+
+    </fragment>
+
+    <fragment
         android:id="@+id/destEventRegistration"
         android:name="in.bitotsav.events.ui.EventRegistrationFragment"
         android:label="Event Registration"
@@ -133,7 +153,7 @@
     <fragment
         android:id="@+id/destChampionshipRegistration"
         android:name="in.bitotsav.profile.ui.ChampionshipRegistrationFragment"
-        android:label=" Championship Registration" />
+        android:label="fragment_championship_registration" />
 
     <action
         android:id="@+id/action_global_destEventDetail"

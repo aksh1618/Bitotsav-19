@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="in.bitotsav.events.ui.NightDetailFragment"
+    tools:showIn="@layout/fragment_night_detail">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="night"
+            type="in.bitotsav.events.data.Night" />
+
+        <variable
+            name="color"
+            type="int" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ImageView
+            android:id="@+id/artistPoster"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            tools:src="@drawable/bg2"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- This is put at 60% of total height of ScrollView -->
+        <!--<androidx.constraintlayout.widget.Guideline-->
+            <!--android:id="@+id/guideHorizontal60"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--app:layout_constraintGuide_percent="0.60" />-->
+
+        <TextView
+            android:id="@+id/name_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{night.type}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Heading2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/artistPoster"
+            tools:text="EDM Night" />
+
+        <!-- Date and Venue -->
+
+        <TextView
+            android:id="@+id/time_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{@string/night_format_time(night.timeString, night.day)}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_text_view"
+            tools:text="14:00 (Day 2)" />
+
+        <TextView
+            android:id="@+id/venue_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{night.venue}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time_text_view"
+            tools:text="Bitotsav Ground" />
+
+        <TextView
+            android:id="@+id/description_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:autoLink="all"
+            android:linksClickable="true"
+            android:text="@{night.description}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
+            android:textColorLink="@color/textColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/venue_text_view"
+            tools:text="This is gonna be so lit !!" />
+
+        <View
+            android:id="@+id/fab_padding_view"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_text_view" />
+
+        <!-- Contacts -->
+
+        <!--<TextView-->
+        <!--android:id="@+id/label_contact_text_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="@dimen/detail_margin_start"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="@string/event_label_contact"-->
+        <!--android:textAppearance="@style/TextAppearance.Bitotsav.Body2"-->
+        <!--android:textColor="@{color}"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/category_text_view"-->
+        <!--tools:textColor="?colorPrimary" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/contact1_name_text_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="@dimen/detail_margin_start"-->
+        <!--android:layout_marginTop="4dp"-->
+        <!--android:text="@{event.contact1Name}"-->
+        <!--android:textAppearance="@style/TextAppearance.Bitotsav.Body3"-->
+        <!--android:visibility="@{(event.contact1Name == null || event.contact1Name.length() == 0) ? View.GONE : View.VISIBLE}"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/contact1_num_text_view"-->
+        <!--app:layout_constraintHorizontal_chainStyle="spread_inside"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/label_contact_text_view"-->
+        <!--tools:text="John Doe" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/contact1_num_text_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="@dimen/detail_margin_start"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:autoLink="phone"-->
+        <!--android:background="@drawable/ripple_circle"-->
+        <!--android:linksClickable="true"-->
+        <!--android:text="@{event.contact1Number > 0 ? String.valueOf(event.contact1Number) : ``}"-->
+        <!--android:textAppearance="@style/TextAppearance.Bitotsav.Body3"-->
+        <!--android:textColorLink="@color/textColor"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.5"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/contact1_name_text_view"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/contact1_name_text_view"-->
+        <!--tools:text="9999999999" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/contact2_name_text_view"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="@dimen/detail_margin_start"-->
+        <!--android:layout_marginTop="4dp"-->
+        <!--android:text="@{event.contact2Name}"-->
+        <!--android:textAppearance="@style/TextAppearance.Bitotsav.Body3"-->
+        <!--android:visibility="@{(event.contact2Name == null || event.contact2Name.length() == 0) ? View.GONE : View.VISIBLE}"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/contact2_num_text_view"-->
+        <!--app:layout_constraintHorizontal_bias="0.5"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/contact1_name_text_view"-->
+        <!--tools:text="Jane Doe" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/contact2_num_text_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="@dimen/detail_margin_start"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:autoLink="phone"-->
+        <!--android:background="@drawable/ripple_circle"-->
+        <!--android:linksClickable="true"-->
+        <!--android:text="@{event.contact2Number > 0 ? String.valueOf(event.contact2Number) : ``}"-->
+        <!--android:textAppearance="@style/TextAppearance.Bitotsav.Body3"-->
+        <!--android:textColorLink="@color/textColor"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.5"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/contact2_name_text_view"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/contact2_name_text_view"-->
+        <!--tools:text="8888888888" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

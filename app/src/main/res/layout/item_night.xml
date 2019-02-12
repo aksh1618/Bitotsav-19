@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout2">
+
+    <data>
+
+        <variable
+            name="night"
+            type="in.bitotsav.events.data.Night" />
+
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="color"
+            type="int" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/round_corners"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_height="100dp"
+        android:onClick="@{listener}"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/artistImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img_dev4" />
+
+        <View
+            android:id="@+id/gradient"
+            android:background="@drawable/grad_transparent"
+            android:backgroundTint="@{color}"
+            tools:backgroundTint="?colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/artistName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="40dp"
+            android:text="@{night.artistName}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/artistImage"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Ayush Raj" />
+
+        <TextView
+            android:id="@+id/nightTimeVenue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="40dp"
+            android:text="@{@string/event_format_time_venue(night.timeString, night.venue)}"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toStartOf="@+id/artistImage"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/artistName"
+            app:layout_constraintTop_toBottomOf="@+id/artistName"
+            tools:text="6:00 • Bitotsav Ground" />
+
+        <TextView
+            android:id="@+id/nightType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="40dp"
+            android:text="@{night.type}"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toStartOf="@+id/artistImage"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/artistName"
+            app:layout_constraintTop_toBottomOf="@+id/nightTimeVenue"
+            tools:text="Fun &amp; Run" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -349,4 +349,149 @@ SOFTWARE.
     <string name="login_terms_and_conditions"><u>Terms &amp; Conditions</u></string>
     <string name="login_terms_and_conditions_link">https://kutt.it/b19tnc</string>
 
+    <!-- Night -->
+
+    <string name="night_format_time">%1$s (Day %2$d)</string>
+    <string name="night_format_time_venue">%1$s • %2$s</string>
+
+    <string-array name="night_artists">
+        <item>Amandeep Singh</item>
+        <item>Moongphali</item>
+        <item>Naalayak</item>
+        <item>DJ Candice Redding</item>
+        <item>DJ NYK</item>
+        <item>Shalmali Kholgade</item>
+        <item>Sachin Jigar</item>
+    </string-array>
+
+    <string-array name="night_types">
+        <item>Heritage Night</item>
+        <item>Band Night</item>
+        <item>Band Night</item>
+        <item>EDM Night</item>
+        <item>EDM Night</item>
+        <item>Pro Night</item>
+        <item>Pro Night</item>
+    </string-array>
+
+    <string-array name="night_venues">
+        <item>G.P. Birla Auditorium</item>
+        <item>Fusion Arena</item>
+        <item>Fusion Arena</item>
+        <item>Fusion Arena</item>
+        <item>Fusion Arena</item>
+        <item>Fusion Arena</item>
+        <item>Fusion Arena</item>
+    </string-array>
+
+    <integer-array name="night_days">
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+        <item>3</item>
+    </integer-array>
+
+    <string-array name="night_times">
+        <item>18:00</item>
+        <item>18:00</item>
+        <item>18:00</item>
+        <item>18:00</item>
+        <item>18:00</item>
+        <item>18:00</item>
+        <item>18:00</item>
+    </string-array>
+
+    <string-array name="night_descriptions">
+        <item>
+            “मिलेंगे हम भी सफ़र में अजनबियों की तरह\n
+            उन रास्तों से गुज़रते हुए जो जाने पहचाने से थे”\n\n
+
+            These mellifluous lines from our Heritage Night star are the perfect depiction
+            of his style, simple yet heart wrenching. His storytelling includes poetry
+            inspired from the most quotidian things, expressed in the most lucid yet
+            poignant manner. His cadence has often left people awe struck. From
+            jibber-jabber on friendship to failed mass bunk executions; from woes of mess
+            food to the bittersweet experiences of love and adulting, be there at the G. P.
+            Birla auditorium on February 14, 2019 to watch Amandeep Singh express stories
+            relating to these and much more with his poetry. Make sure that you do not miss
+            this for the world!
+        </item>
+        <item>Band Night</item>
+        <item>Band Night</item>
+        <item>
+            Electro, techno, house, trance, drum, bass!\n\n
+
+            With our carnival of cultures drawing nearer, we can feel your escalating vigour
+            and palpating energies as you restlessly wait to dance and sway to the ebb and
+            flow of music. The wait is finally over as we now reveal one of the EDM artists
+            for BITOTSAV\'19. She was recently ranked as the 3rd best DJ by DJaneMag India and
+            was the official DJ of the RCB team for the last few seasons of IPL. Yes, it is
+            Candice Redding! Register today and ensure your presence at BIT Mesra on
+            February 16th to dance to some spine chilling EDM. Put on your best dancing
+            shoes to groove to reverberant, curated music and segueing tracks and rest
+            assured you will have the most exhilarating rendezvous ever!
+        </item>
+        <item>
+            From producing remixes and songs in high school days to keeping his passion
+            alive and becoming one of the best DJ in the country, Nikhil Sahni a.k.a NYK has
+            won many hearts and topped numerous charts. A record-breaking three time winner
+            of Vh1 MyFav Awards for India\'s Best Bollywood DJ and with over a million online
+            followers, NYK is known for his unique skill of blending different rhythms to
+            create fresh and enthralling music. With his vibrant energy and musical
+            abilities, he is sure to make the crowd go wild with his heart thumping beats!
+            Be there at BIT Mesra on February 16 to groove to the beats of foot-tapping
+            numbers and witness an electrifying night full of fervour and zest!
+        </item>
+        <item>
+            With breathtaking compositions illuminating the silhouette of silence and
+            sparkling vivacity throughout, a squallish, power-packed and exhilarating
+            performance is all set to unfurl its opulence in this celebration of cultures.\n\n
+
+            Embracing the zestful verve that runs in all our veins, BITOTSAV\'19 is thrilled
+            to announce the first ‘Pronite’ artist, the ravishing Shalmali Kholgade!\n\n
+
+            BITOTSAV\'19 welcomes you all to witness this blissful fusion of euphonious notes
+            and audacious tunes. Catch her live on 17th February, 2019 in NCC ground and
+            witness her set the stage ablaze with fiery notes and feisty rhythms!
+        </item>
+        <item>
+            The strings of time have perfectly woven a shroud of anticipation, a cloud of
+            enthralment and a resplendent aura of excitement all around. The sun has finally
+            dawned upon this purple haze of pandemonium, for it is time to set the tone for
+            the biggest, the grandest night of the year!\n\n
+
+            Ladies and Gentlemen! It\'s finally time for the most awaited announcement of the
+            festival! With skies glittering with a prismatic streak of euphoria, get ready
+            to witness an ethereal spectacle of symphony and melody as BITOTSAV\'19 presents
+            to you the headliners of the Pro Nite, the dazzling duo- \'SACHIN-JIGAR\'!\n\n
+
+            So, get ready to groove your feet to their peppy beats as BITOTSAV\'19 welcomes
+            one and all to witness their music create magic on 17th February, 2019 from 6:30
+            P.M in the Fusion Arena(NCC Ground)!
+        </item>
+    </string-array>
+
+    <integer-array name="night_poster_drawables">
+        <item>@drawable/img_night_poster_heritage</item>
+        <item>@drawable/img_night_poster_band1</item>
+        <item>@drawable/img_night_poster_band2</item>
+        <item>@drawable/img_night_poster_edm1</item>
+        <item>@drawable/img_night_poster_edm2</item>
+        <item>@drawable/img_night_poster_pro1</item>
+        <item>@drawable/img_night_poster_pro2</item>
+    </integer-array>
+
+    <integer-array name="night_artist_drawables">
+        <item>@drawable/img_night_artist_heritage</item>
+        <item>@drawable/img_night_artist_band1</item>
+        <item>@drawable/img_night_artist_band2</item>
+        <item>@drawable/img_night_artist_edm1</item>
+        <item>@drawable/img_night_artist_edm2</item>
+        <item>@drawable/img_night_artist_pro1</item>
+        <item>@drawable/img_night_artist_pro2</item>
+    </integer-array>
+
 </resources>
