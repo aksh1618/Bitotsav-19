@@ -28,5 +28,3 @@ class RegistrationMember(val index: Int, id: String = "", email: String = "") {
     )
 
 }
-
-data class Member(val memberId: String, val memberEmail: String)
