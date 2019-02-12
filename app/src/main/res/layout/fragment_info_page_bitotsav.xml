@@ -29,6 +29,13 @@
             android:paddingTop="8dp"
             android:paddingBottom="116dp">
 
+            <com.smarteist.autoimageslider.SliderLayout
+                android:id="@+id/gallerySlider"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
             <include
                 android:id="@+id/bitotsav19"
                 layout="@layout/include_paragraph_with_title"

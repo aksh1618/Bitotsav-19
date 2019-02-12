@@ -23,7 +23,7 @@ android {
     }
     buildTypes {
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
@@ -68,6 +68,8 @@ ext {
     safetynet_version = "16.0.0"
     appkillermanager_version = "2.1.1"
     smartapprate_version = "1.0.8"
+    glide_version = "4.8.0"
+    android_image_slider_version = "1.2.0"
 }
 
 dependencies {
@@ -126,13 +128,23 @@ dependencies {
     // Captcha
     implementation "com.google.android.gms:play-services-safetynet:$safetynet_version"
 
+    // Palette
+    implementation "androidx.palette:palette:1.0.0"
+
     // 3rd party
-//    https://github.com/thelittlefireman/AppKillerManager/tree/master
+
+    // App Killer Manager https://github.com/thelittlefireman/AppKillerManager/tree/master
     implementation "com.thelittlefireman:AppKillerManager:$appkillermanager_version"
 
-//    https://github.com/codemybrainsout/smart-app-rate
+    // Smart App Rate https://github.com/codemybrainsout/smart-app-rate
     implementation "com.codemybrainsout.rating:ratingdialog:$smartapprate_version"
 
+    // Glide https://github.com/bumptech/glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    // Android image slider https://github.com/smarteist/android-image-slide
+    implementation "com.github.smarteist:autoimageslider:$android_image_slider_version"
 
 }
 
