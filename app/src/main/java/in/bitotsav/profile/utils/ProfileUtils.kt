@@ -87,6 +87,24 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
     }
 }
 
+fun fetchPaymentDetailsAsync(authToken: String): Deferred<Boolean> {
+    return CoroutineScope(Dispatchers.IO).async {
+        val authHeaderValue = "Authorization $authToken"
+        val request = ProfileService.api.getPaymentDetailsAsync(authHeaderValue)
+        val response = request.await()
+        if (response.code() == 200) {
+            Log.d(TAG, "Profile payment details received from the server")
+            CurrentUser.paymentDetails = response.body()
+            return@async true
+        } else {
+            when (response.code()) {
+                404 -> throw NonRetryableException("Participant not found")
+                else -> throw NetworkException("Unable to fetch payment details. Response code: ${response.code()}")
+            }
+        }
+    }
+}
+
 fun syncUserProfile(): ListenableFuture<Operation.State.SUCCESS> {
 
     val profileWork = getWork<ProfileWorker>(

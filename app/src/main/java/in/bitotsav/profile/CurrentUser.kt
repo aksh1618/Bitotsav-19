@@ -1,6 +1,8 @@
 package `in`.bitotsav.profile
 
+import `in`.bitotsav.shared.data.MapConverter.Companion.fromMap
 import `in`.bitotsav.shared.data.MapConverter.Companion.fromMapOfMap
+import `in`.bitotsav.shared.data.MapConverter.Companion.toMap
 import `in`.bitotsav.shared.data.MapConverter.Companion.toMapOfMap
 import android.content.SharedPreferences
 import org.koin.core.KoinComponent
@@ -52,8 +54,8 @@ object CurrentUser : KoinComponent {
         set(value) {
             value?.let {
                 putInPrefs("userTeams", fromMapOfMap(it))
-                field = value
-            }
+            } ?: putInPrefs("userTeams", null)
+            field = value
         }
 
     //    [{id:{email, name}}]
@@ -61,8 +63,18 @@ object CurrentUser : KoinComponent {
         set(value) {
             value?.let {
                 putInPrefs("teamMembers", fromMapOfMap(it))
-                field = value
-            }
+            } ?: putInPrefs("teamMembers", null)
+            field = value
+        }
+
+    //    {day1,day2,day3,merchandise,accommodation}
+    var paymentDetails: Map<String, Boolean>? =
+        getFromPrefs("paymentDetails")?.let { toMap(it) as Map<String, Boolean> }
+        set(value) {
+            value?.let {
+                putInPrefs("paymentDetails", fromMap(value as Map<String, String>))
+            } ?: putInPrefs("paymentDetails", null)
+            field = value
         }
 
     fun clearAllFields() {
@@ -74,6 +86,7 @@ object CurrentUser : KoinComponent {
         teamMembers = null
         userTeams = null
         championshipTeamName = null
+        paymentDetails = null
     }
 
     private fun getFromPrefs(key: String): String? {
@@ -92,6 +105,7 @@ object CurrentUser : KoinComponent {
             TeamName: $championshipTeamName
             UserTeams: $userTeams
             Members: $teamMembers
+            Payment: $paymentDetails
         """.trimIndent()
     }
 }

@@ -11,6 +11,9 @@ interface ProfileService {
     @GET("getParticipantDetails")
     fun getParticipantDetailsAsync(@Header("token") authHeaderValue: String): Deferred<Response<Map<String, Any>>>
 
+    @GET("getPaymentDetails")
+    fun getPaymentDetailsAsync(@Header("token") authHeaderValue: String): Deferred<Response<Map<String, Boolean>>>
+
     companion object {
         val api: ProfileService by lazy {
             get().koin.get<Retrofit>()

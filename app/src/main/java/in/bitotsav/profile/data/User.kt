@@ -15,7 +15,12 @@ data class User(
     @PrimaryKey val id: String,
     val name: String,
     val email: String,
-    val championshipTeam: String? = null
+    val championshipTeam: String? = null,
+    val day1: Boolean = false,
+    val day2: Boolean = false,
+    val day3: Boolean = false,
+    val merchandise: Boolean = false,
+    val accommodation: Boolean = false
 ) : KoinComponent {
     var score: Int = runBlocking { championshipTeam?.let { get<ChampionshipTeamRepository>().getScoreByName(it) } ?: 0 }
     // [{"eventId":{eventName:"eventName",teamName:"teamName",rank:"rank"**}}]  Note: All values are strings

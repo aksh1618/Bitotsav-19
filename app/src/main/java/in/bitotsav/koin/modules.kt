@@ -1,6 +1,7 @@
 package `in`.bitotsav.koin
 
 import `in`.bitotsav.database.AppDatabase
+import `in`.bitotsav.database.MIGRATION_1_2
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.events.ui.EventViewModel
 import `in`.bitotsav.events.ui.NightViewModel
@@ -38,6 +39,7 @@ val repositoriesModule = module {
 
     single {
         Room.databaseBuilder(androidContext(), AppDatabase::class.java, "App.db")
+            .addMigrations(MIGRATION_1_2)
             .build()
     }
     single { EventRepository(get<AppDatabase>().eventDao()) }
