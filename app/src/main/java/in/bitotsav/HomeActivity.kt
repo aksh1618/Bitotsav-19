@@ -2,6 +2,7 @@ package `in`.bitotsav
 
 import `in`.bitotsav.databinding.ActivityHomeBinding
 import `in`.bitotsav.shared.ui.UiUtilViewModel
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -17,6 +18,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.thelittlefireman.appkillermanager.managers.KillerManager
 import com.thelittlefireman.appkillermanager.ui.DialogKillerManagerBuilder
 import org.koin.androidx.viewmodel.ext.viewModel
+import org.koin.core.context.GlobalContext.get
+import java.util.*
+
+// To be used to display AppKillerManger prompt from second run onwards
+private const val RUN_COUNTER = "runCounter"
 
 class HomeActivity : AppCompatActivity() {
 
@@ -51,9 +57,7 @@ class HomeActivity : AppCompatActivity() {
         setupBottomNavMenu()
 
         // AppKillerManager
-        startDialog(KillerManager.Actions.ACTION_AUTOSTART)
-        startDialog(KillerManager.Actions.ACTION_NOTIFICATIONS)
-        startDialog(KillerManager.Actions.ACTION_POWERSAVING)
+        initAppKillerManager()
     }
 
     private fun setupBottomNavMenu() {
@@ -72,7 +76,27 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun startDialog(actions: KillerManager.Actions) {
+    private fun initAppKillerManager() {
+//        TODO: Handle orientation change
+        val runCount = get().koin.get<SharedPreferences>().getInt(RUN_COUNTER, 0)
+        val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
+        calendar.set(2019, 1, 19, 0, 0)
+        val endOfBitotsav = calendar.timeInMillis
+        val isBitotsavOver = System.currentTimeMillis() > endOfBitotsav
+        // Execute only if second run and Bitotsav not over
+        if (runCount > 0 && !isBitotsavOver) {
+            val manufacturer = android.os.Build.MANUFACTURER
+            if ("xiaomi".equals(manufacturer, true) || "huawei".equals(manufacturer, true)) {
+                startAppKillerManagerDialog(KillerManager.Actions.ACTION_AUTOSTART)
+                startAppKillerManagerDialog(KillerManager.Actions.ACTION_NOTIFICATIONS)
+                startAppKillerManagerDialog(KillerManager.Actions.ACTION_POWERSAVING)
+            }
+        } else if (runCount == 0) {
+            get().koin.get<SharedPreferences>().edit().putInt(RUN_COUNTER, runCount + 1).apply()
+        }
+    }
+
+    private fun startAppKillerManagerDialog(actions: KillerManager.Actions) {
         DialogKillerManagerBuilder().setContext(this).setAction(actions).show()
     }
 }
