@@ -25,26 +25,31 @@
     <style name="AppThemeRed" parent="AppTheme">
         <item name="colorPrimary">@color/colorRed</item>
         <item name="colorPrimaryDark">@color/colorRedDark</item>
+        <item name="colorAccent">@color/colorRedDark</item>
     </style>
 
     <style name="AppThemeFuchsia" parent="AppTheme">
         <item name="colorPrimary">@color/colorPurple</item>
         <item name="colorPrimaryDark">@color/colorPurpleDark</item>
+        <item name="colorAccent">@color/colorPurpleDark</item>
     </style>
 
     <style name="AppThemeGreen" parent="AppTheme">
         <item name="colorPrimary">@color/colorGreen</item>
         <item name="colorPrimaryDark">@color/colorGreenDark</item>
+        <item name="colorAccent">@color/colorGreenDark</item>
     </style>
 
     <style name="AppThemeIndigo" parent="AppTheme">
         <item name="colorPrimary">@color/colorIndigo</item>
         <item name="colorPrimaryDark">@color/colorIndigoDark</item>
+        <item name="colorAccent">@color/colorIndigoDark</item>
     </style>
 
     <style name="AppThemeOrange" parent="AppTheme">
         <item name="colorPrimary">@color/colorOrange</item>
         <item name="colorPrimaryDark">@color/colorOrangeDark</item>
+        <item name="colorAccent">@color/colorOrangeDark</item>
     </style>
 
     <!--<style name="AppThemeGreen" parent="AppTheme">-->

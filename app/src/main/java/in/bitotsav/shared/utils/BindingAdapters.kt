@@ -11,7 +11,6 @@ import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.text.style.BulletSpan
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.AutoCompleteTextView
@@ -85,13 +84,12 @@ fun setCenterInLayout(view: TextView, centerInLayout: Boolean) {
 }
 
 @BindingAdapter("backgroundTint")
-fun setBackgroundTint(button: MaterialButton, color: Int) {
+fun setBackgroundTint(button: View, color: Int) {
     button.backgroundTintList = ColorStateList.valueOf(color)
 }
 
 @BindingAdapter("annotatedText")
 fun setAnnotatedText(textView: TextView, stringRes: Int) {
-    Log.d("BindingAdapters", textView.context.getText(stringRes).toString())
     textView.text = SpannableString(textView.context.getText(stringRes)).getAlignedText()
 }
 
