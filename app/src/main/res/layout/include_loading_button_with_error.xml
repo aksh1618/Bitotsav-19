@@ -48,7 +48,7 @@
             android:text="@{label}"
             android:textColor="@color/colorWhite"
             android:visibility="@{loading ? View.GONE: View.VISIBLE}"
-            app:backgroundTint="@{color}"
+            app:backgroundTint="?colorPrimary"
             tools:backgroundTint="?colorPrimary"
             tools:text="Click Me!" />
 
@@ -59,7 +59,7 @@
             android:layout_height="52dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:indeterminateTint="@{color}"
+            android:indeterminateTint="?colorPrimary"
             android:padding="8dp"
             android:visibility="@{loading ? View.VISIBLE: View.GONE}"
             tools:indeterminateTint="?colorPrimary" />
