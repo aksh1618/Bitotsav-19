@@ -15,7 +15,6 @@ import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.TransformationUtils
 import org.koin.androidx.viewmodel.ext.sharedViewModel
 
 class NightDetailFragment : Fragment() {
@@ -45,11 +44,11 @@ class NightDetailFragment : Fragment() {
             .apply {
                 lifecycleOwner = this@NightDetailFragment
                 viewModel = nightViewModel.apply { setCurrentNight(nightId) }
+                val heightToSet = DisplayMetrics().apply {
+                    activity?.windowManager?.defaultDisplay?.getMetrics(this)
+                }.heightPixels * 0.6
+                content.artistPoster.updateLayoutParams { height = heightToSet.toInt() }
                 context?.let {
-                    val heightToSet = DisplayMetrics().apply {
-                        activity?.windowManager?.defaultDisplay?.getMetrics(this)
-                    }.heightPixels * 0.6
-                    content.artistPoster.updateLayoutParams { height = heightToSet.toInt() }
                     GlideApp.with(it)
                         .asBitmap()
                         .load(nightViewModel.currentNight.value?.posterRes)

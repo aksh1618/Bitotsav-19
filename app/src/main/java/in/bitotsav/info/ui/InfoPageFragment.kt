@@ -49,8 +49,8 @@ class InfoPageFragment : Fragment() {
                 .inflate(inflater, container, false)
                 .apply {
                     color = infoViewModel.mColor
-                    gallerySlider.setPagerIndicatorVisibility(false)
-                    gallerySlider.apply {
+                    gallery.gallerySlider.setPagerIndicatorVisibility(false)
+                    gallery.gallerySlider.apply {
                         setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION)
                         scrollTimeInSec = 1
                         setIndicatorAnimation(IndicatorAnimations.THIN_WORM)

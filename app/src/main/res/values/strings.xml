@@ -419,8 +419,30 @@ SOFTWARE.
             relating to these and much more with his poetry. Make sure that you do not miss
             this for the world!
         </item>
-        <item>Band Night</item>
-        <item>Band Night</item>
+        <item>
+             Have you ever felt the heat of electric beats echoing in your soul? The magnetic
+            moments circuited via electrifying performances are soon to become a regular in
+            your life as BITOTSAV\'19 is here. Yes, we come doing “Charchebaazi” about the
+            band night which comes with some huge acts that promise to keep you rocking all
+            night. BITOTSAV\'19 turns up the volume of excitement along with a license to go
+            nuts for the amazing band, \'Moongphali\', a band which has an image of rampimg up
+            the crowd with its sharp and catchy melodies.The bandwagon is filled with
+            awardees who have thrilled the audience with songs like \'Dil se\',\' Humma\' and
+            \'Kabira\'. So mark the dates and get ready for the hindi band night, as it\'s time
+            to \'Jee Aao\'!
+        </item>
+        <item>
+            Revivified with music and soul, BITOTSAV is back for us to savour and relish
+            some striking performances. With some amazing tracks for us to listen to, this
+            year the Band-Nite promises to be bigger and better than ever before. With
+            electric beats, coupled with soul thumping music,  we are here, ready to surge
+            the atmosphere with ecstasy, as BITOTSAV\'19 brings to you, a breathtaking
+            display of melody with the band "NAALAYAK"! This band from Chandigarh, considered
+            to be one of the upcoming bands of India, is known for its explosive live acts
+            and pumping music. They are now considered to be the trailbreakers of the genre
+            defining a new era of Indie Rock. So, get ready to be rocked and put your hands
+            up for the incredible band, NAALAYAK! 6:30 p.m. Fusion Arena. Be there!
+        </item>
         <item>
             Electro, techno, house, trance, drum, bass!\n\n
 
@@ -475,13 +497,13 @@ SOFTWARE.
     </string-array>
 
     <integer-array name="night_poster_drawables">
-        <item>@drawable/img_night_poster_heritage</item>
-        <item>@drawable/img_night_poster_band1</item>
-        <item>@drawable/img_night_poster_band2</item>
-        <item>@drawable/img_night_poster_edm1</item>
-        <item>@drawable/img_night_poster_edm2</item>
-        <item>@drawable/img_night_poster_pro1</item>
-        <item>@drawable/img_night_poster_pro2</item>
+        <item>@drawable/img_night_artist_heritage_large</item>
+        <item>@drawable/img_night_artist_band1_large</item>
+        <item>@drawable/img_night_artist_band2_large</item>
+        <item>@drawable/img_night_artist_edm1_large</item>
+        <item>@drawable/img_night_artist_edm2_large</item>
+        <item>@drawable/img_night_artist_pro1_large</item>
+        <item>@drawable/img_night_artist_pro2_large</item>
     </integer-array>
 
     <integer-array name="night_artist_drawables">
