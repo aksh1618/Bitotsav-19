@@ -1,7 +1,9 @@
 package `in`.bitotsav
 
 import `in`.bitotsav.databinding.ActivityHomeBinding
+import `in`.bitotsav.shared.ui.BaseFragment
 import `in`.bitotsav.shared.ui.UiUtilViewModel
+import `in`.bitotsav.shared.utils.onTrue
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -13,7 +15,10 @@ import android.view.WindowManager
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavHost
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.thelittlefireman.appkillermanager.managers.KillerManager
@@ -46,6 +51,9 @@ class HomeActivity : AppCompatActivity() {
             theme?.resolveAttribute(R.attr.colorPrimary, this, true)
         }.data
     }
+    private val navController by lazy {
+        Navigation.findNavController(this, R.id.mainFragment)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(Theme.values().random().themeRes)
@@ -68,7 +76,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavMenu() {
-        val navController = Navigation.findNavController(this, R.id.mainFragment)
         findViewById<BottomNavigationView>(R.id.mainNavigation)
             .setupWithNavController(navController)
     }
@@ -114,4 +121,15 @@ class HomeActivity : AppCompatActivity() {
         outState?.putBoolean(KEY_ROTATED, true)
         super.onSaveInstanceState(outState, outPersistentState)
     }
+
+    override fun onBackPressed() {
+        uiUtilViewModel.backPressed.value = true
+        uiUtilViewModel.backPressed.value = false
+        if (navController.currentDestination?.label != "fragment_leaderboard") {
+            super.onBackPressed()
+        } else {
+            Log.d("HA", "Back press passed to leaderboard fragment")
+        }
+    }
+
 }

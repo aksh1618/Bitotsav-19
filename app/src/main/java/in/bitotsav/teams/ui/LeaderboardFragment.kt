@@ -3,11 +3,9 @@ package `in`.bitotsav.teams.ui
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentLeaderboardBinding
 import `in`.bitotsav.databinding.ItemTeamBinding
-import `in`.bitotsav.shared.ui.BaseFragment
 import `in`.bitotsav.shared.ui.SimpleRecyclerViewAdapter
-import `in`.bitotsav.shared.utils.executeAfter
-import `in`.bitotsav.shared.utils.getColorCompat
-import `in`.bitotsav.shared.utils.setObserver
+import `in`.bitotsav.shared.ui.UiUtilViewModel
+import `in`.bitotsav.shared.utils.*
 import `in`.bitotsav.teams.championship.data.ChampionshipTeam
 import android.os.Bundle
 import android.util.TypedValue
@@ -16,12 +14,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import org.koin.androidx.viewmodel.ext.sharedViewModel
 import org.koin.androidx.viewmodel.ext.viewModel
 
 
-class LeaderboardFragment : BaseFragment() {
+class LeaderboardFragment : Fragment() {
 
     private val leaderboardViewModel by viewModel<LeaderboardViewModel>()
+    private val uiUtilViewModel by sharedViewModel<UiUtilViewModel>()
+
 
     private val adapter by lazy {
         SimpleRecyclerViewAdapter<ChampionshipTeam>(
@@ -41,6 +43,8 @@ class LeaderboardFragment : BaseFragment() {
         )
     }
 
+    private lateinit var binding: FragmentLeaderboardBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -49,7 +53,7 @@ class LeaderboardFragment : BaseFragment() {
             activity?.theme?.resolveAttribute(R.attr.colorPrimary, this, true)
         }.data
 
-        return FragmentLeaderboardBinding.inflate(inflater, container, false)
+        binding = FragmentLeaderboardBinding.inflate(inflater, container, false)
             .apply {
                 viewModel = leaderboardViewModel
                 teams.adapter = adapter.apply {
@@ -58,18 +62,26 @@ class LeaderboardFragment : BaseFragment() {
                 lifecycleOwner = viewLifecycleOwner
                 setObservers()
                 searchFab.setOnClickListener {
-                    teamSearch.addTextChangedListener {
-                        applyFilter(it.toString())
-                    }
+                    teamSearch.visibility = View.VISIBLE
+                    searchFab.hide()
+                }
+                teamSearch.addTextChangedListener {
+                    applyFilter(it.toString())
                 }
             }
-            .root
+        return binding.root
     }
 
     private fun applyFilter(query: String) {
+        query.isNullOrEmpty().onTrue {
+
+        }
         adapter.submitList(
-            leaderboardViewModel.teams.value?.filter {
-                it.name.contains(query, ignoreCase = true)
+            when (query.length) {
+                0 -> leaderboardViewModel.teams.value
+                else -> leaderboardViewModel.teams.value?.filter {
+                    it.name.contains(query, ignoreCase = true)
+                }
             }
         )
     }
@@ -81,8 +93,20 @@ class LeaderboardFragment : BaseFragment() {
                 notifyDataSetChanged()
             }
         }
+        uiUtilViewModel.backPressed.setObserver(viewLifecycleOwner) { backPressed ->
+            backPressed.onTrue {
+                (binding.teamSearch.visibility == View.VISIBLE)
+                    .onTrue {
+                        binding.teamSearch.setText("")
+                        binding.teamSearch.visibility = View.GONE
+                        binding.searchFab.show()
+                    }
+                    .onFalse {
+                        findNavController().navigateUp()
+                    }
+            }
+        }
     }
-
 
     private fun getTeamItemListener(teamItem: ChampionshipTeam) = View.OnClickListener {
     }
