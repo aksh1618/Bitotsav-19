@@ -5,6 +5,7 @@ import `in`.bitotsav.shared.ui.UiUtilViewModel
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
@@ -34,6 +35,10 @@ class HomeActivity : AppCompatActivity() {
         ORANGE(R.style.AppThemeOrange)
     }
 
+    companion object {
+        const val KEY_ROTATED = "rotated"
+    }
+
     private val uiUtilViewModel by viewModel<UiUtilViewModel>()
     private lateinit var binding: ActivityHomeBinding
     val primaryColor by lazy {
@@ -56,8 +61,10 @@ class HomeActivity : AppCompatActivity() {
         handlePlatformLimitations()
         setupBottomNavMenu()
 
-        // AppKillerManager
-        initAppKillerManager()
+        if (savedInstanceState?.getBoolean(KEY_ROTATED) != true) {
+            // AppKillerManager
+            initAppKillerManager()
+        }
     }
 
     private fun setupBottomNavMenu() {
@@ -77,7 +84,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initAppKillerManager() {
-//        TODO: Handle orientation change
         val runCount = get().koin.get<SharedPreferences>().getInt(RUN_COUNTER, 0)
         val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
         calendar.set(2019, 1, 19, 0, 0)
@@ -92,11 +98,20 @@ class HomeActivity : AppCompatActivity() {
                 startAppKillerManagerDialog(KillerManager.Actions.ACTION_POWERSAVING)
             }
         } else if (runCount == 0) {
-            get().koin.get<SharedPreferences>().edit().putInt(RUN_COUNTER, runCount + 1).apply()
+            get().koin.get<SharedPreferences>().edit().putInt(RUN_COUNTER, runCount + 1)
+                .apply()
         }
     }
 
     private fun startAppKillerManagerDialog(actions: KillerManager.Actions) {
         DialogKillerManagerBuilder().setContext(this).setAction(actions).show()
+    }
+
+    override fun onSaveInstanceState(
+        outState: Bundle?,
+        outPersistentState: PersistableBundle?
+    ) {
+        outState?.putBoolean(KEY_ROTATED, true)
+        super.onSaveInstanceState(outState, outPersistentState)
     }
 }

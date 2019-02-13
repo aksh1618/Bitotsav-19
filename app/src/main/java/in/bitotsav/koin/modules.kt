@@ -16,6 +16,7 @@ import `in`.bitotsav.profile.ui.RegistrationViewModel
 import `in`.bitotsav.shared.ui.UiUtilViewModel
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
+import `in`.bitotsav.teams.ui.LeaderboardViewModel
 import android.content.Context.MODE_PRIVATE
 import androidx.room.Room
 import com.google.gson.ExclusionStrategy
@@ -90,4 +91,5 @@ val viewModelsModule = module {
     viewModel { FeedViewModel(get()) }
     viewModel { InfoViewModel() }
     viewModel { NightViewModel() }
+    viewModel { LeaderboardViewModel(get()) }
 }

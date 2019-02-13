@@ -39,7 +39,15 @@
         android:id="@+id/destFeed"
         android:name="in.bitotsav.feed.ui.FeedFragment"
         android:label="fragment_feed"
-        tools:layout="@layout/fragment_feed" />
+        tools:layout="@layout/fragment_feed" >
+        <action
+            android:id="@+id/action_destFeed_to_destLeaderboard"
+            app:destination="@id/destLeaderboard"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/slide_out_bottom" />
+    </fragment>
 
     <fragment
         android:id="@+id/destProfile"
@@ -162,5 +170,10 @@
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/slide_out_bottom" />
+    <fragment
+        android:id="@+id/destLeaderboard"
+        android:name="in.bitotsav.teams.ui.LeaderboardFragment"
+        android:label="fragment_leaderboard"
+        tools:layout="@layout/fragment_leaderboard" />
 
 </navigation>

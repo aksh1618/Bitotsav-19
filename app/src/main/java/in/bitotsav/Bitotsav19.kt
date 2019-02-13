@@ -6,9 +6,7 @@ import `in`.bitotsav.koin.retrofitModule
 import `in`.bitotsav.koin.sharedPrefsModule
 import `in`.bitotsav.koin.viewModelsModule
 import `in`.bitotsav.notification.utils.createNotificationChannels
-import `in`.bitotsav.shared.utils.getWork
-import `in`.bitotsav.shared.utils.scheduleWork
-import `in`.bitotsav.shared.utils.startReminderWork
+import `in`.bitotsav.shared.utils.*
 import `in`.bitotsav.shared.workers.*
 import android.app.Application
 import android.content.SharedPreferences
@@ -72,6 +70,10 @@ class Bitotsav19 : Application() {
         }
 
         get<EventRepository>().getEventsFromLocalJson()
+        scheduleUniqueWork<TeamWorker>(
+            workDataOf("type" to TeamWorkType.FETCH_ALL_TEAMS.name),
+            getWorkNameForTeamWorker(TeamWorkType.FETCH_ALL_TEAMS)
+        )
     }
 
     private fun checkAndScheduleReminderWork() {

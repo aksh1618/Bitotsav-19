@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Bitotsav \'19</string>
-    <string name="app_version">1.0.2</string>
+    <string name="app_version">1.1.0</string>
     <string name="app_url_play_store">https://play.google.com/store/apps/details?id=in.bitotsav</string>
 
     <!--Images Content Descriptions-->
@@ -344,10 +344,36 @@ SOFTWARE.
         ]]>
     </string>
 
+    <string name="info_about_credit7_name">Glide</string>
+    <string name="info_about_credit7_role">
+        <![CDATA[Copyright © Sam Judd
+        https://github.com/bumptech/glide
+
+        BSD, Part MIT & Apache 2.0 License
+
+        Full license: https://github.com/bumptech/glide/blob/master/LICENSE
+
+        ]]>
+    </string>
+
+    <string name="info_about_credit8_name">Android Image Slider</string>
+    <string name="info_about_credit8_role">
+        Copyright © 2019 smarteist
+        https://github.com/smarteist/android-image-slider
+    </string>
+
     <string name="login_privacy_policy"><u>Privacy Policy</u></string>
     <string name="login_privacy_policy_link">https://kutt.it/b19pp</string>
     <string name="login_terms_and_conditions"><u>Terms &amp; Conditions</u></string>
     <string name="login_terms_and_conditions_link">https://kutt.it/b19tnc</string>
+
+    <!-- Leaderboard -->
+    <string name="leaderboard_title">Leaderboard</string>
+    <string name="leaderboard_label_rank">Rank</string>
+    <string name="leaderboard_label_name">Team Name</string>
+    <string name="leaderboard_label_points">Points</string>
+    <string name="leaderboard_label_search">Search</string>
+
 
     <!-- Night -->
 
