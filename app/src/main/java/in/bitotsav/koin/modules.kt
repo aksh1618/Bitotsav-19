@@ -3,6 +3,7 @@ package `in`.bitotsav.koin
 import `in`.bitotsav.database.AppDatabase
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.events.ui.EventViewModel
+import `in`.bitotsav.events.ui.NightViewModel
 import `in`.bitotsav.events.ui.ScheduleViewModel
 import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.feed.ui.FeedViewModel
@@ -15,6 +16,7 @@ import `in`.bitotsav.profile.ui.RegistrationViewModel
 import `in`.bitotsav.shared.ui.UiUtilViewModel
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
+import `in`.bitotsav.teams.ui.LeaderboardViewModel
 import android.content.Context.MODE_PRIVATE
 import androidx.room.Room
 import com.google.gson.ExclusionStrategy
@@ -88,4 +90,6 @@ val viewModelsModule = module {
     viewModel { EventViewModel(get(), get()) }
     viewModel { FeedViewModel(get()) }
     viewModel { InfoViewModel() }
+    viewModel { NightViewModel() }
+    viewModel { LeaderboardViewModel(get()) }
 }

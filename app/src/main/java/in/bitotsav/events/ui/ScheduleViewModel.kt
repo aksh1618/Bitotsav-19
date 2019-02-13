@@ -2,6 +2,7 @@ package `in`.bitotsav.events.ui
 
 import `in`.bitotsav.events.data.Event
 import `in`.bitotsav.events.data.EventRepository
+import `in`.bitotsav.profile.utils.NonNullMutableLiveData
 import `in`.bitotsav.shared.ui.BaseViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -40,6 +41,7 @@ class ScheduleViewModel(
     private lateinit var allCategories: List<String>
     // TODO: Use switch map with double trigger for this
     val areFiltersActive = MutableLiveData<Boolean>()
+    val filterFabVisible = NonNullMutableLiveData(true)
 
     init {
         _showStarredOnly.value = false

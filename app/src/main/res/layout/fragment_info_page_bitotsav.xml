@@ -29,6 +29,9 @@
             android:paddingTop="8dp"
             android:paddingBottom="116dp">
 
+            <include android:id="@+id/gallery"
+                layout="@layout/include_gallery_slider"/>
+
             <include
                 android:id="@+id/bitotsav19"
                 layout="@layout/include_paragraph_with_title"

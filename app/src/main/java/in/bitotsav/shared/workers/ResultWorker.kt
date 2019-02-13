@@ -8,12 +8,15 @@ import `in`.bitotsav.notification.utils.getEventDetailPendingIntent
 import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.forEachParallel
+import `in`.bitotsav.shared.utils.getWorkNameForTeamWorker
+import `in`.bitotsav.shared.utils.scheduleUniqueWork
 import `in`.bitotsav.shared.workers.ResultWorkType.valueOf
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
 import android.content.Context
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import kotlinx.coroutines.runBlocking
 import org.koin.core.KoinComponent
 import org.koin.core.get
@@ -41,6 +44,10 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
                         ?: throw NonRetryableException("Event $eventId not found in DB")
                     fetchWinningTeamsByEvent(event)
                     checkAndHandleIfUsersTeam(event)
+                    scheduleUniqueWork<TeamWorker>(
+                        workDataOf("type" to TeamWorkType.FETCH_ALL_TEAMS.name),
+                        getWorkNameForTeamWorker(TeamWorkType.FETCH_ALL_TEAMS)
+                    )
                 }
                 ResultWorkType.WINNING_TEAMS -> {
                     val events = runBlocking { get<EventRepository>().getAllEvents() }

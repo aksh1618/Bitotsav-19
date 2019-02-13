@@ -4,11 +4,9 @@ import `in`.bitotsav.NavBitotsavDirections
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentFeedBinding
 import `in`.bitotsav.databinding.ItemFeedBinding
-import `in`.bitotsav.databinding.ItemRegistrationHistoryBinding
 import `in`.bitotsav.feed.data.Feed
 import `in`.bitotsav.shared.ui.SimpleRecyclerViewAdapter
 import `in`.bitotsav.shared.utils.executeAfter
-import `in`.bitotsav.shared.utils.getColorCompat
 import `in`.bitotsav.shared.utils.setObserver
 import `in`.bitotsav.shared.utils.shareText
 import android.os.Bundle
@@ -18,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.viewModel
 
 
@@ -58,6 +57,9 @@ class FeedFragment : Fragment() {
                 viewModel = feedViewModel
                 feed.adapter = adapter.apply {
                     submitList(feedViewModel.feed.value)
+                }
+                leaderboardFab.setOnClickListener {
+                    findNavController().navigate(R.id.action_destFeed_to_destLeaderboard)
                 }
                 lifecycleOwner = viewLifecycleOwner
                 setObservers()

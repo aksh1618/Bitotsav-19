@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="rank"
+            type="String" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="points"
+            type="String" />
+
+        <variable
+            name="color"
+            type="int" />
+
+        <variable
+            name="listener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple_circle"
+        android:onClick="@{listener}"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textColor="@{color}"
+            android:id="@+id/rankView"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="@dimen/list_margin_end"
+            android:paddingBottom="8dp"
+            android:text="@{rank}"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <TextView
+            android:textColor="@{color}"
+            android:id="@+id/nameView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="@dimen/list_margin_start"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@{name}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toStartOf="@+id/pointsView"
+            app:layout_constraintStart_toEndOf="@+id/rankView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Morphine" />
+
+        <TextView
+            android:textColor="@{color}"
+            android:id="@+id/pointsView"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:text="@{points}"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="400" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

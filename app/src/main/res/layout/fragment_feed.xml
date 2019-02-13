@@ -45,7 +45,6 @@
             android:layout_margin="@dimen/fab_margin"
             android:backgroundTint="@{viewModel.mColor}"
             android:src="@drawable/ic_trophy_white_24dp"
-            android:visibility="gone"
             app:layout_anchor="@+id/feed"
             app:layout_anchorGravity="end|bottom"
             tools:backgroundTint="?colorPrimary" />

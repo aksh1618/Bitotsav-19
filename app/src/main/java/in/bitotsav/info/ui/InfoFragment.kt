@@ -3,6 +3,8 @@ package `in`.bitotsav.info.ui
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentInfoBinding
 import `in`.bitotsav.info.ui.InfoPageFragment.InfoPage
+import `in`.bitotsav.shared.utils.onTrue
+import `in`.bitotsav.shared.utils.toast
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -66,7 +68,12 @@ class InfoFragment : Fragment() {
     private fun feedback() {
         context?.let {
             val ratingDialog = RatingDialog.Builder(it)
-                .icon(AppCompatResources.getDrawable(it, `in`.bitotsav.R.drawable.ic_bitotsav_red_24dp)!!)
+                .icon(
+                    AppCompatResources.getDrawable(
+                        it,
+                        `in`.bitotsav.R.drawable.ic_bitotsav_red_24dp
+                    )!!
+                )
                 .threshold(4f)
                 .title("How was your experience with us?")
                 .positiveButtonText("Not Now")
@@ -78,6 +85,11 @@ class InfoFragment : Fragment() {
                 .formSubmitText("Submit")
                 .formCancelText("Cancel")
                 .playstoreUrl(getString(R.string.app_url_play_store))
+                .onRatingChanged { rating, thresholdCleared ->
+                    thresholdCleared.onTrue {
+                        context?.let { "Please leave a review!".toast(it) }
+                    }
+                }
                 .onRatingBarFormSumbit { feedback ->
                     val intent = Intent(Intent.ACTION_SENDTO).apply {
                         data = Uri.parse("mailto:")

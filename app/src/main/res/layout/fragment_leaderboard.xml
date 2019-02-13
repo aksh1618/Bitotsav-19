@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".teams.ui.LeaderboardFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="in.bitotsav.teams.ui.LeaderboardViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/appBar"
+            layout="@layout/include_app_bar"
+            app:color="@{@color/background}"
+            app:tabbed="@{false}"
+            app:title="@{@string/leaderboard_title}" />
+
+        <!-- FIXME: [WARN] Might break because of behavior string. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:orientation="vertical">
+
+            <include android:id="@+id/labels"
+                layout="@layout/item_team"
+                app:color="@{viewModel.mColor}"
+                app:rank="@{@string/leaderboard_label_rank}"
+                app:name="@{@string/leaderboard_label_name}"
+                app:points="@{@string/leaderboard_label_points}" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/teams"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="32dp"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbarDefaultDelayBeforeFade="10000"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_team" />
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/searchFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@{viewModel.mColor}"
+            android:src="@drawable/ic_search_outline_white_24dp"
+            app:layout_anchor="@+id/teams"
+            android:visibility="gone"
+            app:layout_anchorGravity="end|bottom"
+            tools:backgroundTint="?colorPrimary" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/teamSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body1"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:hint="@string/leaderboard_label_search"
+            android:background="?colorPrimary"
+            android:textColorHint="@color/colorWhite"
+            android:visibility="gone"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="2dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

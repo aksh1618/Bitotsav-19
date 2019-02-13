@@ -5,13 +5,14 @@ import `in`.bitotsav.databinding.FragmentInfoPageAboutBinding
 import `in`.bitotsav.databinding.FragmentInfoPageBitotsavBinding
 import `in`.bitotsav.databinding.FragmentInfoPageContactBinding
 import `in`.bitotsav.info.ui.InfoPageFragment.InfoPage.*
-import `in`.bitotsav.shared.utils.getColorCompat
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.smarteist.autoimageslider.*
 import org.koin.androidx.viewmodel.ext.sharedViewModel
 
 class InfoPageFragment : Fragment() {
@@ -46,7 +47,16 @@ class InfoPageFragment : Fragment() {
 
             BITOTSAV -> FragmentInfoPageBitotsavBinding
                 .inflate(inflater, container, false)
-                .apply { color = infoViewModel.mColor }
+                .apply {
+                    color = infoViewModel.mColor
+                    gallery.gallerySlider.setPagerIndicatorVisibility(false)
+                    gallery.gallerySlider.apply {
+                        setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION)
+                        scrollTimeInSec = 1
+                        setIndicatorAnimation(IndicatorAnimations.THIN_WORM)
+                        addSliderViews(this)
+                    }
+                }
 
             CONTACT -> FragmentInfoPageContactBinding
                 .inflate(inflater, container, false)
@@ -59,10 +69,43 @@ class InfoPageFragment : Fragment() {
         }.root
     }
 
+    private fun addSliderViews(sliderLayout: SliderLayout) {
+        galleryDrawables.shuffled().forEach {
+            DefaultSliderView(context).apply {
+                setImageDrawable(it)
+                setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+            }.let { sliderLayout.addSliderView(it) }
+        }
+    }
+
     enum class InfoPage(val title: Int) {
         BITOTSAV(R.string.info_title_bitotsav_bit),
         CONTACT(R.string.info_title_contact),
         ABOUT(R.string.info_title_about_app)
     }
+
+    val galleryDrawables = listOf(
+        R.drawable.img_gallery1,
+        R.drawable.img_gallery2,
+        R.drawable.img_gallery3,
+        R.drawable.img_gallery4,
+//        R.drawable.img_gallery5,
+        R.drawable.img_gallery6,
+        R.drawable.img_gallery7,
+//        R.drawable.img_gallery8,
+        R.drawable.img_gallery9,
+        R.drawable.img_gallery10,
+        R.drawable.img_gallery11,
+//        R.drawable.img_gallery12,
+        R.drawable.img_gallery13,
+        R.drawable.img_gallery14,
+        R.drawable.img_gallery15,
+        R.drawable.img_gallery16,
+        R.drawable.img_gallery17,
+        R.drawable.img_gallery18,
+        R.drawable.img_gallery19,
+        R.drawable.img_gallery20,
+        R.drawable.img_gallery21
+    )
 
 }

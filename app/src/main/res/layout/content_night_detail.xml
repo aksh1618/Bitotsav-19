@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="in.bitotsav.events.ui.NightDetailFragment"
+    tools:showIn="@layout/fragment_night_detail">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="night"
+            type="in.bitotsav.events.data.Night" />
+
+        <variable
+            name="color"
+            type="int" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ImageView
+            android:id="@+id/artistPoster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:src="@drawable/img_night_artist_band1_large"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{night.type}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Heading2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/artistPoster"
+            tools:text="EDM Night" />
+
+        <!-- Date and Venue -->
+
+        <TextView
+            android:id="@+id/time_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{@string/night_format_time(night.timeString, night.day)}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_text_view"
+            tools:text="14:00 (Day 2)" />
+
+        <TextView
+            android:id="@+id/venue_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{night.venue}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time_text_view"
+            tools:text="Bitotsav Ground" />
+
+        <TextView
+            android:id="@+id/description_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_margin_start"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:autoLink="all"
+            android:linksClickable="true"
+            android:text="@{night.description}"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body3"
+            android:textColorLink="@color/textColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/venue_text_view"
+            tools:text="This is gonna be so lit !!" />
+
+        <View
+            android:id="@+id/fab_padding_view"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_text_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

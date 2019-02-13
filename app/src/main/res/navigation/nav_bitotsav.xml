@@ -25,13 +25,29 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/slide_out_bottom" />
 
+        <action
+            android:id="@+id/showNightDetail"
+            app:destination="@+id/destNightDetail"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/slide_out_bottom" />
+
     </fragment>
 
     <fragment
         android:id="@+id/destFeed"
         android:name="in.bitotsav.feed.ui.FeedFragment"
         android:label="fragment_feed"
-        tools:layout="@layout/fragment_feed" />
+        tools:layout="@layout/fragment_feed" >
+        <action
+            android:id="@+id/action_destFeed_to_destLeaderboard"
+            app:destination="@id/destLeaderboard"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/slide_out_bottom" />
+    </fragment>
 
     <fragment
         android:id="@+id/destProfile"
@@ -118,6 +134,18 @@
     </fragment>
 
     <fragment
+        android:id="@+id/destNightDetail"
+        android:name="in.bitotsav.events.ui.NightDetailFragment"
+        android:label="fragment_night_detail"
+        tools:layout="@layout/fragment_night_detail">
+
+        <argument
+            android:name="nightId"
+            app:argType="integer" />
+
+    </fragment>
+
+    <fragment
         android:id="@+id/destEventRegistration"
         android:name="in.bitotsav.events.ui.EventRegistrationFragment"
         android:label="Event Registration"
@@ -133,7 +161,7 @@
     <fragment
         android:id="@+id/destChampionshipRegistration"
         android:name="in.bitotsav.profile.ui.ChampionshipRegistrationFragment"
-        android:label=" Championship Registration" />
+        android:label="fragment_championship_registration" />
 
     <action
         android:id="@+id/action_global_destEventDetail"
@@ -142,5 +170,10 @@
         app:exitAnim="@anim/nav_default_exit_anim"
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/slide_out_bottom" />
+    <fragment
+        android:id="@+id/destLeaderboard"
+        android:name="in.bitotsav.teams.ui.LeaderboardFragment"
+        android:label="fragment_leaderboard"
+        tools:layout="@layout/fragment_leaderboard" />
 
 </navigation>
