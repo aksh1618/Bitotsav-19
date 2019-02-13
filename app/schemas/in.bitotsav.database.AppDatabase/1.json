@@ -2,21 +2,15 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8c3eaf1b01adab6eecd0f584397b20ac",
+    "identityHash": "208115ed2d445164ae5b4467d28c9560",
     "entities": [
       {
         "tableName": "Event",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`timestamp` INTEGER NOT NULL, `isStarred` INTEGER NOT NULL, `id` INTEGER NOT NULL, `name` TEXT NOT NULL, `venue` TEXT NOT NULL, `timeString` TEXT NOT NULL, `day` INTEGER NOT NULL, `description` TEXT NOT NULL, `rules` TEXT NOT NULL, `contact1Name` TEXT NOT NULL, `contact1Number` INTEGER NOT NULL, `contact2Name` TEXT, `contact2Number` INTEGER, `points1` INTEGER NOT NULL, `points2` INTEGER NOT NULL, `points3` INTEGER NOT NULL, `type` TEXT NOT NULL, `minimumMembers` INTEGER NOT NULL, `maximumMembers` INTEGER NOT NULL, `category` TEXT NOT NULL, `status` TEXT NOT NULL, `prize1` INTEGER NOT NULL, `prize2` INTEGER NOT NULL, `prize3` INTEGER NOT NULL, `position1` TEXT, `position2` TEXT, `position3` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`timestamp` INTEGER NOT NULL, `id` INTEGER NOT NULL, `name` TEXT NOT NULL, `venue` TEXT NOT NULL, `timeString` TEXT NOT NULL, `day` INTEGER NOT NULL, `description` TEXT NOT NULL, `rules` TEXT NOT NULL, `contact1Name` TEXT NOT NULL, `contact1Number` INTEGER NOT NULL, `contact2Name` TEXT, `contact2Number` INTEGER, `points1` INTEGER NOT NULL, `points2` INTEGER NOT NULL, `points3` INTEGER NOT NULL, `type` TEXT NOT NULL, `minimumMembers` INTEGER NOT NULL, `maximumMembers` INTEGER NOT NULL, `category` TEXT NOT NULL, `status` TEXT NOT NULL, `prize1` INTEGER NOT NULL, `prize2` INTEGER NOT NULL, `prize3` INTEGER NOT NULL, `position1` TEXT, `position2` TEXT, `position3` TEXT, `isStarred` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "timestamp",
             "columnName": "timestamp",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isStarred",
-            "columnName": "isStarred",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -169,6 +163,12 @@
             "columnName": "position3",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "isStarred",
+            "columnName": "isStarred",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -244,14 +244,8 @@
       },
       {
         "tableName": "ChampionshipTeam",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rank` INTEGER NOT NULL, `name` TEXT NOT NULL, `members` TEXT NOT NULL, `totalScore` INTEGER NOT NULL, PRIMARY KEY(`name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `members` TEXT NOT NULL, `totalScore` INTEGER NOT NULL, `rank` INTEGER NOT NULL, PRIMARY KEY(`name`))",
         "fields": [
-          {
-            "fieldPath": "rank",
-            "columnName": "rank",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "name",
             "columnName": "name",
@@ -267,6 +261,12 @@
           {
             "fieldPath": "totalScore",
             "columnName": "totalScore",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rank",
+            "columnName": "rank",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -339,7 +339,7 @@
       },
       {
         "tableName": "User",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`score` INTEGER NOT NULL, `teams` TEXT NOT NULL, `members` TEXT NOT NULL, `id` TEXT NOT NULL, `name` TEXT NOT NULL, `email` TEXT NOT NULL, `championshipTeam` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`score` INTEGER NOT NULL, `teams` TEXT NOT NULL, `members` TEXT NOT NULL, `id` TEXT NOT NULL, `name` TEXT NOT NULL, `email` TEXT NOT NULL, `championshipTeam` TEXT, `day1` INTEGER NOT NULL, `day2` INTEGER NOT NULL, `day3` INTEGER NOT NULL, `merchandise` INTEGER NOT NULL, `accommodation` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "score",
@@ -382,6 +382,36 @@
             "columnName": "championshipTeam",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "day1",
+            "columnName": "day1",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day2",
+            "columnName": "day2",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "day3",
+            "columnName": "day3",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "merchandise",
+            "columnName": "merchandise",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "accommodation",
+            "columnName": "accommodation",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -397,7 +427,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"8c3eaf1b01adab6eecd0f584397b20ac\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"208115ed2d445164ae5b4467d28c9560\")"
     ]
   }
 }

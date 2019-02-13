@@ -17,7 +17,7 @@ import androidx.room.TypeConverters
 
 @Database(
     entities = [Event::class, Feed::class, ChampionshipTeam::class, NonChampionshipTeam::class, User::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(MapConverter::class)
 abstract class AppDatabase : RoomDatabase() {
