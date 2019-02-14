@@ -12,8 +12,8 @@ android {
         applicationId "in.bitotsav"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.1.0"
+        versionCode 5
+        versionName "1.2.0"
         kapt {
             arguments {
                 arg("room.schemaLocation", "$projectDir/schemas".toString())
