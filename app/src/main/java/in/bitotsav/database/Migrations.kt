@@ -10,6 +10,7 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
         database.execSQL("ALTER TABLE User ADD COLUMN day3 INTEGER NOT NULL DEFAULT 0")
         database.execSQL("ALTER TABLE User ADD COLUMN merchandise INTEGER NOT NULL DEFAULT 0")
         database.execSQL("ALTER TABLE User ADD COLUMN accommodation INTEGER NOT NULL DEFAULT 0")
+        database.execSQL("ALTER TABLE User ADD COLUMN eventMembers TEXT NOT NULL DEFAULT '{}'")
     }
 
 }
