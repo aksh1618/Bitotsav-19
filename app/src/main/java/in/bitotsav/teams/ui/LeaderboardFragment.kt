@@ -7,6 +7,7 @@ import `in`.bitotsav.shared.ui.SimpleRecyclerViewAdapter
 import `in`.bitotsav.shared.ui.UiUtilViewModel
 import `in`.bitotsav.shared.utils.*
 import `in`.bitotsav.teams.championship.data.ChampionshipTeam
+import `in`.bitotsav.teams.data.BasicTeam
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -73,9 +74,6 @@ class LeaderboardFragment : Fragment() {
     }
 
     private fun applyFilter(query: String) {
-        query.isNullOrEmpty().onTrue {
-
-        }
         adapter.submitList(
             when (query.length) {
                 0 -> leaderboardViewModel.teams.value
@@ -108,7 +106,10 @@ class LeaderboardFragment : Fragment() {
         }
     }
 
-    private fun getTeamItemListener(teamItem: ChampionshipTeam) = View.OnClickListener {
-    }
+    private fun getTeamItemListener(teamItem: ChampionshipTeam) =
+        View.OnClickListener {
+            BasicTeam(teamItem.name, teamItem.members.values.toTypedArray())
+                .showDialog(it.context)
+        }
 
 }

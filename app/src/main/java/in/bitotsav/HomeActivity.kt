@@ -1,9 +1,7 @@
 package `in`.bitotsav
 
 import `in`.bitotsav.databinding.ActivityHomeBinding
-import `in`.bitotsav.shared.ui.BaseFragment
 import `in`.bitotsav.shared.ui.UiUtilViewModel
-import `in`.bitotsav.shared.utils.onTrue
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -15,10 +13,7 @@ import android.view.WindowManager
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavHost
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.thelittlefireman.appkillermanager.managers.KillerManager

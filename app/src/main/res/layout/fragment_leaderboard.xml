@@ -44,7 +44,7 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:paddingTop="8dp"
-                android:paddingBottom="32dp"
+                android:paddingBottom="92dp"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:scrollbarDefaultDelayBeforeFade="10000"
                 android:scrollbars="vertical"
