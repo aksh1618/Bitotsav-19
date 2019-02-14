@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Paint
 import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
@@ -147,5 +148,19 @@ fun setBulletText(textView: TextView, string: String?, bulletColor: Int) {
             )
         }
         textView.text = spannableStringBuilder
+    }
+}
+
+@BindingAdapter("infoOnClick")
+fun showInfoOnClick(textView: TextView, info: String) {
+    textView.setOnClickListener {
+        info.showInfoDialog(textView.context)
+    }
+}
+
+@BindingAdapter("underlined")
+fun setUnderlined(textView: TextView, underline: Boolean) {
+    if (underline) {
+        textView.paintFlags = textView.paintFlags or Paint.UNDERLINE_TEXT_FLAG
     }
 }

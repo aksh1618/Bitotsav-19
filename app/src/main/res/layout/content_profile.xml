@@ -106,6 +106,156 @@
             app:layout_constraintTop_toTopOf="@+id/registeredEmailLabel"
             tools:text="aksh1618.d@gmail.com" />
 
+        <TextView
+            android:id="@+id/night1Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/profile_label_night1"
+            android:textColor="@{viewModel.mColor}"
+            app:layout_constraintEnd_toStartOf="@+id/night1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registeredEmailLabel"
+            tools:textColor="?colorPrimary" />
+
+        <TextView
+            android:id="@+id/night1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            app:infoOnClick="@{@string/profile_info_nights}"
+            android:text="@{user.day1 ? @string/profile_verification_done : @string/profile_verification_pending}"
+            app:underlined="@{user.day1 ? false : true}"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/night1Label"
+            app:layout_constraintTop_toTopOf="@+id/night1Label"
+            tools:text="Pending: Pay/Verify" />
+
+        <TextView
+            android:id="@+id/night2Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/profile_label_night2"
+            android:textColor="@{viewModel.mColor}"
+            app:layout_constraintEnd_toStartOf="@+id/night2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/night1Label"
+            tools:textColor="?colorPrimary" />
+
+        <TextView
+            android:id="@+id/night2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            app:infoOnClick="@{@string/profile_info_nights}"
+            android:text="@{user.day2 ? @string/profile_verification_done : @string/profile_verification_pending}"
+            app:underlined="@{user.day2 ? false : true}"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/night2Label"
+            app:layout_constraintTop_toTopOf="@+id/night2Label"
+            tools:text="Pending: Pay/Verify" />
+
+        <TextView
+            android:id="@+id/night3Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/profile_label_night3"
+            android:textColor="@{viewModel.mColor}"
+            app:layout_constraintEnd_toStartOf="@+id/night"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/night2Label"
+            tools:textColor="?colorPrimary" />
+
+        <TextView
+            android:id="@+id/night"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            app:infoOnClick="@{@string/profile_info_nights}"
+            android:text="@{user.day3 ? @string/profile_verification_done : @string/profile_verification_pending}"
+            app:underlined="@{user.day3 ? false : true}"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/night3Label"
+            app:layout_constraintTop_toTopOf="@+id/night3Label"
+            tools:text="Pending: Pay/Verify" />
+
+        <TextView
+            android:id="@+id/merchandiseLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/profile_label_merchandise"
+            android:textColor="@{viewModel.mColor}"
+            app:layout_constraintEnd_toStartOf="@+id/merchandise"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/night3Label"
+            tools:textColor="?colorPrimary" />
+
+        <TextView
+            android:id="@+id/merchandise"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            app:infoOnClick="@{@string/profile_info_merchandise}"
+            android:text="@{user.merchandise ? @string/profile_verification_done : @string/profile_verification_pending}"
+            app:underlined="@{user.merchandise ? false : true}"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/merchandiseLabel"
+            app:layout_constraintTop_toTopOf="@+id/merchandiseLabel"
+            tools:text="Pending: Pay/Verify" />
+
+        <TextView
+            android:id="@+id/accommodationLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/profile_label_accommodation"
+            android:textColor="@{viewModel.mColor}"
+            app:layout_constraintEnd_toStartOf="@+id/accommodation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/merchandiseLabel"
+            tools:textColor="?colorPrimary" />
+
+        <TextView
+            android:id="@+id/accommodation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            app:infoOnClick="@{@string/profile_info_accommodation}"
+            android:text="@{user.accommodation ? @string/profile_verification_done : @string/profile_verification_pending}"
+            app:underlined="@{user.accommodation ? false : true}"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.Bitotsav.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/accommodationLabel"
+            app:layout_constraintTop_toTopOf="@+id/accommodationLabel"
+            tools:text="Pending: Pay/Verify" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/register"
             style="@style/TextAppearance.MaterialComponents.Body1"
@@ -144,7 +294,7 @@
             android:textColor="@{viewModel.mColor}"
             app:layout_constraintEnd_toStartOf="@+id/championshipTeam"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registeredEmailLabel"
+            app:layout_constraintTop_toBottomOf="@+id/accommodationLabel"
             tools:textColor="?colorPrimary" />
 
         <TextView
@@ -153,6 +303,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
+            app:underlined="@{true}"
             android:gravity="end"
             android:text="@{user.championshipTeam}"
             android:textAlignment="viewEnd"

@@ -17,6 +17,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
@@ -102,4 +104,26 @@ fun Context.onConfirmation(action: String, block: () -> Unit) {
         }
         .create()
         .show()
+}
+
+fun String.showInfoDialog(context: Context) {
+    AlertDialog.Builder(context)
+        .setMessage(this)
+        .setPositiveButton("OK", null)
+        .setNeutralButton("Help") { _, _ ->
+            "Contact out team (Info -> Contact Us)".toast(context)
+        }
+        .create()
+        .show()
+}
+
+fun RecyclerView.setupWithFab(fab: FloatingActionButton) {
+    addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            when {
+                dy > 0 -> fab.hide()
+                else -> fab.show()
+            }
+        }
+    })
 }
