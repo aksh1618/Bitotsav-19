@@ -5,13 +5,13 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Paint
 import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.text.style.BulletSpan
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.AutoCompleteTextView
@@ -85,13 +85,12 @@ fun setCenterInLayout(view: TextView, centerInLayout: Boolean) {
 }
 
 @BindingAdapter("backgroundTint")
-fun setBackgroundTint(button: MaterialButton, color: Int) {
+fun setBackgroundTint(button: View, color: Int) {
     button.backgroundTintList = ColorStateList.valueOf(color)
 }
 
 @BindingAdapter("annotatedText")
 fun setAnnotatedText(textView: TextView, stringRes: Int) {
-    Log.d("BindingAdapters", textView.context.getText(stringRes).toString())
     textView.text = SpannableString(textView.context.getText(stringRes)).getAlignedText()
 }
 
@@ -149,5 +148,19 @@ fun setBulletText(textView: TextView, string: String?, bulletColor: Int) {
             )
         }
         textView.text = spannableStringBuilder
+    }
+}
+
+@BindingAdapter("infoOnClick")
+fun showInfoOnClick(textView: TextView, info: String) {
+    textView.setOnClickListener {
+        info.showInfoDialog(textView.context)
+    }
+}
+
+@BindingAdapter("underlined")
+fun setUnderlined(textView: TextView, underline: Boolean) {
+    if (underline) {
+        textView.paintFlags = textView.paintFlags or Paint.UNDERLINE_TEXT_FLAG
     }
 }

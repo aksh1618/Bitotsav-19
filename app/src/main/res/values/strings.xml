@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Bitotsav \'19</string>
-    <string name="app_version">1.1.0</string>
+    <string name="app_version">1.2.0</string>
     <string name="app_url_play_store">https://play.google.com/store/apps/details?id=in.bitotsav</string>
 
     <!--Images Content Descriptions-->
@@ -102,10 +102,28 @@
     <string name="profile_label_bitotsav_credentials">Your Bitotsav Details</string>
     <string name="profile_label_bitotsav_id">Bitotsav ID</string>
     <string name="profile_label_email">Registered Email</string>
+    <!-- TODO: @ashank Verify strings -->
+    <string name="profile_label_night1">Night 1</string>
+    <string name="profile_label_night2">Night 2</string>
+    <string name="profile_label_night3">Night 3</string>
+    <string name="profile_info_nights">
+        Students of BIT Mesra: Visit 192.168.101.17:8080 from local network to verify.\n\n
+        Others: Collect your night passes from the info desk.
+    </string>
+    <string name="profile_label_merchandise">Merchandise</string>
+    <string name="profile_info_merchandise">
+        Pay for and collect merchandise at the info desk.
+    </string>
+    <string name="profile_label_accommodation">Accommodation</string>
+    <string name="profile_info_accommodation">
+        Report at info desk to get accommodation details.
+    </string>
+    <string name="profile_verification_done">Confirmed</string>
+    <string name="profile_verification_pending"><u>Pending: Pay/Verify</u></string>
     <string name="profile_label_register">Register for Championship</string>
     <string name="profile_label_championship_team">Championship Team</string>
     <string name="profile_label_championship_score">Championship Score</string>
-    <string name="profile_label_registrations">Registrations</string>
+    <string name="profile_label_registrations">Event Registrations</string>
     <string name="profile_label_logout">Logout</string>
     <string name="profile_format_registration_message">
         Welcome to the Championship, %s 🎉

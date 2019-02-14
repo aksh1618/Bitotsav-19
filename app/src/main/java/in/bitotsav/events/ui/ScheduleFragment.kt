@@ -3,6 +3,7 @@ package `in`.bitotsav.events.ui
 import `in`.bitotsav.R
 import `in`.bitotsav.databinding.FragmentScheduleBinding
 import `in`.bitotsav.shared.ui.UiUtilViewModel
+import `in`.bitotsav.shared.utils.onTrue
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -32,6 +33,7 @@ class ScheduleFragment : Fragment() {
     private var toast: Toast? = null
 
     private lateinit var sheetBehavior: BottomSheetBehavior<NestedScrollView>
+    private lateinit var binding: FragmentScheduleBinding
     private val filterAdapter by lazy { ScheduleFilterAdapter(scheduleViewModel) }
 
     // TODO: Get colors from resources
@@ -55,7 +57,7 @@ class ScheduleFragment : Fragment() {
             activity?.theme?.resolveAttribute(R.attr.colorPrimary, this, true)
         }.data
 
-        return FragmentScheduleBinding.inflate(inflater, container, false)
+        binding = FragmentScheduleBinding.inflate(inflater, container, false)
             // TODO: Putting everything from here on in onActivityCreated may increase performance.
             .apply {
                 lifecycleOwner = this@ScheduleFragment
@@ -78,7 +80,15 @@ class ScheduleFragment : Fragment() {
                 appBar.tabs.setupWithViewPager(dayPager)
                 setObservers()
             }
-            .root
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // To prevent hidden fab when user navigates away from nights and comes back
+        (binding.dayPager.currentItem < DAYS).onTrue {
+            binding.filterFab.show()
+        }
     }
 
     private fun setObservers() {

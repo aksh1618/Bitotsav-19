@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "208115ed2d445164ae5b4467d28c9560",
+    "version": 2,
+    "identityHash": "18015bcc590b900adadea3be513f3c48",
     "entities": [
       {
         "tableName": "Event",
@@ -339,7 +339,7 @@
       },
       {
         "tableName": "User",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`score` INTEGER NOT NULL, `teams` TEXT NOT NULL, `members` TEXT NOT NULL, `id` TEXT NOT NULL, `name` TEXT NOT NULL, `email` TEXT NOT NULL, `championshipTeam` TEXT, `day1` INTEGER NOT NULL, `day2` INTEGER NOT NULL, `day3` INTEGER NOT NULL, `merchandise` INTEGER NOT NULL, `accommodation` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`score` INTEGER NOT NULL, `teams` TEXT NOT NULL, `members` TEXT NOT NULL, `eventMembers` TEXT NOT NULL, `id` TEXT NOT NULL, `name` TEXT NOT NULL, `email` TEXT NOT NULL, `championshipTeam` TEXT, `day1` INTEGER NOT NULL, `day2` INTEGER NOT NULL, `day3` INTEGER NOT NULL, `merchandise` INTEGER NOT NULL, `accommodation` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "score",
@@ -356,6 +356,12 @@
           {
             "fieldPath": "members",
             "columnName": "members",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "eventMembers",
+            "columnName": "eventMembers",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -427,7 +433,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"208115ed2d445164ae5b4467d28c9560\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"18015bcc590b900adadea3be513f3c48\")"
     ]
   }
 }

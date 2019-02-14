@@ -6,7 +6,10 @@ import `in`.bitotsav.koin.retrofitModule
 import `in`.bitotsav.koin.sharedPrefsModule
 import `in`.bitotsav.koin.viewModelsModule
 import `in`.bitotsav.notification.utils.createNotificationChannels
-import `in`.bitotsav.shared.utils.*
+import `in`.bitotsav.shared.utils.getWork
+import `in`.bitotsav.shared.utils.getWorkNameForTeamWorker
+import `in`.bitotsav.shared.utils.scheduleUniqueWork
+import `in`.bitotsav.shared.utils.startReminderWork
 import `in`.bitotsav.shared.workers.*
 import android.app.Application
 import android.content.SharedPreferences
@@ -57,10 +60,10 @@ class Bitotsav19 : Application() {
             getWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
         val winningTeamsWork =
             getWork<ResultWorker>(workDataOf("type" to ResultWorkType.WINNING_TEAMS.name))
-        WorkManager.getInstance().beginWith(eventWork).then(winningTeamsWork).enqueue()
-        scheduleWork<FeedWorker>(
+        val feedWork = getWork<FeedWorker>(
             workDataOf("type" to FeedWorkType.FETCH_FEEDS.name)
         )
+        WorkManager.getInstance().beginWith(eventWork).then(winningTeamsWork).then(feedWork).enqueue()
     }
 
     // Place code which needs to run on first run only here

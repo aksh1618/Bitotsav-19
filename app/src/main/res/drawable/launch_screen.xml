@@ -6,7 +6,7 @@
             android:gravity="fill"/>
     </item>
     <item>
-        <bitmap android:src="@drawable/bitotsav_official_logo"
+        <bitmap android:src="@drawable/img_bitotsav_final_logo"
             android:gravity="center"/>
     </item>
 </layer-list>

@@ -9,13 +9,23 @@ import `in`.bitotsav.events.data.Night
 import `in`.bitotsav.shared.ui.SimpleRecyclerViewAdapter
 import `in`.bitotsav.shared.utils.GlideApp
 import `in`.bitotsav.shared.utils.executeAfter
+import `in`.bitotsav.shared.utils.getColorCompat
 import `in`.bitotsav.shared.utils.setObserver
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Shader
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.ScaleDrawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
+import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.palette.graphics.Palette
@@ -146,8 +156,24 @@ class ScheduleDayFragment : Fragment() {
                 ): Boolean {
                     resource?.let { bitmap ->
                         // nightItem.bgColor.value =
-                        binding.color =
-                            Palette.from(bitmap).generate().getDarkVibrantColor(Color.RED)
+                        val darkVibrantColor = Palette
+                            .from(bitmap)
+                            .generate()
+                            .getDarkVibrantColor(Color.RED)
+                        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
+                            binding.gradient.background =
+                                ScaleDrawable(
+                                    GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                                        intArrayOf(darkVibrantColor, darkVibrantColor, Color.TRANSPARENT)
+                                    ),
+                                    Gravity.START,
+                                    1f,
+                                    0f
+                                ).apply { level = 9900 }
+                        } else {
+                            binding.color =
+                                Palette.from(bitmap).generate().getDarkVibrantColor(Color.RED)
+                        }
                     }
                     return false
                 }
