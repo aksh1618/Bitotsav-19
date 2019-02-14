@@ -8,8 +8,9 @@ import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.profile.data.RegistrationHistoryItem
 import `in`.bitotsav.shared.ui.SimpleRecyclerViewAdapter
 import `in`.bitotsav.shared.utils.executeAfter
-import `in`.bitotsav.shared.utils.getColorCompat
 import `in`.bitotsav.shared.utils.setObserver
+import `in`.bitotsav.teams.data.BasicTeam
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -39,6 +40,7 @@ class ProfileFragment : Fragment() {
                     this.item = registrationHistoryItem
                     this.color = profileViewModel.mColor
                     this.listener = getHistoryEventClickListener(registrationHistoryItem)
+                    this.teamListener = getHistoryTeamClickListener(registrationHistoryItem)
                     lifecycleOwner = this@ProfileFragment
                 }
             }
@@ -48,10 +50,6 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-
-//        context?.let {
-//            profileViewModel.mColor = it.getColorCompat(R.color.colorRed)
-//        }
 
         profileViewModel.mColor = TypedValue().apply {
             activity?.theme?.resolveAttribute(R.attr.colorPrimary, this, true)
@@ -98,6 +96,16 @@ class ProfileFragment : Fragment() {
                 ProfileFragmentDirections.registerForChampionship()
             )
         }
+        binding.content.championshipTeam.setOnClickListener {
+            binding.content.user?.let { user ->
+                BasicTeam(
+                    user.championshipTeam ?: "",
+                    user.getChampionshipTeamMembers().map {
+                        "${it.name}\n${it.bitotsavId} • ${it.email}"
+                    }.toTypedArray()
+                ).showDialog(it.context)
+            }
+        }
     }
 
     private fun getHistoryEventClickListener(registrationHistoryItem: RegistrationHistoryItem) =
@@ -106,6 +114,14 @@ class ProfileFragment : Fragment() {
                 NavBitotsavDirections.actionGlobalDestEventDetail(registrationHistoryItem.eventId)
             )
         }
+
+    private fun getHistoryTeamClickListener(registrationHistoryItem: RegistrationHistoryItem) =
+        View.OnClickListener {
+            with(registrationHistoryItem) {
+                BasicTeam(teamName, members.toTypedArray()).showDialog(it.context)
+            }
+        }
+
 
     override fun onDestroyView() {
         profileViewModel.waitingForLogout.value = false

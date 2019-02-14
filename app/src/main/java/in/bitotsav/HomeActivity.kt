@@ -46,6 +46,9 @@ class HomeActivity : AppCompatActivity() {
             theme?.resolveAttribute(R.attr.colorPrimary, this, true)
         }.data
     }
+    private val navController by lazy {
+        Navigation.findNavController(this, R.id.mainFragment)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(Theme.values().random().themeRes)
@@ -68,7 +71,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavMenu() {
-        val navController = Navigation.findNavController(this, R.id.mainFragment)
         findViewById<BottomNavigationView>(R.id.mainNavigation)
             .setupWithNavController(navController)
     }
@@ -114,4 +116,15 @@ class HomeActivity : AppCompatActivity() {
         outState?.putBoolean(KEY_ROTATED, true)
         super.onSaveInstanceState(outState, outPersistentState)
     }
+
+    override fun onBackPressed() {
+        uiUtilViewModel.backPressed.value = true
+        uiUtilViewModel.backPressed.value = false
+        if (navController.currentDestination?.label != "fragment_leaderboard") {
+            super.onBackPressed()
+        } else {
+            Log.d("HA", "Back press passed to leaderboard fragment")
+        }
+    }
+
 }

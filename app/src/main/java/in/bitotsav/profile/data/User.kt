@@ -68,7 +68,10 @@ data class User(
                     "2" -> "2nd"
                     "3" -> "3rd"
                     else -> "--"
-                }
+                },
+                members[eventId]?.map { (_, name) ->
+                    name
+                } ?: emptyList()
             )
         }
 }
