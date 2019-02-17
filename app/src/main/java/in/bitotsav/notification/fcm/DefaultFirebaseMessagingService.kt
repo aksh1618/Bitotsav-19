@@ -27,7 +27,8 @@ private enum class UpdateType {
     ANNOUNCEMENT,
     PM,
     ALL_EVENTS,
-    ALL_TEAMS
+    ALL_TEAMS,
+    CANCEL_ALL_WORK
 }
 
 class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponent {
@@ -71,6 +72,11 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
                     getWorkNameForTeamWorker(TeamWorkType.FETCH_ALL_TEAMS)
                 )
 //                scheduleWork<TeamWorker>(workDataOf("type" to TeamWorkType.FETCH_ALL_TEAMS.name))
+                return
+            }
+
+            if (UpdateType.CANCEL_ALL_WORK == updateType) {
+                WorkManager.getInstance().cancelAllWork()
                 return
             }
 

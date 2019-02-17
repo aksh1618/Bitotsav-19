@@ -58,12 +58,13 @@ class Bitotsav19 : Application() {
 
         val eventWork =
             getWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
-        val winningTeamsWork =
-            getWork<ResultWorker>(workDataOf("type" to ResultWorkType.WINNING_TEAMS.name))
+//        val winningTeamsWork =
+//            getWork<ResultWorker>(workDataOf("type" to ResultWorkType.WINNING_TEAMS.name))
         val feedWork = getWork<FeedWorker>(
             workDataOf("type" to FeedWorkType.FETCH_FEEDS.name)
         )
-        WorkManager.getInstance().beginWith(eventWork).then(winningTeamsWork).then(feedWork).enqueue()
+//        WorkManager.getInstance().beginWith(eventWork).then(winningTeamsWork).then(feedWork).enqueue()
+        WorkManager.getInstance().beginWith(eventWork).then(feedWork).enqueue()
     }
 
     // Place code which needs to run on first run only here
