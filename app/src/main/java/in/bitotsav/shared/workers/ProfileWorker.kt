@@ -8,6 +8,7 @@ import `in`.bitotsav.profile.utils.fetchProfileDetailsAsync
 import `in`.bitotsav.shared.exceptions.AuthException
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.getWork
+import `in`.bitotsav.shared.utils.isBitotsavOver
 import `in`.bitotsav.shared.workers.ProfileWorkType.FETCH_PAYMENT_DETAILS
 import `in`.bitotsav.shared.workers.ProfileWorkType.valueOf
 import android.content.Context
@@ -28,6 +29,8 @@ class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context
 
     override fun doWork(): Result {
         try {
+            if (isBitotsavOver())
+                return Result.success()
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             when (type) {

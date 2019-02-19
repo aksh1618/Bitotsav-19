@@ -1,6 +1,7 @@
 package `in`.bitotsav.shared.workers
 
 import `in`.bitotsav.shared.exceptions.NonRetryableException
+import `in`.bitotsav.shared.utils.isBitotsavOver
 import `in`.bitotsav.shared.workers.TeamWorkType.*
 import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
@@ -25,6 +26,8 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
 
     override fun doWork(): Result {
         try {
+            if (isBitotsavOver())
+                return Result.success()
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             when (type) {

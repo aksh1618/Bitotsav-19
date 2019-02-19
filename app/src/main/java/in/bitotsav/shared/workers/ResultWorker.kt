@@ -9,6 +9,7 @@ import `in`.bitotsav.profile.CurrentUser
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.forEachParallel
 import `in`.bitotsav.shared.utils.getWorkNameForTeamWorker
+import `in`.bitotsav.shared.utils.isBitotsavOver
 import `in`.bitotsav.shared.utils.scheduleUniqueWork
 import `in`.bitotsav.shared.workers.ResultWorkType.valueOf
 import `in`.bitotsav.teams.nonchampionship.data.NonChampionshipTeamRepository
@@ -33,6 +34,8 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
 
     override fun doWork(): Result {
         try {
+            if (isBitotsavOver())
+                return Result.success()
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             when (type) {

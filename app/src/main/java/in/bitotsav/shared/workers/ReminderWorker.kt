@@ -7,6 +7,7 @@ import `in`.bitotsav.notification.utils.getEventDetailPendingIntent
 import `in`.bitotsav.notification.utils.getFeedPendingIntent
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.cancelReminderWork
+import `in`.bitotsav.shared.utils.isBitotsavOver
 import `in`.bitotsav.shared.utils.startReminderWork
 import `in`.bitotsav.shared.workers.ReminderWorkType.valueOf
 import android.content.Context
@@ -30,6 +31,8 @@ class ReminderWorker(context: Context, params: WorkerParameters) : Worker(contex
     KoinComponent {
     override fun doWork(): Result {
         try {
+            if (isBitotsavOver())
+                return Result.success()
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             when (type) {
