@@ -65,19 +65,6 @@ class FeedRepository(private val feedDao: FeedDao) : Repository<Feed>, KoinCompo
                 val feeds = response.body() ?: throw NetworkException("Response body is empty")
                 feeds.forEachParallel {
                     if (it.eventId != null) {
-//                        if (FeedType.RESULT == FeedType.valueOf(it.type)) {
-//                            val eventWork = getWork<EventWorker>(
-//                                workDataOf("type" to EventWorkType.FETCH_EVENT.name, "eventId" to it.eventId)
-//                            )
-//                            val resultWork = getWork<ResultWorker>(
-//                                workDataOf("type" to ResultWorkType.RESULT.name, "eventId" to it.eventId)
-//                            )
-//                            WorkManager.getInstance().beginUniqueWork(
-//                                getWorkNameForResultWorker(ResultWorkType.RESULT, it.eventId),
-//                                ExistingWorkPolicy.REPLACE,
-//                                eventWork
-//                            ).then(resultWork).enqueue()
-//                        }
                         val isStarred = get<EventRepository>().isStarred(it.eventId) ?: false
                         val eventName = get<EventRepository>().getNameById(it.eventId)
                             ?: throw DatabaseException("Event name not found for ${it.eventId}")

@@ -23,7 +23,7 @@ data class User(
     val accommodation: Boolean = false
 ) : KoinComponent {
     var score: Int = runBlocking { championshipTeam?.let { get<ChampionshipTeamRepository>().getScoreByName(it) } ?: 0 }
-    // [{"eventId":{eventName:"eventName",teamName:"teamName",rank:"rank"**}}]  Note: All values are strings
+    // [{"eventId":{eventName:"eventName",teamName:"teamName",rank:"rank"}}]  Note: All values are strings
     var teams: Map<String, Map<String, String>>
     //    [{id:{"email": email, "name": name}}]
     // Championship team members
@@ -36,9 +36,6 @@ data class User(
         val (userTeams, eventTeams) = getUserTeams()
         teams = userTeams
         eventMembers = eventTeams
-//        Log.d("TEST", (eventMembers["12"]?.map { (_, name) ->
-//            name
-//        } ?: emptyList()).toString())
     }
 
     private fun getUserTeams(): Pair<Map<String, Map<String, String>>, Map<String, Map<String, String>>> {
@@ -57,16 +54,11 @@ data class User(
             }
         }
         return Pair(userTeams.toMap(), eventTeams.toMap())
-//        return userTeams.toMap()
     }
 
     private fun getTeamMembers(): Map<String, Map<String, String>> {
         return CurrentUser.teamMembers ?: mapOf()
     }
-
-//    private fun getEventMembers(): Map<String, Map<String, String>> {
-//        val teams = runBlocking { get<NonChampionshipTeamRepository>().getAllUserTeams() }
-//    }
 
     fun getChampionshipTeamMembers() =
         members.map { (id, member) ->

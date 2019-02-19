@@ -41,7 +41,7 @@ data class Event(
     @SerializedName("eventPrize2") val prize2: Int,
     @SerializedName("eventPrize3") val prize3: Int,
 //    Note: Default value is empty map
-//    eventPosition1: {
+//    position1: {
 //    teamLeader: String,
 //    teamLeaderName: String,
 //    championshipTeam: String = "-1",
