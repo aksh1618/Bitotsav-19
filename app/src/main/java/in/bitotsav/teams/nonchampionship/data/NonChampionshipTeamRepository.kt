@@ -52,7 +52,6 @@ class NonChampionshipTeamRepository(
 //    403 - eventId or teamLeaderId not found
 //    200 - Success with teamMembers array
     fun fetchNonChampionshipTeamAsync(eventId: Int, teamLeaderId: String, isUserTeam: Boolean): Deferred<Any> {
-        // TODO: Needs thorough testing
         return CoroutineScope(Dispatchers.IO).async {
             val body = mapOf(
                 "eventId" to eventId,
@@ -65,12 +64,6 @@ class NonChampionshipTeamRepository(
                 @Suppress("UNCHECKED_CAST")
                 val members = response.body()?.get("teamMembers") as Map<String, String>
                 val event = get<EventRepository>().getById(eventId)
-//                eventPosition1: {
-//                    teamLeader: req.body.eventPosition1,
-//                    teamLeaderName: map[req.body.eventPosition1].name,
-//                    championshipTeam: (team1 != null) ? team1 : "-1",
-//                    points: (team1 != null) ? event.eventPoints1 : 0
-//                }
 
                 if (isUserTeam) {
                     val userTeams = CurrentUser.userTeams?.toMutableMap()

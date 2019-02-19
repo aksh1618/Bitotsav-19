@@ -3,6 +3,7 @@ package `in`.bitotsav.shared.utils
 import `in`.bitotsav.shared.workers.*
 import android.util.Log
 import androidx.work.*
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 private const val TAG = "WorkerUtils"
@@ -55,51 +56,6 @@ fun cancelReminderWork() {
     WorkManager.getInstance().cancelUniqueWork(ReminderWorkType.CHECK_UPCOMING_EVENTS.name)
 }
 
-//fun scheduleStartReminderWork() {
-//    Log.d(TAG, "on scheduleStartReminderWork")
-//    val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
-//    calendar.set(2019, 1, 9, 0, 0)
-////    calendar.set(2019, 1, 15, 7, 0)
-////    val startTime = calendar.timeInMillis - System.currentTimeMillis()
-//    val testStartTime = calendar.timeInMillis - System.currentTimeMillis()
-//    Log.d(TAG, "Test start delayDuration: $testStartTime")
-////    val testStartTime = 10 * 60 * 1000
-//    val oneTimeWorkRequest = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
-//        .setInputData(workDataOf("type" to ReminderWorkType.START_REMINDER_WORK.name))
-//        .setInitialDelay(testStartTime, TimeUnit.MILLISECONDS)
-////        .setInitialDelay(startTime, TimeUnit.MILLISECONDS)
-//        .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
-//        .build()
-//
-//    WorkManager.getInstance().enqueueUniqueWork(
-//        ReminderWorkType.START_REMINDER_WORK.name,
-//        ExistingWorkPolicy.REPLACE,
-//        oneTimeWorkRequest
-//    )
-//}
-
-//fun scheduleStopReminderWork() {
-//    Log.d(TAG, "on scheduleStopReminderWork")
-//    val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
-//    calendar.set(2019, 1, 9, 2, 20)
-////    calendar.set(2019, 1, 17, 20, 0)
-////    val delayDuration = calendar.timeInMillis - System.currentTimeMillis()
-//    val testDelay = calendar.timeInMillis - System.currentTimeMillis()
-//    Log.d(TAG, "Test time: $testDelay")
-//    val oneTimeWorkRequest = OneTimeWorkRequest.Builder(ReminderWorker::class.java)
-//        .setInputData(workDataOf("type" to ReminderWorkType.STOP_REMINDER_WORK.name))
-////        .setInitialDelay(delayDuration, TimeUnit.MILLISECONDS)
-//        .setInitialDelay(testDelay, TimeUnit.MILLISECONDS)
-//        .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
-//        .build()
-//
-//    WorkManager.getInstance().enqueueUniqueWork(
-//        ReminderWorkType.STOP_REMINDER_WORK.name,
-//        ExistingWorkPolicy.REPLACE,
-//        oneTimeWorkRequest
-//    )
-//}
-
 inline fun <reified T : Worker> getWork(input: Data): OneTimeWorkRequest {
     val constraints: Constraints = Constraints.Builder().apply {
         setRequiredNetworkType(NetworkType.CONNECTED)
@@ -110,6 +66,13 @@ inline fun <reified T : Worker> getWork(input: Data): OneTimeWorkRequest {
         .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 20, TimeUnit.SECONDS)
         .setConstraints(constraints)
         .build()
+}
+
+fun isBitotsavOver(): Boolean {
+    val timestamp = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
+    // Bitotsav ends on 17.02.2019. A few extra days to account for clean up.
+    timestamp.set(2019, 1, 20, 0, 0)
+    return System.currentTimeMillis() > timestamp.timeInMillis
 }
 
 fun getWorkNameForEventWorker(type: EventWorkType, eventId: Int? = null): String {

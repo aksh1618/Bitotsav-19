@@ -62,7 +62,6 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
                     workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name),
                     getWorkNameForEventWorker(EventWorkType.FETCH_ALL_EVENTS)
                 )
-//                scheduleWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
                 return
             }
 
@@ -71,7 +70,6 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
                     workDataOf("type" to TeamWorkType.FETCH_ALL_TEAMS.name),
                     getWorkNameForTeamWorker(TeamWorkType.FETCH_ALL_TEAMS)
                 )
-//                scheduleWork<TeamWorker>(workDataOf("type" to TeamWorkType.FETCH_ALL_TEAMS.name))
                 return
             }
 
@@ -126,9 +124,6 @@ class DefaultFirebaseMessagingService : FirebaseMessagingService(), KoinComponen
                             workDataOf("type" to EventWorkType.FETCH_EVENT.name, "eventId" to eventId),
                             getWorkNameForEventWorker(EventWorkType.FETCH_EVENT, eventId)
                         )
-//                        scheduleWork<EventWorker>(
-//                            workDataOf("type" to EventWorkType.FETCH_EVENT.name, "eventId" to eventId)
-//                        )
                     } else {
                         val eventWork = getWork<EventWorker>(
                             workDataOf("type" to EventWorkType.FETCH_EVENT.name, "eventId" to eventId)

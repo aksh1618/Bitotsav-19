@@ -3,6 +3,7 @@ package `in`.bitotsav.shared.workers
 import `in`.bitotsav.notification.utils.deleteFcmTokenAsync
 import `in`.bitotsav.notification.utils.sendFcmTokenAsync
 import `in`.bitotsav.shared.exceptions.NonRetryableException
+import `in`.bitotsav.shared.utils.isBitotsavOver
 import `in`.bitotsav.shared.workers.FcmTokenWorkType.valueOf
 import android.content.Context
 import android.util.Log
@@ -21,6 +22,8 @@ class FcmTokenWorker(context: Context, params: WorkerParameters) : Worker(contex
 
     override fun doWork(): Result {
         try {
+            if (isBitotsavOver())
+                return Result.success()
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             val authToken = inputData.getString("authToken")

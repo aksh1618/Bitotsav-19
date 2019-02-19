@@ -2,6 +2,7 @@ package `in`.bitotsav.shared.workers
 
 import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.shared.exceptions.NonRetryableException
+import `in`.bitotsav.shared.utils.isBitotsavOver
 import `in`.bitotsav.shared.workers.EventWorkType.*
 import android.content.Context
 import android.util.Log
@@ -22,6 +23,8 @@ class EventWorker(context: Context, params: WorkerParameters) : Worker(context, 
 
     override fun doWork(): Result {
         try {
+            if (isBitotsavOver())
+                return Result.success()
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             when (type) {
