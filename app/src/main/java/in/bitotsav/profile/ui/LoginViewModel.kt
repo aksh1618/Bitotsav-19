@@ -57,7 +57,9 @@ class LoginViewModel(
                 Log.e("LoginViewModel.login", null, exception)
             } catch (exception: Exception) {
                 loginErrorText.value = exception.message
-                    ?.let { "Unable to reach bitotsav :(" }
+                    // ?.let { "Unable to reach bitotsav :(" }
+                    // Pack Up
+                    ?.let { "Too late 🙃" }
                     ?: "Unknown Error!!"
                 Log.e("LoginViewModel.login", null, exception)
             } finally {

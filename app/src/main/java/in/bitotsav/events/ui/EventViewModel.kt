@@ -145,7 +145,9 @@ class EventViewModel(
             } catch (e: Exception) {
                 when (e) {
                     is UnknownHostException, is SocketTimeoutException -> {
-                        error("Unable to reach bitotsav.in")
+                        // error("Unable to reach bitotsav.in")
+                        // Pack Up
+                        error("Too Late 🙃")
                     }
                     else -> {
                         error(e.message ?: "Some error occurred :( Try again.")

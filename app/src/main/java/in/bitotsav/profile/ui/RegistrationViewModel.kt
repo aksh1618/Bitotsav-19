@@ -94,7 +94,9 @@ class RegistrationViewModel(
                 registrationError.value = e.message ?: "Authentication Error"
                 Log.e(TAG, null, e)
             } catch (e: Exception) {
-                registrationError.value = "Unknown Error :("
+                // registrationError.value = "Unknown Error :("
+                // Pack Up
+                registrationError.value = "Too late 🙃"
                 Log.e(TAG, null, e)
             } finally {
                 waiting.value = false
