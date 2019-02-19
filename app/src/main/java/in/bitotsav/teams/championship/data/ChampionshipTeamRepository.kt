@@ -1,12 +1,15 @@
 package `in`.bitotsav.teams.championship.data
 
+import `in`.bitotsav.R
 import `in`.bitotsav.shared.data.Repository
+import `in`.bitotsav.shared.data.getJsonStringFromFile
 import `in`.bitotsav.shared.exceptions.NetworkException
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.teams.api.ChampionshipTeamService
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +28,15 @@ class ChampionshipTeamRepository(private val championshipTeamDao: ChampionshipTe
 
     @WorkerThread
     override suspend fun insert(vararg items: ChampionshipTeam) = championshipTeamDao.insert(*items)
+
+    fun getTeamsFromLocalJson() {
+        val teamsJsonString = getJsonStringFromFile(R.raw.teams)
+        val listOfTeams = Gson().fromJson(teamsJsonString, Array<ChampionshipTeam>::class.java).toList()
+        CoroutineScope(Dispatchers.IO).async {
+            insert(*getChampionshipTeamsByRank(listOfTeams).toTypedArray())
+            Log.d(TAG, "Inserted teams into DB from local json file.")
+        }
+    }
 
     //    GET - /getAllBCTeams
 //    502 - Server error

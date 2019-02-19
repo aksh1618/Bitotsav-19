@@ -1,6 +1,7 @@
 package `in`.bitotsav
 
 import `in`.bitotsav.events.data.EventRepository
+import `in`.bitotsav.feed.data.FeedRepository
 import `in`.bitotsav.koin.repositoriesModule
 import `in`.bitotsav.koin.retrofitModule
 import `in`.bitotsav.koin.sharedPrefsModule
@@ -11,6 +12,7 @@ import `in`.bitotsav.shared.utils.getWorkNameForTeamWorker
 import `in`.bitotsav.shared.utils.scheduleUniqueWork
 import `in`.bitotsav.shared.utils.startReminderWork
 import `in`.bitotsav.shared.workers.*
+import `in`.bitotsav.teams.championship.data.ChampionshipTeamRepository
 import android.app.Application
 import android.content.SharedPreferences
 import android.os.Build
@@ -73,7 +75,10 @@ class Bitotsav19 : Application() {
             createNotificationChannels(this)
         }
 
-        get<EventRepository>().getEventsFromLocalJson()
+        get<EventRepository>().getEventsFromLocalJsonAsync().invokeOnCompletion {
+            get<FeedRepository>().getFeedsFromLocalJson()
+        }
+        get<ChampionshipTeamRepository>().getTeamsFromLocalJson()
         scheduleUniqueWork<TeamWorker>(
             workDataOf("type" to TeamWorkType.FETCH_ALL_TEAMS.name),
             getWorkNameForTeamWorker(TeamWorkType.FETCH_ALL_TEAMS)

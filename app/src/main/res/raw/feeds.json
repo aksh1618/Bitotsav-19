@@ -1,0 +1,2091 @@
+[
+  {
+    "id": 2,
+    "title": "Bitotsav 19 is here!",
+    "content": "It's Bitotsav week! Make sure you complete registrations by 14th February. Come, join the celebration of cultures!",
+    "timestamp": 1549896994110,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1549896994110
+  },
+  {
+    "id": 3,
+    "title": "Be the champion!",
+    "content": "This edition of Bitotsav brings you a chance to compete for the prestigious championship. Make teams of size 6-8 and compete with the best!",
+    "timestamp": 1549897225382,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1549897225382
+  },
+  {
+    "id": 4,
+    "title": "Official App Release!",
+    "content": "The official Bitotsav '19 app is live on the play store!\nCoded with ❤ by the Tech Team.",
+    "timestamp": 1549898107662,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1549898107662
+  },
+  {
+    "id": 4,
+    "title": "Update for Natsamraat",
+    "content": "Added time limit for Natsamraat ",
+    "timestamp": 1550119373862,
+    "type": "EVENT",
+    "feedId": 1550119373862,
+    "eventId": "11"
+  },
+  {
+    "id": 5,
+    "title": "Update for Robo Air Hockey",
+    "content": "Two players for the event",
+    "timestamp": 1550122806859,
+    "type": "EVENT",
+    "feedId": 1550122806859,
+    "eventId": "44"
+  },
+  {
+    "id": 6,
+    "title": "Update for Talkies",
+    "content": "Event will now begin at 1300 hours on Day 3",
+    "timestamp": 1550123003954,
+    "type": "EVENT",
+    "feedId": 1550123003954,
+    "eventId": "26"
+  },
+  {
+    "id": 7,
+    "title": "Update for Acoustic Alchemy",
+    "content": "The event is now scheduled from 9:00 am at CAT Hall on Day 3",
+    "timestamp": 1550123173633,
+    "type": "EVENT",
+    "feedId": 1550123173633,
+    "eventId": "3"
+  },
+  {
+    "id": 8,
+    "title": "App Update",
+    "content": "An update has been released for the app.\nVerification process has been updated in the profile section of the app.\nKindly visit and verify yourself at the earliest.",
+    "timestamp": 1550125004160,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550125004160
+  },
+  {
+    "id": 9,
+    "title": "TVF Talent Hunt",
+    "content": "The event participation is closed for today. We will be resuming tomorrow. Stay tuned for further details.",
+    "timestamp": 1550143734604,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550143734604
+  },
+  {
+    "id": 10,
+    "title": "Update for Pukaar",
+    "content": "Flagship event 'Pukaar' is scheduled to begin at 10:00 AM. Teams are required to complete their registration by tonight 11:59 PM.",
+    "timestamp": 1550160387227,
+    "type": "EVENT",
+    "feedId": 1550160387227,
+    "eventId": "9"
+  },
+  {
+    "id": 11,
+    "title": "Update for Model United Nations",
+    "content": "Flagship event 'Model United Nation' is scheduled to begin at 10:00 AM. Teams are required to complete their registration by tonight 11:59 PM.",
+    "timestamp": 1550160433513,
+    "type": "EVENT",
+    "feedId": 1550160433513,
+    "eventId": "12"
+  },
+  {
+    "id": 12,
+    "title": "Event Registration",
+    "content": "The registration for Day 1 events will close at 11:59 PM. Teams are required to complete their registration failing to which they won't be eligible for prizes and/or points.",
+    "timestamp": 1550160567559,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550160567559
+  },
+  {
+    "id": 13,
+    "title": "Participant Verification",
+    "content": "Participants belonging to BIT Mesra must verify themselves by visiting http://192.168.101.17:8080/ on the local network.\nOthers are required to report to Infocell at 10:00 AM tomorrow for verification and receiving the night passes.\nUnverified participants are not eligible for prizes or allowed for the nights.",
+    "timestamp": 1550161324201,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550161324201
+  },
+  {
+    "id": 14,
+    "title": "Update for Pukaar",
+    "content": "The event has been rescheduled to start at 12:00 PM.",
+    "timestamp": 1550196657095,
+    "type": "EVENT",
+    "feedId": 1550196657095,
+    "eventId": "9"
+  },
+  {
+    "id": 15,
+    "title": "Eatopia ",
+    "content": "Eatopia is scheduled for Day 1, at Mehak, from 10:00 AM- 1:00 PM.",
+    "timestamp": 1550203393614,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550203393614
+  },
+  {
+    "id": 16,
+    "title": "Update for Splatter",
+    "content": "The event is rescheduled to begin at 11:30 AM.",
+    "timestamp": 1550205002372,
+    "type": "EVENT",
+    "feedId": 1550205002372,
+    "eventId": "31"
+  },
+  {
+    "id": 17,
+    "title": "Update for Eatopia",
+    "content": "The event is about to begin at 10:00 AM at Mehak.",
+    "timestamp": 1550205213375,
+    "type": "EVENT",
+    "feedId": 1550205213375,
+    "eventId": "20"
+  },
+  {
+    "id": 18,
+    "title": "Update for Robo Air Hockey",
+    "content": "The event is about to begin at 10:00 AM",
+    "timestamp": 1550205533475,
+    "type": "EVENT",
+    "feedId": 1550205533475,
+    "eventId": "44"
+  },
+  {
+    "id": 19,
+    "title": "Update for Robo Air Hockey",
+    "content": "The event has started.",
+    "timestamp": 1550206247419,
+    "type": "EVENT",
+    "feedId": 1550206247419,
+    "eventId": "44"
+  },
+  {
+    "id": 20,
+    "title": "Update for Ballod'dor",
+    "content": "The event is about to begin at Room no. 237.",
+    "timestamp": 1550206760064,
+    "type": "EVENT",
+    "feedId": 1550206760064,
+    "eventId": "19"
+  },
+  {
+    "id": 21,
+    "title": "Update for Ballod'dor",
+    "content": "The event has started.",
+    "timestamp": 1550207181852,
+    "type": "EVENT",
+    "feedId": 1550207181852,
+    "eventId": "19"
+  },
+  {
+    "id": 22,
+    "title": "Update for Footloose",
+    "content": "The event is about to begin at CAT Hall.",
+    "timestamp": 1550210985004,
+    "type": "EVENT",
+    "feedId": 1550210985004,
+    "eventId": "7"
+  },
+  {
+    "id": 23,
+    "title": "Pukaar",
+    "content": "All teams registered for Pukaar are required to report to Shorbagh 1 for common call.",
+    "timestamp": 1550211188920,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550211188920
+  },
+  {
+    "id": 24,
+    "title": "Update for Pukaar",
+    "content": "All Pukaar Teams have to report to Shorbagh II, at 12:00 PM, for Common Call.",
+    "timestamp": 1550211372306,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550211372306
+  },
+  {
+    "id": 25,
+    "title": "Update for Splatter",
+    "content": "The event is about to start at IC stage.",
+    "timestamp": 1550211545135,
+    "type": "EVENT",
+    "feedId": 1550211545135,
+    "eventId": "31"
+  },
+  {
+    "id": 26,
+    "title": "Update for The Pixel Auction",
+    "content": "The event has started.",
+    "timestamp": 1550211583531,
+    "type": "EVENT",
+    "feedId": 1550211583531,
+    "eventId": "28"
+  },
+  {
+    "id": 27,
+    "title": "Update for Model United Nations",
+    "content": "The event has started.",
+    "timestamp": 1550211657158,
+    "type": "EVENT",
+    "feedId": 1550211657158,
+    "eventId": "12"
+  },
+  {
+    "id": 28,
+    "title": "Update for Kings of Asia",
+    "content": "The event has started.",
+    "timestamp": 1550211692434,
+    "type": "EVENT",
+    "feedId": 1550211692434,
+    "eventId": "45"
+  },
+  {
+    "id": 29,
+    "title": "Pukaar",
+    "content": "The common call for Pukaar has started at Shorbagh 1.",
+    "timestamp": 1550212061980,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550212061980
+  },
+  {
+    "id": 30,
+    "title": "Update for Saptak",
+    "content": "Event has Started.",
+    "timestamp": 1550212406819,
+    "type": "EVENT",
+    "feedId": 1550212406819,
+    "eventId": "1"
+  },
+  {
+    "id": 31,
+    "title": "Update for Pukaar",
+    "content": "The event has started.",
+    "timestamp": 1550213266742,
+    "type": "EVENT",
+    "feedId": 1550213266742,
+    "eventId": "9"
+  },
+  {
+    "id": 32,
+    "title": "Update for Footloose",
+    "content": "Event has started.",
+    "timestamp": 1550213683775,
+    "type": "EVENT",
+    "feedId": 1550213683775,
+    "eventId": "7"
+  },
+  {
+    "id": 33,
+    "title": "TVF Talent Hunt Update",
+    "content": "No points will be awarded to any of the teams for TVF Talent Hunt due to mismatch in the number of registrations to the actual participation. ",
+    "timestamp": 1550215297559,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550215297559
+  },
+  {
+    "id": 34,
+    "title": "Update for Kings of Asia",
+    "content": "Event is over.",
+    "timestamp": 1550215971785,
+    "type": "EVENT",
+    "feedId": 1550215971785,
+    "eventId": "45"
+  },
+  {
+    "id": 35,
+    "title": "Update for Eatopia",
+    "content": "The event is over.",
+    "timestamp": 1550216950084,
+    "type": "EVENT",
+    "feedId": 1550216950084,
+    "eventId": "20"
+  },
+  {
+    "id": 36,
+    "title": "Update for Saptak",
+    "content": "Slots open.",
+    "timestamp": 1550217281051,
+    "type": "EVENT",
+    "feedId": 1550217281051,
+    "eventId": "1"
+  },
+  {
+    "id": 37,
+    "title": "Update for Da Vinci Code",
+    "content": "Event has now started.",
+    "timestamp": 1550217319277,
+    "type": "EVENT",
+    "feedId": 1550217319277,
+    "eventId": "39"
+  },
+  {
+    "id": 38,
+    "title": "Update for Robo Air Hockey",
+    "content": "Event is complete.",
+    "timestamp": 1550217839761,
+    "type": "EVENT",
+    "feedId": 1550217839761,
+    "eventId": "44"
+  },
+  {
+    "id": 39,
+    "title": "Update for BIT Roadies ",
+    "content": "BIT Roadies is about begin at 2 PM. ",
+    "timestamp": 1550219070976,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550219070976
+  },
+  {
+    "id": 40,
+    "title": "Update for Media Cre",
+    "content": "Event is over.",
+    "timestamp": 1550219938834,
+    "type": "EVENT",
+    "feedId": 1550219938834,
+    "eventId": "35"
+  },
+  {
+    "id": 41,
+    "title": "Update for Kalam-e-Tahir ",
+    "content": "Kalam-e-Tahir is about to begin in LH2 soon.",
+    "timestamp": 1550220000898,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550220000898
+  },
+  {
+    "id": 42,
+    "title": "Update for BIT Roadies",
+    "content": "Event has started.",
+    "timestamp": 1550220277437,
+    "type": "EVENT",
+    "feedId": 1550220277437,
+    "eventId": "29"
+  },
+  {
+    "id": 43,
+    "title": "Update for The Pixel Auction",
+    "content": "Event is over.",
+    "timestamp": 1550220317910,
+    "type": "EVENT",
+    "feedId": 1550220317910,
+    "eventId": "28"
+  },
+  {
+    "id": 44,
+    "title": "Update for Splatter",
+    "content": "Event is now over.",
+    "timestamp": 1550220759876,
+    "type": "EVENT",
+    "feedId": 1550220759876,
+    "eventId": "31"
+  },
+  {
+    "id": 45,
+    "title": "Update for Pukaar",
+    "content": "The event is over.",
+    "timestamp": 1550221444399,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550221444399
+  },
+  {
+    "id": 46,
+    "title": "Update for Asian Parliamentary Debate",
+    "content": "The event has started in room 214.",
+    "timestamp": 1550222388620,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550222388620
+  },
+  {
+    "id": 47,
+    "title": "Update for Footloose",
+    "content": "The event is over.",
+    "timestamp": 1550222651414,
+    "type": "EVENT",
+    "feedId": 1550222651414,
+    "eventId": "7"
+  },
+  {
+    "id": 48,
+    "title": "Update for Pukaar",
+    "content": "The event is over.",
+    "timestamp": 1550222681530,
+    "type": "EVENT",
+    "feedId": 1550222681530,
+    "eventId": "9"
+  },
+  {
+    "id": 49,
+    "title": "Update for Asian Parliamentary Debate",
+    "content": "The event has started",
+    "timestamp": 1550222721870,
+    "type": "EVENT",
+    "feedId": 1550222721870,
+    "eventId": "14"
+  },
+  {
+    "id": 50,
+    "title": "Update for Panache",
+    "content": "Event has started.",
+    "timestamp": 1550223024870,
+    "type": "EVENT",
+    "feedId": 1550223024870,
+    "eventId": "24"
+  },
+  {
+    "id": 51,
+    "title": "Update for Beat The Clock",
+    "content": "The event has started at IC Stage",
+    "timestamp": 1550225893313,
+    "type": "EVENT",
+    "feedId": 1550225893313,
+    "eventId": "37"
+  },
+  {
+    "id": 52,
+    "title": "Update for Tech Quiz",
+    "content": "The event is over.",
+    "timestamp": 1550226753955,
+    "type": "EVENT",
+    "feedId": 1550226753955,
+    "eventId": "21"
+  },
+  {
+    "id": 53,
+    "title": "Update for BIT Roadies",
+    "content": "Event is completed\n",
+    "timestamp": 1550227255368,
+    "type": "EVENT",
+    "feedId": 1550227255368,
+    "eventId": "29"
+  },
+  {
+    "id": 54,
+    "title": "Update for Saptak",
+    "content": "The event is over.",
+    "timestamp": 1550227584137,
+    "type": "EVENT",
+    "feedId": 1550227584137,
+    "eventId": "1"
+  },
+  {
+    "id": 55,
+    "title": "Update for Tech Quiz",
+    "content": ".",
+    "timestamp": 1550229319184,
+    "type": "EVENT",
+    "feedId": 1550229319184,
+    "eventId": "21"
+  },
+  {
+    "id": 56,
+    "title": "Result for event Footloose",
+    "content": "1. BT19/11102 (raja nayak)\n2. BT19/10169 (Simran) - The Archemists - 0 pts\n3. BT19/10084 (Arjita Basu) - Evil_Geniuses_1.0 - 0 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550229897930,
+    "type": "RESULT",
+    "feedId": 1550229897930,
+    "eventId": 7
+  },
+  {
+    "id": 57,
+    "title": "Night Entry",
+    "content": "After 6:00 PM, all female participants must either be inside the arena or reside inside their hostel.",
+    "timestamp": 1550230101028,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550230101028
+  },
+  {
+    "id": 58,
+    "title": "Result for event Robo Air Hockey",
+    "content": "1. BT19/12048 (Ghalib Jamal) - Parle-G - 50 pts\n2. BT19/10212 (Himanshu Singh)\n3. BT19/10146 (Tanweerul Haque) - Team Team - 10 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550230435116,
+    "type": "RESULT",
+    "feedId": 1550230435116,
+    "eventId": 44
+  },
+  {
+    "id": 59,
+    "title": "Update for Kalam-e-tahir",
+    "content": "Congratulations! The following people have made it to the finals of Kalam-e-Taahir. Please report to info cell at 9:00 AM sharp on 16th February, 2019 with Bitotsav ID and valid identity card.\n\n- Aditya Bhaskar\n- Aditya Prakash Pandey\n- Aparna Shambhavi\n- Aradhya Tiwari\n- Arpita Sahay\n- Bhavesh Chaturvedi\n- Ishita Shreshta\n- K.D. Pandey\n- Kumari Surbhi\n- Pratyasha Mukherjee\n- Samverdhana Sandeep",
+    "timestamp": 1550237674821,
+    "type": "EVENT",
+    "feedId": 1550237674821,
+    "eventId": "13"
+  },
+  {
+    "id": 60,
+    "title": "Update for Asian Parliamentary Debate",
+    "content": "The Prelims of the event has completed at 17:00 hours.",
+    "timestamp": 1550245003841,
+    "type": "EVENT",
+    "feedId": 1550245003841,
+    "eventId": "14"
+  },
+  {
+    "id": 61,
+    "title": "Update for Ballod'dor",
+    "content": "The event has completed at 12:00 hours.",
+    "timestamp": 1550245145489,
+    "type": "EVENT",
+    "feedId": 1550245145489,
+    "eventId": "19"
+  },
+  {
+    "id": 62,
+    "title": "Update for Tech Quiz",
+    "content": "The event has completed at 17:00 hours.",
+    "timestamp": 1550245244782,
+    "type": "EVENT",
+    "feedId": 1550245244782,
+    "eventId": "21"
+  },
+  {
+    "id": 63,
+    "title": "Update for Beat The Clock",
+    "content": "The event has completed at 17:00 hours.",
+    "timestamp": 1550245287537,
+    "type": "EVENT",
+    "feedId": 1550245287537,
+    "eventId": "37"
+  },
+  {
+    "id": 64,
+    "title": "Update for Da Vinci Code",
+    "content": "The event has completed at 17:00 hours.",
+    "timestamp": 1550245370374,
+    "type": "EVENT",
+    "feedId": 1550245370374,
+    "eventId": "39"
+  },
+  {
+    "id": 65,
+    "title": "Update for Kalam-e-tahir",
+    "content": "The prelims of the has ended at 16:00 hours. The finals will be held tomorrow. Stay tuned for further details.",
+    "timestamp": 1550245469319,
+    "type": "EVENT",
+    "feedId": 1550245469319,
+    "eventId": "13"
+  },
+  {
+    "id": 66,
+    "title": "Event Registration",
+    "content": "The registration for Day 2 events will close at 11:59 PM. Teams are required to complete their registration failing to which they won't be allowed to participate.",
+    "timestamp": 1550252941694,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550252941694
+  },
+  {
+    "id": 67,
+    "title": "Update for Stomp the Yard",
+    "content": "The venue for the event has been changed.",
+    "timestamp": 1550263619521,
+    "type": "EVENT",
+    "feedId": 1550263619521,
+    "eventId": "6"
+  },
+  {
+    "id": 68,
+    "title": "Update for Saptak Finals",
+    "content": "The venue for the event has been shifted to CAT HALL, from 9:00 AM to 11:00 AM. All participants are requested to directly report to the venue.",
+    "timestamp": 1550284657582,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550284657582
+  },
+  {
+    "id": 69,
+    "title": "Update for Rhapsody Finals",
+    "content": "The venue for the event has been shifted to CAT HALL, from 11:00 AM to 3:00 PM. All participants are requested to directly report to the venue",
+    "timestamp": 1550284691796,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550284691796
+  },
+  {
+    "id": 70,
+    "title": "Info cell ",
+    "content": "Info cell has been shifted to the entrance of the main building. ",
+    "timestamp": 1550284734678,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550284734678
+  },
+  {
+    "id": 71,
+    "title": "Update for Kalam-e-Tahir ",
+    "content": "The venue for the event has been shifted to LH-1, from 9:00 AM to 11:00 AM. All participants are requested to directly report to the venue",
+    "timestamp": 1550285022530,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550285022530
+  },
+  {
+    "id": 72,
+    "title": "Update for Swar ",
+    "content": "The venue for the event has been shifted to LH-, from 12:00 PM to 2:00 PM. All participants are requested to directly report to the venue",
+    "timestamp": 1550285125580,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550285125580
+  },
+  {
+    "id": 73,
+    "title": "Update for Alfaz",
+    "content": "Alfaz Finals has been shifted to LH1 from 9:00 AM- 10:00 AM",
+    "timestamp": 1550286719452,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550286719452
+  },
+  {
+    "id": 74,
+    "title": "CSI Files",
+    "content": "The event CSI Files has been shifted to Day 3.",
+    "timestamp": 1550289812121,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550289812121
+  },
+  {
+    "id": 75,
+    "title": "Techniche",
+    "content": "The event is about start in room number 236, at 10:00 PM",
+    "timestamp": 1550290460361,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550290460361
+  },
+  {
+    "id": 76,
+    "title": "BIT MUN",
+    "content": "Event has started. ",
+    "timestamp": 1550290633213,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550290633213
+  },
+  {
+    "id": 77,
+    "title": "Update for Natsamraat",
+    "content": "Event has started.",
+    "timestamp": 1550290675489,
+    "type": "EVENT",
+    "feedId": 1550290675489,
+    "eventId": "11"
+  },
+  {
+    "id": 78,
+    "title": "You're Hired",
+    "content": "Event has shifted to Room No. 207",
+    "timestamp": 1550290948256,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550290948256
+  },
+  {
+    "id": 79,
+    "title": "Update for Blitzkrieg",
+    "content": "Event timing update.",
+    "timestamp": 1550290989923,
+    "type": "EVENT",
+    "feedId": 1550290989923,
+    "eventId": "40"
+  },
+  {
+    "id": 80,
+    "title": "Update for Swar",
+    "content": "Event time and venue update.",
+    "timestamp": 1550291269443,
+    "type": "EVENT",
+    "feedId": 1550291269443,
+    "eventId": "4"
+  },
+  {
+    "id": 81,
+    "title": "Update for Kalam-e-tahir",
+    "content": "Event has Started.",
+    "timestamp": 1550291350911,
+    "type": "EVENT",
+    "feedId": 1550291350911,
+    "eventId": "13"
+  },
+  {
+    "id": 82,
+    "title": "Update for Q-Riosity",
+    "content": "Event timing update. The registrations for the event will start at 11AM.",
+    "timestamp": 1550291450378,
+    "type": "EVENT",
+    "feedId": 1550291450378,
+    "eventId": "17"
+  },
+  {
+    "id": 83,
+    "title": "Alfaaz",
+    "content": "Event has started.",
+    "timestamp": 1550291845633,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550291845633
+  },
+  {
+    "id": 84,
+    "title": "Quizzie",
+    "content": "Event is going to start in room no. 216.",
+    "timestamp": 1550291878806,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550291878806
+  },
+  {
+    "id": 85,
+    "title": "Update for Techniché",
+    "content": "Event started.",
+    "timestamp": 1550292595468,
+    "type": "EVENT",
+    "feedId": 1550292595468,
+    "eventId": "16"
+  },
+  {
+    "id": 86,
+    "title": "Update for Quizzie",
+    "content": "Event started. ",
+    "timestamp": 1550292769991,
+    "type": "EVENT",
+    "feedId": 1550292769991,
+    "eventId": "42"
+  },
+  {
+    "id": 87,
+    "title": "Update for You're Hired",
+    "content": "The event has been shifted to Room no. 207.",
+    "timestamp": 1550292779102,
+    "type": "EVENT",
+    "feedId": 1550292779102,
+    "eventId": "22"
+  },
+  {
+    "id": 88,
+    "title": "Update for Techniché",
+    "content": "Going to begin at 10:30.",
+    "timestamp": 1550292880554,
+    "type": "EVENT",
+    "feedId": 1550292880554,
+    "eventId": "16"
+  },
+  {
+    "id": 89,
+    "title": "Update for Panache",
+    "content": "The event is completed.",
+    "timestamp": 1550293052542,
+    "type": "EVENT",
+    "feedId": 1550293052542,
+    "eventId": "24"
+  },
+  {
+    "id": 90,
+    "title": "Update for Saptak",
+    "content": "Event has started.",
+    "timestamp": 1550293436420,
+    "type": "EVENT",
+    "feedId": 1550293436420,
+    "eventId": "1"
+  },
+  {
+    "id": 91,
+    "title": "Update for You're Hired",
+    "content": "Event has started.",
+    "timestamp": 1550293573810,
+    "type": "EVENT",
+    "feedId": 1550293573810,
+    "eventId": "22"
+  },
+  {
+    "id": 92,
+    "title": "Update for Bitotsav Treasure Hunt",
+    "content": "Event has started.",
+    "timestamp": 1550293680751,
+    "type": "EVENT",
+    "feedId": 1550293680751,
+    "eventId": "32"
+  },
+  {
+    "id": 93,
+    "title": "Update for Digixpress",
+    "content": "Event has started.",
+    "timestamp": 1550293990046,
+    "type": "EVENT",
+    "feedId": 1550293990046,
+    "eventId": "27"
+  },
+  {
+    "id": 94,
+    "title": "Update for Blitzkrieg",
+    "content": "The event is going to start from 12 PM in room number 214-217.",
+    "timestamp": 1550294093382,
+    "type": "EVENT",
+    "feedId": 1550294093382,
+    "eventId": "40"
+  },
+  {
+    "id": 95,
+    "title": "Result for event Kings of Asia",
+    "content": "1. BT19/11497 (Sourav Jain) - #inception - 50 pts\n2. BT19/11241 (Shantanu Jahagirdar) - Revenant - 30 pts\n3. BT19/11193 (Pallavi) - Pukuchaks - 20 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550294591057,
+    "type": "RESULT",
+    "feedId": 1550294591057,
+    "eventId": 45
+  },
+  {
+    "id": 96,
+    "title": "Update for Mr. and Ms. Bitotsav",
+    "content": "Event has started.",
+    "timestamp": 1550294920857,
+    "type": "EVENT",
+    "feedId": 1550294920857,
+    "eventId": "23"
+  },
+  {
+    "id": 97,
+    "title": "Update for Techniché",
+    "content": "Event has started.",
+    "timestamp": 1550294951094,
+    "type": "EVENT",
+    "feedId": 1550294951094,
+    "eventId": "16"
+  },
+  {
+    "id": 98,
+    "title": "Result for event Da Vinci Code",
+    "content": "1. BT19/11712 (Krishna Pratap Singh) - The Archemists - 75 pts\n2. BT19/12158 (Akshay Sharma)\n3. BT19/10713 (Ishaan Gupta) - X-C@lliber - 25 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550295157069,
+    "type": "RESULT",
+    "feedId": 1550295157069,
+    "eventId": 39
+  },
+  {
+    "id": 99,
+    "title": "Update for Kalam-e-tahir",
+    "content": "Event is over.",
+    "timestamp": 1550296487896,
+    "type": "EVENT",
+    "feedId": 1550296487896,
+    "eventId": "13"
+  },
+  {
+    "id": 100,
+    "title": "Update for Quizzie",
+    "content": "Event is over.",
+    "timestamp": 1550296758754,
+    "type": "EVENT",
+    "feedId": 1550296758754,
+    "eventId": "42"
+  },
+  {
+    "id": 101,
+    "title": "Update for Mr. and Ms. Bitotsav",
+    "content": "Event is completed.",
+    "timestamp": 1550298699612,
+    "type": "EVENT",
+    "feedId": 1550298699612,
+    "eventId": "23"
+  },
+  {
+    "id": 102,
+    "title": "Update for Saptak",
+    "content": "Event is now over.",
+    "timestamp": 1550299612171,
+    "type": "EVENT",
+    "feedId": 1550299612171,
+    "eventId": "1"
+  },
+  {
+    "id": 103,
+    "title": "Update for Saptak",
+    "content": "Event is over.",
+    "timestamp": 1550299754657,
+    "type": "EVENT",
+    "feedId": 1550299754657,
+    "eventId": "1"
+  },
+  {
+    "id": 104,
+    "title": "Result for event Ballod'dor",
+    "content": "1. BT19/10019 (Aparna Shambhawi) - The Archemists - 75 pts\n2. BT19/10031 (BHAVESH CHATURVEDI) - Maha gathbandhan - 50 pts\n3. BT19/11024 (Vedang Raj) - Rage - 25 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550299857811,
+    "type": "RESULT",
+    "feedId": 1550299857811,
+    "eventId": 19
+  },
+  {
+    "id": 105,
+    "title": "Result for event Splatter",
+    "content": "1. BT19/11425 (Sayani Das) - Seekers - 30 pts\n2. BT19/11221 (Deeptam Das) - The Archemists - 20 pts\n3. BT19/12477 (Kavita Kumari)\n\nCongratulations to all the winners.",
+    "timestamp": 1550300111162,
+    "type": "RESULT",
+    "feedId": 1550300111162,
+    "eventId": 31
+  },
+  {
+    "id": 106,
+    "title": "Result for event Tech Quiz",
+    "content": "1. BT19/11723 (Sparsh Jain) - INCOGNITO - 50 pts\n2. BT19/11030 (Ishan Bakshi) - Seekers - 30 pts\n3. BT19/10779 (Umang Srivastava) - Warlock - 20 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550302841757,
+    "type": "RESULT",
+    "feedId": 1550302841757,
+    "eventId": 21
+  },
+  {
+    "id": 107,
+    "title": "Result for event Media Cre",
+    "content": "1. BT19/10039 (Ishita Shreshtha) - Maha gathbandhan - 75 pts\n2. BT19/10735 (Priyanshu Pandey) - Maadhyam - 50 pts\n3. BT19/11521 (Rashi Gupta) - AGENTS OF HYDRA - 25 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550303484221,
+    "type": "RESULT",
+    "feedId": 1550303484221,
+    "eventId": 35
+  },
+  {
+    "id": 108,
+    "title": "Result for event The Pixel Auction",
+    "content": "1. BT19/11459 (Nehal Srivastava)\n2. BT19/10853 (NAGULAN) - TAMIL PASANGA (TP) - 50 pts\n3. BT19/11039 (Ajit Garg) - PSYCHED - 25 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550303905176,
+    "type": "RESULT",
+    "feedId": 1550303905176,
+    "eventId": 28
+  },
+  {
+    "id": 109,
+    "title": "Result for event Beat The Clock",
+    "content": "1. BT19/10131 (Aayush Alkesh) - Team BOSHIKA - 50 pts\n2. BT19/11148 (Vaibhav Kumar) - dANK - 30 pts\n3. BT19/11477 (Tanay Goel) - Rage - 20 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550304681494,
+    "type": "RESULT",
+    "feedId": 1550304681494,
+    "eventId": 37
+  },
+  {
+    "id": 110,
+    "title": "Result for event Eatopia",
+    "content": "1. BT19/11999 (SHEKHAR SATYAKAR) - Parle-G - 50 pts\n2. BT19/12211 (Ritika srivastava)\n3. BT19/10811 (Ujjawal Jha) - First Of Our Name - 20 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550304955369,
+    "type": "RESULT",
+    "feedId": 1550304955369,
+    "eventId": 20
+  },
+  {
+    "id": 111,
+    "title": "Registration",
+    "content": "Participants who are facing issues regarding registrations are required to report to Infocell.",
+    "timestamp": 1550305073433,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550305073433
+  },
+  {
+    "id": 112,
+    "title": "Update for Digixpress",
+    "content": "The event is over.",
+    "timestamp": 1550305590728,
+    "type": "EVENT",
+    "feedId": 1550305590728,
+    "eventId": "27"
+  },
+  {
+    "id": 113,
+    "title": "Update for Rhapsody",
+    "content": "The prelims for Rhapsody stands cancelled. The finals will be held tomorrow at 9:00 AM.",
+    "timestamp": 1550305892224,
+    "type": "EVENT",
+    "feedId": 1550305892224,
+    "eventId": "2"
+  },
+  {
+    "id": 114,
+    "title": "Update for Model United Nations",
+    "content": "The event is over.",
+    "timestamp": 1550305970374,
+    "type": "EVENT",
+    "feedId": 1550305970374,
+    "eventId": "12"
+  },
+  {
+    "id": 115,
+    "title": "Result for event Model United Nations",
+    "content": "1. BT19/11917 (Shivam Kumar)\n2. BT19/11094 (Kumar Shrey) - Octave - 0 pts\n3. BT19/10051 (Madhav Kauntia)\n\nCongratulations to all the winners.",
+    "timestamp": 1550306016043,
+    "type": "RESULT",
+    "feedId": 1550306016043,
+    "eventId": 12
+  },
+  {
+    "id": 116,
+    "title": "Update for CSI Files",
+    "content": "The event has been rescheduled to Day 3.",
+    "timestamp": 1550306146319,
+    "type": "EVENT",
+    "feedId": 1550306146319,
+    "eventId": "34"
+  },
+  {
+    "id": 117,
+    "title": "Update for You're Hired",
+    "content": "The event is over.",
+    "timestamp": 1550306184939,
+    "type": "EVENT",
+    "feedId": 1550306184939,
+    "eventId": "22"
+  },
+  {
+    "id": 118,
+    "title": "Result for event Quizzie",
+    "content": "1. BT19/11431 (Soumyadip Samanta) - JFC - 50 pts\n2. BT19/11392 (Anirudh Singla)\n3. BT19/10725 (Simardeep Singh) - #inception - 20 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550306297775,
+    "type": "RESULT",
+    "feedId": 1550306297775,
+    "eventId": 42
+  },
+  {
+    "id": 119,
+    "title": "Result for event Kalam-e-tahir",
+    "content": "1. BT19/10019 (Aparna Shambhawi) - The Archemists - 0 pts\n2. BT19/10102 (Pratyashaa Mukherjee)\n3. BT19/11862 (Arpita Sahay)\n\nCongratulations to all the winners.",
+    "timestamp": 1550306661673,
+    "type": "RESULT",
+    "feedId": 1550306661673,
+    "eventId": 13
+  },
+  {
+    "id": 120,
+    "title": "Update for Techniché",
+    "content": "The event is over.",
+    "timestamp": 1550306800402,
+    "type": "EVENT",
+    "feedId": 1550306800402,
+    "eventId": "16"
+  },
+  {
+    "id": 121,
+    "title": "Result for event Techniché",
+    "content": "1. BT19/10185 (Uttam Kumar)\n2. BT19/11564 (Himanshu Shekhar) - Maha gathbandhan - 20 pts\n3. BT19/10003 (Tanya Kumari) - Ensemble - 10 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550307214127,
+    "type": "RESULT",
+    "feedId": 1550307214127,
+    "eventId": 16
+  },
+  {
+    "id": 122,
+    "title": "Update for Art-A-Thon",
+    "content": "The event is over.",
+    "timestamp": 1550307255553,
+    "type": "EVENT",
+    "feedId": 1550307255553,
+    "eventId": "36"
+  },
+  {
+    "id": 123,
+    "title": "Result for event Art-A-Thon",
+    "content": "1. BT19/11221 (Deeptam Das) - The Archemists - 30 pts\n2. BT19/11425 (Sayani Das) - Seekers - 20 pts\n3. BT19/10135 (Manashvi sharma)\n\nCongratulations to all the winners.",
+    "timestamp": 1550307495197,
+    "type": "RESULT",
+    "feedId": 1550307495197,
+    "eventId": 36
+  },
+  {
+    "id": 124,
+    "title": "Update for Blitzkrieg",
+    "content": "The event is over.",
+    "timestamp": 1550307588868,
+    "type": "EVENT",
+    "feedId": 1550307588868,
+    "eventId": "40"
+  },
+  {
+    "id": 125,
+    "title": "Result for event Blitzkrieg",
+    "content": "1. BT19/11477 (Tanay Goel) - Rage - 75 pts\n2. BT19/10045 (Vaibhav Raj) - Maha gathbandhan - 50 pts\n3. BT19/11524 (SHUVAM ADHIKARY) - Revenant - 25 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550307642320,
+    "type": "RESULT",
+    "feedId": 1550307642320,
+    "eventId": 40
+  },
+  {
+    "id": 126,
+    "title": "Result for event You're Hired",
+    "content": "1. BT19/10147 (Nandini Mishra) - Seekers - 30 pts\n2. BT19/10723 (Ishita) - First Of Our Name - 20 pts\n3. BT19/11024 (Vedang Raj) - Rage - 10 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550307916001,
+    "type": "RESULT",
+    "feedId": 1550307916001,
+    "eventId": 22
+  },
+  {
+    "id": 127,
+    "title": "Update for Event Bitotsav Treasure Hunt",
+    "content": "Due to some unavoidable circumstances, the results for the event Treasure Hunt has been nullified. The event will be re conducted tomorrow. The timing will be notified soon.",
+    "timestamp": 1550308233856,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550308233856
+  },
+  {
+    "id": 128,
+    "title": "Result for event Saptak",
+    "content": "1. BT19/10701 (Suddhansu ranjan)\n2. BT19/10150 (Ayush Khedia)\n3. BT19/12422 (Abhijeet kumar)\n\nCongratulations to all the winners.",
+    "timestamp": 1550308939507,
+    "type": "RESULT",
+    "feedId": 1550308939507,
+    "eventId": 1
+  },
+  {
+    "id": 129,
+    "title": "Update for BIT Roadies (Finals)",
+    "content": "The finals is scheduled for tomorrow.",
+    "timestamp": 1550309047929,
+    "type": "EVENT",
+    "feedId": 1550309047929,
+    "eventId": "29"
+  },
+  {
+    "id": 130,
+    "title": "Update for BIT Roadies (Finals)",
+    "content": "The finals is scheduled for tomorrow.",
+    "timestamp": 1550309070412,
+    "type": "EVENT",
+    "feedId": 1550309070412,
+    "eventId": "29"
+  },
+  {
+    "id": 131,
+    "title": "Update for Pukaar (Finals)",
+    "content": "The finals is scheduled for tomorrow.",
+    "timestamp": 1550309089147,
+    "type": "EVENT",
+    "feedId": 1550309089147,
+    "eventId": "9"
+  },
+  {
+    "id": 132,
+    "title": "Update for Pukaar (Finals)",
+    "content": "The finals is scheduled for tomorrow.",
+    "timestamp": 1550309102167,
+    "type": "EVENT",
+    "feedId": 1550309102167,
+    "eventId": "9"
+  },
+  {
+    "id": 133,
+    "title": "Update for Abhinay (Finals)",
+    "content": "The finals is scheduled for tomorrow.",
+    "timestamp": 1550309125525,
+    "type": "EVENT",
+    "feedId": 1550309125525,
+    "eventId": "10"
+  },
+  {
+    "id": 134,
+    "title": "Update for Asian Parliamentary Debate (Finals)",
+    "content": "The finals is scheduled for tomorrow.",
+    "timestamp": 1550309151818,
+    "type": "EVENT",
+    "feedId": 1550309151818,
+    "eventId": "14"
+  },
+  {
+    "id": 135,
+    "title": "Result for event Stomp the Yard",
+    "content": "1. BT19/10883 (suman Kumar birua)\n2. BT19/12462 (Arpan khalkho)\n3. BT19/10617 (None)\n\nCongratulations to all the winners.",
+    "timestamp": 1550309658601,
+    "type": "RESULT",
+    "feedId": 1550309658601,
+    "eventId": 6
+  },
+  {
+    "id": 136,
+    "title": "Result for event Digixpress",
+    "content": "1. BT19/10735 (Priyanshu Pandey) - Maadhyam - 75 pts\n2. BT19/11777 (Saloni Anand) - Fire champs - 50 pts\n3. BT19/10162 (Rajarshi Kundu) - Felix Felicis - 25 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550309829246,
+    "type": "RESULT",
+    "feedId": 1550309829246,
+    "eventId": 27
+  },
+  {
+    "id": 137,
+    "title": "Result for Mr and Ms Bitotsav",
+    "content": "Ms. Bitotsav - Anushruti (BT19/11918)\nMr. Bitotsav - Osho Barman (BT19/10689)\n\nCongratulations to all the winners.",
+    "timestamp": 1550309906783,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550309906783
+  },
+  {
+    "id": 138,
+    "title": "Result for event Panache",
+    "content": "1. BT19/11521 (Rashi Gupta) - AGENTS OF HYDRA - 75 pts\n2. BT19/12478 (Pallavi)\n3. BT19/11075 (Kislay Raj) - INF3RNO - 25 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550310537901,
+    "type": "RESULT",
+    "feedId": 1550310537901,
+    "eventId": 24
+  },
+  {
+    "id": 139,
+    "title": "Update for Swar",
+    "content": "The event has started.",
+    "timestamp": 1550310883245,
+    "type": "EVENT",
+    "feedId": 1550310883245,
+    "eventId": "4"
+  },
+  {
+    "id": 140,
+    "title": "Update for Bitotsav Treasure Hunt",
+    "content": "The event stands cancelled.",
+    "timestamp": 1550310931699,
+    "type": "EVENT",
+    "feedId": 1550310931699,
+    "eventId": "32"
+  },
+  {
+    "id": 141,
+    "title": "Band - Nalayak",
+    "content": "Band Nalayak is going to perform today at Fusion Arena at 3:30 PM. Interested people are required to be there.",
+    "timestamp": 1550311333999,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550311333999
+  },
+  {
+    "id": 142,
+    "title": "Result for event Natsamraat",
+    "content": "1. BT19/11226 (Debanjana Biswas)\n2. BT19/10613 (Anvay Yamijala) - Warlock - 0 pts\n3. BT19/11367 (AKASH SINGH)\n\nCongratulations to all the winners.",
+    "timestamp": 1550311732934,
+    "type": "RESULT",
+    "feedId": 1550311732934,
+    "eventId": 11
+  },
+  {
+    "id": 143,
+    "title": "Transport for girls",
+    "content": "Buses will come near the bus stand for girls soon.",
+    "timestamp": 1550319696634,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550319696634
+  },
+  {
+    "id": 144,
+    "title": "EDM Night called off",
+    "content": "EDM night has been called off due to harsh weather condition.",
+    "timestamp": 1550325023569,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550325023569
+  },
+  {
+    "id": 145,
+    "title": "Update for Abhinay (Finals)",
+    "content": "The finals is scheduled at 1:00 PM.",
+    "timestamp": 1550347165207,
+    "type": "EVENT",
+    "feedId": 1550347165207,
+    "eventId": "10"
+  },
+  {
+    "id": 146,
+    "title": "Update for CSI Files",
+    "content": "Event will begin at 10:00 AM in LH-II",
+    "timestamp": 1550373602968,
+    "type": "EVENT",
+    "feedId": 1550373602968,
+    "eventId": "34"
+  },
+  {
+    "id": 147,
+    "title": "Update for Pukaar (Finals)",
+    "content": "Event is scheduled from 9 AM.",
+    "timestamp": 1550377050502,
+    "type": "EVENT",
+    "feedId": 1550377050502,
+    "eventId": "9"
+  },
+  {
+    "id": 148,
+    "title": "Update for Criminal Case",
+    "content": "Event has started.",
+    "timestamp": 1550377421487,
+    "type": "EVENT",
+    "feedId": 1550377421487,
+    "eventId": "41"
+  },
+  {
+    "id": 149,
+    "title": "BIT Treasure Hunt",
+    "content": "BIT Treasure Hunt is going start in 15 minutes.",
+    "timestamp": 1550377556591,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550377556591
+  },
+  {
+    "id": 150,
+    "title": "Update for Pukaar (Finals)",
+    "content": "The event is about to start.",
+    "timestamp": 1550377665797,
+    "type": "EVENT",
+    "feedId": 1550377665797,
+    "eventId": "9"
+  },
+  {
+    "id": 151,
+    "title": "Update for The Journalist's Hour",
+    "content": "The event is rescheduled to 1:00 PM at Lecture Hall 2.",
+    "timestamp": 1550377847250,
+    "type": "EVENT",
+    "feedId": 1550377847250,
+    "eventId": "33"
+  },
+  {
+    "id": 152,
+    "title": "Update for Talkies",
+    "content": "[Important] The event is preponed to 12:00 PM.",
+    "timestamp": 1550377929614,
+    "type": "EVENT",
+    "feedId": 1550377929614,
+    "eventId": "26"
+  },
+  {
+    "id": 153,
+    "title": "Update for BIT Roadies (Finals)",
+    "content": "The event is rescheduled to 2:00 PM at Shorbagh 2.",
+    "timestamp": 1550377994629,
+    "type": "EVENT",
+    "feedId": 1550377994629,
+    "eventId": "29"
+  },
+  {
+    "id": 154,
+    "title": "Update for CSI Files",
+    "content": "Event has started.",
+    "timestamp": 1550378012643,
+    "type": "EVENT",
+    "feedId": 1550378012643,
+    "eventId": "34"
+  },
+  {
+    "id": 155,
+    "title": "Update for Danza Duo",
+    "content": "[Important] The event is preponed to 1:00 PM.",
+    "timestamp": 1550378075052,
+    "type": "EVENT",
+    "feedId": 1550378075052,
+    "eventId": "8"
+  },
+  {
+    "id": 156,
+    "title": "Update for Humorously Yours",
+    "content": "[Important] The event is preponed to 12:00 PM.",
+    "timestamp": 1550378132338,
+    "type": "EVENT",
+    "feedId": 1550378132338,
+    "eventId": "15"
+  },
+  {
+    "id": 157,
+    "title": "Update for Bitotsav Treasure Hunt",
+    "content": "The event has been rescheduled to 10:00 AM at Room no. 203.",
+    "timestamp": 1550378193937,
+    "type": "EVENT",
+    "feedId": 1550378193937,
+    "eventId": "32"
+  },
+  {
+    "id": 158,
+    "title": "Update for PokerAZIA",
+    "content": "The event is rescheduled to 12:00 PM.",
+    "timestamp": 1550378307973,
+    "type": "EVENT",
+    "feedId": 1550378307973,
+    "eventId": "38"
+  },
+  {
+    "id": 159,
+    "title": "Update for CSI Files",
+    "content": "The event has started.",
+    "timestamp": 1550378334297,
+    "type": "EVENT",
+    "feedId": 1550378334297,
+    "eventId": "34"
+  },
+  {
+    "id": 160,
+    "title": "Update for The Journalist's Hour",
+    "content": ".",
+    "timestamp": 1550378434612,
+    "type": "EVENT",
+    "feedId": 1550378434612,
+    "eventId": "33"
+  },
+  {
+    "id": 161,
+    "title": "Event Schedule",
+    "content": "The event schedule for Day 3 has been updated. Participants can check the same in the Bitotsav '19 App.",
+    "timestamp": 1550378632599,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550378632599
+  },
+  {
+    "id": 162,
+    "title": "Update for Swar",
+    "content": "The event is over.",
+    "timestamp": 1550378658431,
+    "type": "EVENT",
+    "feedId": 1550378658431,
+    "eventId": "4"
+  },
+  {
+    "id": 163,
+    "title": "Result for event Swar",
+    "content": "1. BT19/10153 (Nachiket Agni)\n2. BT19/10633 (Harsh Ronald Dungdung) - Ensemble - 0 pts\n3. BT19/11250 (Aaditya Anees Abbas)\n\nCongratulations to all the winners.",
+    "timestamp": 1550378690506,
+    "type": "RESULT",
+    "feedId": 1550378690506,
+    "eventId": 4
+  },
+  {
+    "id": 164,
+    "title": "Update for What's In The Box?",
+    "content": "Event has started.",
+    "timestamp": 1550378735946,
+    "type": "EVENT",
+    "feedId": 1550378735946,
+    "eventId": "43"
+  },
+  {
+    "id": 165,
+    "title": "Update for Q-Riosity",
+    "content": "The event is over.",
+    "timestamp": 1550378825523,
+    "type": "EVENT",
+    "feedId": 1550378825523,
+    "eventId": "17"
+  },
+  {
+    "id": 166,
+    "title": "Update for CSI Files",
+    "content": "The event registration has been opened again.",
+    "timestamp": 1550378907434,
+    "type": "EVENT",
+    "feedId": 1550378907434,
+    "eventId": "34"
+  },
+  {
+    "id": 167,
+    "title": "CSI Files",
+    "content": "Registration for CSI Files will close in ten minutes.",
+    "timestamp": 1550379019120,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550379019120
+  },
+  {
+    "id": 168,
+    "title": "BIT Treasure Hunt",
+    "content": "No more than 40 teams will be allowed to register for BIT Treasure Hunt.",
+    "timestamp": 1550379061230,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550379061230
+  },
+  {
+    "id": 169,
+    "title": "Result for event Q-Riosity",
+    "content": "1. BT19/12549 (Piyush Kedia)\n2. BT19/12394 (Pabitra Narayan Nayak)\n3. BT19/12557 (Saket Kumar Jha)\n\nCongratulations to all the winners.",
+    "timestamp": 1550379844525,
+    "type": "RESULT",
+    "feedId": 1550379844525,
+    "eventId": 17
+  },
+  {
+    "id": 170,
+    "title": "Update for Pukaar (Finals)",
+    "content": "Event has started. ",
+    "timestamp": 1550380896732,
+    "type": "EVENT",
+    "feedId": 1550380896732,
+    "eventId": "9"
+  },
+  {
+    "id": 171,
+    "title": "The Journalist's Hour",
+    "content": "The event has been preponed and will start at 12:30 PM. Registrations will start at 12:20 PM sharp.",
+    "timestamp": 1550381061716,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550381061716
+  },
+  {
+    "id": 172,
+    "title": "Update for Dance Saga",
+    "content": "Event started.",
+    "timestamp": 1550381097813,
+    "type": "EVENT",
+    "feedId": 1550381097813,
+    "eventId": "5"
+  },
+  {
+    "id": 173,
+    "title": "Update for Cryptic Crossword",
+    "content": "Event has started.",
+    "timestamp": 1550381281448,
+    "type": "EVENT",
+    "feedId": 1550381281448,
+    "eventId": "18"
+  },
+  {
+    "id": 174,
+    "title": "Update for Bitotsav Treasure Hunt",
+    "content": "Event has started.",
+    "timestamp": 1550381321440,
+    "type": "EVENT",
+    "feedId": 1550381321440,
+    "eventId": "32"
+  },
+  {
+    "id": 175,
+    "title": "KTM Stunt Show",
+    "content": "KTM stunt show will start 12:00 PM sharp, at PMC. Head over!",
+    "timestamp": 1550381436998,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550381436998
+  },
+  {
+    "id": 176,
+    "title": "Bitotsav Treasure Hunt",
+    "content": "The registration for the event will close soon.",
+    "timestamp": 1550381501994,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550381501994
+  },
+  {
+    "id": 177,
+    "title": "Acoustic Alchemy",
+    "content": "The registration for the event will close soon.",
+    "timestamp": 1550381615922,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550381615922
+  },
+  {
+    "id": 178,
+    "title": "Beauty and the Geek",
+    "content": "The event is about to start soon. Reach 236 asap!",
+    "timestamp": 1550381658052,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550381658052
+  },
+  {
+    "id": 179,
+    "title": "Update for Acoustic Alchemy",
+    "content": "Event has started.",
+    "timestamp": 1550382551502,
+    "type": "EVENT",
+    "feedId": 1550382551502,
+    "eventId": "3"
+  },
+  {
+    "id": 180,
+    "title": "Critical App Update",
+    "content": "Please update the Bitotsav App from the Play Store. This update is critical and has many fixes necessary for the smooth and fast functioning of the App.",
+    "timestamp": 1550384324730,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550384324730
+  },
+  {
+    "id": 181,
+    "title": "KTM Stunt Show",
+    "content": "KTM Stunt Show is going the start at PMC now. Rush to the stunt arena! ",
+    "timestamp": 1550384743443,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550384743443
+  },
+  {
+    "id": 182,
+    "title": "Update for Cryptic Crossword",
+    "content": "Event is now complete.",
+    "timestamp": 1550384879264,
+    "type": "EVENT",
+    "feedId": 1550384879264,
+    "eventId": "18"
+  },
+  {
+    "id": 183,
+    "title": "Update for Cryptic Crossword",
+    "content": "Event is over.",
+    "timestamp": 1550385018244,
+    "type": "EVENT",
+    "feedId": 1550385018244,
+    "eventId": "18"
+  },
+  {
+    "id": 184,
+    "title": "Update for What's In The Box?",
+    "content": "Event is over.",
+    "timestamp": 1550385176433,
+    "type": "EVENT",
+    "feedId": 1550385176433,
+    "eventId": "43"
+  },
+  {
+    "id": 185,
+    "title": "Update for PokerAZIA",
+    "content": "Team size updated. Maximum team size of PokerAZIA is 2.",
+    "timestamp": 1550385911216,
+    "type": "EVENT",
+    "feedId": 1550385911216,
+    "eventId": "38"
+  },
+  {
+    "id": 186,
+    "title": "Update for Humorously Yours",
+    "content": "The event will start at 1:15 PM",
+    "timestamp": 1550386487285,
+    "type": "EVENT",
+    "feedId": 1550386487285,
+    "eventId": "15"
+  },
+  {
+    "id": 187,
+    "title": "Update for CSI Files",
+    "content": "The event is now complete.",
+    "timestamp": 1550386553718,
+    "type": "EVENT",
+    "feedId": 1550386553718,
+    "eventId": "34"
+  },
+  {
+    "id": 188,
+    "title": "Update for Asian Parliamentary Debate (Finals)",
+    "content": "The event is over.",
+    "timestamp": 1550386964507,
+    "type": "EVENT",
+    "feedId": 1550386964507,
+    "eventId": "14"
+  },
+  {
+    "id": 189,
+    "title": "Critical App Update",
+    "content": "Please update the Bitotsav App from the Play Store. This update is critical and has many fixes necessary for the smooth and fast functioning of the App.",
+    "timestamp": 1550387138173,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550387138173
+  },
+  {
+    "id": 190,
+    "title": "Update for Talkies",
+    "content": "Update in event time.",
+    "timestamp": 1550387668029,
+    "type": "EVENT",
+    "feedId": 1550387668029,
+    "eventId": "26"
+  },
+  {
+    "id": 191,
+    "title": "Update for Acoustic Alchemy",
+    "content": "The event is over.",
+    "timestamp": 1550387885188,
+    "type": "EVENT",
+    "feedId": 1550387885188,
+    "eventId": "3"
+  },
+  {
+    "id": 192,
+    "title": "Update for Rhapsody",
+    "content": "The event stands cancelled.",
+    "timestamp": 1550389003389,
+    "type": "EVENT",
+    "feedId": 1550389003389,
+    "eventId": "2"
+  },
+  {
+    "id": 193,
+    "title": "Result for event Asian Parliamentary Debate (Finals)",
+    "content": "1. BT19/10793 (Tejaswini Singh) - Ensemble - 30 pts\n2. BT19/10031 (BHAVESH CHATURVEDI) - Maha gathbandhan - 20 pts\n3. BT19/10145 (Alaap Banerjee)\n\nCongratulations to all the winners.",
+    "timestamp": 1550389123222,
+    "type": "RESULT",
+    "feedId": 1550389123222,
+    "eventId": 14
+  },
+  {
+    "id": 194,
+    "title": "Update for Bitotsav Treasure Hunt",
+    "content": "The event is over",
+    "timestamp": 1550389192881,
+    "type": "EVENT",
+    "feedId": 1550389192881,
+    "eventId": "32"
+  },
+  {
+    "id": 195,
+    "title": "Update for Criminal Case",
+    "content": "The event is over.",
+    "timestamp": 1550389388677,
+    "type": "EVENT",
+    "feedId": 1550389388677,
+    "eventId": "41"
+  },
+  {
+    "id": 196,
+    "title": "Update for Dance Saga",
+    "content": "Event is now over.",
+    "timestamp": 1550389525037,
+    "type": "EVENT",
+    "feedId": 1550389525037,
+    "eventId": "5"
+  },
+  {
+    "id": 197,
+    "title": "Update for Pukaar (Finals)",
+    "content": "Event is now over.",
+    "timestamp": 1550389575952,
+    "type": "EVENT",
+    "feedId": 1550389575952,
+    "eventId": "9"
+  },
+  {
+    "id": 198,
+    "title": "Update for Bitotsav Treasure Hunt",
+    "content": "The event is now complete.",
+    "timestamp": 1550389715458,
+    "type": "EVENT",
+    "feedId": 1550389715458,
+    "eventId": "32"
+  },
+  {
+    "id": 199,
+    "title": "Result for event Criminal Case",
+    "content": "1. BT19/11955 (Adarsh Kumar)\n2. BT19/12009 (Ruthwik podila) - The \"Uniques\" - 50 pts\n3. BT19/10786 (Harsh singh) - Conquerors - 25 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550390507241,
+    "type": "RESULT",
+    "feedId": 1550390507241,
+    "eventId": 41
+  },
+  {
+    "id": 200,
+    "title": "Important Announcement",
+    "content": "GoPro Hero 5 is misplaced. Please return it to he info desk immediately.",
+    "timestamp": 1550391175835,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550391175835
+  },
+  {
+    "id": 201,
+    "title": "Important Announcement",
+    "content": "Go Pro Hero 5 is misplaced from the KTM Arena. Please return it to the info desk immediately.",
+    "timestamp": 1550391725714,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550391725714
+  },
+  {
+    "id": 202,
+    "title": "Result for event Bitotsav Treasure Hunt",
+    "content": "1. BT19/10797 (Anurag rai)\n2. BT19/11025 (Abhishek Agrawal) - Rampage - 50 pts\n3. BT19/10212 (Himanshu Singh)\n\nCongratulations to all the winners.",
+    "timestamp": 1550393153484,
+    "type": "RESULT",
+    "feedId": 1550393153484,
+    "eventId": 32
+  },
+  {
+    "id": 203,
+    "title": "Update for Face Painting",
+    "content": "The event has started.\n",
+    "timestamp": 1550393697474,
+    "type": "EVENT",
+    "feedId": 1550393697474,
+    "eventId": "30"
+  },
+  {
+    "id": 204,
+    "title": "Update for Talkies",
+    "content": "The event has started",
+    "timestamp": 1550393867602,
+    "type": "EVENT",
+    "feedId": 1550393867602,
+    "eventId": "26"
+  },
+  {
+    "id": 205,
+    "title": "Update for Abhinay (Finals)",
+    "content": "The event has started.",
+    "timestamp": 1550393904956,
+    "type": "EVENT",
+    "feedId": 1550393904956,
+    "eventId": "10"
+  },
+  {
+    "id": 206,
+    "title": "Result for event Acoustic Alchemy",
+    "content": "1. BT19/12424 (Avinash routh)\n2. BT19/10153 (Nachiket Agni)\n3. BT19/10170 (Riju Chatterjee)\n\nCongratulations to all the winners.",
+    "timestamp": 1550394026225,
+    "type": "RESULT",
+    "feedId": 1550394026225,
+    "eventId": 3
+  },
+  {
+    "id": 207,
+    "title": "Update for BIT Roadies (Finals)",
+    "content": "The event has started.\n",
+    "timestamp": 1550394467715,
+    "type": "EVENT",
+    "feedId": 1550394467715,
+    "eventId": "29"
+  },
+  {
+    "id": 208,
+    "title": "Result for event What's In The Box?",
+    "content": "1. BT19/10807 (Piyush Sourav) - Spectrum - 50 pts\n2. BT19/10992 (Aryan Yashaswi) - Maadhyam - 30 pts\n3. BT19/11559 (Nishant) - Maha gathbandhan - 20 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550394665960,
+    "type": "RESULT",
+    "feedId": 1550394665960,
+    "eventId": 43
+  },
+  {
+    "id": 209,
+    "title": "Update for Beauty and the Geek",
+    "content": "The event is over.\n",
+    "timestamp": 1550394745140,
+    "type": "EVENT",
+    "feedId": 1550394745140,
+    "eventId": "25"
+  },
+  {
+    "id": 210,
+    "title": "Result for event Cryptic Crossword",
+    "content": "1. BT19/11559 (Nishant) - Maha gathbandhan - 50 pts\n2. BT19/11917 (Shivam Kumar)\n3. BT19/11045 (Aditya Mishra) - Felix Felicis - 20 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550395040326,
+    "type": "RESULT",
+    "feedId": 1550395040326,
+    "eventId": 18
+  },
+  {
+    "id": 211,
+    "title": "Acoustic Alchemy Result Update",
+    "content": "The third position for the event was also shared by Shaswat (BT19/10758), Gaurav (BT19/10769) and Simardeep (BT19/10725).",
+    "timestamp": 1550395274352,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550395274352
+  },
+  {
+    "id": 212,
+    "title": "Result for event Beauty and the Geek",
+    "content": "1. BT19/11097 (AAKANKSHA SINGH) - Seekers - 50 pts\n2. BT19/11918 (Anushruti)\n3. BT19/10862 (Vidyuth) - TAMIL PASANGA (TP) - 20 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550395621450,
+    "type": "RESULT",
+    "feedId": 1550395621450,
+    "eventId": 25
+  },
+  {
+    "id": 213,
+    "title": "Points allotment",
+    "content": "All team members participating in an event must belong to the same Championship team to get the points. There is no such thing as degree of belongingness of members to a Championship team (@#&! Fuzzy).",
+    "timestamp": 1550396300385,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550396300385
+  },
+  {
+    "id": 214,
+    "title": "Result for event Pukaar (Finals)",
+    "content": "1. BT19/12091 (Nikhil Roy)\n2. BT19/10000 (Sushant Kumar Gupta) - BitTeam - 0 pts\n3. BT19/10617 (Sushant)\n\nCongratulations to all the winners.",
+    "timestamp": 1550397200214,
+    "type": "RESULT",
+    "feedId": 1550397200214,
+    "eventId": 9
+  },
+  {
+    "id": 215,
+    "title": "Result for Dance Saga",
+    "content": "1. MALANG (BT19/10909)\n2. MVS CREW (BT19/12380)\n3. MAYUR (BT19/11903)\n\nCongratulations to all the winners.",
+    "timestamp": 1550397835295,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550397835295
+  },
+  {
+    "id": 216,
+    "title": "Update for Danza Duo",
+    "content": "The event is over.",
+    "timestamp": 1550398144694,
+    "type": "EVENT",
+    "feedId": 1550398144694,
+    "eventId": "8"
+  },
+  {
+    "id": 217,
+    "title": "Bitotsav Kits",
+    "content": "Bitotsav Kits are now available. Participants can collect it from Infocell.",
+    "timestamp": 1550401430289,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550401430289
+  },
+  {
+    "id": 218,
+    "title": "Bitotsav Kits",
+    "content": "Only for participants from outside of BIT Mesra.",
+    "timestamp": 1550402694145,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550402694145
+  },
+  {
+    "id": 219,
+    "title": "Result for event CSI Files",
+    "content": "1. BT19/10143 (Kumar Sonu) - The Archemists - 75 pts\n2. BT19/11004 (MEhul Vijayvargiya) - @camouflage - 50 pts\n3. BT19/10250 (Aayush Garg) - Ensemble - 25 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550403041862,
+    "type": "RESULT",
+    "feedId": 1550403041862,
+    "eventId": 34
+  },
+  {
+    "id": 220,
+    "title": "Update for BIT Roadies (Finals)",
+    "content": "The event is over.",
+    "timestamp": 1550403113368,
+    "type": "EVENT",
+    "feedId": 1550403113368,
+    "eventId": "29"
+  },
+  {
+    "id": 221,
+    "title": "Result for event BIT Roadies (Finals)",
+    "content": "1. BT19/11650 (Abhishek Dutta) - The Despicables - 30 pts\n2. BT19/11364 (Abhay Surya) - No-Placement - 20 pts\n3. BT19/10238 (Ayush Jain) - Frozen_Electronics - 10 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550403292026,
+    "type": "RESULT",
+    "feedId": 1550403292026,
+    "eventId": 29
+  },
+  {
+    "id": 222,
+    "title": "Update for Face Painting",
+    "content": "The event is over.",
+    "timestamp": 1550403362842,
+    "type": "EVENT",
+    "feedId": 1550403362842,
+    "eventId": "30"
+  },
+  {
+    "id": 223,
+    "title": "Update for PokerAZIA",
+    "content": "The event is over.",
+    "timestamp": 1550403496822,
+    "type": "EVENT",
+    "feedId": 1550403496822,
+    "eventId": "38"
+  },
+  {
+    "id": 224,
+    "title": "Result for event PokerAZIA",
+    "content": "1. BT19/10992 (Aryan Yashaswi) - Maadhyam - 75 pts\n2. BT19/10798 (Abhishek Kumar Patra) - Bratstvo - 50 pts\n3. BT19/11158 (Sanskar Agarwal)\n\nCongratulations to all the winners.",
+    "timestamp": 1550403574585,
+    "type": "RESULT",
+    "feedId": 1550403574585,
+    "eventId": 38
+  },
+  {
+    "id": 225,
+    "title": "Update for Event CSI Files",
+    "content": "Since Uttam Kumar (BT19/10185) doesn't belong to the same Bitotsav Championship team, 75 points are deducted from the team Archemist.",
+    "timestamp": 1550403899740,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550403899740
+  },
+  {
+    "id": 226,
+    "title": "Result for Talkies",
+    "content": "1. The Virtual Trap (BT19/12583)\n2. Muqammal (BT19/11807)\n3. Tripathi (BT19/10823)\n\nCongratulations to all the winners.",
+    "timestamp": 1550405205974,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550405205974
+  },
+  {
+    "id": 227,
+    "title": "Update for Talkies",
+    "content": "The event is over.",
+    "timestamp": 1550405238191,
+    "type": "EVENT",
+    "feedId": 1550405238191,
+    "eventId": "26"
+  },
+  {
+    "id": 228,
+    "title": "Update for The Journalist's Hour",
+    "content": "The event is completed.",
+    "timestamp": 1550405398663,
+    "type": "EVENT",
+    "feedId": 1550405398663,
+    "eventId": "33"
+  },
+  {
+    "id": 229,
+    "title": "Result for event The Journalist's Hour",
+    "content": "1. BT19/10703 (Apoorva Nanda) - Seekers - 0 pts\n2. BT19/10045 (Vaibhav Raj) - Maha gathbandhan - 0 pts\n3. BT19/10143 (Kumar Sonu) - The Archemists - 0 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550405573192,
+    "type": "RESULT",
+    "feedId": 1550405573192,
+    "eventId": 33
+  },
+  {
+    "id": 230,
+    "title": "Announcement for Nights",
+    "content": "No cameras are allowed in the night.",
+    "timestamp": 1550405970378,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550405970378
+  },
+  {
+    "id": 231,
+    "title": "Result for event Face Painting",
+    "content": "1. BT19/11221 (Deeptam Das) - The Archemists - 50 pts\n2. BT19/10759 (prakhar kumar) - First Of Our Name - 30 pts\n3. BT19/11425 (Sayani Das) - Seekers - 20 pts\n\nCongratulations to all the winners.",
+    "timestamp": 1550406246931,
+    "type": "RESULT",
+    "feedId": 1550406246931,
+    "eventId": 30
+  },
+  {
+    "id": 232,
+    "title": "Update for Abhinay (Finals)",
+    "content": "The event is over.",
+    "timestamp": 1550406310375,
+    "type": "EVENT",
+    "feedId": 1550406310375,
+    "eventId": "10"
+  },
+  {
+    "id": 233,
+    "title": "Update for Humorously Yours",
+    "content": "The event is over.",
+    "timestamp": 1550406606888,
+    "type": "EVENT",
+    "feedId": 1550406606888,
+    "eventId": "15"
+  },
+  {
+    "id": 234,
+    "title": "Result for event Humorously Yours",
+    "content": "1. BT19/11322 (Shankar pandey)\n2. BT19/10753 (SANCHIT AGARWAL)\n3. BT19/11271 (Sahil Dutt)\n\nCongratulations to all the winners.",
+    "timestamp": 1550406635990,
+    "type": "RESULT",
+    "feedId": 1550406635990,
+    "eventId": 15
+  },
+  {
+    "id": 235,
+    "title": "Result for event Abhinay (Finals)",
+    "content": "1. BT19/10195 (Sujata Chatterjee)\n2. BT19/12513 (Sagnik Mukherjee)\n3. BT19/11418 (Shivani Meena)\n\nCongratulations to all the winners.",
+    "timestamp": 1550408053343,
+    "type": "RESULT",
+    "feedId": 1550408053343,
+    "eventId": 10
+  },
+  {
+    "id": 236,
+    "title": "Night event",
+    "content": "No cameras are allowed in the fusion arena.",
+    "timestamp": 1550408291835,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550408291835
+  },
+  {
+    "id": 237,
+    "title": "Night event",
+    "content": "The last bus for girls will leave at 7:15 PM sharp.",
+    "timestamp": 1550408329433,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550408329433
+  },
+  {
+    "id": 238,
+    "title": "Events",
+    "content": "All day events are now complete. The overall champions will be announced at the fusion arena.",
+    "timestamp": 1550408397488,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550408397488
+  },
+  {
+    "id": 239,
+    "title": "Night event",
+    "content": "It is compulsory for everyone to get their college Id cards for entry to the night event.",
+    "timestamp": 1550408572757,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550408572757
+  }
+]
