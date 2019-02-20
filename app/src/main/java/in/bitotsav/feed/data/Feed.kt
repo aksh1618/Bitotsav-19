@@ -2,6 +2,7 @@ package `in`.bitotsav.feed.data
 
 import `in`.bitotsav.shared.ui.SimpleRecyclerViewAdapter
 import android.text.format.DateFormat
+import androidx.annotation.Keep
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
@@ -15,6 +16,8 @@ enum class FeedType {
     PM
 }
 
+//Exclude Member from proguard to allow gson serialization
+@Keep
 @Entity
 data class Feed(
     @PrimaryKey @SerializedName("feedId") val id: Long,

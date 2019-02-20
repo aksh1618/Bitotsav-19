@@ -8,7 +8,6 @@ import `in`.bitotsav.profile.utils.fetchProfileDetailsAsync
 import `in`.bitotsav.shared.exceptions.AuthException
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.getWork
-import `in`.bitotsav.shared.utils.isBitotsavOver
 import `in`.bitotsav.shared.workers.ProfileWorkType.FETCH_PAYMENT_DETAILS
 import `in`.bitotsav.shared.workers.ProfileWorkType.valueOf
 import android.content.Context
@@ -16,6 +15,8 @@ import android.util.Log
 import androidx.work.*
 import kotlinx.coroutines.runBlocking
 import org.koin.core.context.GlobalContext.get
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 private const val TAG = "ProfileWorker"
 
@@ -29,8 +30,6 @@ class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context
 
     override fun doWork(): Result {
         try {
-            if (isBitotsavOver())
-                return Result.success()
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             when (type) {
@@ -78,6 +77,12 @@ class ProfileWorker(context: Context, params: WorkerParameters) : Worker(context
         } catch (e: AuthException) {
             Log.d(TAG, e.message ?: "Authentication exception")
             // TODO: Delete token
+            return Result.failure()
+        } catch (e: UnknownHostException) {
+            Log.d(TAG, e.message ?: "Unknown Error")
+            return Result.failure()
+        } catch (e: SocketTimeoutException) {
+            Log.d(TAG, e.message ?: "Unknown Error")
             return Result.failure()
         } catch (e: Exception) {
             Log.d(TAG, e.message ?: "Unknown Error")

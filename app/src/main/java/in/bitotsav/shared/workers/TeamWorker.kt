@@ -12,6 +12,8 @@ import androidx.work.WorkerParameters
 import kotlinx.coroutines.runBlocking
 import org.koin.core.KoinComponent
 import org.koin.core.get
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 private const val TAG = "TeamWorker"
 
@@ -26,14 +28,16 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
 
     override fun doWork(): Result {
         try {
-            if (isBitotsavOver())
-                return Result.success()
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             when (type) {
                 // Fetch all championship teams
-                FETCH_ALL_TEAMS -> runBlocking {
-                    get<ChampionshipTeamRepository>().fetchAllChampionshipTeamsAsync().await()
+                FETCH_ALL_TEAMS -> {
+                    if (isBitotsavOver())
+                        return Result.success()
+                    runBlocking {
+                        get<ChampionshipTeamRepository>().fetchAllChampionshipTeamsAsync().await()
+                    }
                 }
                 // Fetch non-championship team by id
                 FETCH_TEAM -> {
@@ -65,6 +69,12 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
             return Result.success()
         } catch (e: NonRetryableException) {
             Log.d(TAG, e.message ?: "Non-retryable exception")
+            return Result.failure()
+        } catch (e: UnknownHostException) {
+            Log.d(TAG, e.message ?: "Unknown Error")
+            return Result.failure()
+        } catch (e: SocketTimeoutException) {
+            Log.d(TAG, e.message ?: "Unknown Error")
             return Result.failure()
         } catch (e: Exception) {
             Log.d(TAG, e.message ?: "Unknown Error")

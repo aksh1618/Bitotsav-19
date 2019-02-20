@@ -71,7 +71,7 @@ inline fun <reified T : Worker> getWork(input: Data): OneTimeWorkRequest {
 fun isBitotsavOver(): Boolean {
     val timestamp = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))
     // Bitotsav ends on 17.02.2019. A few extra days to account for clean up.
-    timestamp.set(2019, 1, 20, 0, 0)
+    timestamp.set(2019, 1, 22, 0, 0)
     return System.currentTimeMillis() > timestamp.timeInMillis
 }
 

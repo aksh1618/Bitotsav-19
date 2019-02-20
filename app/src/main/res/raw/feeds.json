@@ -2087,5 +2087,13 @@
     "timestamp": 1550408572757,
     "type": "ANNOUNCEMENT",
     "feedId": 1550408572757
+  },
+  {
+    "id": 240,
+    "title": "Signing Off 👋",
+    "content": "Thanks for being a part of Bitotsav '19! Although there were some unavoidable hurdles along the way, we hope you still had a great time. See you next year! (Don't forget to review the app 😛)\n\nP.S. The leaderboard, results etc. will stay accessible through the app for bragging rights ✌️",
+    "timestamp": 1550693942302,
+    "type": "ANNOUNCEMENT",
+    "feedId": 1550693942302
   }
 ]

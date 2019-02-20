@@ -52,6 +52,8 @@ val repositoriesModule = module {
 val retrofitModule = module {
 
     single("custom_gson") {
+        //        Use @Expose(serialize = false, deserialize = false) with this gson to ignore both serialization and
+//        de-serialization of particular members or fields
         GsonBuilder().addDeserializationExclusionStrategy(
             object : ExclusionStrategy {
                 override fun shouldSkipField(fieldAttributes: FieldAttributes): Boolean {
