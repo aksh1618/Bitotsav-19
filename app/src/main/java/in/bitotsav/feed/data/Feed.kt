@@ -20,13 +20,14 @@ data class Feed(
     @PrimaryKey @SerializedName("feedId") val id: Long,
     @SerializedName("title") val title: String,
     @SerializedName("content") val content: String,
-    @SerializedName("type") val type: String,
+    @SerializedName("type") val type: String, // FeedType
     @SerializedName("timestamp") val timestamp: Long, // Milliseconds
     @Expose(serialize = false, deserialize = false) var isStarred: Boolean = false,
     val eventId: Int? = null,
     @Expose(serialize = false, deserialize = false) var eventName: String? = null
 ) : SimpleRecyclerViewAdapter.SimpleItem() {
 
+    // *Note: Must be called when creating an instance using Gson to initialise these params.
     fun setProperties(isStarred: Boolean, eventName: String?) {
         this.isStarred = isStarred
         this.eventName = eventName

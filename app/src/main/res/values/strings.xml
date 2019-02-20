@@ -102,7 +102,6 @@
     <string name="profile_label_bitotsav_credentials">Your Bitotsav Details</string>
     <string name="profile_label_bitotsav_id">Bitotsav ID</string>
     <string name="profile_label_email">Registered Email</string>
-    <!-- TODO: @ashank Verify strings -->
     <string name="profile_label_night1">Night 1</string>
     <string name="profile_label_night2">Night 2</string>
     <string name="profile_label_night3">Night 3</string>

@@ -31,9 +31,11 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             when (type) {
+                // Fetch all championship teams
                 FETCH_ALL_TEAMS -> runBlocking {
                     get<ChampionshipTeamRepository>().fetchAllChampionshipTeamsAsync().await()
                 }
+                // Fetch non-championship team by id
                 FETCH_TEAM -> {
                     val eventId = inputData.getInt("eventId", -1)
                     if (eventId == -1)
@@ -50,14 +52,9 @@ class TeamWorker(context: Context, params: WorkerParameters) : Worker(context, p
                     get<NonChampionshipTeamRepository>().cleanupUserTeams()
                     Log.d(TAG, "Teams cleanup complete")
                 }
+                // Fetch Bitotsav championship team by id
                 FETCH_BC_TEAM -> {
                     val teamName = inputData.getString("teamName")
-//                    val user = User(
-//                        CurrentUser.bitotsavId!!,
-//                        CurrentUser.name!!,
-//                        CurrentUser.email!!,
-//                        teamName
-//                    )
                     runBlocking {
                         teamName?.let {
                             get<ChampionshipTeamRepository>().fetchChampionshipTeamAsync(teamName).await()

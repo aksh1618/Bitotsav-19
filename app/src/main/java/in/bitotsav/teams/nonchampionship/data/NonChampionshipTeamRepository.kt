@@ -31,6 +31,9 @@ class NonChampionshipTeamRepository(
     @WorkerThread
     override suspend fun insert(vararg items: NonChampionshipTeam) = nonChampionshipTeamDao.insert(*items)
 
+    /**
+     * Call this method after inserting new user teams into the DB to remove older teams
+     */
     @WorkerThread
     suspend fun cleanupUserTeams() {
         get<AppDatabase>().beginTransaction()

@@ -15,7 +15,7 @@ data class User(
     @PrimaryKey val id: String,
     val name: String,
     val email: String,
-    val championshipTeam: String? = null,
+    val championshipTeam: String? = null, // Name
     val day1: Boolean = false,
     val day2: Boolean = false,
     val day3: Boolean = false,

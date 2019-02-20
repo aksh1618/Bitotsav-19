@@ -75,6 +75,9 @@ class ChampionshipTeamRepository(private val championshipTeamDao: ChampionshipTe
         }
     }
 
+    /**
+     * Get sorted list of championship teams by rank
+     */
     private fun getChampionshipTeamsByRank(teams: List<ChampionshipTeam>): List<ChampionshipTeam> {
         val sortedTeams = teams.sortedByDescending { it.totalScore }
         var rank = 1

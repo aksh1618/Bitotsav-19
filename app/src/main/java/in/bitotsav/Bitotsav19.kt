@@ -35,6 +35,7 @@ class Bitotsav19 : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        // Subscribe this device to "global" topic
         FirebaseMessaging.getInstance().subscribeToTopic("global")
             .addOnCompleteListener { task ->
                 var msg = "Subscription to global successful"
@@ -51,6 +52,7 @@ class Bitotsav19 : Application() {
             modules(repositoriesModule, retrofitModule, viewModelsModule, sharedPrefsModule)
         }
 
+        // Initialise Reminder worker
         checkAndScheduleReminderWork()
 
         if (get<SharedPreferences>().getBoolean(IS_FIRST_RUN, true)) {
@@ -58,6 +60,7 @@ class Bitotsav19 : Application() {
             get<SharedPreferences>().edit().putBoolean(IS_FIRST_RUN, false).apply()
         }
 
+        // Refresh events and fetch new feeds on each run
         val eventWork =
             getWork<EventWorker>(workDataOf("type" to EventWorkType.FETCH_ALL_EVENTS.name))
         val feedWork = getWork<FeedWorker>(
@@ -82,6 +85,11 @@ class Bitotsav19 : Application() {
         )
     }
 
+    /**
+     * Start the reminder work if Bitotsav is not yet over.
+     * This method is called on each run as insurance that the Reminder worker does run on all devices. Reminder on
+     * some Chinese OEMs may fail without this strategy.
+     */
     private fun checkAndScheduleReminderWork() {
         val currentTimestamp = System.currentTimeMillis()
         val calendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Kolkata"))

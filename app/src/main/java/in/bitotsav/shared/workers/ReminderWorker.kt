@@ -4,11 +4,9 @@ import `in`.bitotsav.events.data.EventRepository
 import `in`.bitotsav.notification.utils.Channel
 import `in`.bitotsav.notification.utils.displayNotification
 import `in`.bitotsav.notification.utils.getEventDetailPendingIntent
-import `in`.bitotsav.notification.utils.getFeedPendingIntent
 import `in`.bitotsav.shared.exceptions.NonRetryableException
 import `in`.bitotsav.shared.utils.cancelReminderWork
 import `in`.bitotsav.shared.utils.isBitotsavOver
-import `in`.bitotsav.shared.utils.startReminderWork
 import `in`.bitotsav.shared.workers.ReminderWorkType.valueOf
 import android.content.Context
 import android.util.Log
@@ -22,9 +20,7 @@ import java.util.*
 private const val TAG = "ReminderWorker"
 
 enum class ReminderWorkType {
-    CHECK_UPCOMING_EVENTS,
-    START_REMINDER_WORK,
-    STOP_REMINDER_WORK
+    CHECK_UPCOMING_EVENTS
 }
 
 class ReminderWorker(context: Context, params: WorkerParameters) : Worker(context, params),
@@ -36,19 +32,8 @@ class ReminderWorker(context: Context, params: WorkerParameters) : Worker(contex
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             when (type) {
-                ReminderWorkType.START_REMINDER_WORK -> {
-                    Log.d(TAG, "Starting reminder work")
-                    startReminderWork()
-//                    checkNotification("STARTING_REMINDER_WORK", applicationContext)
-                }
-                ReminderWorkType.STOP_REMINDER_WORK -> {
-                    Log.d(TAG, "Stopping reminder work")
-                    cancelReminderWork()
-//                    checkNotification("STOPPING_REMINDER_WORK", applicationContext)
-                }
                 ReminderWorkType.CHECK_UPCOMING_EVENTS -> {
                     Log.d(TAG, "Reminder work running")
-//                    checkNotification("RUNNING_REMINDER_WORK", applicationContext)
                     val events = runBlocking { get<EventRepository>().getAllStarred() }
                     val timePeriod = 45 * 60 * 1000
                     val currentTimestamp = System.currentTimeMillis()
@@ -80,15 +65,4 @@ class ReminderWorker(context: Context, params: WorkerParameters) : Worker(contex
             return Result.failure()
         }
     }
-}
-
-private fun checkNotification(title: String, context: Context) {
-    displayNotification(
-        title,
-        "Test content",
-        System.currentTimeMillis(),
-        Channel.ANNOUNCEMENT,
-        getFeedPendingIntent(context),
-        context
-    )
 }

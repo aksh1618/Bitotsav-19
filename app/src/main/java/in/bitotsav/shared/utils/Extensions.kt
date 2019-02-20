@@ -111,7 +111,7 @@ fun String.showInfoDialog(context: Context) {
         .setMessage(this)
         .setPositiveButton("OK", null)
         .setNeutralButton("Help") { _, _ ->
-            "Contact out team (Info -> Contact Us)".toast(context)
+            "Contact our team (Info -> Contact Us)".toast(context)
         }
         .create()
         .show()

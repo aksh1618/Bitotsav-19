@@ -39,6 +39,7 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             when (type) {
+                // Handle result notification
                 ResultWorkType.RESULT -> {
                     val eventId = inputData.getInt("eventId", -1)
                     if (eventId == -1)
@@ -52,6 +53,7 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
                         getWorkNameForTeamWorker(TeamWorkType.FETCH_ALL_TEAMS)
                     )
                 }
+                // Get winning teams for all events
                 ResultWorkType.WINNING_TEAMS -> {
                     val events = runBlocking { get<EventRepository>().getAllEvents() }
                     events.forEachParallel {
@@ -90,6 +92,9 @@ class ResultWorker(context: Context, params: WorkerParameters) : Worker(context,
         }
     }
 
+    /**
+     * Check whether the user's team won and display a notification
+     */
     private fun checkAndHandleIfUsersTeam(event: Event) {
         val leaderId = CurrentUser.userTeams?.get(event.id.toString())
         val position: String?

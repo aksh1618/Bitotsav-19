@@ -8,7 +8,7 @@ data class NonChampionshipTeam(
     val eventId: Int,
     val teamLeaderId: String,
     @Expose(serialize = false, deserialize = false) var name: String,
-    val members: Map<String, String>,
+    val members: Map<String, String>, // [{bitId:name}]
     @Expose(serialize = false, deserialize = false) var rank: Int = 0,
     @Expose(serialize = false, deserialize = false) var isUserTeam: Boolean = false,
     // For updating user teams
