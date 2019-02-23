@@ -24,6 +24,7 @@ class FeedWorker(context: Context, params: WorkerParameters) : Worker(context, p
         try {
             if (isBitotsavOver())
                 return Result.success()
+            @Suppress("UNUSED_VARIABLE")
             val type = inputData.getString("type")?.let { valueOf(it) }
                 ?: throw NonRetryableException("Invalid work type")
             runBlocking {

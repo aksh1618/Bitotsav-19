@@ -68,6 +68,7 @@ object CurrentUser : KoinComponent {
         }
 
     //    {day1,day2,day3,merchandise,accommodation}
+    @Suppress("UNCHECKED_CAST")
     var paymentDetails: Map<String, Boolean>? =
         getFromPrefs("paymentDetails")?.let { toMap(it) as Map<String, Boolean> }
         set(value) {
