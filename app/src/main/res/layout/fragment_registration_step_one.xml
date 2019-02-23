@@ -60,7 +60,7 @@
                 app:inputType="@{InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS}"
                 app:target="@{fields.email}" />
 
-            <!-- TODO: Indicate this will mailed and then removed -->
+            <!-- TODO [Refactor]: Indicate this will mailed and then removed -->
             <include
                 android:id="@+id/password"
                 layout="@layout/include_edit_text"

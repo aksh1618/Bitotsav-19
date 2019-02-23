@@ -24,7 +24,8 @@ abstract class BaseViewModel(
 
     fun toast(message: String) {
         _toastMessage.value = message
-        // TODO: Adding this line might help avoid duplicate toasts
+        // TODO [Refactor]: Use SingleLiveEvent for toast instead of LiveData
+        //  Meanwhile, adding this line might help avoid duplicate toasts
 //        _toastMessage.value = ""
     }
 
@@ -32,7 +33,7 @@ abstract class BaseViewModel(
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Main
 
-    // FIXME: Rename this to uiScope
+    // TODO [Refactor]: Rename this to uiScope
     protected val scope = CoroutineScope(coroutineContext)
 
     override fun onCleared() {

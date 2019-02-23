@@ -59,7 +59,7 @@ class NightDetailFragment : Fragment() {
         return binding.root
     }
 
-    // TODO : Create a back button somewhere
+    // TODO [Refactor] : Create a back button somewhere
 //    private fun setClickListeners(binding: FragmentEventDetailBinding) {
 //
 //        binding.back.setOnClickListener {

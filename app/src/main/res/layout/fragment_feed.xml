@@ -23,7 +23,6 @@
             app:tabbed="@{false}"
             app:title="@{@string/feed_title}" />
 
-        <!-- FIXME: [WARN] Might break because of behavior string. -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/feed"
             android:layout_width="match_parent"

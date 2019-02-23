@@ -21,8 +21,6 @@ import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.safetynet.SafetyNet
 import org.koin.androidx.viewmodel.ext.sharedViewModel
 
-// TODO: [Refactor] Try removing as many observers as possible, observing should be
-//  done by data binding view only, preferably.
 class RegistrationStepFragment : Fragment() {
 
     companion object {
@@ -98,7 +96,7 @@ class RegistrationStepFragment : Fragment() {
         }
     }
 
-    // TODO: Autofill this OTP if same device.
+    // TODO [Feature]: Autofill this OTP if same device.
     private fun setStepTwoObservers() {
         with(registrationViewModel) {
 
@@ -153,7 +151,7 @@ class RegistrationStepFragment : Fragment() {
             .addOnFailureListener(activity as Activity) { e ->
                 if (e is ApiException) {
                     // An error occurred when communicating with the
-                    // reCAPTCHA service. TODO: Refer to the status code to
+                    // reCAPTCHA service. TODO [Refactor]: Refer to the status code to
                     // handle the error appropriately.
                     Log.e(
                         "RegistrationVM.captcha",

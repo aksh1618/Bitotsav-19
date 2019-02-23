@@ -77,7 +77,6 @@ class EventRegistrationFragment : Fragment() {
 
             isUserRegistered.setObserver(viewLifecycleOwner) { registered ->
                 if (registered) {
-                    // TODO: Show success in some way
                     this@EventRegistrationFragment.toast(
                         getString(
                             R.string.event_format_registration_message,
@@ -107,4 +106,4 @@ class EventRegistrationFragment : Fragment() {
 
 }
 
-// FIXME [WARN]: Ask for confirmation before going back from registration
+// TODO [Refactor]: Ask for confirmation before going back from registration

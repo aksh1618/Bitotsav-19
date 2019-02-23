@@ -87,7 +87,6 @@
             tools:text="Team members will be separated and sent to various rooms where they have to solve quizzes on various topics such as gaming, etc. Rest of the topics will be disclosed during the event." />
 
         <!-- Rules -->
-        <!-- TODO [Refactor]: Use spans to insert bullets ? -->
         <TextView
             android:id="@+id/label_rules_text_view"
             android:layout_width="0dp"
@@ -166,7 +165,6 @@
             app:layout_constraintTop_toBottomOf="@+id/category_text_view"
             tools:textColor="?colorPrimary" />
 
-        <!-- FIXME: Text color on this -->
         <TextView
             android:id="@+id/status_text_view"
             android:layout_width="0dp"
