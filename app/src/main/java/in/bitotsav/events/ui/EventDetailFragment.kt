@@ -87,7 +87,6 @@ class EventDetailFragment : Fragment() {
         }
 
         binding.share.setOnClickListener {
-            // FIXME [WARN] : Use deep link here.
             eventViewModel.currentEvent.value?.let {
                 val link = "bitotsav.in/event/${it.id}"
                 val textToShare = getString(R.string.event_format_share_text, it.name, link)
@@ -102,7 +101,7 @@ class EventDetailFragment : Fragment() {
                 eventViewModel.isUserAlreadyRegistered
                     .onTrue {
                         Log.d(TAG, "Deregistering...")
-                        // FIXME [WARN]: Add Confirmation Dialog
+                        // TODO [Refactor]: Add Confirmation Dialog
                         toast("Deregistering...")
                         eventViewModel.deregister()
                     }

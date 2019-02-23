@@ -34,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 private const val baseUrl = "https://bitotsav.in/api/app/"
 
-// TODO: Should modules conform to package division?
+// TODO [Refactor]: Should modules conform to package division?
 val repositoriesModule = module {
 
     single {
@@ -67,7 +67,7 @@ val retrofitModule = module {
             }
         ).create()
     }
-//    TODO: Check if custom client is required
+    // TODO @ashank : Check if custom client is required
     single {
         Retrofit.Builder()
             .baseUrl(baseUrl)

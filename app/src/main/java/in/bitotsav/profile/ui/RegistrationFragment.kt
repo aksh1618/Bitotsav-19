@@ -83,7 +83,7 @@ class RegistrationFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        // TODO: Check if saving email and password is needed
+        // TODO [Refactor]: Figure out if saving email and password is necessary
         registrationViewModel.fields.email.text.value.let {
             it.isNotEmpty().onTrue { outState.putString(KEY_EMAIL, it) }
         }

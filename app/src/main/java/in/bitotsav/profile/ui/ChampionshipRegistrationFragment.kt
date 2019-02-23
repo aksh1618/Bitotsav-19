@@ -61,7 +61,6 @@ class ChampionshipRegistrationFragment : Fragment() {
 
             championshipTeamRegistered.setObserver(viewLifecycleOwner) { registered ->
                 if (registered) {
-                    // TODO: Show success in some way
                     this@ChampionshipRegistrationFragment.toast(
                         getString(
                             R.string.profile_format_registration_message,

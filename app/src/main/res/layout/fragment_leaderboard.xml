@@ -24,7 +24,6 @@
             app:tabbed="@{false}"
             app:title="@{@string/leaderboard_title}" />
 
-        <!-- FIXME: [WARN] Might break because of behavior string. -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

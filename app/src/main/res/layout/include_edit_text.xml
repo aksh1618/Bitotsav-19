@@ -3,8 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Do something about hint color on focus -->
-
     <data>
 
         <variable
@@ -33,9 +31,6 @@
 
     </data>
 
-    <!-- FIXME: Do something about colors of hint on focus, password toggle, cursor etc.
-     -->
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout"
         style="@style/Widget.Bitotsav.TextInput"
@@ -54,8 +49,6 @@
         app:hintTextAppearance="@style/TextInputLayout.HintText"
         tools:hint="Hint">
 
-        <!-- TODO [WARN]: Setting default value for passwordHidingEnabled leads to
-        compilation error due to resource linking failure. -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText"
             android:textCursorDrawable="@drawable/cursor_drawable"
