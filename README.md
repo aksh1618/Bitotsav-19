@@ -15,11 +15,11 @@ Note: The functionality of the app is limited after the fest, as the servers are
 </a>
 </p>
 
-## About
+## 🎨 About
 
 Bitotsav '19, the 29th edition of Birla Institute of Technology, Mesra's annual socio-cultural fest, took place from the 14th to the 17th of February, 2019, featuring 4 nights and 48 events. This app was created by the tech team for proper management of the fest, assisting both participants and organizers by acting as a medium for latest updates as well as the source of knowledge for event details like rules, timings & venues, payment status, rankings & results and much more, all dynamic and real time. Additionally, to complement the theme i.e. "Colours of Asia", the UI colors change on every start.
 
-## Features
+## ✨ Features
 
 - **Profile:** Login with Bitotsav Id to access Team Statistics, Activity and Night Pass status.
 - **Individual Registration:** Register and get your Bitotsav Id.
@@ -32,32 +32,37 @@ Bitotsav '19, the 29th edition of Birla Institute of Technology, Mesra's annual 
 - **Feed:** Real time updates from the Bitotsav '19 team.
 - **Leaderboard:** Live standings of all registered championship teams.
 
-## Screenshots
+## 🖼 Screenshots
 
 <p float="left">
 <img src="art/screen1.jpeg" width="200" hspace="12" vspace="12">
 <img src="art/screen2.jpeg" width="200" hspace="12" vspace="12">
 <img src="art/screen3.jpeg" width="200" hspace="12" vspace="12">
+<br>
+<br>
 <img src="art/screen4.jpeg" width="200" hspace="12" vspace="12">
 <img src="art/screen5.jpeg" width="200" hspace="12" vspace="12">
 <img src="art/screen6.jpeg" width="200" hspace="12" vspace="12">
+<br>
+<br>
 <img src="art/screen7.jpeg" width="200" hspace="12" vspace="12">
 <img src="art/screen8.jpeg" width="200" hspace="12" vspace="12">
 <img src="art/screen9.jpeg" width="200" hspace="12" vspace="12">
+</p>
 
-## Permissions
+## ℹ️ Permissions
 
 No explicit permissions are used by this app, but it does prompt users of devices of certain manufacturers to enable autostart and disable battery optimization to ensure timely delivery of notifications.
 
-## Tech
+## 💻 Tech
 
-### Overview
+### 🗒 Overview
 
 - Developed in **Kotlin** with **Android Studio Canary** as IDE and latest technologies such as AndroidX, Jetpack Architecture Components, Coroutines etc.
 - MVVM architecture
 - Feature based package structure
 
-### Android SDK Components
+### 📱 Android SDK Components
 
 - AndroidX
 - Navigation
@@ -68,14 +73,14 @@ No explicit permissions are used by this app, but it does prompt users of device
 - ViewModel
 - Palette
 
-### Network Libraries
+### 🌐 Network Libraries
 
 - [Retrofit 2](https://github.com/square/retrofit) by Square
 - [Gson](https://github.com/google/gson) by Google
 - Firebase (FCM)
 - Safety Net (reCAPTCHA v2)
 
-### Other Third Party Libraries
+### 🔌 Other Third Party Libraries
 
 - [Koin 2 (Beta)](https://github.com/InsertKoinIO/koin) by [InsertKoin.io](insert-koin.io)
 - [Retrofit Kotlin Coroutine Adapter](https://github.com/JakeWharton/retrofit2-kotlin-coroutines-adapter) by Jake Wharton
@@ -84,17 +89,17 @@ No explicit permissions are used by this app, but it does prompt users of device
 - [Glide](https://github.com/bumptech/glide) by Sam Judd
 - [Android image slider](https://github.com/smarteist/android-image-slider) by Smarteist
 
-### Other Tech
+### 🖮 Other Tech
 
 - Git Workflow - [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) (using [gitflow-avh](https://github.com/petervanderdoes/gitflow-avh))
 - Versioning - [Semantic Versioning 2.0.0](https://semver.org/)
 
-## TODO
+## ✅ TODO
 
 - [ ] Tests
 - [ ] Better documentation
 
-## License
+## 🏛 License
 
 ```
 Copyright 2019 Aakarshit Uppal, Ashank Anshuman
