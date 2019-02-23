@@ -22,7 +22,6 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
-        <!-- TODO: Do something about hint color on focus -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.Bitotsav.TextInput"
             android:layout_width="wrap_content"

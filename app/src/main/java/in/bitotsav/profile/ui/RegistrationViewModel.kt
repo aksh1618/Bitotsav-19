@@ -18,7 +18,6 @@ class RegistrationViewModel(
     private val authService: AuthenticationService
 ) : BaseViewModel("RegVM") {
 
-    // TODO: Should this be initialized or lateinit ?
     var fields = RegistrationFields()
     val nextStep = NonNullMutableLiveData(1)
     val registrationError = NonNullMutableLiveData("")

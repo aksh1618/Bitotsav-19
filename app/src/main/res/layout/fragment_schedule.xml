@@ -26,7 +26,6 @@
             app:tabbed="@{true}"
             app:title="@{@string/schedule_title}" />
 
-        <!-- FIXME: [WARN] Might break because of behavior string. -->
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/dayPager"
             android:layout_width="match_parent"

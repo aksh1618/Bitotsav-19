@@ -39,7 +39,7 @@ class ScheduleViewModel(
         get() = scheduleFiltersList
     lateinit var filterColors: IntArray
     private lateinit var allCategories: List<String>
-    // TODO: Use switch map with double trigger for this
+    // TODO [Refactor]: Use switch map with double trigger for this ?
     val areFiltersActive = MutableLiveData<Boolean>()
     val filterFabVisible = NonNullMutableLiveData(true)
 
@@ -57,7 +57,6 @@ class ScheduleViewModel(
                     throw IllegalStateException("Categories and/or starred are null, somehow")
                 when (categories) {
                     ALL_CATEGORIES -> eventRepository.getByDay(day, starredOnly)
-                    // TODO: May need to be sorted by time
                     else -> eventRepository.getByCategoriesForDay(
                         day,
                         starredOnly,

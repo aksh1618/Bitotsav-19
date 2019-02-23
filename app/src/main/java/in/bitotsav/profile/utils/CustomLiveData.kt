@@ -5,7 +5,7 @@ import `in`.bitotsav.shared.utils.onTrue
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 
-// TODO: [REFACTOR] Make DSL out of this
+// TODO [Refactor]: Make DSL out of this
 class MutableLiveDataTextWithValidation(
     vararg validationErrorPairs: Pair<String.() -> Boolean, String>,
     defaultText: String = "",

@@ -57,6 +57,7 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
 
             val teamMembers = mutableMapOf<String, Map<String, String>>()
             teamName?.let {
+                @Suppress("UNCHECKED_CAST")
                 val members = response.body()?.get("teamMembers") as List<Map<String, String>>
                 members.forEach {
                     val bitId = it["id"].toString()
@@ -67,6 +68,7 @@ fun fetchProfileDetailsAsync(authToken: String): Deferred<Any> {
                 CurrentUser.teamMembers = teamMembers.toMap()
             }
 
+            @Suppress("UNCHECKED_CAST")
             val teams = response.body()?.get("events") as List<Map<String, Any>>
             val userTeams = mutableMapOf<String, Map<String, String>>()
             teams.forEach {

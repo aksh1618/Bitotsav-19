@@ -36,7 +36,6 @@ class ScheduleFragment : Fragment() {
     private lateinit var binding: FragmentScheduleBinding
     private val filterAdapter by lazy { ScheduleFilterAdapter(scheduleViewModel) }
 
-    // TODO: Get colors from resources
     private val filterColors by lazy {
         context?.resources?.getIntArray(R.array.categoryColors)
             ?: intArrayOf(scheduleViewModel.mColor)
@@ -49,7 +48,7 @@ class ScheduleFragment : Fragment() {
     ): View? {
 
         uiUtilViewModel.showBottomNav()
-        // TODO: May need to account for sheet closed on swipe
+        // TODO [Refactor] : May need to account for sheet closed on swipe
         scheduleViewModel.hideFiltersSheet()
         scheduleViewModel.setupFilters()
         scheduleViewModel.filterColors = filterColors
@@ -58,7 +57,6 @@ class ScheduleFragment : Fragment() {
         }.data
 
         binding = FragmentScheduleBinding.inflate(inflater, container, false)
-            // TODO: Putting everything from here on in onActivityCreated may increase performance.
             .apply {
                 lifecycleOwner = this@ScheduleFragment
                 viewModel = scheduleViewModel

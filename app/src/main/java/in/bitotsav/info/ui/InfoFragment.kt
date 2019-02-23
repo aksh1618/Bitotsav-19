@@ -85,7 +85,7 @@ class InfoFragment : Fragment() {
                 .formSubmitText("Submit")
                 .formCancelText("Cancel")
                 .playstoreUrl(getString(R.string.app_url_play_store))
-                .onRatingChanged { rating, thresholdCleared ->
+                .onRatingChanged { _, thresholdCleared ->
                     thresholdCleared.onTrue {
                         context?.let { "Please leave a review!".toast(it) }
                     }

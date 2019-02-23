@@ -16,11 +16,11 @@ import androidx.navigation.NavDeepLinkBuilder
 import java.util.*
 
 enum class Channel(val id: String, val channelName: String) {
-    ANNOUNCEMENT("announcement", "Announcement"), // Announcement icon
-    EVENT("event", "Event"), // TODO: Bitotsav logo vector
-    PM("pm", "Private Message"), // Priority high icon or profile icon
-    RESULT("result", "Result"), // Trophy icon
-    STARRED("starred", "Starred") // Star icon
+    ANNOUNCEMENT("announcement", "Announcement"),
+    EVENT("event", "Event"),
+    PM("pm", "Private Message"),
+    RESULT("result", "Result"),
+    STARRED("starred", "Starred")
 }
 
 /**
@@ -58,7 +58,7 @@ fun displayNotification(
 
 @TargetApi(26)
 fun createNotificationChannels(context: Context) {
-//    TODO("Fix notification channel for MIUI")
+    // TODO [Feature]: Add a workaround for anomalous behavior of notification channels on MIUI
     val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 

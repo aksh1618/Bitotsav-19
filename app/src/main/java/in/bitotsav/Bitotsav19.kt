@@ -101,9 +101,12 @@ class Bitotsav19 : Application() {
 }
 
 // Global TODOs
-// TODO: Move tools:context in all layout files from <layout> to root inside <layout>
-// TODO: [Refactor] The magnum opus: Wire color change into the lifecycle, so every
-//  major interactions causes a color change!
-// TODO: [WARN]: Figure out if lifecycleOwner passed to data binding should be
-//  viewLifecycleOwner or
-// TODO: [Refactor] Inject all services as AuthenticationService is right now
+// TODO [WARN]: Figure out if lifecycleOwner passed to data binding should be
+//  viewLifecycleOwner or fragment.this
+// TODO [WARN]: Figure out if app:layout_behavior="@string/appbar_scrolling_view_behavior" can
+//  break in various layout files.
+// TODO [Refactor]: Inject all services as AuthenticationService is right now
+// TODO [Refactor]: Try removing as many observers from fragments as possible, observing should
+//  preferably be done by data binding view only.
+// TODO [WARN]: Figure out which fragment lifecycle method should contain what code, instead of putting
+//  everything in onCreateView. Might lead to increased performance.
